@@ -20,7 +20,8 @@
   :ensure t
   :config (setq helm-mode-fuzzy-match 1)
   :bind (("M-x" . helm-M-x)
-	 ("C-x b" . helm-mini)
+	 ("C-x b" . helm-buffers-list)
+	 ("C-x r" . helm-recentf)
 	 ("C-x C-f" . helm-find-files)
 	 ("M-y" . helm-show-kill-ring)))
 
