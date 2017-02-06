@@ -31,7 +31,7 @@
   :ensure t
   :bind (("s-p p" . helm-projectile-find-file)
 	 ("s-p s" . helm-projectile-switch-project))
-  :config ((helm-projectile-on))
+  :config ((helm-projectile-on)))
 
 (defun back-to-cfg ()
   (interactive)

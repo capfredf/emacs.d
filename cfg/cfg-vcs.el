@@ -4,3 +4,5 @@
   :bind (("s-m m" . magit-status))
   :config (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
+(provide 'cfg-vcs)
+
