@@ -12,7 +12,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (diff-hl diff-hl-mode magit helm-projectile projectile use-package solarized-theme multiple-cursors markdown-mode iy-go-to-char highlight-parentheses helm dracula-theme))))
+    (expand-region rust-mode rust diff-hl diff-hl-mode magit helm-projectile projectile use-package solarized-theme multiple-cursors markdown-mode iy-go-to-char highlight-parentheses helm dracula-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

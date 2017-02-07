@@ -17,5 +17,6 @@
     (elt '(cfg-visual
 	   cfg-nav
 	   cfg-text-operation
-	   cfg-vcs))
+	   cfg-vcs
+	   cfg-rust))
   (require elt))

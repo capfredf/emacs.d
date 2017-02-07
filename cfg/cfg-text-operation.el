@@ -13,6 +13,11 @@
 	 ("s-;" . iy-go-to-or-up-to-continue)
 	 ("s-," . iy-go-to-or-up-to-continue-backward)))
 
+(use-package expand-region
+  :ensure t
+  :bind (("C-=" . er/expand-region)))
+
+
 (defun select-line ()
   (interactive)
   (move-beginning-of-line nil)
