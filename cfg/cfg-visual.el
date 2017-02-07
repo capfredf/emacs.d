@@ -8,4 +8,9 @@
   :ensure t
   :config (highlight-parentheses-mode t))
 
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+  (set-fontset-font (frame-parameter nil 'font)
+                    charset
+                    (font-spec :family "Noto Sans CJK SC" :size 14)))
+
 (provide 'cfg-visual)
