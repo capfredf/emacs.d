@@ -22,13 +22,30 @@
   (interactive)
   (move-beginning-of-line nil)
   (push-mark (point) nil t)
-  (next-line 1))
+  (next-line 1)
+  (move-beginning-of-line 1))
 
 (defun myjoin-line ()
   (interactive)
   (next-line 1)
   (join-line))
 
+(defun open-line-before()
+  (interactive)
+  (previous-line)
+  (open-line-after))
+
+(defun open-line-after()
+  (interactive)
+  (move-end-of-line nil)
+  (newline)
+  (indent-for-tab-command))
+
+
+(delete-selection-mode 1)
+
+(global-set-key (kbd "C-s-o") 'open-line-after)
+(global-set-key (kbd "C-o") 'open-line-before)
 (global-set-key (kbd "C-l") 'select-line)
 (global-set-key (kbd "s-j") 'myjoin-line)
 

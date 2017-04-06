@@ -10,12 +10,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(helm-ls-git-show-abs-or-relative (quote relative))
  '(package-selected-packages
    (quote
-    (expand-region rust-mode rust diff-hl diff-hl-mode magit helm-projectile projectile use-package solarized-theme multiple-cursors markdown-mode iy-go-to-char highlight-parentheses helm dracula-theme))))
+    (helm-ls-git racket-mode expand-region rust-mode rust diff-hl diff-hl-mode magit helm-projectile use-package solarized-theme multiple-cursors markdown-mode iy-go-to-char highlight-parentheses helm dracula-theme)))
+ '(sgml-basic-offset 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#002b36" :foreground "#839496" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Noto Mono")))))
+ '(default ((t (:inherit nil :stipple nil :background "#002b36" :foreground "#839496" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Inziu Iosevka SC")))))

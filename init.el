@@ -13,6 +13,25 @@
 (define-coding-system-alias 'utf8 'utf-8)
 (set-language-environment 'utf-8)
 
+(defun read-lines (filePath)
+  "Return a list of lines of a file at filePath."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (split-string (buffer-string) "\n" t)))
+
+(setq old-paths
+      (split-string (getenv "PATH") ":"))
+
+
+(setq exec-paths
+      (append
+       (mapcar (lambda (x)
+		 (expand-file-name x))
+		 (read-lines "~/dotconf/path"))
+       old-paths))
+
+(setenv "PATH" (mapconcat 'identity exec-paths ":"))
+
 (dolist
     (elt '(cfg-visual
 	   cfg-nav

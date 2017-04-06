@@ -23,21 +23,24 @@
 	 ("C-x b" . helm-buffers-list)
 	 ("C-x r" . helm-recentf)
 	 ("C-x C-f" . helm-find-files)
-	 ("M-y" . helm-show-kill-ring)))
+	 ("M-y" . helm-show-kill-ring)
+	 ("s-p p" . helm-browse-project)))
+
+(use-package helm-ls-git
+  :ensure t)
 
 (use-package projectile
   :ensure t)
 
 (use-package helm-projectile
   :ensure t
-  :bind (("s-p p" . helm-projectile-find-file)
-	 ("s-p s" . helm-projectile-switch-project))
-  :config ((helm-projectile-on)))
+  :bind ("s-p s" . helm-projectile-switch-project)
+  :config (helm-projectile-on))
 
 (defun back-to-cfg ()
   (interactive)
   (find-file user-emacs-directory))
 
-(global-set-key (kbd "C-c C-i")  'back-to-cfg)
+(global-set-key (kbd "s-o i")  'back-to-cfg)
 
 (provide 'cfg-nav)
