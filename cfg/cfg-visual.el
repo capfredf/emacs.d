@@ -11,6 +11,6 @@
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font (frame-parameter nil 'font)
                     charset
-                    (font-spec :family "Noto Sans CJK SC" :size 14)))
+                    (font-spec :family "Source Han Sans HW SC" :size 13)))
 
 (provide 'cfg-visual)

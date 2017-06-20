@@ -39,3 +39,5 @@
 	   cfg-vcs
 	   cfg-rust))
   (require elt))
+
+(server-start)

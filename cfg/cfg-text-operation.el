@@ -17,6 +17,12 @@
   :ensure t
   :bind (("C-=" . er/expand-region)))
 
+(use-package undo-tree
+  :ensure t
+  :bind (("C-/" . undo-tree-undo)
+	 ("C-?" . undo-tree-redo)
+	 ("C-x u" . undo-tree-visualize)))
+
 
 (defun select-line ()
   (interactive)
