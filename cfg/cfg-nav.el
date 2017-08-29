@@ -16,34 +16,30 @@
 (global-set-key (kbd "C-s-k")  'windmove-up)
 (global-set-key (kbd "C-s-j")  'windmove-down)
 
-(use-package helm
-  :ensure t
-  :config (setq helm-mode-fuzzy-match 1)
-  :bind (("M-x" . helm-M-x)
-	 ("C-x b" . helm-buffers-list)
-	 ("C-x r" . helm-recentf)
-	 ("C-x C-f" . helm-find-files)
-	 ("M-y" . helm-show-kill-ring)))
-
-;; (use-package helm-ls-git
-;;   :ensure t)
-
 (use-package projectile
   :ensure t
-  :config (projectile-mode))
+  :init
+  (setq projectile-completion-system 'ivy)
+  :config
+  (projectile-mode)
+  :bind (("s-p p" . project-find-file)))
 
-(use-package helm-projectile
+(use-package ivy
   :ensure t
-  :bind (("s-p s" . helm-projectile-switch-project)
-	 ("s-p p" . helm-projectile-find-file))
-  :config (helm-projectile-on))
+  :init
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  :config (ivy-mode)
+  :demand t
+  :bind (("C-c C-r" . ivy-resume)))
+
+(use-package counsel
+  :ensure t
+  :bind (("s-o i" . back-to-cfg)))
 
 (defun back-to-cfg ()
   (interactive)
-  (find-file user-emacs-directory))
-
-(global-set-key (kbd "s-o i")  'back-to-cfg)
-
+  (counsel-find-file "~/.emacs.d/cfg"))
 
 (defun smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
@@ -72,5 +68,11 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
 
+(setq tramp-default-method "sshx")
+
+(require 'ivy)
+(require 'counsel)
 
 (provide 'cfg-nav)
+
+

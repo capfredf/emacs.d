@@ -3,6 +3,7 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize) ;; You might already have this line
 (add-to-list 'load-path (expand-file-name "cfg" user-emacs-directory))
+(package-install 'use-package)
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
   (load custom-file))
@@ -34,10 +35,11 @@
 
 (dolist
     (elt '(cfg-visual
-	   cfg-nav
-	   cfg-text-operation
-	   cfg-vcs
-	   cfg-rust))
+		   cfg-nav
+		   cfg-c
+		   cfg-text-operation
+		   cfg-vcs
+		   cfg-rust))
   (require elt))
 
 (server-start)
