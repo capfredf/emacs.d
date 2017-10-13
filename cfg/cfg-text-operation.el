@@ -55,9 +55,18 @@
 (global-set-key (kbd "C-o") 'open-line-before)
 (global-set-key (kbd "C-l") 'select-line)
 (global-set-key (kbd "s-j") 'myjoin-line)
+(global-set-key (kbd "M-y") 'counsel-yank-pop)
 
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 
-
+(use-package yasnippet
+  :ensure t
+  :config
+  (setq yas-snippet-dirs
+		'("~/.emacs.d/yasnippet-snippets/snippets"                 ;; personal snippets
+		  "~/.emacs.d/snippets"                 ;; personal snippets
+		  ))
+  (yas-global-mode t))
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 (provide 'cfg-text-operation)

@@ -37,9 +37,11 @@
     (elt '(cfg-visual
 		   cfg-nav
 		   cfg-c
+		   cfg-racket
 		   cfg-text-operation
 		   cfg-vcs
 		   cfg-rust))
   (require elt))
 
 (server-start)
+(put 'upcase-region 'disabled nil)

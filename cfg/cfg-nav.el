@@ -20,9 +20,12 @@
   :ensure t
   :init
   (setq projectile-completion-system 'ivy)
+  (setq projectile-enable-caching t)
   :config
   (projectile-mode)
-  :bind (("s-p p" . project-find-file)))
+  :bind (("s-p f" . projectile-find-file)
+		 ("s-p g" . projectile-grep)
+		 ("s-p s-p" . projectile-switch-project)))
 
 (use-package ivy
   :ensure t
@@ -74,5 +77,3 @@ point reaches the beginning or end of the buffer, stop there."
 (require 'counsel)
 
 (provide 'cfg-nav)
-
-
