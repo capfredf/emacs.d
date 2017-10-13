@@ -2,3 +2,8 @@ auto-save-list/
 elpa/
 .mc-lists.el
 recentf
+tramp
+eshell/
+projectile-bookmarks.eld
+projectile.cache
+snippets/
