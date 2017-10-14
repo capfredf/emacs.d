@@ -17,6 +17,18 @@
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
   :config
   (show-paren-mode t))
+
+(defhydra hydra-paredit ()
+  "In Paredit"
+  ("." paredit-forward-slurp-sexp "forward slurp")
+  ("," paredit-forward-barf-sexp "forward bar")
+  ("<" paredit-backward-slurp-sexp "backward slurp")
+  (">" paredit-backward-barf-sexp "backward barf")
+  ("s" paredit-splice-sexp "splice")
+  ("(" paredit-wrap-round "wrap")
+  ("o" paredit-close-round-and-newline "close sexp and newline"))
+
+(global-set-key (kbd "C-'") 'hydra-paredit/body)
   ;; :config
   ;; (put 'paredit-forward-delete 'delete-selection 'supersede)
   ;; :bind ("DEL" . del-iwm))
