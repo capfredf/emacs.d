@@ -5,11 +5,6 @@
   (add-hook 'racket-mode-hook      #'racket-unicode-input-method-enable)
   (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable))
 
-(defun del-iwm ()
-  (interactive)
-  (if (use-region-p) (delete-selection-helper 'supersede)
-	(paredit-forward-delete)))
-
 (use-package paredit
   :ensure t
   :init
