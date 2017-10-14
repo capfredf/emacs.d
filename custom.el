@@ -23,7 +23,7 @@
  '(org-src-fontify-natively t t)
  '(package-selected-packages
    (quote
-	(yasnippet paredit smart-mode-line-powerline-theme smart-mode-line base16-theme solarized-theme color-theme-sanityinc-tomorrow auto-dim-other-buffers multi-term leuven-theme counsel ivy material-theme projectile undo-tree racket-mode expand-region rust-mode rust diff-hl diff-hl-mode magit helm-projectile use-package multiple-cursors markdown-mode iy-go-to-char highlight-parentheses helm dracula-theme)))
+	(hydra yasnippet paredit smart-mode-line-powerline-theme smart-mode-line base16-theme solarized-theme color-theme-sanityinc-tomorrow auto-dim-other-buffers multi-term leuven-theme counsel ivy material-theme projectile undo-tree racket-mode expand-region rust-mode rust diff-hl diff-hl-mode magit helm-projectile use-package multiple-cursors markdown-mode iy-go-to-char highlight-parentheses helm dracula-theme)))
  '(sgml-basic-offset 4)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
  '(sml/theme (quote powerline))

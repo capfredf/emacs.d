@@ -11,10 +11,13 @@
 
 (global-set-key (kbd "s-]") 'jump-to-file-and-line)
 
-(global-set-key (kbd "C-s-h")  'windmove-left)
-(global-set-key (kbd "C-s-l")  'windmove-right)
-(global-set-key (kbd "C-s-k")  'windmove-up)
-(global-set-key (kbd "C-s-j")  'windmove-down)
+(defhydra hydra-window-rator (:hint nil)
+  "manipulate windows"
+  ("h" windmove-left "go left")
+  ("l" windmove-right "go right")
+  ("k" windmove-up "go up")
+  ("j" windmove-down "go down"))
+(global-set-key (kbd "C-c C-w") 'hydra-window-rator/body)
 
 (use-package projectile
   :ensure t
@@ -23,9 +26,12 @@
   (setq projectile-enable-caching t)
   :config
   (projectile-mode)
-  :bind (("s-p f" . projectile-find-file)
-		 ("s-p g" . projectile-grep)
-		 ("s-p s-p" . projectile-switch-project)))
+  (defhydra hydra-projectile-rator (:hint nil)
+	"projectile:"
+	("f" projectile-find-file "find file")
+	("g" projectile-grep "grep")
+	("s" projectile-switch-project "switch-project"))
+  :bind (("s-p" . hydra-projectile-rator/body)))
 
 (use-package ivy
   :ensure t
@@ -67,11 +73,11 @@ point reaches the beginning or end of the buffer, stop there."
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
 
-;; remap C-a to `smarter-move-beginning-of-line'
-(global-set-key [remap move-beginning-of-line]
+;; remap C-a to `smarter-move-beginning-of-line'"e
+(ing-of-line]
                 'smarter-move-beginning-of-line)
 
-(setq tramp-default-method "sshx")
+(setq tramp-default-method "ssh")
 
 (require 'ivy)
 (require 'counsel)
