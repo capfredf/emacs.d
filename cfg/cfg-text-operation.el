@@ -31,6 +31,7 @@
   :config
   (global-undo-tree-mode 1)
   (define-key undo-tree-map (kbd "C-/") nil)
+  (define-key undo-tree-map (kbd "C-x u") nil)
 
   (defhydra hydra-undo-tree (:hint nil)
 	"undo!"
@@ -38,7 +39,7 @@
 	("r" undo-tree-redo "redo")
 	("u" undo-tree-visualize "visualize"))
 
-  :bind (("C-" . hydra-undo-tree/body)))
+  :bind (("C-/" . hydra-undo-tree/body)))
 
 (defun select-line ()
   (interactive)

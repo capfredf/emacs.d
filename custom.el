@@ -19,7 +19,9 @@
  '(custom-safe-themes
    (quote
 	("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
- '(hydra-is-helpful nil)
+ '(hydra-is-helpful t)
+ '(hydra-lv nil)
+ '(ivy-use-virtual-buffers nil)
  '(magit-diff-use-overlays nil)
  '(org-src-fontify-natively t t)
  '(package-selected-packages
