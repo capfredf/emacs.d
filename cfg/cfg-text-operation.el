@@ -1,5 +1,6 @@
 (use-package multiple-cursors
   :config
+  (define-key mc/keymap (kbd "C-'") nil)
   (defhydra hydra-multi-cursors (:hint nil)
   "multiple cursors"
 	("e" mc/edit-lines "split selected lines into cursors")
@@ -24,7 +25,8 @@
 
 (use-package expand-region
   :ensure t
-  :demand t)
+  :demand t
+  :bind (("C-=" . er/expand-region)))
 
 (use-package undo-tree
   :ensure t
@@ -48,10 +50,10 @@
   (next-line 1)
   (move-beginning-of-line 1))
 
-;; (defun myjoin-line ()
-;;   (interactive)
-;;   (next-line 1)
-;;   (join-line))
+(defun myjoin-line ()
+  (interactive)
+  (next-line 1)
+  (join-line))
 
 (defun open-line-before()
   (interactive)
@@ -68,6 +70,7 @@
   "To manipulate the line"
   ("o" open-line-after "open line after")
   ("s" select-line "select current line")
+  ("j" myjoin-line "join line and after")
   ("O" open-line-before "open line before"))
 
 (global-set-key (kbd "C-l") 'hydra-line-rator/body)

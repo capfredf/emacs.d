@@ -11,13 +11,23 @@
 
 (global-set-key (kbd "s-]") 'jump-to-file-and-line)
 
-(defhydra hydra-window-rator (:hint nil)
-  "manipulate windows"
-  ("h" windmove-left "go left")
-  ("l" windmove-right "go right")
-  ("k" windmove-up "go up")
-  ("j" windmove-down "go down"))
-(global-set-key (kbd "C-c C-w") 'hydra-window-rator/body)
+(use-package ace-window
+  :ensure t
+  :config
+  (defhydra hydra-window-rator (:hint nil)
+	"manipulate windows"
+	("h" windmove-left)
+	("l" windmove-right)
+	("k" windmove-up)
+	("j" windmove-down)
+	("v" scroll-other-window "scroll other")
+	("V" scroll-other-window-down "scroll other down")
+	("o" ace-window "ace")
+	("1" ace-delete-window "del")
+	("0" delete-other-windows "del others")
+	("e" ace-delete-other-windows "keep one"))
+  :bind (("C-M-o" . hydra-window-rator/body)))
+
 
 (use-package projectile
   :ensure t
@@ -76,6 +86,9 @@ point reaches the beginning or end of the buffer, stop there."
 ;; remap C-a to `smarter-move-beginning-of-line'"e
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
+
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(autoload 'ibuffer "ibuffer" "List buffers." t)
 
 (setq tramp-default-method "ssh")
 

@@ -11,7 +11,10 @@
 (setq frame-title-format (list "%b - " (getenv "USER") "@" (getenv "HOSTNAME")))
 (use-package highlight-parentheses
   :ensure t
-  :config (highlight-parentheses-mode t))
+  :init
+  (add-hook 'racket-mode-hook (lambda () highlight-parentheses-mode t))
+  (add-hook 'emacs-lisp-mode-hook (lambda () highlight-parentheses-mode t)))
+
 
 ;; (use-package auto-dim-other-buffers
 ;;   :ensure t
