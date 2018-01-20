@@ -3,6 +3,7 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize) ;; You might already have this line
 (add-to-list 'load-path (expand-file-name "cfg" user-emacs-directory))
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/agda")
 (package-install 'use-package)
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
@@ -34,14 +35,14 @@
 (setenv "PATH" (mapconcat 'identity exec-paths ":"))
 
 (dolist
-    (elt '(cfg-visual
-		   cfg-nav
-		   cfg-c
-		   cfg-racket
-		   cfg-text-operation
-		   cfg-vcs
-		   cfg-rust))
+    (elt '(cfg-base
+           cfg-workspace
+           cfg-visual
+           cfg-c
+           cfg-racket
+           cfg-edit
+           cfg-vcs
+           cfg-rust))
   (require elt))
 
 (server-start)
-(put 'upcase-region 'disabled nil)
