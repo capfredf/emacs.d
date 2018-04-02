@@ -26,7 +26,7 @@
 (toggle-scroll-bar -1)
 (setq-default redisplay-dont-pause t)
 (setq-default cursor-type 'bar)
-
+(set-face-attribute 'default nil :height 130 :width 'condensed :foundry "nil" :family "Iosevka")
 ;; (setq frame-title-format '("" "%b @ Emacs " emacs-version))
 (setq-default frame-title-format (list "%b - " (getenv "USER") "@" (getenv "HOSTNAME")))
 
@@ -48,6 +48,10 @@
   :ensure t
   :demand t
   :config
+  (setq telephone-line-lhs
+      '((accent . (telephone-line-vc-segment
+                   telephone-line-process-segment))
+        (nil    . (telephone-line-buffer-segment))))
   (setq solarized-high-contrast-mode-line t)
   (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
       telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
@@ -67,6 +71,6 @@
                     charset
                     (font-spec :family "Source Han Sans" :size 13)))
 
-(setq org-src-fontify-natively t)
+(setq-default org-src-fontify-natively t)
 
 (provide 'cfg-visual)

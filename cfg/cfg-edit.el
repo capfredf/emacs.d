@@ -114,6 +114,11 @@
 	("o" paredit-close-round-and-newline "close & newline"))
   :bind (("M-i" . hydra-paredit/body)))
 
+(use-package swiper
+  :ensure t
+  :bind
+  (("C-s" . swiper)))
+
 (defun jump-to-file-and-line ()
   (interactive)
   (let ((line (buffer-substring-no-properties (point-at-bol) (point-at-eol))))

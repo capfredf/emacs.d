@@ -4,7 +4,8 @@
   :mode "\\.rkt"
   :init
   (add-hook 'racket-mode-hook      #'racket-unicode-input-method-enable)
-  (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable))
+  (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable)
+  (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode)))
 
 
 

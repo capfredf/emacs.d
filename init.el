@@ -5,9 +5,9 @@
 (add-to-list 'load-path (expand-file-name "cfg" user-emacs-directory))
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/agda")
 (package-install 'use-package)
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(when (file-exists-p custom-file)
-  (load custom-file))
+(setq custom-file (expand-file-name "~/tmp/custom.el")) ;; discard the custom file
+;; (when (file-exists-p custom-file)
+;;   (load custom-file))
 
 (setq make-backup-files nil)
 
@@ -34,6 +34,7 @@
 
 (setenv "PATH" (mapconcat 'identity exec-paths ":"))
 
+(require 'agda2-mode)
 (dolist
     (elt '(cfg-base
            cfg-workspace

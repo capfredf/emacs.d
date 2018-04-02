@@ -7,22 +7,23 @@
 	("l" windmove-right)
 	("k" windmove-up)
 	("j" windmove-down)
+    ("f" toggle-frame-maximized "toggle full screen" :color blue)
 	("v" scroll-other-window "scroll other")
 	("V" scroll-other-window-down "scroll other down")
 	("o" ace-window "ace" :color blue)
-	("1" ace-delete-window "del" :color blue)
+	("d" ace-delete-window "del" :color blue)
 	("0" delete-other-windows "del others" :color blue)
 	("e" ace-delete-other-windows "keep one" :color blue))
   :bind (("C-M-o" . hydra-window-rator/body)))
 
 (use-package projectile
   :ensure t
-  :init
-  (setq projectile-completion-system 'ivy)
-  (setq projectile-enable-caching t)
+  :custom
+  (projectile-completion-system 'ivy)
+  (projectile-enable-caching t)
+  (projectile-use-git-grep t)
   :config
   (projectile-mode)
-
   (defun back-to-cfg ()
     (interactive)
     (projectile-switch-project-by-name "~/.emacs.d/"))
