@@ -23,10 +23,11 @@
   (load-theme 'sanityinc-tomorrow-night t))
 
 (tool-bar-mode -1)
-(toggle-scroll-bar -1)
+(add-to-list 'default-frame-alist
+             '(vertical-scroll-bars . nil))
 (setq-default redisplay-dont-pause t)
 (setq-default cursor-type 'bar)
-(set-face-attribute 'default nil :height 130 :width 'condensed :foundry "nil" :family "Iosevka")
+(set-face-attribute 'default nil :height 140 :foundry "nil" :family "Iosevka")
 ;; (setq frame-title-format '("" "%b @ Emacs " emacs-version))
 (setq-default frame-title-format (list "%b - " (getenv "USER") "@" (getenv "HOSTNAME")))
 
@@ -46,7 +47,6 @@
 
 (use-package telephone-line
   :ensure t
-  :demand t
   :config
   (setq telephone-line-lhs
       '((accent . (telephone-line-vc-segment
@@ -61,7 +61,6 @@
 
 (use-package highlight-parentheses
   :ensure t
-  :demand t
   :init
   (add-hook 'racket-mode-hook (lambda () (highlight-parentheses-mode t)))
   (add-hook 'emacs-lisp-mode-hook (lambda () (highlight-parentheses-mode t))))
@@ -69,8 +68,6 @@
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font (frame-parameter nil 'font)
                     charset
-                    (font-spec :family "Source Han Sans" :size 13)))
-
-(setq-default org-src-fontify-natively t)
+                    (font-spec :family "Source Han Sans")))
 
 (provide 'cfg-visual)

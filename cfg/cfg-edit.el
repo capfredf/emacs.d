@@ -29,7 +29,6 @@
 
 (use-package expand-region
   :ensure t
-  :demand t
   :bind (("C-=" . er/expand-region)))
 
 (use-package undo-tree
@@ -81,12 +80,14 @@
 
 (use-package yasnippet
   :ensure t
+  :hook ((prog-mode . yas-minor-mode)
+         (org-mode . yas-minor-mode))
   :config
   (setq yas-snippet-dirs
 		'("~/.emacs.d/yasnippet-snippets/snippets"                 ;; personal snippets
 		  "~/.emacs.d/snippets"                 ;; personal snippets
 		  ))
-  (yas-global-mode t))
+  (yas-reload-all))
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (use-package paredit

@@ -13,19 +13,15 @@
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
 
 (use-package hydra
-  :ensure t
-  :demand t)
+  :ensure t)
 
 (use-package ivy
-  :ensure t
-  :demand t)
+  :ensure t)
 
 (use-package ivy-hydra
-  :ensure t
-  :demand t)
+  :ensure t)
 (use-package counsel
   :ensure t
-  :demand t
   :init
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
@@ -43,23 +39,36 @@
 
 (use-package org
   :ensure t
+  :mode ("\\.org" . org-mode)
   :init
   (use-package org-bullets :ensure t)
   (add-hook 'org-mode-hook (lambda ()
                              (org-bullets-mode 1)
+                             ;; (face-remap-add-relative 'default :family "Source Sans Pro" :height 140)
                              (visual-line-mode)))
   :custom
   (org-hide-emphasis-markers t)
+  (org-fontify-done-headline t)
+  (org-src-fontify-natively t)
   :custom-face
-  (org-level-8 ((t (headline variable-tuple))))
-  (org-level-7 ((t (headline variable-tuple))))
-  (org-level-6 ((t (headline variable-tuple))))
-  (org-level-5 ((t (headline variable-tuple))))
-  (org-level-4 ((t (headline variable-tuple :height 1.1))))
-  (org-level-3 ((t (headline variable-tuple :height 1.25))))
-  (org-level-2 ((t (headline variable-tuple :height 1.5))))
-  (org-level-1 ((t (headline variable-tuple :height 1.75))))
-  (org-document-title ((t (headline variable-tuple :height 1.5 :underline nil)))))
+  ;; (org-quote ((t (:height 2.0))))
+  (org-done ((t (:foreground "dim gray" :strike-through t))))
+  (org-headline-done ((t (:foreground "dim gray" :strike-through t))))
+  (org-level-8 ((t (:family "Source Sans Pro"))))
+  (org-level-7 ((t (:family "Source Sans Pro"))))
+  (org-level-6 ((t (:family "Source Sans Pro"))))
+  (org-level-5 ((t (:family "Source Sans Pro"))))
+  (org-level-4 ((t (:family "Source Sans Pro" :height 1.1))))
+  (org-level-3 ((t (:family "Source Sans Pro" :height 1.25))))
+  (org-level-2 ((t (:family "Source Sans Pro" :height 1.5))))
+  (org-level-1 ((t (:family "Source Sans Pro" :height 1.75))))
+  (org-document-title ((t (:family "Source Sans Pro" :height 1.5 :underline nil)))))
+
+(use-package org-journal
+  :ensure t
+  :defer t
+  :custom
+  (org-journal-dir "~/captainwiki/journal/"))
 
 (setq tramp-default-method "ssh")
 

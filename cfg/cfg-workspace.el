@@ -7,6 +7,9 @@
 	("l" windmove-right)
 	("k" windmove-up)
 	("j" windmove-down)
+    ("M-n" make-frame-command "new frame" :color blue)
+    ("M-q" delete-frame "close current frame" :color blue)
+    ("M-p" select-frame-by-name "select frame by name" :color blue)
     ("f" toggle-frame-maximized "toggle full screen" :color blue)
 	("v" scroll-other-window "scroll other")
 	("V" scroll-other-window-down "scroll other down")
@@ -35,6 +38,7 @@
     ("c" projectile-invalidate-cache "invalidate cache")
     ("h" back-to-cfg "back to cfg")
 	("s" projectile-switch-project "switch-project"))
-  :bind (("s-p" . hydra-projectile-rator/body)))
+  :bind (("s-p" . hydra-projectile-rator/body)
+         ("C-x b" . projectile-switch-to-buffer)))
 
 (provide 'cfg-workspace)
