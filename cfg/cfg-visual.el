@@ -20,17 +20,18 @@
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-night t))
+  (load-theme 'sanityinc-tomorrow-day t)
+  (set-face-attribute 'default nil :background "#fafafa"))
 
 (tool-bar-mode -1)
 (add-to-list 'default-frame-alist
              '(vertical-scroll-bars . nil))
 (setq-default redisplay-dont-pause t)
 (setq-default cursor-type 'bar)
-(set-face-attribute 'default nil :height 140 :foundry "nil" :family "Iosevka")
+(set-face-attribute 'default nil :height 130 :foundry "nil" :family "Iosevka")
 ;; (setq frame-title-format '("" "%b @ Emacs " emacs-version))
 (setq-default frame-title-format (list "%b - " (getenv "USER") "@" (getenv "HOSTNAME")))
-
+(global-hl-line-mode t)
 
 ;; (use-package auto-dim-other-buffers
 ;;   :ensure t

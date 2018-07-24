@@ -13,7 +13,7 @@
 	("p" mc/mark-previous-like-this "mark previous")
 	("<" mc/mark-all-like-this "mark all"))
   :ensure t
-  :bind (("s-d" . hydra-multi-cursors/body)))
+  :bind (("C-M-d" . hydra-multi-cursors/body)))
 
 
 (use-package iy-go-to-char
@@ -25,7 +25,7 @@
 	("F" iy-go-to-char-backward "to some char backward")
 	(";" iy-go-to-or-up-to-continue "repeat foward")
 	("," iy-go-to-or-up-to-continue-backward "repeat backward"))
-  :bind (("s-f" . hydra-iy-go-to-char/body)))
+  :bind (("C-M-f" . hydra-iy-go-to-char/body)))
 
 (use-package expand-region
   :ensure t
@@ -96,24 +96,32 @@
   (add-hook 'racket-mode-hook #'enable-paredit-mode)
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
   :config
-  (defhydra hydra-paredit ()
-	"In Paredit"
-    ("l" paredit-forward "f")
-	("j" paredit-backward-up "b-up")
-	("J" paredit-forward-up "f-up")
-	("k" paredit-forward-down "f-down")
-	("K" paredit-backward-down "b-down")
-	("h" paredit-backward "b")
-	("." paredit-forward-slurp-sexp "f-slurp")
-	("," paredit-forward-barf-sexp "f-barf")
-	("<" paredit-backward-slurp-sexp "b-slurp")
-	(">" paredit-backward-barf-sexp "b-barf")
-	("s" paredit-splice-sexp "splice")
-	("(" paredit-wrap-round "wrap")
-	("r" paredit-raise "raise")
-	("d" paredit-splice-sexp-killing-backward "splice & b-kill")
-	("o" paredit-close-round-and-newline "close & newline"))
-  :bind (("M-i" . hydra-paredit/body)))
+  (unbind-key "C-M-f" paredit-mode-map)
+  (unbind-key "C-(" paredit-mode-map)
+  (unbind-key "C-)" paredit-mode-map)
+  (unbind-key "C-{" paredit-mode-map)
+  (unbind-key "C-}" paredit-mode-map)
+  (unbind-key "C-M-b" paredit-mode-map)
+  (unbind-key "C-M-d" paredit-mode-map)
+  (unbind-key "C-M-n" paredit-mode-map)
+  (unbind-key "C-M-p" paredit-mode-map)
+  (bind-keys :map paredit-mode-map
+             ("s-l" . paredit-forward)
+             ("s-h" . paredit-backward)
+             ("s-r" . paredit-raise-sexp)
+             ("s-s" . paredit-splice-sexp-killing-backward)
+             ("s-j" . paredit-backward-up)
+             ("s-J" . paredit-forward-up)
+             ("s-k" . paredit-forward-down)
+             ("s-K" . paredit-backward-down)
+             ("s-." . paredit-forward-slurp-sexp)
+             ("s-," . paredit-forward-barf-sexp)
+             ("s-<" . paredit-backward-slurp-sexp)
+             ("s->" . paredit-backward-barf-sexp)
+             ("s-S" . paredit-splice-sexp)
+             ("s-(" . paredit-wrap-round)
+             ("s-o" . paredit-close-round-and-newline)))
+
 
 (use-package swiper
   :ensure t
@@ -131,7 +139,7 @@
           (find-file-other-window (concat dir file))
           (and lnum (goto-line (string-to-number lnum))))))))
 
-(global-set-key (kbd "s-]") 'jump-to-file-and-line)
+(global-set-key (kbd "C-M-]") 'jump-to-file-and-line)
 
 (defun smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
