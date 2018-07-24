@@ -1,7 +1,6 @@
 (put 'upcase-region 'disabled nil)
 
 (delete-selection-mode 1)
-
 (use-package multiple-cursors
   :config
   (define-key mc/keymap (kbd "C-'") nil)

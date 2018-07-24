@@ -13,7 +13,10 @@
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
 
 (use-package hydra
-  :ensure t)
+  :ensure t
+  :custom
+  (hydra-lv t)
+  (hydra-is-helpful t))
 
 (use-package ivy
   :ensure t)
