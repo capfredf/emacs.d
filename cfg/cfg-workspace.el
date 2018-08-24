@@ -25,6 +25,7 @@
   (projectile-completion-system 'ivy)
   (projectile-enable-caching t)
   (projectile-use-git-grep t)
+  (projectile-git-submodule-command "")
   :config
   (projectile-mode)
   (defun back-to-cfg ()
@@ -35,7 +36,7 @@
 	"projectile"
 	("f" projectile-find-file "find file" :column "project")
 	("g" projectile-grep "grep" :column "project")
-    ("c" projectile-invalidate-cache "invalidate cache" :column "meta")
+    ("c" projectile-invalidate-cache "invalidate cache" :color red :column "meta")
     ("h" back-to-cfg "back to cfg" :column "shortcut")
 	("s" projectile-switch-project "switch-project" :column "shortcut"))
 

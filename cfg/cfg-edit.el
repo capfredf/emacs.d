@@ -12,7 +12,7 @@
 	("p" mc/mark-previous-like-this "mark previous")
 	("<" mc/mark-all-like-this "mark all"))
   :ensure t
-  :bind (("C-M-d" . hydra-multi-cursors/body)))
+  :bind (("C-M-s" . hydra-multi-cursors/body)))
 
 
 (use-package iy-go-to-char

@@ -16,4 +16,10 @@
   :ensure t
   :mode "\\.hs")
 
+(use-package proof-general
+  :mode ("\\.v" . coq-mode)
+  :load-path "$HOME/.emacs.d/PG/generic/proof-site")
+
+
+
 (provide 'cfg-c)
