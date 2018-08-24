@@ -71,4 +71,12 @@
                     charset
                     (font-spec :family "Source Han Sans")))
 
+(defhydra hydra-zoom (:color red)
+  "zoom"
+  ("i" text-scale-increase "in")
+  ("r" (text-scale-adjust 0) "reset")
+  ("o" text-scale-decrease "out"))
+
+(global-set-key (kbd "<f3>") 'hydra-zoom/body)
+
 (provide 'cfg-visual)
