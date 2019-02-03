@@ -12,7 +12,7 @@
 	("p" mc/mark-previous-like-this "mark previous")
 	("<" mc/mark-all-like-this "mark all"))
   :ensure t
-  :bind (("C-M-s" . hydra-multi-cursors/body)))
+  :bind (("M-s" . hydra-multi-cursors/body)))
 
 
 (use-package iy-go-to-char
@@ -104,15 +104,16 @@
   (unbind-key "C-M-d" paredit-mode-map)
   (unbind-key "C-M-n" paredit-mode-map)
   (unbind-key "C-M-p" paredit-mode-map)
+  (unbind-key "M-s" paredit-mode-map)
   :bind (:map paredit-mode-map
          ("s-l" . paredit-forward)
          ("s-h" . paredit-backward)
          ("s-r" . paredit-raise-sexp)
          ("s-s" . paredit-splice-sexp-killing-backward)
-         ("s-j" . paredit-backward-up)
-         ("s-J" . paredit-forward-up)
+         ("s-j" . paredit-backward-down)
+         ("s-J" . paredit-backward-up)
          ("s-k" . paredit-forward-down)
-         ("s-K" . paredit-backward-down)
+         ("s-K" . paredit-forward-up)
          ("s-." . paredit-forward-slurp-sexp)
          ("s-," . paredit-forward-barf-sexp)
          ("s-<" . paredit-backward-slurp-sexp)
@@ -167,4 +168,4 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
 
-(provide 'cfg-edit)
+(provide 'mod-edit)
