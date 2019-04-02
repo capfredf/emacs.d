@@ -93,6 +93,7 @@
   :ensure t
   :init
   (add-hook 'racket-mode-hook #'enable-paredit-mode)
+  (add-hook 'racket-repl-mode-hook #'enable-paredit-mode)
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
   :config
   (unbind-key "C-M-f" paredit-mode-map)

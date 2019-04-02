@@ -21,6 +21,7 @@
   :load-path "$HOME/.emacs.d/PG/generic/proof-site")
 
 
+
 (require 'bind-key)
 (use-package racket-mode
   :ensure t
@@ -32,8 +33,8 @@
   (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable)
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
   :config
-  (setq racket-racket-program "/Applications/Racket_v7.0/bin/racket")
-  (setq racket-raco-program "/Applications/Racket_v7.0/bin/raco")
+  (setq racket-racket-program (concat (getenv "HOME") "/.racket/bin/racket"))
+  (setq racket-raco-program (concat (getenv "HOME") "/.racket/bin/raco"))
   (racket-unicode-input-method-enable)
   (with-temp-buffer
     (set-input-method "racket-unicode")

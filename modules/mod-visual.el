@@ -11,7 +11,21 @@
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-day t))
+  (load-theme 'sanityinc-tomorrow-day t)
+  ;; for moody
+  (let ((line (face-attribute 'mode-line :underline)))
+    (set-face-attribute 'mode-line          nil :overline   line)
+    (set-face-attribute 'mode-line-inactive nil :overline   line)
+    (set-face-attribute 'mode-line-inactive nil :underline  line)
+    (set-face-attribute 'mode-line          nil :box        nil)
+    (set-face-attribute 'mode-line-inactive nil :box        nil))
+
+(use-package moody
+  :ensure t
+  :config
+  (setq x-underline-at-descent-line t)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode))
 
 
 (setq-default fill-column 80)
@@ -28,21 +42,6 @@
  '(fixed-pitch ((t ( :family "Iosevka" :slant normal :weight normal :height 1.0 :width normal)))))
 
 (setq-default frame-title-format (list "%b - " (getenv "USER") "@" (getenv "HOSTNAME")))
-
-
-(use-package telephone-line
-  :ensure t
-  :config
-  (setq telephone-line-lhs
-      '((accent . (telephone-line-vc-segment
-                   telephone-line-process-segment))
-        (nil    . (telephone-line-buffer-segment))))
-  (setq telephone-line-primary-left-separator 'telephone-line-flat
-        telephone-line-secondary-left-separator 'telephone-line-flat
-        telephone-line-primary-right-separator 'telephone-line-flat
-        telephone-line-height 20
-        telephone-line-secondary-right-separator 'telephone-line-flat)
-  (telephone-line-mode 1))
 
 (use-package highlight-parentheses
   :ensure t

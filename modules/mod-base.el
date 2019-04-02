@@ -30,6 +30,7 @@ Version 2017-11-01"
 (setq initial-major-mode (quote text-mode))
 (setq initial-buffer-choice 'xah-new-empty-buffer)
 
+
 (use-package benchmark-init
   :ensure t
   :config
@@ -91,6 +92,11 @@ Version 2017-11-01"
   (global-set-key (kbd "M-y") 'counsel-yank-pop)
   (ivy-mode)
   (counsel-mode))
+
+(add-hook 'eshell-mode-hook
+  (lambda ()
+    (define-key eshell-mode-map (kbd "<tab>")
+      'completion-at-point)))
 
 (setq tramp-default-method "ssh")
 

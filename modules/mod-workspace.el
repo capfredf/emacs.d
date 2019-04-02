@@ -1,7 +1,7 @@
 (use-package ace-window
   :ensure t
   :config
-  (defhydra hydra-window-rator (:hint nil)
+  (defhydra hydra-window-rator (:hint nil :idle 2)
 	"manipulate windows"
 	("h" windmove-left "left" :column "movement")
 	("l" windmove-right "right" :column "movement")
@@ -33,7 +33,7 @@
     (interactive)
     (projectile-switch-project-by-name "~/.emacs.d/"))
 
-  (defhydra hydra-projectile-rator (:color blue)
+  (defhydra hydra-projectile-rator (:color blue :idle 2)
 	"projectile"
 	("f" projectile-find-file "find file" :column "project")
 	("g" projectile-grep "grep" :column "project")
