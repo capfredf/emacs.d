@@ -27,6 +27,8 @@
   (org-fontify-done-headline t)
   (org-src-fontify-natively t)
   (org-image-actual-width 500)
+  (org-agenda-files (list "~/captainwiki/plan"))
+
   :custom-face
   ;; (org-quote ((t (:height 2.0))))
   (org-done ((t (:foreground "dim gray" :strike-through t))))
@@ -51,7 +53,7 @@
   (require 'org) ;; not the idomatic way to load the org package
   :custom
   (org-journal-dir "~/captainwiki/journal/")
-  (org-journal-file-format "%Y%m%d.org")
+  (org-journal-file-format "%Y%m%d.jnl")
   :bind ("C-c C-k" . org-journal-new-entry))
 
 
