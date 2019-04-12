@@ -18,7 +18,7 @@
     (set-face-attribute 'mode-line-inactive nil :overline   line)
     (set-face-attribute 'mode-line-inactive nil :underline  line)
     (set-face-attribute 'mode-line          nil :box        nil)
-    (set-face-attribute 'mode-line-inactive nil :box        nil))
+    (set-face-attribute 'mode-line-inactive nil :box        nil)))
 
 (use-package moody
   :ensure t

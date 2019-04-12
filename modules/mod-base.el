@@ -64,12 +64,14 @@ Version 2017-11-01"
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 
 
+;; for some reasons, use-package on hydra with customizations to
+;; hydra-is-helpful and -lv inteferes with load-theme, so I used plain install
+;; and require
+(unless (package-installed-p 'hydra)
+  (ignore-errors
+    (package-install 'hydra)))
+(require 'hydra)
 
-(use-package hydra
-  :ensure t
-  :custom
-  (hydra-lv t)
-  (hydra-is-helpful t))
 
 (use-package ivy
   :ensure t)
