@@ -4,46 +4,16 @@
 (use-package multiple-cursors
   :config
   (define-key mc/keymap (kbd "C-'") nil)
-  (defhydra hydra-multi-cursors (:hint nil)
-  "multiple cursors"
-	("e" mc/edit-lines "split selected lines into cursors")
-	("d" mc/mark-next-like-this "mark next")
-	("s" mc/skip-to-next-like-this "skip next")
-	("p" mc/mark-previous-like-this "mark previous")
-	("<" mc/mark-all-like-this "mark all"))
   :ensure t
-  :bind (("M-s" . hydra-multi-cursors/body)))
-
-
-(use-package iy-go-to-char
-  :ensure t
-  :config
-  (defhydra hydra-iy-go-to-char (:hint nil :idle 5)
-	"go to char in line"
-	("f" iy-go-to-char "to some char foward")
-	("F" iy-go-to-char-backward "to some char backward")
-	(";" iy-go-to-or-up-to-continue "repeat foward")
-	("," iy-go-to-or-up-to-continue-backward "repeat backward"))
-  :bind (("C-M-f" . hydra-iy-go-to-char/body)))
+  :bind (("C-M-e" . mc/edit-lines)
+         ("C-," . mc/mark-next-like-this)
+         ("C-." . mc/mark-previous-like-this)
+         ("C->" . mc/skip-to-next-like-this)
+         ("C-<" . mc/skip-to-previous-like-this)))
 
 (use-package expand-region
   :ensure t
   :bind (("C-=" . er/expand-region)))
-
-(use-package undo-tree
-  :ensure t
-  :config
-  (global-undo-tree-mode 1)
-  (define-key undo-tree-map (kbd "C-/") nil)
-  (define-key undo-tree-map (kbd "C-x u") nil)
-
-  (defhydra hydra-undo-tree (:hint nil)
-	"undo!"
-	("/" undo-tree-undo "undo")
-	("r" undo-tree-redo "redo")
-	("u" undo-tree-visualize "visualize"))
-
-  :bind (("C-/" . hydra-undo-tree/body)))
 
 (defun select-line ()
   (interactive)
@@ -68,14 +38,11 @@
   (newline)
   (indent-for-tab-command))
 
-(defhydra hydra-line-rator (:hint nil)
-  "To manipulate the line"
-  ("o" open-line-after "open line after")
-  ("s" select-line "select current line")
-  ("j" myjoin-line "join line and after")
-  ("O" open-line-before "open line before"))
-
-(global-set-key (kbd "C-l") 'hydra-line-rator/body)
+(global-set-key (kbd "C-l") nil)
+(global-set-key (kbd "C-l j") 'myjoin-line)
+(global-set-key (kbd "C-l s") 'select-line)
+(global-set-key (kbd "C-l o") 'open-line-after)
+(global-set-key (kbd "C-l O") 'open-line-before)
 
 (use-package yasnippet
   :ensure t

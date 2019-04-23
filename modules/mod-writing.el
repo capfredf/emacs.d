@@ -28,6 +28,10 @@
   (org-src-fontify-natively t)
   (org-image-actual-width 500)
   (org-agenda-files (list "~/captainwiki/plan"))
+  (org-refile-targets '((nil :maxlevel . 3)
+                        (org-agenda-files :maxlevel . 3)))
+  (org-refile-use-outline-path 'file) ;; use file path as refile targets
+  (org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
 
   :custom-face
   ;; (org-quote ((t (:height 2.0))))

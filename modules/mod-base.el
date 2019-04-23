@@ -67,18 +67,8 @@ Version 2017-11-01"
 ;; for some reasons, use-package on hydra with customizations to
 ;; hydra-is-helpful and -lv inteferes with load-theme, so I used plain install
 ;; and require
-(unless (package-installed-p 'hydra)
-  (ignore-errors
-    (package-install 'hydra)))
-(require 'hydra)
-
-
 (use-package ivy
   :ensure t)
-
-(use-package ivy-hydra
-  :ensure t
-  :after (ivy hydra))
 
 (use-package swiper
   :ensure t
@@ -112,5 +102,9 @@ Version 2017-11-01"
 
 (custom-set-variables '(server-kill-new-buffers t))
 (add-hook 'server-done-hook (lambda () (delete-frame)))
+
+(global-unset-key (kbd "C-z")) ;; unbind (suspend-frame) to C-z
+(global-unset-key (kbd "C-x z")) ;; unbind repeat to C-x
+(global-set-key (kbd "C-z") 'repeat)
 
 (provide 'mod-base)
