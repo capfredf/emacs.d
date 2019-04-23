@@ -46,7 +46,9 @@
   ;; (org-level-3 ((t (:family "Source Han Sans SC" :height 1.25))))
   ;; (org-level-2 ((t (:family "Source Han Sans SC" :height 1.5))))
   ;; (org-level-1 ((t (:family "Source Han Sans SC" :height 1.75))))
-  (org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil)))))
+  (org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))))
+  :bind (("C-c a" . org-agenda)
+         ("C-c g" . counsel-org-goto-all)))
 
 (use-package org-bullets :ensure t :after org)
 

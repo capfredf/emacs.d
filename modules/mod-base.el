@@ -64,9 +64,11 @@ Version 2017-11-01"
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 
 
-;; for some reasons, use-package on hydra with customizations to
-;; hydra-is-helpful and -lv inteferes with load-theme, so I used plain install
-;; and require
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
+
 (use-package ivy
   :ensure t)
 
