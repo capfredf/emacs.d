@@ -8,17 +8,25 @@
   (mapcar #'disable-theme custom-enabled-themes)
   (load-theme theme t))
 
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t
-  :config
-  (load-theme 'sanityinc-tomorrow-day t)
-  ;; for moody
+(defun load-theme-after (theme-id &rest arg)
+  ;; darken the background color a little bit when applying tomorrow-day
+  (when (equal theme-id 'sanityinc-tomorrow-day)
+    (set-face-attribute 'default nil :background "#fafafa"))
+
+  ;; config for moody
   (let ((line (face-attribute 'mode-line :underline)))
     (set-face-attribute 'mode-line          nil :overline   line)
     (set-face-attribute 'mode-line-inactive nil :overline   line)
     (set-face-attribute 'mode-line-inactive nil :underline  line)
     (set-face-attribute 'mode-line          nil :box        nil)
     (set-face-attribute 'mode-line-inactive nil :box        nil)))
+
+(advice-add 'load-theme :after #'load-theme-after)
+
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :config
+  (load-theme 'sanityinc-tomorrow-day t))
 
 (use-package moody
   :ensure t

@@ -44,6 +44,9 @@
 (global-set-key (kbd "C-l o") 'open-line-after)
 (global-set-key (kbd "C-l O") 'open-line-before)
 
+(global-set-key (kbd "M-k") nil)
+(global-set-key (kbd "M-k k") 'kill-whole-line)
+
 (use-package yasnippet
   :ensure t
   :hook ((prog-mode . yas-minor-mode)

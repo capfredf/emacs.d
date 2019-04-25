@@ -20,11 +20,20 @@
   (projectile-mode))
 
 (use-package diff-hl :ensure t)
+
 (use-package magit
   :ensure t
   :bind (("C-M-m" . magit-status))
   :config (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
+(winner-mode t)
+
+(use-package eyebrowse
+  :ensure t
+  :custom
+  (eyebrowse-keymap-prefix (kbd "C-M-w"))
+  :config
+  (eyebrowse-mode t))
 
 (provide 'mod-workspace)
 ;; (defun print-elements-of-list (list)

@@ -28,7 +28,10 @@ Version 2017-11-01"
     ))
 
 (setq initial-major-mode (quote text-mode))
-(setq initial-buffer-choice 'xah-new-empty-buffer)
+(setq fancy-splash-image (expand-file-name "~/Downloads/ThereIsNoLinearTime1.png"))
+(fancy-startup-screen)
+;; (setq initial-buffer-choice 'xah-new-empty-buffer)
+;; (setq initial-buffer-choice nil)
 
 
 (use-package benchmark-init
