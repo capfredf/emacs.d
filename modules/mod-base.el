@@ -11,26 +11,44 @@
 (define-coding-system-alias 'utf8 'utf-8)
 (set-language-environment 'utf-8)
 
-(defun xah-new-empty-buffer ()
-  "Create a new empty buffer.
-New buffer will be named “untitled” or “untitled<2>”, “untitled<3>”, etc.
+(defun splash-head ()
+  "Insert the head part of the splash screen into the current buffer."
+  (let* ((image-file (expand-file-name "~/Downloads/ThereIsNoLinearTime1.png"))
+         (img (create-image image-file))
+         (image-width (and img (car (image-size img))))
+         (window-width (window-width)))
+    (when img
+      (when (> window-width image-width)
+        ;; Center the image in the window.
+        (insert (propertize " " 'display
+                            `(space :align-to (+ center (-0.5 . ,img)))))
 
-It returns the buffer (for elisp programing).
+        ;; Change the color of the XPM version of the splash image
+        ;; so that it is visible with a dark frame background.
 
-URL `http://ergoemacs.org/emacs/emacs_new_empty_buffer.html'
-Version 2017-11-01"
+        ;; Insert the image with a help-echo and a link.
+        (make-button (prog1 (point) (insert-image img)) (point)
+                     'face 'default
+                     'help-echo "mouse-2, RET: Browse https://www.yahw.io"
+                     'action (lambda (_button) (browse-url "https://www.yahw.io"))
+                     'follow-link t)
+        (insert "\n\n")))))
+
+(defun welcome-buffer ()
   (interactive)
-  (let (($buf (generate-new-buffer "untitled")))
-    (switch-to-buffer $buf)
-    (funcall initial-major-mode)
-    (setq buffer-offer-save t)
-    $buf
-    ))
+  (let (($buf (get-buffer-create "*Aye, aye, Captain*")))
+    (with-current-buffer $buf
+      (erase-buffer)
+      (funcall initial-major-mode)
+      (setq buffer-offer-save t)
+      (splash-head)
+      (insert "Thirteen years ago I knew the carpets would need vacuuming around now and having a baby seemd to be the easist and cheapest way to get the job done\n\n")
+      (insert "                                                                                                                 -- Ted Chiang, Stories of Your Life")
+      (setq buffer-read-only t))
+    (switch-to-buffer $buf)))
 
-(setq initial-major-mode (quote text-mode))
-(setq fancy-splash-image (expand-file-name "~/Downloads/ThereIsNoLinearTime1.png"))
-(fancy-startup-screen)
-;; (setq initial-buffer-choice 'xah-new-empty-buffer)
+(setq initial-major-mode (quote fundamental-mode))
+(setq initial-buffer-choice 'welcome-buffer)
 ;; (setq initial-buffer-choice nil)
 
 

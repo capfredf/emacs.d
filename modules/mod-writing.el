@@ -18,6 +18,7 @@
   (add-hook 'org-mode-hook (lambda ()
                              (org-bullets-mode 1)
                              (org-indent-mode t)
+                             (setq fill-column 100)
                              ;; (variable-pitch-mode t)
                              ;; (face-remap-add-relative 'default :family "Source Sans Pro" :height 140)
                              (visual-line-mode)
