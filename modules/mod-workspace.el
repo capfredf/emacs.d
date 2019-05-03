@@ -3,7 +3,7 @@
   :custom
   (aw-dispatch-always t) ;; this is the default value
   (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  :bind (("C-M-o" . ace-window)))
+  :bind (("M-o" . ace-window)))
 
 (require 'subr-x)
 (use-package projectile
@@ -31,7 +31,7 @@
 (use-package eyebrowse
   :ensure t
   :custom
-  (eyebrowse-keymap-prefix (kbd "<f1>"))
+  (eyebrowse-keymap-prefix (kbd "<f2>"))
   :config
   (eyebrowse-mode t))
 

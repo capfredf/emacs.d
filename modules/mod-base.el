@@ -53,6 +53,7 @@
 ;; (setq initial-buffer-choice nil)
 
 
+(desktop-save-mode t)
 (use-package benchmark-init
   :ensure t
   :config
