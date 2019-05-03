@@ -44,7 +44,8 @@
       (splash-head)
       (insert "Thirteen years ago I knew the carpets would need vacuuming around now and having a baby seemd to be the easist and cheapest way to get the job done\n\n")
       (insert "                                                                                                                 -- Ted Chiang, Stories of Your Life")
-      (setq buffer-read-only t))
+      (setq buffer-read-only t)
+      (set-buffer-modified-p nil))
     (switch-to-buffer $buf)))
 
 (setq initial-major-mode (quote fundamental-mode))
@@ -57,6 +58,8 @@
   :config
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
+
+(use-package ag :ensure t)
 
 (defun read-lines (filePath)
   "Return a list of lines of a file at filePath."
@@ -126,8 +129,8 @@
 (custom-set-variables '(server-kill-new-buffers t))
 (add-hook 'server-done-hook (lambda () (delete-frame)))
 
-(global-unset-key (kbd "C-z")) ;; unbind (suspend-frame) to C-z
+(global-unset-key (kbd "M-z")) ;; unbind (suspend-frame) to C-z
 (global-unset-key (kbd "C-x z")) ;; unbind repeat to C-x
-(global-set-key (kbd "C-z") 'repeat)
+(global-set-key (kbd "M-z") 'repeat)
 
 (provide 'mod-base)

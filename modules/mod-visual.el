@@ -28,6 +28,10 @@
   :config
   (load-theme 'sanityinc-tomorrow-day t))
 
+(use-package beacon
+  :ensure t
+  :config
+  (beacon-mode t))
 (use-package moody
   :ensure t
   :config

@@ -22,6 +22,8 @@
 
 
 
+(setq shell-file-name "bash")
+(setq comint-prompt-read-only t)
 (require 'bind-key)
 (use-package racket-mode
   :ensure t

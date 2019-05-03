@@ -15,7 +15,7 @@
   (projectile-git-submodule-command "")
   (projectile-indexing-method 'alien)
   :bind-keymap
-  ("C-M-p" . projectile-command-map)
+  ("s-m p" . projectile-command-map)
   :config
   (projectile-mode))
 
@@ -23,7 +23,7 @@
 
 (use-package magit
   :ensure t
-  :bind (("C-M-m" . magit-status))
+  :bind (("s-m m" . magit-status))
   :config (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
 (winner-mode t)
@@ -31,7 +31,7 @@
 (use-package eyebrowse
   :ensure t
   :custom
-  (eyebrowse-keymap-prefix (kbd "C-M-w"))
+  (eyebrowse-keymap-prefix (kbd "<f1>"))
   :config
   (eyebrowse-mode t))
 

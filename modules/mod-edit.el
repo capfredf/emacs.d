@@ -1,13 +1,14 @@
 (put 'upcase-region 'disabled nil)
 
 (delete-selection-mode 1)
+
 (use-package multiple-cursors
   :config
   (define-key mc/keymap (kbd "C-'") nil)
   :ensure t
   :bind (("C-M-e" . mc/edit-lines)
-         ("C-," . mc/mark-next-like-this)
-         ("C-." . mc/mark-previous-like-this)
+         ("C-." . mc/mark-next-like-this)
+         ("C-," . mc/mark-previous-like-this)
          ("C->" . mc/skip-to-next-like-this)
          ("C-<" . mc/skip-to-previous-like-this)))
 
