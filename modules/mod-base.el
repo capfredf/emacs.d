@@ -120,14 +120,16 @@
 
 (require 'server)
 (unless (server-running-p) (server-start))
-(add-hook 'server-switch-hook
-          (lambda nil
-            (let ((server-buf (current-buffer)))
-              (bury-buffer)
-              (switch-to-buffer-other-frame server-buf))))
 
-(custom-set-variables '(server-kill-new-buffers t))
-(add-hook 'server-done-hook (lambda () (delete-frame)))
+;; I don't know the reason that I added the code below
+;; (add-hook 'server-switch-hook
+;;           (lambda nil
+;;             (let ((server-buf (current-buffer)))
+;;               (bury-buffer)
+;;               (switch-to-buffer-other-frame server-buf))))
+
+;; (custom-set-variables '(server-kill-new-buffers t))
+;; (add-hook 'server-done-hook (lambda () (delete-frame)))
 
 (global-unset-key (kbd "M-z")) ;; unbind (suspend-frame) to C-z
 (global-unset-key (kbd "C-x z")) ;; unbind repeat to C-x
