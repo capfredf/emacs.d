@@ -8,3 +8,9 @@ projectile-bookmarks.eld
 projectile.cache
 snippets/
 url/
+/.emacs.desktop.lock
+/bookmarks
+/desktop-save/.emacs.desktop
+/desktop-save
+/transient/
+.emacs.desktop

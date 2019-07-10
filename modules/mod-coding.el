@@ -23,8 +23,11 @@
 
 
 (setq shell-file-name "bash")
+
 (setq comint-prompt-read-only t)
+
 (require 'bind-key)
+
 (use-package racket-mode
   :ensure t
   :no-require t
@@ -38,14 +41,16 @@
   (setq racket-racket-program (concat (getenv "HOME") "/.racket/bin/racket"))
   (setq racket-raco-program (concat (getenv "HOME") "/.racket/bin/raco"))
   (racket-unicode-input-method-enable)
+  (put 'required/typed 'racket-indent-function 1)
   (with-temp-buffer
     (set-input-method "racket-unicode")
     (let ((quail-current-package (assoc "racket-unicode" quail-package-alist)))
       (quail-define-rules ((append . t))
                           ("vdash" ["⊢"])
                           ("^o" ["ᵒ"])))))
-
 ;; (load "/Users/phay/.opam/system/share/emacs/site-lisp/tuareg-site-file")
+
+(setq compilation-scroll-output 'first-error)
 
 (use-package rust-mode
   :ensure t)

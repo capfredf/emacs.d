@@ -1,5 +1,6 @@
 (require 'package)
 
+(setq old-val gc-cons-threshold)
 (setq gc-cons-threshold 100000000)
 
 (add-to-list 'package-archives
@@ -10,7 +11,6 @@
   (require 'use-package))
 (require 'bind-key)
 
-
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 
 (require 'mod-base)
@@ -19,3 +19,5 @@
 (require 'mod-edit)
 (require 'mod-coding)
 (require 'mod-writing)
+
+(setq gc-cons-threshold old-val)

@@ -13,7 +13,7 @@
 
 (defun splash-head ()
   "Insert the head part of the splash screen into the current buffer."
-  (let* ((image-file (expand-file-name "~/Downloads/ThereIsNoLinearTime1.png"))
+  (let* ((image-file (expand-file-name "~/.emacs.d/ThereIsNoLinearTime1.png"))
          (img (create-image image-file))
          (image-width (and img (car (image-size img))))
          (window-width (window-width)))

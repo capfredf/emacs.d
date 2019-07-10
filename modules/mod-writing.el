@@ -54,14 +54,14 @@
 (use-package org-bullets :ensure t :after org)
 
 
-(use-package org-journal
-  :ensure t
-  :init
-  (require 'org) ;; not the idomatic way to load the org package
-  :custom
-  (org-journal-dir "~/captainwiki/journal/")
-  (org-journal-file-format "%Y%m%d.jnl")
-  :bind ("C-c C-k" . org-journal-new-entry))
+;; (use-package org-journal
+;;   :ensure t
+;;   :init
+;;   (require 'org) ;; not the idomatic way to load the org package
+;;   :custom
+;;   (org-journal-dir "~/captainwiki/journal/")
+;;   (org-journal-file-format "%Y%m%d.jnl")
+;;   :bind ("C-c C-k" . org-journal-new-entry))
 
 
 ;; Tex

@@ -17,7 +17,11 @@
   :bind-keymap
   ("s-m p" . projectile-command-map)
   :config
-  (projectile-mode))
+  (projectile-mode)
+  (projectile-register-project-type 'racket '(".racket_prj")
+				  :compile "raco setup typed-racket typed"
+				  :test "raco make -v typed-racket-test/main.rkt && racket typed-racket-test/main.rkt --unit"
+				  :run "echo 'hell world'"))
 
 (use-package diff-hl :ensure t)
 
@@ -31,7 +35,7 @@
 (use-package eyebrowse
   :ensure t
   :custom
-  (eyebrowse-keymap-prefix (kbd "<f2>"))
+  (eyebrowse-keymap-prefix (kbd "s-m e"))
   :config
   (eyebrowse-mode t))
 

@@ -9,10 +9,6 @@
   (load-theme theme t))
 
 (defun load-theme-after (theme-id &rest arg)
-  ;; darken the background color a little bit when applying tomorrow-day
-  (when (equal theme-id 'sanityinc-tomorrow-day)
-    (set-face-attribute 'default nil :background "#fafafa"))
-
   ;; config for moody
   (let ((line (face-attribute 'mode-line :underline)))
     (set-face-attribute 'mode-line          nil :overline   line)
@@ -24,7 +20,7 @@
 (advice-add 'load-theme :after #'load-theme-after)
 
 (use-package color-theme-sanityinc-tomorrow
-  :ensure t
+  :load-path "site-lisp/color-theme-sanityinc-tomorrow"
   :config
   (load-theme 'sanityinc-tomorrow-day t))
 
