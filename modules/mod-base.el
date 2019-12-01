@@ -48,8 +48,8 @@
       (set-buffer-modified-p nil))
     (switch-to-buffer $buf)))
 
-(setq initial-major-mode (quote fundamental-mode))
-(setq initial-buffer-choice 'welcome-buffer)
+;; (setq initial-major-mode (quote fundamental-mode))
+;; (setq initial-buffer-choice 'welcome-buffer)
 ;; (setq initial-buffer-choice nil)
 
 
@@ -99,7 +99,9 @@
 
 (use-package swiper
   :ensure t
-  :after ivy)
+  :after ivy
+  :config
+  (global-set-key (kbd "s-m r") 'ivy-resume))
 
 (use-package counsel
   :ensure t
@@ -109,6 +111,7 @@
   (setq ivy-count-format "(%d/%d) ")
   :config
   (global-set-key (kbd "M-y") 'counsel-yank-pop)
+  (global-set-key (kbd "s-m s") 'counsel-ag)
   (ivy-mode)
   (counsel-mode))
 
@@ -120,6 +123,10 @@
 (setq tramp-default-method "ssh")
 
 (require 'server)
+(when (eq system-type 'darwin)
+  (setq mac-mouse-wheel-mode t)
+  (setq mac-mouse-wheel-smooth-scroll t))
+
 (unless (server-running-p) (server-start))
 
 ;; I don't know the reason that I added the code below

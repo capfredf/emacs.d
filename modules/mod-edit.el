@@ -41,6 +41,7 @@
 
 (global-set-key (kbd "C-l") nil)
 (global-set-key (kbd "C-l j") 'myjoin-line)
+(global-set-key (kbd "C-l l") 'beacon-blink)
 (global-set-key (kbd "C-l s") 'select-line)
 (global-set-key (kbd "C-l o") 'open-line-after)
 (global-set-key (kbd "C-l O") 'open-line-before)
@@ -51,14 +52,15 @@
 (use-package yasnippet
   :ensure t
   :hook ((prog-mode . yas-minor-mode)
-         (org-mode . yas-minor-mode))
+         (org-mode . yas-minor-mode)
+         (tex-mode . yas-minor-mode))
   :config
   (setq yas-snippet-dirs
 		'("~/.emacs.d/yasnippet-snippets/snippets"                 ;; personal snippets
 		  "~/.emacs.d/snippets"                 ;; personal snippets
 		  ))
   (yas-reload-all))
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (use-package paredit
   :ensure t
@@ -140,4 +142,6 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
 
+(setq org-reveal-root "file:///Users/capfredf/Downloads/reveal.js-3.8.0/")
+(setq org-reveal-history t)
 (provide 'mod-edit)

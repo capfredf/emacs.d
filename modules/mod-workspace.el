@@ -17,6 +17,7 @@
   :bind-keymap
   ("s-m p" . projectile-command-map)
   :config
+  (which-key-add-key-based-replacements "s-m p" "projectile")
   (projectile-mode)
   (projectile-register-project-type 'racket '(".racket_prj")
 				  :compile "raco setup typed-racket typed"
@@ -37,6 +38,7 @@
   :custom
   (eyebrowse-keymap-prefix (kbd "s-m e"))
   :config
+  (which-key-add-key-based-replacements "s-m e" "eyebrowse")
   (eyebrowse-mode t))
 
 (provide 'mod-workspace)

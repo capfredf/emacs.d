@@ -55,4 +55,13 @@
 (use-package rust-mode
   :ensure t)
 
+
+;; (use-package org-ref
+;;   :ensure t
+;;   :custom
+;;   (org-ref-completion-library 'org-ref-ivy-cite)
+;;   (reftex-default-bibliography '("~/captainwiki/bibliography/references.bib"))
+;;   (org-ref-bibliography-notes "~/captainwiki/bibliography/notes.org")
+;;   (org-ref-pdf-directory "~/captainwiki/bibliography/bibtex-pdfs/"))
+
 (provide 'mod-coding)
