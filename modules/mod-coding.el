@@ -55,6 +55,36 @@
 (use-package rust-mode
   :ensure t)
 
+(require 'flycheck)
+(require 's)
+(flycheck-define-checker pie
+  "A Pie type error checker."
+  ;:command ("/Users/capfredf/code/chaos/pie/tmp.sh")
+  :command ("/Users/capfredf/.racket/bin/raco" "expand" source)
+  :error-patterns
+  ((error line-start (message (one-or-more (or "\n" not-newline))) "\n  location...:\n" (or (one-or-more space) "\t") (file-name)":" line ":" column line-end)
+   (info "'\"" (file-name) ":" line "." column ":" " TODO:" (message) "\""))
+  :modes racket-mode
+  :error-filter
+  (lambda (errors)
+    (dolist (err (flycheck-sanitize-errors errors))
+      (-when-let (msg (flycheck-error-message err))
+        (setf (flycheck-error-message err)
+              (s-replace "\\n" "\n" msg))))
+    (flycheck-increment-error-columns errors))
+  :predicate
+  (lambda ()
+    (equal (file-name-extension (buffer-file-name)) "pie")))
+
+
+
+;; (require 'rx)
+;; (s-matches-p
+;;  (rx "'\"" "/Users/capfredf/code/lecture-types-2020/draft-hello.pie" ":" (one-or-more digit) "." (one-or-more digit) ":" " TODO:"  (one-or-more (or "\n" not-newline)) "\"")
+;;  "'\"/Users/capfredf/code/lecture-types-2020/draft-hello.pie:8.6: TODO:\n A : U\n n : Nat\n v : (Vec A n)\n---------------\n A\n\n\"")
+
+(add-to-list 'flycheck-checkers 'pie)
+;;(add-to-list 'flycheck-checkers 'pie-todo)
 
 ;; (use-package org-ref
 ;;   :ensure t
@@ -65,3 +95,4 @@
 ;;   (org-ref-pdf-directory "~/captainwiki/bibliography/bibtex-pdfs/"))
 
 (provide 'mod-coding)
+

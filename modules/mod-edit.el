@@ -102,6 +102,13 @@
   :bind
   (("C-s" . swiper)))
 
+(use-package scribble
+  :load-path "site-lisp/scribble-emacs")
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
 (defun jump-to-file-and-line ()
   (interactive)
   (let ((line (buffer-substring-no-properties (point-at-bol) (point-at-eol))))
@@ -112,6 +119,14 @@
         (when (and file (file-exists-p (concat dir file)))
           (find-file-other-window (concat dir file))
           (and lnum (goto-line (string-to-number lnum))))))))
+
+(add-to-list 'display-buffer-alist
+             `(,(rx bos "*Flycheck errors*" eos)
+              (display-buffer-reuse-window
+               display-buffer-in-side-window)
+              (side            . bottom)
+              (reusable-frames . visible)
+              (window-height   . 0.33)))
 
 (global-set-key (kbd "C-M-]") 'jump-to-file-and-line)
 
@@ -141,6 +156,28 @@ point reaches the beginning or end of the buffer, stop there."
 ;; remap C-a to `smarter-move-beginning-of-line'"e
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
+
+(defun with-face (str &rest face-plist)
+  (propertize str 'face face-plist))
+
+(defun shk-eshell-prompt ()
+  (let ((header-bg "#fafafa"))
+    (concat
+     (with-face "\n" :background header-bg)
+     (with-face (concat (eshell/pwd) " ") :background header-bg)
+     (with-face
+      (or (ignore-errors (format "(%s)" (vc-responsible-backend default-directory))) "")
+      :background header-bg)
+     (with-face "\n" :background header-bg)
+     (with-face user-login-name :foreground "#64a6ae")
+     "@"
+     (with-face (system-name) :foreground "#889a2e")
+     (if (= (user-uid) 0)
+         (with-face " #" :foreground "red")
+       " $")
+     " ")))
+(setq eshell-prompt-function 'shk-eshell-prompt)
+(setq eshell-highlight-prompt nil)
 
 (setq org-reveal-root "file:///Users/capfredf/Downloads/reveal.js-3.8.0/")
 (setq org-reveal-history t)

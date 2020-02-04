@@ -63,9 +63,34 @@
                     (font-spec :family "Source Han Sans")))
 
 
+;; (defadvice text-scale-increase (around all-buffers (arg) activate)
+;;   ad-do-it)
+
+(defun text-scale-increase-for-all-buffers ()
+  "Increase font size for all buffers."
+  (interactive)
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      (text-scale-increase 1))))
+
+(defun text-scale-decrease-for-all-buffers ()
+  "Decrease font size for all buffers."
+  (interactive)
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      (text-scale-decrease 1))))
+
+(defun text-scale-reset-for-all-buffers ()
+  "Reset to the default font size for all buffers."
+  (interactive)
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      (text-scale-adjust 0))))
+
 (global-set-key (kbd "<f3>") nil)
-(global-set-key (kbd "<f3> i") 'text-scale-increase)
-(global-set-key (kbd "<f3> r") (lambda () (interactive) (text-scale-adjust 0)))
-(global-set-key (kbd "<f3> o") 'text-scale-decrease)
+(global-set-key (kbd "<f3> i") 'text-scale-increase-for-all-buffers)
+(global-set-key (kbd "<f3> r") 'text-scale-reset-for-all-buffers)
+(global-set-key (kbd "<f3> o") 'text-scale-decrease-for-all-buffers)
 
 (provide 'mod-visual)
+;;; mod-visual.el ends here

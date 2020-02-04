@@ -14,6 +14,7 @@
   (projectile-use-git-grep t)
   (projectile-git-submodule-command "")
   (projectile-indexing-method 'alien)
+  :bind ("C-x b" . projectile-switch-to-buffer)
   :bind-keymap
   ("s-m p" . projectile-command-map)
   :config

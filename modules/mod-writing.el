@@ -67,7 +67,8 @@
            :html-head "<link rel=\"stylesheet\" href=\"/static/css/style.css\" type=\"text/css\"/>"
            :auto-sitemap t                ; Generate sitemap.org automagically...
            :sitemap-filename "index.org"  ; ... call it sitemap.org (it's the default)...
-           :sitemap-title ""        ; ... with title 'Sitemap'.
+           :sitemap-title "Inside:"        ; ... with title 'Sitemap'.
+           :sitemap-sort-files anti-chronologically
            :with-author nil
            )
           ("static"
