@@ -3,8 +3,8 @@
 (delete-selection-mode 1)
 
 (use-package multiple-cursors
-  :config
-  (define-key mc/keymap (kbd "C-'") nil)
+  ;; :config
+  ;; (define-key mc/keymap (kbd "C-'") 'mc-hide-unmatched-lines-mode)
   :ensure t
   :bind (("C-M-e" . mc/edit-lines)
          ("C-." . mc/mark-next-like-this)
@@ -89,9 +89,9 @@
          ("s-k" . paredit-forward-down)
          ("s-K" . paredit-forward-up)
          ("s-." . paredit-forward-slurp-sexp)
-         ("s-," . paredit-forward-barf-sexp)
-         ("s-<" . paredit-backward-slurp-sexp)
-         ("s->" . paredit-backward-barf-sexp)
+         ("s->" . paredit-forward-barf-sexp)
+         ("s-," . paredit-backward-slurp-sexp)
+         ("s-<" . paredit-backward-barf-sexp)
          ("s-S" . paredit-splice-sexp)
          ("s-(" . paredit-wrap-round)
          ("s-o" . paredit-close-round-and-newline)))
