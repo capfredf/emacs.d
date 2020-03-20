@@ -66,31 +66,43 @@
 ;; (defadvice text-scale-increase (around all-buffers (arg) activate)
 ;;   ad-do-it)
 
-(defun text-scale-increase-for-all-buffers ()
+(defun text-scale-increase-for-all ()
   "Increase font size for all buffers."
   (interactive)
   (dolist (buffer (buffer-list))
     (with-current-buffer buffer
       (text-scale-increase 1))))
 
-(defun text-scale-decrease-for-all-buffers ()
+(defun text-scale-decrease-for-all ()
   "Decrease font size for all buffers."
   (interactive)
   (dolist (buffer (buffer-list))
     (with-current-buffer buffer
       (text-scale-decrease 1))))
 
-(defun text-scale-reset-for-all-buffers ()
+(defun text-scale-reset-for-all ()
   "Reset to the default font size for all buffers."
   (interactive)
   (dolist (buffer (buffer-list))
     (with-current-buffer buffer
       (text-scale-adjust 0))))
 
-(global-set-key (kbd "<f3>") nil)
-(global-set-key (kbd "<f3> i") 'text-scale-increase-for-all-buffers)
-(global-set-key (kbd "<f3> r") 'text-scale-reset-for-all-buffers)
-(global-set-key (kbd "<f3> o") 'text-scale-decrease-for-all-buffers)
+(defvar text-scaling-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "i") 'text-scale-increase-for-all)
+    (define-key map (kbd "r") 'text-scale-reset-for-all)
+    (define-key map (kbd "o") 'text-scale-decrease-for-all)
+    map))
+
+(defun scale-text ()
+  "Start the text scaling mode."
+  (interactive)
+  (set-transient-map text-scaling-map t))
+
+(require 'which-key)
+(add-to-list 'which-key-show-transient-maps text-scaling-map)
+
+(global-set-key (kbd "<f3>") 'scale-text)
 
 (provide 'mod-visual)
 ;;; mod-visual.el ends here

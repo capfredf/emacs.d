@@ -52,8 +52,8 @@
 ;; (setq initial-buffer-choice 'welcome-buffer)
 ;; (setq initial-buffer-choice nil)
 
-
-(desktop-save-mode t)
+;; (setq desktop-restore-eager 1)
+;; (desktop-save-mode t)
 (use-package benchmark-init
   :ensure t
   :config
@@ -111,7 +111,7 @@
   (setq ivy-count-format "(%d/%d) ")
   :config
   (global-set-key (kbd "M-y") 'counsel-yank-pop)
-  (global-set-key (kbd "s-m s") 'counsel-ag)
+  (global-set-key (kbd "s-m s") 'counsel-git-grep)
   (ivy-mode)
   (counsel-mode))
 

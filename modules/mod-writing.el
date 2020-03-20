@@ -24,11 +24,12 @@
                              (visual-line-mode)
                              ))
   :custom
+  (org-latex-create-formula-image-program 'dvisvgm)
   (org-hide-emphasis-markers t)
   (org-fontify-done-headline t)
   (org-src-fontify-natively t)
   (org-image-actual-width 500)
-  (org-agenda-files (list "~/captainwiki/plan"))
+  (org-agenda-files (list "~/brain/main.org" "~/brain/typed-racket-dev.org" "~/brain/distributed-systems.org"))
   (org-refile-targets '((nil :maxlevel . 3)
                         (org-agenda-files :maxlevel . 3)))
   (org-refile-use-outline-path 'file) ;; use file path as refile targets
@@ -52,6 +53,13 @@
          ("C-c g" . counsel-org-goto-all))
   :config
   (require 'ox-publish)
+  (setq org-latex-listings 'minted
+      org-latex-packages-alist '(("" "minted"))
+      org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+  (org-link-set-parameters "message" :follow (lambda (path)
+                                               (browse-url (concat "message://" path))))
   (setq org-publish-project-alist
         '(("org"
            :base-directory "~/brain/"
@@ -110,6 +118,11 @@
   (setq TeX-parse-self t)
   (setq TeX-save-query nil))
 
+(setq org-agenda-custom-commands
+      '(("c" "Simple agenda view"
+         ((agenda "")
+          (alltodo "")))))
+
 (use-package deft
   :ensure t
   :bind ("<f8>" . deft)
@@ -118,4 +131,20 @@
   (deft-auto-save-interval 0)
   (deft-extensions '("org" "md" "txt" "tex")))
 
+
+
+;; (use-package org-super-agenda
+;;   :ensure t
+;;   :config
+;;   (let ((org-agenda-span 'day)
+;;         (org-super-agenda-groups
+;;          '((:name "Today"  ; Optionally specify section name
+;;                   :time-grid t  ; Items that appear on the time grid
+;;                   :todo "DONE")  ; Items that have this TODO keyword
+;;            (:priority<= "B"
+;;                       ;; Show this section after "Today" and "Important", because
+;;                       ;; their order is unspecified, defaulting to 0. Sections
+;;                       ;; are displayed lowest-number-first.
+;;                       :order 1))))
+;;   (org-agenda nil "c")))
 (provide 'mod-writing)

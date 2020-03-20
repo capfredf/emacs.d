@@ -2,9 +2,12 @@
 
 (delete-selection-mode 1)
 
+(use-package wgrep
+  :ensure t)
+
 (use-package multiple-cursors
-  ;; :config
-  ;; (define-key mc/keymap (kbd "C-'") 'mc-hide-unmatched-lines-mode)
+  :config
+  (define-key mc/keymap (kbd "C-'") 'mc-hide-unmatched-lines-mode)
   :ensure t
   :bind (("C-M-e" . mc/edit-lines)
          ("C-." . mc/mark-next-like-this)

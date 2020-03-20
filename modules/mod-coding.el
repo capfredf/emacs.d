@@ -5,12 +5,15 @@
 (use-package agda2-mode
   :mode "\\.agda"
   :load-path "/usr/local/share/emacs/site-lisp/agda"
-  :custom-face
-   (agda2-highlight-datatype-face ((t (:foreground "dodger blue"))))
-   (agda2-highlight-function-face ((t (:foreground "dodger blue"))))
-   (agda2-highlight-postulate-face ((t (:foreground "dodger blue"))))
-   (agda2-highlight-primitive-face ((t (:foreground "dodger blue"))))
-   (agda2-highlight-primitive-type-face ((t (:foreground "dodger blue")))))
+  :defer nil
+  ;; :custom-face
+  ;;  (agda2-highlight-datatype-face ((t (:foreground "dodger blue"))))
+  ;;  (agda2-highlight-function-face ((t (:foreground "dodger blue"))))
+  ;;  (agda2-highlight-postulate-face ((t (:foreground "dodger blue"))))
+  ;;  (agda2-highlight-primitive-face ((t (:foreground "dodger blue"))))
+  ;; (agda2-highlight-primitive-type-face ((t (:foreground "dodger blue"))))
+  )
+
 
 (use-package haskell-mode
   :ensure t
@@ -40,6 +43,7 @@
   :config
   (setq racket-racket-program (concat (getenv "HOME") "/.racket/bin/racket"))
   (setq racket-raco-program (concat (getenv "HOME") "/.racket/bin/raco"))
+  (put 'Π 'racket-indent-function 1)
   (racket-unicode-input-method-enable)
   (put 'required/typed 'racket-indent-function 1)
   (with-temp-buffer
@@ -47,7 +51,9 @@
     (let ((quail-current-package (assoc "racket-unicode" quail-package-alist)))
       (quail-define-rules ((append . t))
                           ("vdash" ["⊢"])
-                          ("^o" ["ᵒ"])))))
+                          ("^o" ["ᵒ"])
+                          ("isa" ["∈"])
+                          ("zero" ["Ø"])))))
 ;; (load "/Users/phay/.opam/system/share/emacs/site-lisp/tuareg-site-file")
 
 (setq compilation-scroll-output 'first-error)

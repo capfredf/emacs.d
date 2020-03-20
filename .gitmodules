@@ -7,3 +7,6 @@
 [submodule "site-lisp/color-theme-sanityinc-tomorrow"]
 	path = site-lisp/color-theme-sanityinc-tomorrow
 	url = git@github.com:capfredf/color-theme-sanityinc-tomorrow.git
+[submodule "site-lisp/org-roam"]
+	path = site-lisp/org-roam
+	url = https://github.com/jethrokuan/org-roam/
