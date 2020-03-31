@@ -132,6 +132,34 @@
   (deft-extensions '("org" "md" "txt" "tex")))
 
 
+(use-package org-roam
+  :ensure t
+  :after (emacsql emacsql-sqlite dash)
+  :hook
+  (after-init . org-roam-mode)
+  :custom
+  (org-roam-directory (expand-file-name "~/brain/"))
+  :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n b" . org-roam-switch-to-buffer)
+               ("C-c n g" . org-roam-show-graph))
+         :map org-mode-map
+         (("C-c n i" . org-roam-insert))))
+
+(defun formatted-copy ()
+  "Export region to HTML, and copy it to the clipboard."
+  (interactive)
+  (save-window-excursion
+    (let* ((buf (org-export-to-buffer 'html "*Formatted Copy*" nil nil t t))
+           (html (with-current-buffer buf (buffer-string))))
+      (with-current-buffer buf
+        (shell-command-on-region
+         (point-min)
+         (point-max)
+         "textutil -stdin -format html -convert rtf -stdout | pbcopy"))
+      (kill-buffer buf))))
+
 
 ;; (use-package org-super-agenda
 ;;   :ensure t
