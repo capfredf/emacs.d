@@ -14,7 +14,6 @@
   (projectile-use-git-grep t)
   (projectile-git-submodule-command "")
   (projectile-indexing-method 'alien)
-  :bind ("C-x b" . projectile-switch-to-buffer)
   :bind-keymap
   ("s-m p" . projectile-command-map)
   :config
@@ -34,33 +33,61 @@
 
 (winner-mode t)
 
-(use-package eyebrowse
-  :ensure t
-  :custom
-  (eyebrowse-keymap-prefix (kbd "s-m e"))
-  :config
-  (require 'eyebrowse)
-  (which-key-add-key-based-replacements "s-m e" "eyebrowse")
-  (eyebrowse-mode t)
-  (eyebrowse-switch-to-window-config 0)
-  (eyebrowse-rename-window-config 0 "emacs")
-  (find-file "~/.emacs.d/init.el")
-  
-  (eyebrowse-switch-to-window-config 1)
-  (eyebrowse-rename-window-config 1 "typed-racket")
-  (find-file "~/code/racket-extra-pkgs/typed-racket/")
-  
-  (eyebrowse-switch-to-window-config 2)
-  (eyebrowse-rename-window-config 2 "racket")
-  (find-file "~/code/racket/racket/")
 
-  (eyebrowse-switch-to-window-config 3)
-  (eyebrowse-rename-window-config 3 "pie")
-  (find-file "~/code/lecture-types-2020/")
+;; (defun clear-invisible-buffer ()
+;;   (interactive)
+;;   (let* ((whitelisted (seq-filter (lambda (b) (string-prefix-p " " (buffer-name b))) (buffer-list)))
+;;          (bl-in-other-tabs (apply #'seq-concatenate 'list
+;;                                   (seq-map (lambda (f)
+;;                                              (apply #'seq-concatenate 'list
+;;                                                     (seq-map (lambda (tab)
+;;                                                                (alist-get 'wc-bl tab))
+;;                                                              (tab-bar--tabs-recent nil f))))
+;;                                            (frame-list)))))
+;;     (seq-do (lambda (b)
+;;               (unless (or (get-buffer-window b)
+;;                           (seq-contains bl-in-other-tabs b)
+;;                           (seq-contains whitelisted b))
+;;                 ;; (message (buffer-name b))
+;;                 ;; (error nil)
+;;                 (kill-buffer b)))
+;;             (apply #'seq-concatenate 'list
+;;                    (mapcar (lambda (f) (buffer-list f))
+;;                            (frame-list))))))
 
-  (eyebrowse-switch-to-window-config 4)
-  (eyebrowse-rename-window-config 4 "sp-model")
-  (find-file "~/code/struct-properties/"))
+;; (advice-add #'desktop-save :before (lambda (dirname &optional release only-if-changed version)
+;;                                      (clear-invisible-buffer)))
+
+
+(global-set-key (kbd "s-m e") tab-prefix-map)
+;; (use-package eyebrowse
+;;   :ensure t
+;;   :custom
+;;   (eyebrowse-keymap-prefix (kbd "s-m e"))
+;;   :config
+;;   (require 'eyebrowse)
+;;   (which-key-add-key-based-replacements "s-m e" "eyebrowse")
+;;   (eyebrowse-mode t)
+;;   ;; (eyebrowse-switch-to-window-config 0)
+;;   ;; (eyebrowse-rename-window-config 0 "emacs")
+;;   ;; (find-file "~/.emacs.d/init.el")
+  
+;;   ;; (eyebrowse-switch-to-window-config 1)
+;;   ;; (eyebrowse-rename-window-config 1 "typed-racket")
+;;   ;; (find-file "~/code/racket-extra-pkgs/typed-racket/")
+  
+;;   ;; (eyebrowse-switch-to-window-config 2)
+;;   ;; (eyebrowse-rename-window-config 2 "racket")
+;;   ;; (find-file "~/code/racket/racket/")
+
+;;   ;; (eyebrowse-switch-to-window-config 3)
+;;   ;; (eyebrowse-rename-window-config 3 "pie")
+;;   ;; (find-file "~/code/lecture-types-2020/")
+
+;;   ;; (eyebrowse-switch-to-window-config 4)
+;;   ;; (eyebrowse-rename-window-config 4 "sp-model")
+;;   ;; (find-file "~/code/struct-properties/")
+;;   )
 
 (defun rename-current-file-and-buffer ()
   ;; from Batsov

@@ -37,6 +37,7 @@
   :mode "\\.rkt"
   ;;:load-path "/Users/capfredf/code/racket-mode"
   :init
+  (add-hook 'racket-mode-hook      #'racket-xp-mode)
   (add-hook 'racket-mode-hook      #'racket-unicode-input-method-enable)
   (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable)
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
@@ -53,15 +54,13 @@
                           ("vdash" ["⊢"])
                           ("^o" ["ᵒ"])
                           ("isa" ["∈"])
-                          ("zero" ["Ø"])))))
+                          ("Zero" ["Ø"])))))
 ;; (load "/Users/phay/.opam/system/share/emacs/site-lisp/tuareg-site-file")
-
-(setq compilation-scroll-output 'first-error)
 
 (use-package rust-mode
   :ensure t)
 
-(require 'flycheck)
+;;(require 'flycheck)
 (require 's)
 (flycheck-define-checker pie
   "A Pie type error checker."
@@ -82,6 +81,10 @@
   (lambda ()
     (equal (file-name-extension (buffer-file-name)) "pie")))
 
+
+(use-package python-mode
+  :mode "\\.py"
+  :interpreter ("python" . python-mode))
 
 
 ;; (require 'rx)

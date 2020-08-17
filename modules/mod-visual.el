@@ -42,11 +42,11 @@
              '(vertical-scroll-bars . nil))
 (setq-default redisplay-dont-pause t)
 (setq-default cursor-type 'bar)
-(set-face-attribute 'default nil :height 140 :foundry "nil" :family "Iosevka")
+(set-face-attribute 'default nil :height 140 :foundry "nil" :family "Sarasa Fixed SC")
 
 (custom-theme-set-faces
  'user
- '(variable-pitch ((t (:family "Source Han Sans" :height 160 :weight normal))))
+ '(variable-pitch ((t (:family "Source Han Sans" :height 140 :weight normal))))
  '(fixed-pitch ((t ( :family "Iosevka" :slant normal :weight normal :height 1.0 :width normal)))))
 
 (setq-default frame-title-format (list "%b - " (getenv "USER") "@" (getenv "HOSTNAME")))

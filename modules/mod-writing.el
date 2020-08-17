@@ -7,9 +7,13 @@
 (defvar headline `(:inherit default :weight bold :foreground ,base-font-color))
 
 
-(use-package visual-fill-column
-  :ensure t
-  :hook (visual-line-mode . visual-fill-column-mode))
+;; conflict with olivetti
+;; (use-package visual-fill-column
+;;   :ensure t
+;;   :hook (visual-line-mode . visual-fill-column-mode))
+
+(use-package olivetti
+  :hook (org-mode . olivetti-mode))
 
 (use-package org
   :ensure t
@@ -25,11 +29,11 @@
                              ))
   :custom
   (org-latex-create-formula-image-program 'dvisvgm)
-  (org-hide-emphasis-markers t)
+  (org-hide-emphasis-markers nil)
   (org-fontify-done-headline t)
   (org-src-fontify-natively t)
   (org-image-actual-width 500)
-  (org-agenda-files (list "~/brain/main.org" "~/brain/typed-racket-dev.org" "~/brain/distributed-systems.org"))
+  (org-agenda-files (list "~/brain/main.org"))
   (org-refile-targets '((nil :maxlevel . 3)
                         (org-agenda-files :maxlevel . 3)))
   (org-refile-use-outline-path 'file) ;; use file path as refile targets
@@ -54,10 +58,13 @@
   :config
   (require 'ox-publish)
   (setq org-latex-listings 'minted
-      org-latex-packages-alist '(("" "minted"))
-      org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+        org-latex-packages-alist '(("" "minted")
+                                   ("" "mathtools")
+                                   ("" "amssymb")
+                                   ("" "bbm"))
+        org-latex-pdf-process
+        '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
   (org-link-set-parameters "message" :follow (lambda (path)
                                                (browse-url (concat "message://" path))))
   (setq org-publish-project-alist
@@ -134,11 +141,8 @@
 
 (use-package org-roam
   :ensure t
-  :after (emacsql emacsql-sqlite dash)
   :hook
-  (after-init . org-roam-mode)
-  :custom
-  (org-roam-directory (expand-file-name "~/brain/"))
+  (org-mode . org-roam-mode)
   :bind (:map org-roam-mode-map
               (("C-c n l" . org-roam)
                ("C-c n f" . org-roam-find-file)

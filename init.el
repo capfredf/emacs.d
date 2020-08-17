@@ -24,3 +24,4 @@
 (require 'mod-writing)
 
 (setq gc-cons-threshold old-val)
+(put 'downcase-region 'disabled nil)

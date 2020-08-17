@@ -2,14 +2,16 @@
 (use-package use-package-ensure-system-package
   :ensure t)
 
-(setq custom-file (expand-file-name "~/tmp/custom.el")) ;; discard the custom file
-;; (when (file-exists-p custom-file)
-;;   (load custom-file))
+(setq custom-file (concat user-emacs-directory "setting.el"))
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 (setq make-backup-files nil)
 (define-coding-system-alias 'UTF-8 'utf-8)
 (define-coding-system-alias 'utf8 'utf-8)
 (set-language-environment 'utf-8)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (defun splash-head ()
   "Insert the head part of the splash screen into the current buffer."
@@ -52,8 +54,8 @@
 ;; (setq initial-buffer-choice 'welcome-buffer)
 ;; (setq initial-buffer-choice nil)
 
-;; (setq desktop-restore-eager 1)
-;; (desktop-save-mode t)
+(setq desktop-restore-eager 10)
+(desktop-save-mode t)
 (use-package benchmark-init
   :ensure t
   :config
@@ -85,8 +87,9 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-x b") 'counsel-switch-buffer)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 
 (use-package which-key
@@ -111,7 +114,7 @@
   (setq ivy-count-format "(%d/%d) ")
   :config
   (global-set-key (kbd "M-y") 'counsel-yank-pop)
-  (global-set-key (kbd "s-m s") 'counsel-git-grep)
+  (global-set-key (kbd "s-m s") 'counsel-ag)
   (ivy-mode)
   (counsel-mode))
 
