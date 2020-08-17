@@ -6,13 +6,14 @@
   :ensure t)
 
 (use-package multiple-cursors
-  :config
-  (define-key mc/keymap (kbd "C-'") 'mc-hide-unmatched-lines-mode)
+  :defer t
+  ;; :config
+  ;; (define-key mc/keymap (kbd "C-'") 'mc-hide-unmatched-lines-mode)
   :ensure t
   :bind (("C-M-e" . mc/edit-lines)
          ("C-." . mc/mark-next-like-this)
          ("C-," . mc/mark-previous-like-this)
-         ("C-" . mc/skip-to-next-like-this)
+         ("C->" . mc/skip-to-next-like-this)
          ("C-<" . mc/skip-to-previous-like-this)))
 
 (use-package expand-region
@@ -113,7 +114,8 @@
 ;;   :ensure t
 ;;   :init (global-flycheck-mode))
 
-(use-package smartparens
+(use-package smartparens-config
+  :ensure smartparens
   :init
   (add-hook 'racket-mode-hook #'smartparens-mode)
   (add-hook 'racket-repl-mode-hook #'smartparens-mode)

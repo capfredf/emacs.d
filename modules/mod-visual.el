@@ -47,7 +47,7 @@
 (custom-theme-set-faces
  'user
  '(variable-pitch ((t (:family "Source Han Sans" :height 140 :weight normal))))
- '(fixed-pitch ((t ( :family "Iosevka" :slant normal :weight normal :height 1.0 :width normal)))))
+ '(fixed-pitch ((t ( :family "Sarasa Fixed SC" :slant normal :weight normal :height 1.0 :width normal)))))
 
 (setq-default frame-title-format (list "%b - " (getenv "USER") "@" (getenv "HOSTNAME")))
 
@@ -57,10 +57,10 @@
   (add-hook 'racket-mode-hook (lambda () (highlight-parentheses-mode t)))
   (add-hook 'emacs-lisp-mode-hook (lambda () (highlight-parentheses-mode t))))
 
-(dolist (charset '(kana han symbol cjk-misc bopomofo))
-  (set-fontset-font (frame-parameter nil 'font)
-                    charset
-                    (font-spec :family "Source Han Sans")))
+;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+;;   (set-fontset-font (frame-parameter nil 'font)
+;;                     charset
+;;                     (font-spec :family "Source Han Sans")))
 
 
 ;; (defadvice text-scale-increase (around all-buffers (arg) activate)
