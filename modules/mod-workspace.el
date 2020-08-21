@@ -59,7 +59,7 @@
 ;;                                      (clear-invisible-buffer)))
 
 
-(global-set-key (kbd "s-m e") tab-prefix-map)
+(global-set-key (kbd "s-m t") tab-prefix-map)
 ;; (use-package eyebrowse
 ;;   :ensure t
 ;;   :custom
