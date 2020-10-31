@@ -70,22 +70,23 @@
     (insert-file-contents filePath)
     (split-string (buffer-string) "\n" t)))
 
-(setq old-paths
-      (split-string (getenv "PATH") ":"))
+;; (setq old-paths
+;;       (split-string (getenv "PATH") ":"))
 
 
-(setq exec-paths
-      (append
-       (mapcar (lambda (x)
-		 (expand-file-name x))
-		 (read-lines "~/dotconf/path"))
-       old-paths))
+;; (setq exec-paths
+;;       (append
+;;        (mapcar (lambda (x)
+;; 		 (expand-file-name x))
+;; 		 (read-lines "~/dotconf/path"))
+;;        old-paths))
 
-(setenv "PATH" (mapconcat 'identity exec-paths ":"))
+;; (setenv "PATH" (mapconcat 'identity exec-paths ":"))
 
 (setq ring-bell-function 'ignore)
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
+(define-key global-map [?\s-m] nil)
 
 (global-set-key (kbd "C-x b") 'counsel-switch-buffer)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
@@ -95,6 +96,9 @@
 (use-package which-key
   :ensure t
   :config
+  (setq which-key-show-early-on-C-h t)
+  (setq which-key-idle-delay 10000)
+  (setq which-key-idle-secondary-delay 0.05)
   (which-key-mode))
 
 (use-package ivy
@@ -129,6 +133,12 @@
 (when (eq system-type 'darwin)
   (setq mac-mouse-wheel-mode t)
   (setq mac-mouse-wheel-smooth-scroll t))
+
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 (unless (server-running-p) (server-start))
 

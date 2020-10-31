@@ -125,6 +125,8 @@
   (setq TeX-parse-self t)
   (setq TeX-save-query nil))
 
+(require 'reftex)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq org-agenda-custom-commands
       '(("c" "Simple agenda view"
          ((agenda "")

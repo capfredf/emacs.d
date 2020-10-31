@@ -114,8 +114,8 @@
 ;;   :ensure t
 ;;   :init (global-flycheck-mode))
 
-(use-package smartparens-config
-  :ensure smartparens
+(use-package smartparens
+  :ensure t
   :init
   (add-hook 'racket-mode-hook #'smartparens-mode)
   (add-hook 'racket-repl-mode-hook #'smartparens-mode)
@@ -132,8 +132,9 @@
         (sp-wrap-with-pair new-sur)
         (forward-char 1)
         (sp-splice-sexp-killing-backward 1))))
-  (sp-local-pair 'racket-mode "'" nil :actions :rem)
-  (sp-local-pair 'emacs-lisp-mode "'" nil :actions :rem)
+  (sp-local-pair 'racket-mode "'" nil :actions nil)
+  (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+  (message "hello smartparens")
   :bind (:map smartparens-mode-map
          ("s-l" . sp-forward-sexp)
          ("s-h" . sp-backward-sexp)
@@ -179,6 +180,10 @@
               (window-height   . 0.33)))
 
 (global-set-key (kbd "C-M-]") 'jump-to-file-and-line)
+
+(defun insert-current-time ()
+  (interactive)
+  (insert (format-time-string "%D, %R")))
 
 (defun smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
