@@ -133,6 +133,8 @@
         (forward-char 1)
         (sp-splice-sexp-killing-backward 1))))
   (sp-local-pair 'racket-mode "'" nil :actions nil)
+  (sp-local-pair 'racket-mode "`" nil :actions nil)
+  (sp-local-pair 'emacs-lisp-mode "`" nil :actions nil)
   (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
   (message "hello smartparens")
   :bind (:map smartparens-mode-map

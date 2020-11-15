@@ -14,9 +14,12 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(desktop-auto-save-timeout 0)
+ '(dired-hide-details-hide-information-lines t)
  '(olivetti-body-width 120)
+ '(org-agenda-custom-commands '(("h" "HotList" tags-todo "+Focused" nil)))
  '(org-agenda-dim-blocked-tasks 'invisible)
  '(org-agenda-files '("~/brain/main.org"))
+ '(org-catch-invisible-edits 'smart)
  '(org-enforce-todo-dependencies t)
  '(org-id-link-to-org-use-id t)
  '(org-log-into-drawer t)
@@ -27,7 +30,7 @@
  '(org-tags-column -110)
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(exec-path-from-shell yaml-mode perspective centaur-tabs smartparens rotate olivetti python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode racket-mode projectile popup pdf-tools parsebib paredit ox-reveal org-super-agenda org-roam org-journal org-bullets multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft counsel biblio benchmark-init beacon auctex ag ace-window))
+   '(diredfl exec-path-from-shell yaml-mode perspective centaur-tabs smartparens rotate olivetti python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode racket-mode projectile popup pdf-tools parsebib paredit ox-reveal org-super-agenda org-roam org-journal org-bullets multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft counsel biblio benchmark-init beacon auctex ag ace-window))
  '(safe-local-variable-values '((olivetti-body-width . 150))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

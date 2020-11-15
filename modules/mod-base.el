@@ -64,6 +64,12 @@
 
 (use-package ag :ensure t)
 
+
+
+(use-package dired
+  :hook (dired-mode . dired-hide-details-mode))
+
+
 (defun read-lines (filePath)
   "Return a list of lines of a file at filePath."
   (with-temp-buffer

@@ -103,6 +103,20 @@
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 
+(defvar tab-cfg '(("Typed Racket" . "~/code/racket-extra-pkgs/typed-racket")
+                  ("Infer" . "~/code/inferengine")
+                  ("Writing" . "~/brain")))
+
+(defun recreate-main-workspace ()
+  "Recreate all my main tabs in a current frame.  
+
+This function doesn't check if there are pre-existing tabs with
+the same name or for the same purpose "
+  (interactive)
+  (dolist (c tab-cfg)
+    (tab-rename (car c))
+    (dired (expand-file-name (cdr c)))
+    (tab-new)))
 
 (provide 'mod-workspace)
 ;; (defun print-elements-of-list (list)

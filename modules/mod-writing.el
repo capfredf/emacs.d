@@ -54,7 +54,15 @@
   ;; (org-level-1 ((t (:family "Source Han Sans SC" :height 1.75))))
   (org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))))
   :bind (("C-c a" . org-agenda)
-         ("C-c g" . counsel-org-goto-all))
+         ("C-c g" . counsel-org-goto-all)
+         :map org-mode-map
+         ("C-c l" . org-store-link)
+         ("C-c C-M-o" . org-mark-ring-goto)
+         ("s-n" . org-next-visible-heading)
+         ("s-p" . org-previous-visible-heading)
+         ("s-u" . outline-up-heading)
+         ("s-l" . org-forward-heading-same-level)
+         ("s-h" . org-backward-heading-same-level))
   :config
   (require 'ox-publish)
   (setq org-latex-listings 'minted
@@ -127,10 +135,6 @@
 
 (require 'reftex)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(setq org-agenda-custom-commands
-      '(("c" "Simple agenda view"
-         ((agenda "")
-          (alltodo "")))))
 
 (use-package deft
   :ensure t
