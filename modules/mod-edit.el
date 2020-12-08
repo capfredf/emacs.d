@@ -68,39 +68,39 @@
 ;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
-;; (use-package paredit
-;;   :ensure t
-;;   :init
-;;   (add-hook 'racket-mode-hook #'enable-paredit-mode)
-;;   (add-hook 'racket-repl-mode-hook #'enable-paredit-mode)
-;;   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
-;;   :config
-;;   (unbind-key "C-M-f" paredit-mode-map)
-;;   (unbind-key "C-(" paredit-mode-map)
-;;   (unbind-key "C-)" paredit-mode-map)
-;;   (unbind-key "C-{" paredit-mode-map)
-;;   (unbind-key "C-}" paredit-mode-map)
-;;   (unbind-key "C-M-b" paredit-mode-map)
-;;   (unbind-key "C-M-d" paredit-mode-map)
-;;   (unbind-key "C-M-n" paredit-mode-map)
-;;   (unbind-key "C-M-p" paredit-mode-map)
-;;   (unbind-key "M-s" paredit-mode-map)
-;;   :bind (:map paredit-mode-map
-;;          ("s-l" . paredit-forward)
-;;          ("s-h" . paredit-backward)
-;;          ("s-r" . paredit-raise-sexp)
-;;          ("s-s" . paredit-splice-sexp-killing-backward)
-;;          ("s-j" . paredit-backward-down)
-;;          ("s-J" . paredit-backward-up)
-;;          ("s-k" . paredit-forward-down)
-;;          ("s-K" . paredit-forward-up)
-;;          ("s-." . paredit-forward-slurp-sexp)
-;;          ("s->" . paredit-forward-barf-sexp)
-;;          ("s-," . paredit-backward-slurp-sexp)
-;;          ("s-<" . paredit-backward-barf-sexp)
-;;          ("s-S" . paredit-splice-sexp)
-;;          ("s-(" . paredit-wrap-round)
-;;          ("s-o" . paredit-close-round-and-newline)))
+(use-package paredit
+  :ensure t
+  :init
+  (add-hook 'racket-mode-hook #'enable-paredit-mode)
+  (add-hook 'racket-repl-mode-hook #'enable-paredit-mode)
+  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+  :config
+  (unbind-key "C-M-f" paredit-mode-map)
+  (unbind-key "C-(" paredit-mode-map)
+  (unbind-key "C-)" paredit-mode-map)
+  (unbind-key "C-{" paredit-mode-map)
+  (unbind-key "C-}" paredit-mode-map)
+  (unbind-key "C-M-b" paredit-mode-map)
+  (unbind-key "C-M-d" paredit-mode-map)
+  (unbind-key "C-M-n" paredit-mode-map)
+  (unbind-key "C-M-p" paredit-mode-map)
+  (unbind-key "M-s" paredit-mode-map)
+  :bind (:map paredit-mode-map
+         ("s-l" . paredit-forward)
+         ("s-h" . paredit-backward)
+         ("s-r" . paredit-raise-sexp)
+         ("s-s" . paredit-splice-sexp-killing-backward)
+         ("s-j" . paredit-backward-down)
+         ("s-J" . paredit-backward-up)
+         ("s-k" . paredit-forward-down)
+         ("s-K" . paredit-forward-up)
+         ("s-." . paredit-forward-slurp-sexp)
+         ("s->" . paredit-forward-barf-sexp)
+         ("s-," . paredit-backward-slurp-sexp)
+         ("s-<" . paredit-backward-barf-sexp)
+         ("s-S" . paredit-splice-sexp)
+         ("s-(" . paredit-wrap-round)
+         ("s-o" . paredit-close-round-and-newline)))
 
 (use-package swiper
   :ensure t
@@ -114,46 +114,45 @@
 ;;   :ensure t
 ;;   :init (global-flycheck-mode))
 
-(use-package smartparens
-  :ensure t
-  :init
-  (add-hook 'racket-mode-hook #'smartparens-mode)
-  (add-hook 'racket-repl-mode-hook #'smartparens-mode)
-  (add-hook 'emacs-lisp-mode-hook #'smartparens-mode)
-  :config
-  (defun change-surrounding ()
-    (interactive)
+;; (use-package smartparens
+;;   :ensure t
+;;   :init
+;;   (add-hook 'racket-mode-hook #'smartparens-mode)
+;;   (add-hook 'racket-repl-mode-hook #'smartparens-mode)
+;;   (add-hook 'emacs-lisp-mode-hook #'smartparens-mode)
+;;   :config
+;;   (defun change-surrounding ()
+;;     (interactive)
     
-    (let ((new-sur (read-string "change to: "))
-          (start (region-beginning))
-          (end (region-end)))
-      (save-excursion
-        (goto-char start)
-        (sp-wrap-with-pair new-sur)
-        (forward-char 1)
-        (sp-splice-sexp-killing-backward 1))))
-  (sp-local-pair 'racket-mode "'" nil :actions nil)
-  (sp-local-pair 'racket-mode "`" nil :actions nil)
-  (sp-local-pair 'emacs-lisp-mode "`" nil :actions nil)
-  (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
-  (message "hello smartparens")
-  :bind (:map smartparens-mode-map
-         ("s-l" . sp-forward-sexp)
-         ("s-h" . sp-backward-sexp)
-         ("s-r" . sp-raise-sexp)
-         ("s-s" . sp-splice-sexp-killing-backward)
-         ("s-j" . sp-backward-down-sexp)
-         ("s-J" . sp-backward-up-sexp)
-         ("s-k" . sp-down-sexp)
-         ("s-K" . sp-up-sexp)
-         ("C-k" . kill-line)
-         ("C-M-k" . sp-kill-sexp)
-         ("s-." . sp-forward-slurp-sexp)
-         ("s->" . sp-forward-barf-sexp)
-         ("s-," . sp-backward-slurp-sexp)
-         ("s-<" . sp-backward-barf-sexp)
-         ("s-S" . sp-splice-sexp)
-         ("s-o" . sp-close-round-and-newline)))
+;;     (let ((new-sur (read-string "change to: "))
+;;           (start (region-beginning))
+;;           (end (region-end)))
+;;       (save-excursion
+;;         (goto-char start)
+;;         (sp-wrap-with-pair new-sur)
+;;         (forward-char 1)
+;;         (sp-splice-sexp-killing-backward 1))))
+;;   (sp-local-pair 'racket-mode "'" nil :actions nil)
+;;   (sp-local-pair 'racket-mode "`" nil :actions nil)
+;;   (sp-local-pair 'emacs-lisp-mode "`" nil :actions nil)
+;;   (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+;;   :bind (:map smartparens-mode-map
+;;          ("s-l" . sp-forward-sexp)
+;;          ("s-h" . sp-backward-sexp)
+;;          ("s-r" . sp-raise-sexp)
+;;          ("s-s" . sp-splice-sexp-killing-backward)
+;;          ("s-j" . sp-backward-down-sexp)
+;;          ("s-J" . sp-backward-up-sexp)
+;;          ("s-k" . sp-down-sexp)
+;;          ("s-K" . sp-up-sexp)
+;;          ("C-k" . kill-line)
+;;          ("C-M-k" . sp-kill-sexp)
+;;          ("s-." . sp-forward-slurp-sexp)
+;;          ("s->" . sp-forward-barf-sexp)
+;;          ("s-," . sp-backward-slurp-sexp)
+;;          ("s-<" . sp-backward-barf-sexp)
+;;          ("s-S" . sp-splice-sexp)
+;;          ("s-o" . sp-close-round-and-newline)))
 
 ;; (require 'electric-pair)
 ;; (setq-local xxxxxxxxxxxx 10)
