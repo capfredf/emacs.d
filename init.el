@@ -18,10 +18,8 @@
 
 (require 'mod-base)
 (require 'mod-visual)
-(require 'mod-workspace)
 (require 'mod-edit)
-(require 'mod-coding)
-(require 'mod-writing)
+
 
 (setq gc-cons-threshold old-val)
 (put 'downcase-region 'disabled nil)
