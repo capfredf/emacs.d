@@ -56,7 +56,7 @@
   (setq solarized-height-plus-4 1.0))
 
 
-(hl-line-mode t)
+(global-hl-line-mode t)
 (use-package moody
   :ensure t
   :config
