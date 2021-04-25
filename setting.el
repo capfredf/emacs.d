@@ -8,13 +8,16 @@
  '(TeX-electric-escape nil)
  '(TeX-electric-math '("$" . "$"))
  '(TeX-engine 'luatex)
+ '(ag-highlight-search t)
  '(comint-scroll-show-maximum-output nil)
  '(compilation-scroll-output 'first-error)
+ '(completion-styles '(basic partial-completion emacs22 substring flex))
  '(custom-enabled-themes '(sanityinc-tomorrow-eighties))
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(desktop-auto-save-timeout 0)
  '(dired-hide-details-hide-information-lines t)
+ '(grep-highlight-matches 'always)
  '(highlight-parentheses-colors '("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900"))
  '(magit-branch-adjust-remote-upstream-alist '(("upstream/master" . "fix-.*")))
  '(olivetti-body-width 120)
@@ -40,7 +43,7 @@ Entered on %U
  '(org-todo-keyword-faces '(("WIP" . "orange") ("TODO" . "gray")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate olivetti python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode racket-mode projectile popup pdf-tools parsebib paredit ox-reveal org-super-agenda org-roam org-journal org-bullets multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft counsel biblio benchmark-init auctex ag ace-window))
+   '(wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate olivetti python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode racket-mode projectile popup pdf-tools parsebib paredit ox-reveal org-super-agenda org-roam org-journal org-bullets multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init auctex ag ace-window))
  '(reftex-plug-into-AUCTeX t)
  '(safe-local-variable-values '((olivetti-body-width . 150))))
 (custom-set-faces
@@ -51,6 +54,7 @@ Entered on %U
  '(fixed-pitch ((t (:family "Iosevka" :slant normal :weight normal :height 1.0 :width normal))))
  '(font-lock-variable-name-face ((t nil)))
  '(highlight ((t nil)))
+ '(match ((t (:background "orange" :foreground "#586e75" :weight bold))))
  '(org-block ((t (:inherit fixed-pitch))))
  '(org-code ((t nil)))
  '(org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))))

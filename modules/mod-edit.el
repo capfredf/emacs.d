@@ -66,10 +66,10 @@
   (yas-reload-all))
 ;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(use-package swiper
-  :ensure t
-  :bind
-  (("C-s" . swiper-isearch)))
+;; (use-package swiper
+;;   :ensure t
+;;   :bind
+;;   (("C-s" . swiper-isearch)))
 
 
 (use-package paredit
@@ -274,7 +274,7 @@ point reaches the beginning or end of the buffer, stop there."
   ;; (org-level-1 ((t (:family "Source Han Sans SC" :height 1.75))))
   (org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))))
   :bind (("C-c a" . org-agenda)
-         ("C-c g" . counsel-org-goto-all)
+         ;;("C-c g" . counsel-org-goto-all)
          :map org-mode-map
          ("C-c l" . org-store-link)
          ("C-c C-M-o" . org-mark-ring-goto)

@@ -94,7 +94,7 @@
 (setq mac-option-modifier 'super)
 (define-key global-map [?\s-m] nil)
 
-(global-set-key (kbd "C-x b") 'counsel-switch-buffer)
+;; (global-set-key (kbd "C-x b") 'counsel-switch-buffer)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
@@ -107,21 +107,21 @@
   (setq which-key-idle-secondary-delay 0.05)
   (which-key-mode))
 
-(use-package ivy
-  :ensure t
-  :config
-  (global-set-key (kbd "s-m r") 'ivy-resume)
-  (ivy-mode))
+;; (use-package ivy
+;;   :ensure t
+;;   :config
+;;   (global-set-key (kbd "s-m r") 'ivy-resume)
+;;   (ivy-mode))
 
-(use-package counsel
-  :ensure t
-  :init
-  (setq ivy-use-virtual-buffers nil)
-  (setq ivy-count-format "(%d/%d) ")
-  :config
-  (global-set-key (kbd "M-y") 'counsel-yank-pop)
-  (global-set-key (kbd "s-m s") 'counsel-ag)
-  (counsel-mode))
+;; (use-package counsel
+;;   :ensure t
+;;   :init
+;;   (setq ivy-use-virtual-buffers nil)
+;;   (setq ivy-count-format "(%d/%d) ")
+;;   :config
+;;   (global-set-key (kbd "M-y") 'counsel-yank-pop)
+;;   (global-set-key (kbd "s-m s") 'counsel-ag)
+;;   (counsel-mode))
 
 (add-hook 'eshell-mode-hook
   (lambda ()
@@ -144,7 +144,7 @@
 (unless (server-running-p) (server-start))
 
 ;; I don't know the reason that I added the code below
-;; (add-hook 'server-switch-hook
+;; (add-hook 'server-swtich-hook
 ;;           (lambda nil
 ;;             (let ((server-buf (current-buffer)))
 ;;               (bury-buffer)
@@ -156,6 +156,7 @@
 (global-unset-key (kbd "M-z")) ;; unbind (suspend-frame) to C-z
 (global-unset-key (kbd "C-x z")) ;; unbind repeat to C-x
 (global-set-key (kbd "M-z") 'repeat)
+(icomplete-mode +1)
 
 
 (use-package ace-window
@@ -168,12 +169,15 @@
 (require 'subr-x)
 (use-package projectile
   :ensure t
+  :demand t
   :custom
-  (projectile-completion-system 'ivy)
+  (projectile-completion-system 'default)
   (projectile-enable-caching t)
   (projectile-use-git-grep t)
   (projectile-git-submodule-command "")
   (projectile-indexing-method 'alien)
+  :bind
+  ("s-m s" . projectile-ag)
   :bind-keymap
   ("s-m p" . projectile-command-map)
   :config
