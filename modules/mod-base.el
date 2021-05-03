@@ -54,8 +54,8 @@
 ;; (setq initial-buffer-choice 'welcome-buffer)
 ;; (setq initial-buffer-choice nil)
 
-(setq desktop-restore-eager 10)
-(desktop-save-mode t)
+;; (setq desktop-restore-eager 10)
+;; (desktop-save-mode t)
 (use-package benchmark-init
   :ensure t
   :config

@@ -9,6 +9,9 @@
  '(TeX-electric-math '("$" . "$"))
  '(TeX-engine 'luatex)
  '(ag-highlight-search t)
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(beacon-color "#f2777a")
  '(comint-scroll-show-maximum-output nil)
  '(compilation-scroll-output 'first-error)
  '(completion-styles '(basic partial-completion emacs22 substring flex))
@@ -17,6 +20,8 @@
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(desktop-auto-save-timeout 0)
  '(dired-hide-details-hide-information-lines t)
+ '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
+ '(frame-background-mode nil)
  '(grep-highlight-matches 'always)
  '(highlight-parentheses-colors '("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900"))
  '(magit-branch-adjust-remote-upstream-alist '(("upstream/master" . "fix-.*")))
