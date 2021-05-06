@@ -41,16 +41,17 @@ Entered on %U
  '(org-log-into-drawer t)
  '(org-loop-over-headlines-in-active-region t)
  '(org-preview-latex-default-process 'dvisvgm nil nil "Customized with use-package org")
- '(org-roam-directory "/Users/capfredf/brain/")
+ '(org-roam-directory "~/brain/")
  '(org-roam-graph-viewer "~/bin/firefox")
  '(org-startup-folded nil)
  '(org-tags-column -110)
  '(org-todo-keyword-faces '(("WIP" . "orange") ("TODO" . "gray")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate olivetti python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode racket-mode projectile popup pdf-tools parsebib paredit ox-reveal org-super-agenda org-roam org-journal org-bullets multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init auctex ag ace-window))
+   '(olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate olivetti python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode racket-mode projectile popup pdf-tools parsebib paredit ox-reveal org-super-agenda org-roam org-journal org-bullets multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init auctex ag ace-window))
  '(reftex-plug-into-AUCTeX t)
- '(safe-local-variable-values '((olivetti-body-width . 150))))
+ '(safe-local-variable-values '((olivetti-body-width . 150)))
+ '(window-divider-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

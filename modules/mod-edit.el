@@ -437,23 +437,13 @@ point reaches the beginning or end of the buffer, stop there."
   ;;:load-path "/Users/capfredf/code/racket-mode"
   :init
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
-  (add-hook 'racket-mode-hook      #'racket-unicode-input-method-enable)
-  (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable)
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
   :config
   (setq racket-racket-program (concat (getenv "HOME") "/.racket/bin/racket"))
   (setq racket-raco-program (concat (getenv "HOME") "/.racket/bin/raco"))
   (put 'Π 'racket-indent-function 1)
   (racket-unicode-input-method-enable)
-  (put 'required/typed 'racket-indent-function 1)
-  (with-temp-buffer
-    (set-input-method "racket-unicode")
-    (let ((quail-current-package (assoc "racket-unicode" quail-package-alist)))
-      (quail-define-rules ((append . t))
-                          ("vdash" ["⊢"])
-                          ("^o" ["ᵒ"])
-                          ("isa" ["∈"])
-                          ("Zero" ["Ø"])))))
+  (put 'required/typed 'racket-indent-function 1))
 ;; (load "/Users/phay/.opam/system/share/emacs/site-lisp/tuareg-site-file")
 
 (use-package rust-mode
