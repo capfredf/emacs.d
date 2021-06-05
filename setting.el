@@ -12,9 +12,10 @@
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
  '(beacon-color "#f2777a")
+ '(browse-url-browser-function 'browse-url-default-browser)
  '(comint-scroll-show-maximum-output nil)
  '(compilation-scroll-output 'first-error)
- '(completion-styles '(basic partial-completion emacs22 substring flex))
+ '(completion-styles '(basic partial-completion substring))
  '(custom-enabled-themes '(sanityinc-tomorrow-eighties))
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))

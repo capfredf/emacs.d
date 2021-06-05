@@ -54,8 +54,9 @@
 ;; (setq initial-buffer-choice 'welcome-buffer)
 ;; (setq initial-buffer-choice nil)
 
-;; (setq desktop-restore-eager 10)
-;; (desktop-save-mode t)
+(setq desktop-restore-eager 10)
+;; disable destop-save-mode if something visual goes wrong, because it tends to save *everything*
+(desktop-save-mode t)
 (use-package benchmark-init
   :ensure t
   :config
