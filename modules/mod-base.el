@@ -129,6 +129,7 @@
     (define-key eshell-mode-map (kbd "<tab>")
       'completion-at-point)))
 
+;; faster than the default "scp"
 (setq tramp-default-method "ssh")
 
 (require 'server)
@@ -196,7 +197,11 @@
   :bind (("s-m m" . magit-status))
   :config (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
+(define-key icomplete-minibuffer-map (kbd "<s-tab>") 'icomplete-force-complete)
+
 (winner-mode t)
+;;(abbrev-mode t)
+(setq-default abbrev-mode t)
 
 
 ;; (defun clear-invisible-buffer ()
@@ -268,9 +273,8 @@
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 
-(defvar tab-cfg '(("Typed Racket" . "~/code/racket-extra-pkgs/typed-racket")
-                  ("Infer" . "~/code/inferengine")
-                  ("Writing" . "~/brain")))
+(defvar tab-cfg '(("Dev" . "~/code/racket-extra-pkgs/typed-racket")
+                  ("Thoughts" . "~/brain")))
 
 (defun recreate-main-workspace ()
   "Recreate all my main tabs in a current frame.  

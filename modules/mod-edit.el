@@ -431,10 +431,9 @@ point reaches the beginning or end of the buffer, stop there."
 (require 'bind-key)
 
 (use-package racket-mode
-  :ensure t
-  :no-require t
+  ;; :no-require t
   :mode "\\.rkt"
-  ;;:load-path "/Users/capfredf/code/racket-mode"
+  ;; :load-path "/Users/capfredf/site-lisp/racket-mode"
   :init
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
