@@ -78,7 +78,17 @@
  '(variable-pitch ((t (:family "Source Han Sans" :height 160 :weight normal))))
  '(fixed-pitch ((t ( :family "Sarasa Fixed SC" :slant normal :weight normal :height 1.0 :width normal)))))
 
-(setq-default frame-title-format (list "%b - " (getenv "USER") "@" (getenv "HOSTNAME")))
+
+(defun ff-get-current-tab-name ()
+  (let* ((tabs (funcall tab-bar-tabs-function))
+         (tab-index (tab-bar--current-tab-index tabs))
+         (tab-to-rename (nth tab-index tabs)))
+    (alist-get 'name tab-to-rename)))
+
+(setq-default frame-title-format '("%b" (:eval (if tab-bar-mode
+                                                   (format "[%s]" (ff-get-current-tab-name)) ""))
+                                   " - "(getenv "USER") "@" (getenv "HOSTNAME")))
+
 
 (use-package highlight-parentheses
   :ensure t
