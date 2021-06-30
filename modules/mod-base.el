@@ -161,12 +161,12 @@
 (icomplete-mode +1)
 
 
-(use-package ace-window
-  :ensure t
-  :custom
-  (aw-dispatch-always t) ;; this is the default value
-  (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  :bind (("M-o" . ace-window)))
+;; (use-package ace-window
+;;   :ensure t
+;;   :custom
+;;   (aw-dispatch-always t) ;; this is the default value
+;;   (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+;;   :bind (("M-o" . ace-window)))
 
 (require 'subr-x)
 (use-package projectile
@@ -200,6 +200,15 @@
 (define-key icomplete-minibuffer-map (kbd "<s-tab>") 'icomplete-force-complete)
 
 (winner-mode t)
+(global-set-key (kbd "C-S-o") 'other-window)
+(global-set-key (kbd "C-S-h") 'windmove-left)
+(global-set-key (kbd "C-S-j") 'windmove-down)
+(global-set-key (kbd "C-S-k") 'windmove-up)
+(global-set-key (kbd "C-S-l") 'windmove-right)
+(global-set-key (kbd "C-S-n") 'windmove-swap-states-left)
+(global-set-key (kbd "C-S-m") 'windmove-swap-states-down)
+(global-set-key (kbd "C-S-,") 'windmove-swap-states-up)
+(global-set-key (kbd "C-S-.") 'windmove-swap-states-right)
 ;;(abbrev-mode t)
 (setq-default abbrev-mode t)
 
