@@ -1,8 +1,5 @@
 (require 'package)
 
-(setq old-val gc-cons-threshold)
-(setq gc-cons-threshold 100000000)
-
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
@@ -26,5 +23,4 @@
 (require 'mod-edit)
 
 
-(setq gc-cons-threshold old-val)
 (put 'downcase-region 'disabled nil)

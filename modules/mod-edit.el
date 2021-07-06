@@ -64,7 +64,8 @@
 		  "~/.emacs.d/snippets"                 ;; personal snippets
 		  ))
   (yas-reload-all))
-;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; (use-package swiper
 ;;   :ensure t

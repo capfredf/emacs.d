@@ -56,7 +56,7 @@ Entered on %U
  '(safe-local-variable-values '((TeX-engine . xelatex) (olivetti-body-width . 150)))
  '(tab-bar-mode t)
  '(warning-suppress-types '((comp)))
- '(windmove-default-keybindings '([ignore] shift))
+ '(windmove-default-keybindings nil)
  '(window-divider-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -57,19 +57,21 @@
 
 
 (global-hl-line-mode t)
-(use-package moody
-  :ensure t
-  :config
-  (setq x-underline-at-descent-line t)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode))
+
+;; double tap in the minibuffer move point to the beginning of the minibuffer
+;; enable when #29 is closed
+;; (use-package moody
+;;   :ensure t
+;;   :config
+;;   (setq x-underline-at-descent-line t)
+;;   (moody-replace-mode-line-buffer-identification)
+;;   (moody-replace-vc-mode))
 
 
 (setq-default fill-column 80)
 (tool-bar-mode -1)
 (add-to-list 'default-frame-alist
              '(vertical-scroll-bars . nil))
-(setq-default redisplay-dont-pause t)
 (setq-default cursor-type 'bar)
 (set-face-attribute 'default nil :height 160 :foundry "nil" :family "Sarasa Fixed SC")
 
@@ -144,4 +146,4 @@
 (global-set-key (kbd "<f3>") 'scale-text)
 
 (provide 'mod-visual)
-;;; mod-visual.el ends here
+;; mod-visual.el ends here
