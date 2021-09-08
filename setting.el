@@ -29,6 +29,7 @@
  '(help-at-pt-display-when-idle 'never nil (help-at-pt))
  '(highlight-parentheses-colors '("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900"))
  '(magit-branch-adjust-remote-upstream-alist '(("upstream/master" . "fix-.*")))
+ '(menu-bar-mode nil)
  '(olivetti-body-width 120)
  '(org-agenda-custom-commands '(("h" "HotList" tags-todo "+Focused" nil)))
  '(org-agenda-dim-blocked-tasks 'invisible)
@@ -51,7 +52,7 @@ Entered on %U
  '(org-todo-keyword-faces '(("WIP" . "orange") ("TODO" . "gray")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate olivetti python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-super-agenda org-roam org-journal org-bullets multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init auctex ag ace-window))
+   '(paredit vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate olivetti python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-super-agenda org-roam org-journal org-bullets multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init auctex ag ace-window))
  '(reftex-plug-into-AUCTeX t)
  '(safe-local-variable-values '((TeX-engine . xelatex) (olivetti-body-width . 150)))
  '(tab-bar-mode t)

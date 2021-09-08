@@ -57,11 +57,11 @@
 (setq desktop-restore-eager 10)
 ;; disable destop-save-mode if something visual goes wrong, because it tends to save *everything*
 (desktop-save-mode t)
-(use-package benchmark-init
-  :ensure t
-  :config
-  ;; To disable collection of benchmark data after init is done.
-  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+;; (use-package benchmark-init
+;;   :ensure t
+;;   :config
+;;   ;; To disable collection of benchmark data after init is done.
+;;   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
 (use-package ag :ensure t)
 
@@ -179,11 +179,9 @@
   (projectile-git-submodule-command "")
   (projectile-indexing-method 'alien)
   :bind
-  ("s-m s" . projectile-ag)
-  :bind-keymap
-  ("s-m p" . projectile-command-map)
+  ("C-x s" . projectile-ag)
   :config
-  (which-key-add-key-based-replacements "s-m p" "projectile")
+  (which-key-add-key-based-replacements "C-x p" "projectile")
   (projectile-mode)
   (projectile-register-project-type 'racket '(".racket_prj")
 				  :compile "raco setup typed-racket typed"
@@ -194,7 +192,7 @@
 
 (use-package magit
   :ensure t
-  :bind (("s-m m" . magit-status))
+  :bind (("C-x m" . magit-status))
   :config (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
 (define-key icomplete-minibuffer-map (kbd "<s-tab>") 'icomplete-force-complete)
@@ -238,7 +236,7 @@
 ;;                                      (clear-invisible-buffer)))
 
 
-(global-set-key (kbd "s-m t") tab-prefix-map)
+(global-set-key (kbd "C-M-m t") tab-prefix-map)
 ;; (use-package eyebrowse
 ;;   :ensure t
 ;;   :custom
@@ -250,11 +248,11 @@
 ;;   ;; (eyebrowse-switch-to-window-config 0)
 ;;   ;; (eyebrowse-rename-window-config 0 "emacs")
 ;;   ;; (find-file "~/.emacs.d/init.el")
-  
+
 ;;   ;; (eyebrowse-switch-to-window-config 1)
 ;;   ;; (eyebrowse-rename-window-config 1 "typed-racket")
 ;;   ;; (find-file "~/code/racket-extra-pkgs/typed-racket/")
-  
+
 ;;   ;; (eyebrowse-switch-to-window-config 2)
 ;;   ;; (eyebrowse-rename-window-config 2 "racket")
 ;;   ;; (find-file "~/code/racket/racket/")
@@ -286,7 +284,7 @@
                   ("Thoughts" . "~/brain")))
 
 (defun recreate-main-workspace ()
-  "Recreate all my main tabs in a current frame.  
+  "Recreate all my main tabs in a current frame.
 
 This function doesn't check if there are pre-existing tabs with
 the same name or for the same purpose "
