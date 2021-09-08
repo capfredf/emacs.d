@@ -7,6 +7,7 @@
  '(TeX-command-extra-options "-shell-escape")
  '(TeX-electric-escape nil)
  '(TeX-electric-math '("$" . "$"))
+ '(TeX-engine 'xetex)
  '(TeX-master nil)
  '(ag-highlight-search t)
  '(ansi-color-faces-vector
@@ -43,7 +44,6 @@ Entered on %U
  '(org-id-link-to-org-use-id t)
  '(org-log-into-drawer t)
  '(org-loop-over-headlines-in-active-region t)
- '(org-preview-latex-default-process 'dvisvgm nil nil "Customized with use-package org")
  '(org-roam-directory "~/brain/")
  '(org-roam-graph-viewer "~/bin/firefox")
  '(org-startup-folded nil)

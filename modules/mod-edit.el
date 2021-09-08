@@ -209,7 +209,7 @@ point reaches the beginning or end of the buffer, stop there."
     (insert (if full-path
                 path
               (if (projectile-project-root)
-                  (file-relative-name path (projectile-project-root))                  
+                  (file-relative-name path (projectile-project-root))
                 (file-name-nondirectory path))))))
 
 (define-key minibuffer-local-map (kbd "M-.") 'insert-file-name-into-minibuffer)
@@ -297,7 +297,18 @@ point reaches the beginning or end of the buffer, stop there."
   (org-link-set-parameters "message" :follow (lambda (path)
                                                (browse-url (concat "message://" path))))
   (setq org-publish-project-alist
-        '(("org"
+        '(("syntax-transformers"
+           :base-directory "~/code/capfredf.github.io/org/"
+           ;; the publish result will follow the directory structure in the base directory
+           :publishing-directory "~/code/capfredf.github.io/"
+           :publishing-function org-html-publish-to-html
+           :headline-levels 4
+           :html-extension "html"
+           :body-only t
+           :recursive t
+           :with-author nil
+           )
+          ("org"
            :base-directory "~/brain/"
            :publishing-directory "~/captainwiki"
            :publishing-function org-html-publish-to-html
