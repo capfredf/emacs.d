@@ -77,18 +77,19 @@
     (insert-file-contents filePath)
     (split-string (buffer-string) "\n" t)))
 
-;; (setq old-paths
-;;       (split-string (getenv "PATH") ":"))
+(setq old-paths
+      (split-string (getenv "PATH") ":"))
 
 
-;; (setq exec-paths
-;;       (append
-;;        (mapcar (lambda (x)
-;; 		 (expand-file-name x))
-;; 		 (read-lines "~/dotconf/path"))
-;;        old-paths))
+(setq exec-path
+      (append
+       (mapcar (lambda (x)
+		         (expand-file-name x))
+		       (read-lines "~/dotconf/extra/path"))
+       old-paths))
 
-;; (setenv "PATH" (mapconcat 'identity exec-paths ":"))
+
+(setenv "PATH" (mapconcat 'identity exec-path ":"))
 
 (setq ring-bell-function 'ignore)
 (setq mac-command-modifier 'meta)

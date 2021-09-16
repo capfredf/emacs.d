@@ -73,12 +73,15 @@
 (add-to-list 'default-frame-alist
              '(vertical-scroll-bars . nil))
 (setq-default cursor-type 'bar)
-(set-face-attribute 'default nil :height 160 :foundry "nil" :family "Sarasa Fixed SC")
 
-(custom-theme-set-faces
- 'user
- '(variable-pitch ((t (:family "Source Han Sans" :height 160 :weight normal))))
- '(fixed-pitch ((t ( :family "Sarasa Fixed SC" :slant normal :weight normal :height 1.0 :width normal)))))
+
+(defun change-font-size (n)
+  (custom-theme-set-faces
+   'user
+   `(default ((t ( :family "Sarasa Fixed SC" :slant normal :weight normal :height ,n :width normal))))))
+
+(change-font-size 120)
+
 
 
 (defun ff-get-current-tab-name ()

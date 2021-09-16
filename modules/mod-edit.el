@@ -81,6 +81,7 @@
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
   :config
   (unbind-key "C-M-f" paredit-mode-map)
+  (unbind-key "C-M-s" paredit-mode-map)
   (unbind-key "C-(" paredit-mode-map)
   (unbind-key "C-)" paredit-mode-map)
   (unbind-key "C-{" paredit-mode-map)
@@ -96,14 +97,14 @@
          ("C-M-r" . paredit-raise-sexp)
          ("C-M-s" . paredit-splice-sexp-killing-backward)
          ("C-M-j" . paredit-backward-down)
-         ("C-M-J" . paredit-backward-up)
+         ("C-M-S-j" . paredit-backward-up)
          ("C-M-k" . paredit-forward-down)
-         ("C-M-K" . paredit-forward-up)
+         ("C-M-S-k" . paredit-forward-up)
          ("C-M-." . paredit-forward-slurp-sexp)
          ("C-M->" . paredit-forward-barf-sexp)
          ("C-M-," . paredit-backward-slurp-sexp)
          ("C-M-<" . paredit-backward-barf-sexp)
-         ("C-M-S" . paredit-splice-sexp)
+         ("C-M-S-s" . paredit-splice-sexp)
          ("C-M-(" . paredit-wrap-round)
          ("C-M-o" . paredit-close-round-and-newline)))
 
@@ -442,6 +443,8 @@ point reaches the beginning or end of the buffer, stop there."
 
 (require 'bind-key)
 
+
+
 (use-package racket-mode
   ;; :no-require t
   :mode "\\.rkt"
@@ -450,8 +453,8 @@ point reaches the beginning or end of the buffer, stop there."
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
   :config
-  (setq racket-racket-program (concat (getenv "HOME") "/.racket/bin/racket"))
-  (setq racket-raco-program (concat (getenv "HOME") "/.racket/bin/raco"))
+  (setq racket-racket-program (executable-find "racket"))
+  (setq racket-raco-program (executable-find "raco"))
   (put 'Π 'racket-indent-function 1)
   (racket-unicode-input-method-enable)
   (put 'required/typed 'racket-indent-function 1))

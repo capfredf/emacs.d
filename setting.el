@@ -55,6 +55,7 @@ Entered on %U
    '(paredit vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate olivetti python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-super-agenda org-roam org-journal org-bullets multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init auctex ag ace-window))
  '(reftex-plug-into-AUCTeX t)
  '(safe-local-variable-values '((TeX-engine . xelatex) (olivetti-body-width . 150)))
+ '(shift-select-mode nil)
  '(tab-bar-mode t)
  '(warning-suppress-types '((comp)))
  '(windmove-default-keybindings nil)
@@ -64,6 +65,7 @@ Entered on %U
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Sarasa Fixed SC" :slant normal :weight normal :height 120 :width normal))))
  '(fixed-pitch ((t (:family "Iosevka" :slant normal :weight normal :height 1.0 :width normal))))
  '(font-lock-variable-name-face ((t nil)))
  '(highlight ((t nil)))
