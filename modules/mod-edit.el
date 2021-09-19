@@ -5,6 +5,15 @@
 (use-package wgrep
   :ensure t)
 
+(use-package wgrep-ag
+  :ensure t)
+
+
+(use-package ag :ensure t
+  :config
+  (autoload 'wgrep-ag-setup "wgrep-ag")
+  (add-hook 'ag-mode-hook 'wgrep-ag-setup))
+
 (use-package multiple-cursors
   :defer t
   ;; :config
