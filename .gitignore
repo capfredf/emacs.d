@@ -3,6 +3,7 @@ elpa/
 .mc-lists.el
 recentf
 tramp
+projects
 eshell/
 projectile-bookmarks.eld
 projectile.cache
