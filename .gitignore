@@ -17,3 +17,4 @@ url/
 .emacs.desktop
 eln-cache/
 org-roam.db
+/epkgs/
