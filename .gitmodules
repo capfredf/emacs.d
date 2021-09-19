@@ -1,9 +1,3 @@
-[submodule "yasnippet-snippets"]
-	path = yasnippet-snippets
-	url = https://github.com/AndreaCrotti/yasnippet-snippets
-[submodule "site-lisp/PG"]
-	path = site-lisp/PG
-	url = git@github.com:ProofGeneral/PG.git
 [submodule "borg"]
 	path = lib/borg
 	url = git@github.com:emacscollective/borg.git
