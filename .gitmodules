@@ -4,6 +4,6 @@
 [submodule "site-lisp/PG"]
 	path = site-lisp/PG
 	url = git@github.com:ProofGeneral/PG.git
-[submodule "site-lisp/color-theme-sanityinc-tomorrow"]
-	path = site-lisp/color-theme-sanityinc-tomorrow
-	url = git@github.com:capfredf/color-theme-sanityinc-tomorrow.git
+[submodule "borg"]
+	path = lib/borg
+	url = git@github.com:emacscollective/borg.git
