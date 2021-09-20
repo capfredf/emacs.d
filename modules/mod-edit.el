@@ -2,14 +2,17 @@
 
 (delete-selection-mode 1)
 
+(use-package s)
+(use-package dash)
 (use-package wgrep
-  :ensure t)
+  :defer t)
 
 (use-package wgrep-ag
-  :ensure t)
+  :defer t)
 
 
-(use-package ag :ensure t
+(use-package ag
+  :defer t
   :config
   (autoload 'wgrep-ag-setup "wgrep-ag")
   (add-hook 'ag-mode-hook 'wgrep-ag-setup))
@@ -18,7 +21,6 @@
   :defer t
   ;; :config
   ;; (define-key mc/keymap (kbd "C-'") 'mc-hide-unmatched-lines-mode)
-  :ensure t
   :bind (("C-M-e" . mc/edit-lines)
          ("C-." . mc/mark-next-like-this)
          ("C-," . mc/mark-previous-like-this)
@@ -26,7 +28,6 @@
          ("C-<" . mc/skip-to-previous-like-this)))
 
 (use-package expand-region
-  :ensure t
   :bind (("C-=" . er/expand-region)))
 
 (defun select-line ()
@@ -62,17 +63,16 @@
 (global-set-key (kbd "M-k") nil)
 (global-set-key (kbd "M-k k") 'kill-whole-line)
 
-(use-package yasnippet
-  :ensure t
-  :hook ((prog-mode . yas-minor-mode)
-         (org-mode . yas-minor-mode)
-         (tex-mode . yas-minor-mode))
-  :config
-  (setq yas-snippet-dirs
-		'("~/.emacs.d/yasnippet-snippets/snippets"                 ;; personal snippets
-		  "~/.emacs.d/snippets"                 ;; personal snippets
-		  ))
-  (yas-reload-all))
+;; (use-package yasnippet
+;;   :hook ((prog-mode . yas-minor-mode)
+;;          (org-mode . yas-minor-mode)
+;;          (tex-mode . yas-minor-mode))
+;;   :config
+;;   (setq yas-snippet-dirs
+;; 		'("~/.emacs.d/yasnippet-snippets/snippets"                 ;; personal snippets
+;; 		  "~/.emacs.d/snippets"                 ;; personal snippets
+;; 		  ))
+;;   (yas-reload-all))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -83,7 +83,6 @@
 
 
 (use-package paredit
-  :ensure t
   :init
   (add-hook 'racket-mode-hook #'enable-paredit-mode)
   (add-hook 'racket-repl-mode-hook #'enable-paredit-mode)
@@ -117,8 +116,8 @@
          ("C-M-(" . paredit-wrap-round)
          ("C-M-o" . paredit-close-round-and-newline)))
 
-(use-package scribble
-  :load-path "site-lisp/scribble-emacs")
+;; (use-package scribble
+;;   :load-path "site-lisp/scribble-emacs")
 
 ;; (use-package flycheck
 ;;   :ensure t
@@ -223,20 +222,19 @@ point reaches the beginning or end of the buffer, stop there."
                 (file-name-nondirectory path))))))
 
 (define-key minibuffer-local-map (kbd "M-.") 'insert-file-name-into-minibuffer)
-
-(setq org-reveal-root "file:///Users/capfredf/Downloads/reveal.js-3.8.0/")
-(setq org-reveal-history t)
+;; (setq org-reveal-root "file:///Users/capfredf/Downloads/reveal.js-3.8.0/")
+;; (setq org-reveal-history t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; writing ;;;;;;;;;;;;;;;;;
-(defvar variable-tuple (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
-                             ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
-                             ((x-list-fonts "Verdana")         '(:font "Verdana"))
-                             ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
-                             (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
-(defvar base-font-color (face-foreground 'default nil 'default))
-(defvar headline `(:inherit default :weight bold :foreground ,base-font-color))
+;; (defvar variable-tuple (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+;;                              ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+;;                              ((x-list-fonts "Verdana")         '(:font "Verdana"))
+;;                              ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+;;                              (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+;; (defvar base-font-color (face-foreground 'default nil 'default))
+;; (defvar headline `(:inherit default :weight bold :foreground ,base-font-color))
 
 
 ;; conflict with olivetti
@@ -248,7 +246,6 @@ point reaches the beginning or end of the buffer, stop there."
   :hook (org-mode . olivetti-mode))
 
 (use-package org
-  :ensure t
   :mode ("\\.org" . org-mode)
   :init
   (add-hook 'org-mode-hook (lambda ()
@@ -316,8 +313,7 @@ point reaches the beginning or end of the buffer, stop there."
            :html-extension "html"
            :body-only t
            :recursive t
-           :with-author nil
-           )
+           :with-author nil)
           ("org"
            :base-directory "~/brain/"
            :publishing-directory "~/captainwiki"
@@ -334,17 +330,15 @@ point reaches the beginning or end of the buffer, stop there."
            :sitemap-filename "index.org"  ; ... call it sitemap.org (it's the default)...
            :sitemap-title "Inside:"        ; ... with title 'Sitemap'.
            :sitemap-sort-files anti-chronologically
-           :with-author nil
-           )
+           :with-author nil)
           ("static"
            :base-directory "~/brain/static/"
            :base-extension any
            :recursive t
            :publishing-directory "~/captainwiki/static"
-           :publishing-function org-publish-attachment
-           ))))
+           :publishing-function org-publish-attachment))))
 
-(use-package org-bullets :ensure t :after org)
+(use-package org-bullets :after org)
 
 ;; (use-package org-journal
 ;;   :ensure t
@@ -359,17 +353,13 @@ point reaches the beginning or end of the buffer, stop there."
 ;; Tex
 
 (use-package markdown-mode
-  :ensure t
-  :ensure-system-package
-  (multimarkdown . "brew install multimarkdown")
-
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)))
 
-(use-package tex
+(use-package tex-site
   :defer t
-  :ensure auctex
+  :pin manual
   :config
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
@@ -379,7 +369,6 @@ point reaches the beginning or end of the buffer, stop there."
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
 (use-package deft
-  :ensure t
   :bind ("<f8>" . deft)
   :custom
   (deft-directory "~/brain/")
@@ -387,17 +376,17 @@ point reaches the beginning or end of the buffer, stop there."
   (deft-extensions '("org" "md" "txt" "tex")))
 
 
-(use-package org-roam
-  :ensure t
-  :hook
-  (org-mode . org-roam-mode)
-  :bind (:map org-roam-mode-map
-              (("C-c n l" . org-roam)
-               ("C-c n f" . org-roam-find-file)
-               ("C-c n b" . org-roam-switch-to-buffer)
-               ("C-c n g" . org-roam-show-graph))
-         :map org-mode-map
-         (("C-c n i" . org-roam-insert))))
+;; (use-package org-roam
+;;   :ensure t
+;;   :hook
+;;   (org-mode . org-roam-mode)
+;;   :bind (:map org-roam-mode-map
+;;               (("C-c n l" . org-roam)
+;;                ("C-c n f" . org-roam-find-file)
+;;                ("C-c n b" . org-roam-switch-to-buffer)
+;;                ("C-c n g" . org-roam-show-graph))
+;;          :map org-mode-map
+;;          (("C-c n i" . org-roam-insert))))
 
 (defun formatted-copy ()
   "Export region to HTML, and copy it to the clipboard."
@@ -418,29 +407,28 @@ point reaches the beginning or end of the buffer, stop there."
 ;;;;;;;;;;;;;;;
 
 (setq-default c-basic-offset 4
-			  tab-width 4
-			  indent-tabs-mode nil)
+	          tab-width 4
+	          indent-tabs-mode nil)
 
-(use-package agda2-mode
-  :mode "\\.agda"
-  :load-path "/usr/local/share/emacs/site-lisp/agda"
-  :defer nil
-  ;; :custom-face
-  ;;  (agda2-highlight-datatype-face ((t (:foreground "dodger blue"))))
-  ;;  (agda2-highlight-function-face ((t (:foreground "dodger blue"))))
-  ;;  (agda2-highlight-postulate-face ((t (:foreground "dodger blue"))))
-  ;;  (agda2-highlight-primitive-face ((t (:foreground "dodger blue"))))
-  ;; (agda2-highlight-primitive-type-face ((t (:foreground "dodger blue"))))
-  )
+;; (use-package agda2-mode
+;;   :mode "\\.agda"
+;;   :load-path "/usr/local/share/emacs/site-lisp/agda"
+;;   :defer nil
+;;   ;; :custom-face
+;;   ;;  (agda2-highlight-datatype-face ((t (:foreground "dodger blue"))))
+;;   ;;  (agda2-highlight-function-face ((t (:foreground "dodger blue"))))
+;;   ;;  (agda2-highlight-postulate-face ((t (:foreground "dodger blue"))))
+;;   ;;  (agda2-highlight-primitive-face ((t (:foreground "dodger blue"))))
+;;   ;; (agda2-highlight-primitive-type-face ((t (:foreground "dodger blue"))))
+;;   )
 
 
-(use-package haskell-mode
-  :ensure t
-  :mode "\\.hs")
+;; (use-package haskell-mode
+;;   :mode "\\.hs")
 
-(use-package proof-general
-  :mode ("\\.v" . coq-mode)
-  :load-path "$HOME/.emacs.d/PG/generic/proof-site")
+;; (use-package proof-general
+;;   :mode ("\\.v" . coq-mode)
+;;   :load-path "$HOME/.emacs.d/PG/generic/proof-site")
 
 
 
@@ -469,34 +457,33 @@ point reaches the beginning or end of the buffer, stop there."
   (put 'required/typed 'racket-indent-function 1))
 ;; (load "/Users/phay/.opam/system/share/emacs/site-lisp/tuareg-site-file")
 
-(use-package rust-mode
-  :ensure t)
+;; (use-package rust-mode
+;;   :ensure t)
 
 ;;(require 'flycheck)
-(require 's)
-(flycheck-define-checker pie
-  "A Pie type error checker."
-  ;:command ("/Users/capfredf/code/chaos/pie/tmp.sh")
-  :command ("/Users/capfredf/.racket/bin/raco" "expand" source)
-  :error-patterns
-  ((error line-start (message (one-or-more (or "\n" not-newline))) "\n  location...:\n" (or (one-or-more space) "\t") (file-name)":" line ":" column line-end)
-   (info "'\"" (file-name) ":" line "." column ":" " TODO:" (message) "\""))
-  :modes racket-mode
-  :error-filter
-  (lambda (errors)
-    (dolist (err (flycheck-sanitize-errors errors))
-      (-when-let (msg (flycheck-error-message err))
-        (setf (flycheck-error-message err)
-              (s-replace "\\n" "\n" msg))))
-    (flycheck-increment-error-columns errors))
-  :predicate
-  (lambda ()
-    (equal (file-name-extension (buffer-file-name)) "pie")))
+;; (flycheck-define-checker pie
+;;   "A Pie type error checker."
+;;   ;:command ("/Users/capfredf/code/chaos/pie/tmp.sh")
+;;   :command ("/Users/capfredf/.racket/bin/raco" "expand" source)
+;;   :error-patterns
+;;   ((error line-start (message (one-or-more (or "\n" not-newline))) "\n  location...:\n" (or (one-or-more space) "\t") (file-name)":" line ":" column line-end)
+;;    (info "'\"" (file-name) ":" line "." column ":" " TODO:" (message) "\""))
+;;   :modes racket-mode
+;;   :error-filter
+;;   (lambda (errors)
+;;     (dolist (err (flycheck-sanitize-errors errors))
+;;       (-when-let (msg (flycheck-error-message err))
+;;         (setf (flycheck-error-message err)
+;;               (s-replace "\\n" "\n" msg))))
+;;     (flycheck-increment-error-columns errors))
+;;   :predicate
+;;   (lambda ()
+;;     (equal (file-name-extension (buffer-file-name)) "pie")))
 
 
-(use-package python-mode
-  :mode "\\.py"
-  :interpreter ("python" . python-mode))
+;; (use-package python-mode
+;;   :mode "\\.py"
+;;   :interpreter ("python" . python-mode))
 
 
 ;; (require 'rx)

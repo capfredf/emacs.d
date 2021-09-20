@@ -1,6 +1,5 @@
-;; to ensure system-wise dependencies
-(use-package use-package-ensure-system-package
-  :ensure t)
+;; to ensure system-wise dependencies of executable programs
+;; (use-package use-package-ensure-system-package)
 
 (setq custom-file (concat user-emacs-directory "setting.el"))
 (when (file-exists-p custom-file)
@@ -98,7 +97,6 @@
 
 
 (use-package which-key
-  :ensure t
   :config
   (setq which-key-show-early-on-C-h t)
   (setq which-key-idle-delay 10000)
@@ -134,11 +132,12 @@
   (setq mac-mouse-wheel-mode t)
   (setq mac-mouse-wheel-smooth-scroll t))
 
-(use-package exec-path-from-shell
-  :ensure t
-  :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
+
+;; (use-package exec-path-from-shell
+;;   :ensure t
+;;   :config
+;;   (when (memq window-system '(mac ns x))
+;;     (exec-path-from-shell-initialize)))
 
 (unless (server-running-p) (server-start))
 
@@ -167,8 +166,6 @@
 
 (require 'subr-x)
 (use-package projectile
-  :ensure t
-  :demand t
   :custom
   (projectile-completion-system 'default)
   (projectile-enable-caching t)
@@ -184,11 +181,7 @@
 				  :compile "raco setup typed-racket typed"
 				  :test "raco make -v typed-racket-test/main.rkt && racket typed-racket-test/main.rkt --unit"
 				  :run "echo 'hell world'"))
-
-(use-package diff-hl :ensure t)
-
 (use-package magit
-  :ensure t
   :bind (("C-x m" . magit-status))
   :config (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
