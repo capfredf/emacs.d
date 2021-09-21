@@ -181,7 +181,12 @@
 				  :compile "raco setup typed-racket typed"
 				  :test "raco make -v typed-racket-test/main.rkt && racket typed-racket-test/main.rkt --unit"
 				  :run "echo 'hell world'"))
+
+(use-package diff-hl
+  :defer t)
+
 (use-package magit
+  :after (diff-hl)
   :bind (("C-x m" . magit-status))
   :config (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
