@@ -232,34 +232,6 @@
 
 
 (global-set-key (kbd "C-M-m t") tab-prefix-map)
-;; (use-package eyebrowse
-;;   :ensure t
-;;   :custom
-;;   (eyebrowse-keymap-prefix (kbd "s-m e"))
-;;   :config
-;;   (require 'eyebrowse)
-;;   (which-key-add-key-based-replacements "s-m e" "eyebrowse")
-;;   (eyebrowse-mode t)
-;;   ;; (eyebrowse-switch-to-window-config 0)
-;;   ;; (eyebrowse-rename-window-config 0 "emacs")
-;;   ;; (find-file "~/.emacs.d/init.el")
-
-;;   ;; (eyebrowse-switch-to-window-config 1)
-;;   ;; (eyebrowse-rename-window-config 1 "typed-racket")
-;;   ;; (find-file "~/code/racket-extra-pkgs/typed-racket/")
-
-;;   ;; (eyebrowse-switch-to-window-config 2)
-;;   ;; (eyebrowse-rename-window-config 2 "racket")
-;;   ;; (find-file "~/code/racket/racket/")
-
-;;   ;; (eyebrowse-switch-to-window-config 3)
-;;   ;; (eyebrowse-rename-window-config 3 "pie")
-;;   ;; (find-file "~/code/lecture-types-2020/")
-
-;;   ;; (eyebrowse-switch-to-window-config 4)
-;;   ;; (eyebrowse-rename-window-config 4 "sp-model")
-;;   ;; (find-file "~/code/struct-properties/")
-;;   )
 
 (defun rename-current-file-and-buffer ()
   ;; from Batsov
