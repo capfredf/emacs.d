@@ -11,6 +11,9 @@
   :defer t)
 
 
+(use-package scribble-mode
+  :mode "\\.scribl")
+
 (use-package ag
   :defer t
   :config
@@ -258,7 +261,7 @@ point reaches the beginning or end of the buffer, stop there."
                              ))
   :custom
   (org-latex-create-formula-image-program 'dvisvgm)
-  (org-hide-emphasis-markers nil)
+  ;; (org-hide-emphasis-markers nil)
   (org-fontify-done-headline t)
   (org-src-fontify-natively t)
   (org-image-actual-width 500)

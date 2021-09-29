@@ -155,6 +155,7 @@
 (global-unset-key (kbd "C-x z")) ;; unbind repeat to C-x
 (global-set-key (kbd "M-z") 'repeat)
 (icomplete-mode +1)
+(icomplete-vertical-mode +1)
 
 
 ;; (use-package ace-window
@@ -183,7 +184,7 @@
 				  :run "echo 'hell world'"))
 
 (use-package diff-hl
-  :defer t)
+  :demand t)
 
 (use-package magit
   :after (diff-hl)
