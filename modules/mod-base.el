@@ -65,6 +65,9 @@
 (use-package dired
   :hook (dired-mode . dired-hide-details-mode))
 
+(use-package bind-key
+  :demand t)
+
 
 (defun read-lines (filePath)
   "Return a list of lines of a file at filePath."
@@ -150,22 +153,26 @@
 ;;   :bind (("M-o" . ace-window)))
 
 (require 'subr-x)
-(use-package projectile
-  :custom
-  (projectile-completion-system 'default)
-  (projectile-enable-caching t)
-  (projectile-use-git-grep t)
-  (projectile-git-submodule-command "")
-  (projectile-indexing-method 'alien)
+;; (use-package projectile
+;;   :custom
+;;   (projectile-completion-system 'default)
+;;   (projectile-enable-caching t)
+;;   (projectile-use-git-grep t)
+;;   (projectile-git-submodule-command "")
+;;   (projectile-indexing-method 'alien)
+;;   :bind
+;;   ("C-x s" . projectile-ag)
+;;   :config
+;;   (which-key-add-key-based-replacements "C-x p" "projectile")
+;;   (projectile-mode)
+;;   (projectile-register-project-type 'racket '(".racket_prj")
+;; 				  :compile "raco setup typed-racket typed"
+;; 				  :test "raco make -v typed-racket-test/main.rkt && racket typed-racket-test/main.rkt --unit"
+;; 				  :run "echo 'hell world'"))
+
+(use-package project
   :bind
-  ("C-x s" . projectile-ag)
-  :config
-  (which-key-add-key-based-replacements "C-x p" "projectile")
-  (projectile-mode)
-  (projectile-register-project-type 'racket '(".racket_prj")
-				  :compile "raco setup typed-racket typed"
-				  :test "raco make -v typed-racket-test/main.rkt && racket typed-racket-test/main.rkt --unit"
-				  :run "echo 'hell world'"))
+  ("C-x s" . project-find-regexp))
 
 (use-package diff-hl
   :demand t)

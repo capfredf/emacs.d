@@ -72,7 +72,7 @@ Entered on %U
  '(highlight ((t nil)))
  '(match ((t (:background "orange" :foreground "#586e75" :weight bold))))
  '(org-block ((t (:inherit fixed-pitch))))
- '(org-code ((t (:inherit default))))
+ '(org-code ((t (:inherit nil :foreground "#93a1a1"))))
  '(org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))))
  '(org-done ((t (:foreground "dim gray" :strike-through t))))
  '(org-headline-done ((t (:foreground "dim gray" :strike-through t))))

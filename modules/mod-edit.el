@@ -5,7 +5,7 @@
 (use-package s)
 (use-package dash)
 (use-package wgrep
-  :defer t)
+  :after grep)
 
 (use-package wgrep-ag
   :defer t)
@@ -70,7 +70,7 @@
 ;;   :hook ((prog-mode . yas-minor-mode)
 ;;          (org-mode . yas-minor-mode)
 ;;          (tex-mode . yas-minor-mode))
-;;   :config
+;;   :configt
 ;;   (setq yas-snippet-dirs
 ;; 		'("~/.emacs.d/yasnippet-snippets/snippets"                 ;; personal snippets
 ;; 		  "~/.emacs.d/snippets"                 ;; personal snippets
@@ -442,8 +442,11 @@ point reaches the beginning or end of the buffer, stop there."
 
 (setenv "PLT_TR_CONTRACTS" "1")
 
-(require 'bind-key)
+(defun open-dashboard ()
+  (interactive)
+  (find-file "~/brain/main.org"))
 
+(bind-key "<f9>" 'open-dashboard)
 
 (use-package racket-unicode-input-method
   :commands racket-unicode-input-method-enable)
