@@ -103,22 +103,6 @@
   (setq which-key-idle-secondary-delay 0.05)
   (which-key-mode))
 
-;; (use-package ivy
-;;   :ensure t
-;;   :config
-;;   (global-set-key (kbd "s-m r") 'ivy-resume)
-;;   (ivy-mode))
-
-;; (use-package counsel
-;;   :ensure t
-;;   :init
-;;   (setq ivy-use-virtual-buffers nil)
-;;   (setq ivy-count-format "(%d/%d) ")
-;;   :config
-;;   (global-set-key (kbd "M-y") 'counsel-yank-pop)
-;;   (global-set-key (kbd "s-m s") 'counsel-ag)
-;;   (counsel-mode))
-
 (add-hook 'eshell-mode-hook
   (lambda ()
     (define-key eshell-mode-map (kbd "<tab>")

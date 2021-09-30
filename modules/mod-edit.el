@@ -221,8 +221,8 @@ point reaches the beginning or end of the buffer, stop there."
   (let ((path (buffer-file-name (window-buffer (minibuffer-selected-window)))))
     (insert (if full-path
                 path
-              (if (projectile-project-root)
-                  (file-relative-name path (projectile-project-root))
+              (if (project-root)
+                  (file-relative-name path (project-root))
                 (file-name-nondirectory path))))))
 
 (define-key minibuffer-local-map (kbd "M-.") 'insert-file-name-into-minibuffer)
