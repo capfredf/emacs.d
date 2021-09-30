@@ -86,6 +86,7 @@
 
 
 (use-package paredit
+  :demand t
   :init
   (add-hook 'racket-mode-hook #'enable-paredit-mode)
   (add-hook 'racket-repl-mode-hook #'enable-paredit-mode)
@@ -444,6 +445,8 @@ point reaches the beginning or end of the buffer, stop there."
 (require 'bind-key)
 
 
+(use-package racket-unicode-input-method
+  :commands racket-unicode-input-method-enable)
 
 (use-package racket-mode
   ;; :no-require t
