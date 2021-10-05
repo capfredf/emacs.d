@@ -221,8 +221,8 @@ point reaches the beginning or end of the buffer, stop there."
   (let ((path (buffer-file-name (window-buffer (minibuffer-selected-window)))))
     (insert (if full-path
                 path
-              (if (project-root)
-                  (file-relative-name path (project-root))
+              (if (project-root (project-current))
+                  (file-relative-name path (project-root (project-current)))
                 (file-name-nondirectory path))))))
 
 (define-key minibuffer-local-map (kbd "M-.") 'insert-file-name-into-minibuffer)
@@ -362,8 +362,7 @@ point reaches the beginning or end of the buffer, stop there."
          ("\\.markdown\\'" . markdown-mode)))
 
 (use-package tex-site
-  :defer t
-  :pin manual
+  :mode (("\\.tex" . latex-mode))
   :config
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
