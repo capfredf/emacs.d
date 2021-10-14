@@ -126,6 +126,9 @@
 ;;   (when (memq window-system '(mac ns x))
 ;;     (exec-path-from-shell-initialize)))
 
+(defun mean (lst)
+  (/ (apply '+ lst) (length lst)))
+
 (unless (server-running-p) (server-start))
 
 ;; I don't know the reason that I added the code below

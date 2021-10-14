@@ -32,7 +32,8 @@
  '(olivetti-body-width 120)
  '(org-agenda-custom-commands '(("h" "HotList" tags-todo "+Focused" nil)))
  '(org-agenda-dim-blocked-tasks 'invisible)
- '(org-agenda-files '("~/brain/typed-racket-dev.org" "~/brain/main.org"))
+ '(org-agenda-files
+   '("~/brain/deep-hours.org" "~/brain/typed-racket-dev.org" "~/brain/main.org"))
  '(org-capture-templates
    '(("j" "Journal" entry
       (file+olp+datetree "~/brain/timeline.org")
