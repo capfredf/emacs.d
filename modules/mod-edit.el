@@ -361,8 +361,8 @@ point reaches the beginning or end of the buffer, stop there."
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)))
 
-(use-package tex-site
-  :mode (("\\.tex" . latex-mode))
+(use-package auctex
+  :mode (("\\.tex" . TeX-latex-mode))
   :config
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
