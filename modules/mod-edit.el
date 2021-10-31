@@ -253,13 +253,8 @@ point reaches the beginning or end of the buffer, stop there."
   :mode ("\\.org" . org-mode)
   :init
   (add-hook 'org-mode-hook (lambda ()
-                             (org-bullets-mode 1)
-                             (org-indent-mode t)
-                             (setq fill-column 100)
-                             ;; (variable-pitch-mode t)
-                             ;; (face-remap-add-relative 'default :family "Source Sans Pro" :height 140)
-                             (visual-line-mode)
-                             ))
+                             ;; (org-bullets-mode 1)
+                             (setq fill-column 100)))
   :custom
   (org-latex-create-formula-image-program 'dvisvgm)
   ;; (org-hide-emphasis-markers nil)
