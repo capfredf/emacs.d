@@ -408,6 +408,9 @@ point reaches the beginning or end of the buffer, stop there."
 	          tab-width 4
 	          indent-tabs-mode nil)
 
+(defun insert-today (arg)
+  (interactive "P")
+  (format-time-string "%b %d, %Y"))
 ;; (use-package agda2-mode
 ;;   :mode "\\.agda"
 ;;   :load-path "/usr/local/share/emacs/site-lisp/agda"
