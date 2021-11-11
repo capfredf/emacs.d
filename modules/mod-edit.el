@@ -11,7 +11,7 @@
   :defer t)
 
 
-(use-package scribble-mode
+(use-package scribble
   :mode "\\.scribl")
 
 (use-package ag
