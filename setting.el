@@ -9,6 +9,7 @@
  '(TeX-electric-math '("$" . "$"))
  '(TeX-engine 'luatex)
  '(TeX-master nil)
+ '(TeX-source-correlate-mode t)
  '(ag-highlight-search t)
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])

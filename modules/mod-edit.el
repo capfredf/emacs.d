@@ -437,7 +437,11 @@ point reaches the beginning or end of the buffer, stop there."
 
 (setq comint-prompt-read-only t)
 
-(setenv "PLT_TR_CONTRACTS" "1")
+(defun plt-tr-contracts-toggle ()
+  (interactive)
+  (setenv "PLT_TR_CONTRACTS" (if (getenv "PLT_TR_CONTRACTS") nil
+                               "1"))
+  (message "PLT_TR_CONTRACTS is now %s" (getenv "PLT_TR_CONTRACTS")))
 
 (defun open-dashboard ()
   (interactive)
