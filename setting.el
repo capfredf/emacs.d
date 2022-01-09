@@ -43,6 +43,9 @@ Entered on %U
   %i")))
  '(org-catch-invisible-edits 'smart)
  '(org-enforce-todo-dependencies t)
+ '(org-format-latex-options
+   '(:foreground default :background default :scale 0.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
+                 ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(org-hide-emphasis-markers nil)
  '(org-id-link-to-org-use-id t t)
  '(org-log-into-drawer t)
