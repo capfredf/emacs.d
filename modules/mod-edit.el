@@ -460,8 +460,7 @@ point reaches the beginning or end of the buffer, stop there."
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
   :config
-  (setq racket-racket-program (executable-find "racket"))
-  (setq racket-raco-program (executable-find "raco"))
+  (setq racket-program (executable-find "racket"))
   (put 'Π 'racket-indent-function 1)
   (racket-unicode-input-method-enable)
   (put 'required/typed 'racket-indent-function 1))
