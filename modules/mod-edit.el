@@ -464,6 +464,9 @@ point reaches the beginning or end of the buffer, stop there."
   (put 'Π 'racket-indent-function 1)
   (racket-unicode-input-method-enable)
   (put 'required/typed 'racket-indent-function 1))
+
+(use-package typescript-mode
+  :mode "\\.ts")
 ;; (load "/Users/phay/.opam/system/share/emacs/site-lisp/tuareg-site-file")
 
 ;; (use-package rust-mode
