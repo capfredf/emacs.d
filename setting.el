@@ -36,18 +36,16 @@
  '(org-agenda-files
    '("~/brain/deep-hours.org" "~/brain/typed-racket-dev.org" "~/brain/main.org"))
  '(org-capture-templates
-   '(("j" "Journal" entry
-      (file+olp+datetree "~/brain/timeline.org")
-      "* %?
-Entered on %U
-  %i")))
+   '(("e" "everything" entry
+      (file+headline "~/brain/main.org" "📥 Super Inbox")
+      "* %?\12Entered on %U\12  %i")))
  '(org-catch-invisible-edits 'smart)
  '(org-enforce-todo-dependencies t)
  '(org-format-latex-options
    '(:foreground default :background default :scale 0.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(org-hide-emphasis-markers nil)
- '(org-id-link-to-org-use-id t t)
+ '(org-id-link-to-org-use-id t)
  '(org-log-into-drawer t)
  '(org-loop-over-headlines-in-active-region t)
  '(org-preview-latex-default-process 'dvisvgm nil nil "Customized with use-package org")
@@ -81,7 +79,14 @@ Entered on %U
  '(org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))))
  '(org-done ((t (:foreground "dim gray" :strike-through t))))
  '(org-headline-done ((t (:foreground "dim gray" :strike-through t))))
+ '(org-level-1 ((t (:height 1))))
+ '(org-level-2 ((t (:height 1))))
+ '(org-level-3 ((t (:height 1))))
  '(org-level-4 ((t (:inherit outline-4 :foreground "#0e0e0e"))))
+ '(org-level-5 ((t (:height 1))))
+ '(org-level-6 ((t (:height 1))))
+ '(org-level-7 ((t (:height 1))))
+ '(org-level-8 ((t (:height 1))))
  '(org-meta-line ((t (:inherit font-lock-comment-face :slant normal))))
  '(region ((((class color) (min-colors 89)) (:extend t :foreground "#fdf6e3" :background "#586e75"))))
  '(tooltip ((t nil)))

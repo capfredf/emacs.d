@@ -77,13 +77,15 @@
 ;; 		  ))
 ;;   (yas-reload-all))
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; (use-package swiper
 ;;   :ensure t
 ;;   :bind
 ;;   (("C-s" . swiper-isearch)))
 
+(require 'ws-butler)
+(add-hook 'prog-mode-hook #'ws-butler-mode)
 
 (use-package paredit
   :demand t
@@ -271,15 +273,15 @@ point reaches the beginning or end of the buffer, stop there."
   (org-done ((t (:foreground "dim gray" :strike-through t))))
   (org-block ((t (:inherit fixed-pitch))))
   (org-headline-done ((t (:foreground "dim gray" :strike-through t))))
-  ;; (org-level-8 ((t (:family "Source Han Sans SC"))))
-  ;; (org-level-7 ((t (:family "Source Han Sans SC"))))
-  ;; (org-level-6 ((t (:family "Source Han Sans SC"))))
-  ;; (org-level-5 ((t (:family "Source Han Sans SC"))))
-  ;; (org-level-4 ((t (:family "Source Han Sans SC" :height 1.1))))
-  ;; (org-level-3 ((t (:family "Source Han Sans SC" :height 1.25))))
-  ;; (org-level-2 ((t (:family "Source Han Sans SC" :height 1.5))))
-  ;; (org-level-1 ((t (:family "Source Han Sans SC" :height 1.75))))
-  (org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))))
+  (org-level-8 ((t (:inherit default :foreground "#657b83" :height 1.0))))
+  (org-level-7 ((t (:inherit default :foreground "#657b83" :height 1.0))))
+  (org-level-6 ((t (:inherit default :foreground "#657b83" :height 1.0))))
+  (org-level-5 ((t (:inherit default :foreground "#657b83" :height 1.0))))
+  (org-level-4 ((t (:inherit default :foreground "#657b83" :height 1.0))))
+  (org-level-3 ((t (:inherit default :foreground "#657b83" :height 1.0))))
+  (org-level-2 ((t (:inherit default :foreground "#657b83" :height 1.0))))
+  (org-level-1 ((t (:inherit default :foreground "#657b83" :height 1.0))))
+  (org-document-title ((t (:height 1.5 :underline nil))))
   :bind (("C-c a" . org-agenda)
          ;;("C-c g" . counsel-org-goto-all)
          :map org-mode-map
@@ -463,6 +465,14 @@ point reaches the beginning or end of the buffer, stop there."
   (setq racket-program (executable-find "racket"))
   (put 'Π 'racket-indent-function 1)
   (racket-unicode-input-method-enable)
+  (with-temp-buffer
+    (racket-unicode-input-method-enable)
+    (set-input-method "racket-unicode")
+    (let ((quail-current-package (assoc "racket-unicode"
+                                        quail-package-alist)))
+      (quail-define-rules ((append . t))
+                          ("lte" ["≤"])
+                          ("dt" ["·"]))))
   (put 'required/typed 'racket-indent-function 1))
 
 (use-package typescript-mode
