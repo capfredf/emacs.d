@@ -288,6 +288,7 @@ point reaches the beginning or end of the buffer, stop there."
          ("C-c l" . org-store-link)
          ("C-c C-M-o" . org-mark-ring-goto)
          ("s-n" . org-next-visible-heading)
+         ("<f9>" . org-capture)
          ("s-p" . org-previous-visible-heading)
          ("s-u" . outline-up-heading)
          ("s-l" . org-forward-heading-same-level)
@@ -350,7 +351,6 @@ point reaches the beginning or end of the buffer, stop there."
 ;;   (org-journal-file-format "%Y%m%d.jnl")
 ;;   :bind ("C-c C-k" . org-journal-new-entry))
 
-
 ;; Tex
 
 (use-package markdown-mode
@@ -368,12 +368,12 @@ point reaches the beginning or end of the buffer, stop there."
 (require 'reftex)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
-(use-package deft
-  :bind ("<f8>" . deft)
-  :custom
-  (deft-directory "~/brain/")
-  (deft-auto-save-interval 0)
-  (deft-extensions '("org" "md" "txt" "tex")))
+;; (use-package deft
+;;   :bind ("<f8>" . deft)
+;;   :custom
+;;   (deft-directory "~/brain/")
+;;   (deft-auto-save-interval 0)
+;;   (deft-extensions '("org" "md" "txt" "tex")))
 
 
 ;; (use-package org-roam
@@ -444,12 +444,6 @@ point reaches the beginning or end of the buffer, stop there."
   (setenv "PLT_TR_CONTRACTS" (if (getenv "PLT_TR_CONTRACTS") nil
                                "1"))
   (message "PLT_TR_CONTRACTS is now %s" (getenv "PLT_TR_CONTRACTS")))
-
-(defun open-dashboard ()
-  (interactive)
-  (find-file "~/brain/main.org"))
-
-(bind-key "<f9>" 'open-dashboard)
 
 (use-package racket-unicode-input-method
   :commands racket-unicode-input-method-enable)
