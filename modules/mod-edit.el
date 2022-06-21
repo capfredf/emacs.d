@@ -283,12 +283,12 @@ point reaches the beginning or end of the buffer, stop there."
   (org-level-1 ((t (:inherit default :foreground "#657b83" :height 1.0))))
   (org-document-title ((t (:height 1.5 :underline nil))))
   :bind (("C-c a" . org-agenda)
+         ("<f9>" . org-capture)
          ;;("C-c g" . counsel-org-goto-all)
          :map org-mode-map
          ("C-c l" . org-store-link)
          ("C-c C-M-o" . org-mark-ring-goto)
          ("s-n" . org-next-visible-heading)
-         ("<f9>" . org-capture)
          ("s-p" . org-previous-visible-heading)
          ("s-u" . outline-up-heading)
          ("s-l" . org-forward-heading-same-level)
