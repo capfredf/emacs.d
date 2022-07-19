@@ -34,7 +34,7 @@
  '(org-agenda-custom-commands '(("h" "HotList" tags-todo "+Focused" nil)))
  '(org-agenda-dim-blocked-tasks 'invisible)
  '(org-agenda-files
-   '("~/brain/deep-hours.org" "~/brain/typed-racket-dev.org" "~/brain/main.org"))
+   '("/home/capfredf/brain/deep-hours.org" "/home/capfredf/brain/main.org"))
  '(org-capture-templates
    '(("e" "everything" entry
       (file+headline "~/brain/main.org" "📥 Super Inbox")
