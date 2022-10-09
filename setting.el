@@ -74,6 +74,7 @@
  '(default ((t (:family "Sarasa Fixed SC" :slant normal :weight normal :height 120 :width normal))))
  '(fixed-pitch ((t (:family "Iosevka" :slant normal :weight normal :height 1.0 :width normal))))
  '(font-lock-variable-name-face ((t nil)))
+ '(helm-ff-file-extension ((t (:extend t :foreground "dark red"))))
  '(highlight ((t nil)))
  '(match ((t (:background "orange" :foreground "#586e75" :weight bold))))
  '(org-block ((t (:inherit fixed-pitch))))
