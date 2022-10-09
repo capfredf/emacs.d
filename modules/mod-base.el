@@ -68,6 +68,18 @@
 (use-package bind-key
   :demand t)
 
+;; (use-package vertico
+;;   :init
+;;   (vertico-mode))
+(use-package helm
+  :bind
+  ("M-x" . helm-M-x)
+  ("C-x C-f" . helm-find-files)
+  ("M-y" . helm-show-kill-ring)
+  :config
+  (helm-mode 1))
+
+
 
 (defun read-lines (filePath)
   "Return a list of lines of a file at filePath."
@@ -144,8 +156,8 @@
 (global-unset-key (kbd "M-z")) ;; unbind (suspend-frame) to C-z
 (global-unset-key (kbd "C-x z")) ;; unbind repeat to C-x
 (global-set-key (kbd "M-z") 'repeat)
-(icomplete-mode +1)
-(icomplete-vertical-mode +1)
+;; (icomplete-mode +1)
+;; (icomplete-vertical-mode +1)
 
 
 ;; (use-package ace-window
@@ -185,7 +197,7 @@
   :bind (("C-x m" . magit-status))
   :config (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
-(define-key icomplete-minibuffer-map (kbd "<s-tab>") 'icomplete-force-complete)
+;; (define-key icomplete-minibuffer-map (kbd "<s-tab>") 'icomplete-force-complete)
 
 (winner-mode t)
 (global-set-key (kbd "C-S-o") 'other-window)

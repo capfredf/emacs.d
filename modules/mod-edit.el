@@ -273,14 +273,6 @@ point reaches the beginning or end of the buffer, stop there."
   (org-done ((t (:foreground "dim gray" :strike-through t))))
   (org-block ((t (:inherit fixed-pitch))))
   (org-headline-done ((t (:foreground "dim gray" :strike-through t))))
-  (org-level-8 ((t (:inherit default :foreground "#657b83" :height 1.0))))
-  (org-level-7 ((t (:inherit default :foreground "#657b83" :height 1.0))))
-  (org-level-6 ((t (:inherit default :foreground "#657b83" :height 1.0))))
-  (org-level-5 ((t (:inherit default :foreground "#657b83" :height 1.0))))
-  (org-level-4 ((t (:inherit default :foreground "#657b83" :height 1.0))))
-  (org-level-3 ((t (:inherit default :foreground "#657b83" :height 1.0))))
-  (org-level-2 ((t (:inherit default :foreground "#657b83" :height 1.0))))
-  (org-level-1 ((t (:inherit default :foreground "#657b83" :height 1.0))))
   (org-document-title ((t (:height 1.5 :underline nil))))
   :bind (("C-c a" . org-agenda)
          ("<f9>" . org-capture)
@@ -458,6 +450,7 @@ point reaches the beginning or end of the buffer, stop there."
   :config
   (setq racket-program (executable-find "racket"))
   (put 'Π 'racket-indent-function 1)
+  (put 'type-case 'racket-indent-function 2)
   (racket-unicode-input-method-enable)
   (with-temp-buffer
     (racket-unicode-input-method-enable)
