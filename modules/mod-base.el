@@ -12,6 +12,8 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(use-package vterm)
+
 (defun splash-head ()
   "Insert the head part of the splash screen into the current buffer."
   (let* ((image-file (expand-file-name "~/.emacs.d/ThereIsNoLinearTime1.png"))

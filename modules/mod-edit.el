@@ -163,6 +163,7 @@
               (window-height   . 0.33)))
 
 (global-set-key (kbd "C-M-]") 'jump-to-file-and-line)
+(global-set-key (kbd "<f4>") 'projectile-run-vterm)
 
 (defun insert-current-time ()
   (interactive)
