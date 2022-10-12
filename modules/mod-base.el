@@ -77,10 +77,10 @@
   :bind
   ("M-x" . helm-M-x)
   ("C-x C-f" . helm-find-files)
+  ("C-x b" . helm-mini)
   ("M-y" . helm-show-kill-ring)
   :config
   (helm-mode 1))
-
 
 
 (defun read-lines (filePath)
