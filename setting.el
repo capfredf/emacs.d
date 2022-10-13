@@ -34,11 +34,8 @@
  '(olivetti-body-width 120)
  '(org-agenda-custom-commands nil)
  '(org-agenda-dim-blocked-tasks 'invisible)
- '(org-agenda-files '("/home/capfredf/brain/main.org"))
- '(org-capture-templates
-   '(("e" "everything" entry
-      (file+headline "~/brain/main.org" "📥 Super Inbox")
-      "* %?\12Entered on %U\12  %i")))
+ '(org-agenda-files '("/home/capfredf/newbrain/"))
+ '(org-capture-templates nil)
  '(org-catch-invisible-edits 'smart)
  '(org-enforce-todo-dependencies t)
  '(org-format-latex-options

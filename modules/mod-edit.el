@@ -252,6 +252,15 @@ point reaches the beginning or end of the buffer, stop there."
 (use-package olivetti
   :hook (org-mode . olivetti-mode))
 
+(defun create-new-notes ()
+  (interactive)
+  (let* ((title (read-string "Title:"))
+         (name (string-replace " " "-" title))
+         (dir default-directory ))
+    (find-file (file-name-concat dir (concat name ".org")))
+    (insert (concat "#+title: " title))))
+
+
 (use-package org
   :mode ("\\.org" . org-mode)
   :init
