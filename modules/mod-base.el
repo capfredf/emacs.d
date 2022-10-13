@@ -189,7 +189,48 @@
 
 (use-package project
   :bind
-  ("C-x s" . project-find-regexp))
+  ("C-x s" . project-find-regexp)
+  (:map project-prefix-map
+        ("f" . helm-project-find-file-dwim)))
+
+(defun helm-project-find-file-dwim (&optional include-all)
+  "Find file at point based on context"
+  (interactive)
+  (let* ((pr (project-current t))
+         (root (project-root pr))
+         (dirs (list root)))
+    (my-project-find-file-in
+     (or (thing-at-point 'filename)
+         (and buffer-file-name (file-relative-name buffer-file-name root)))
+     dirs pr include-all)))
+
+;; adapt project-find-file-in from project.el
+(defun my-project-find-file-in (suggested-filename dirs project &optional include-all)
+  "Complete a file name in DIRS in PROJECT and visit the result.
+
+SUGGESTED-FILENAME is a relative file name, or part of it, which
+is used as part of \"future history\".
+
+If INCLUDE-ALL is non-nil, or with prefix argument when called
+interactively, include all files from DIRS, except for VCS
+directories listed in `vc-directory-exclusion-list'."
+  (let* ((vc-dirs-ignores (mapcar
+                           (lambda (dir)
+                             (concat dir "/"))
+                           vc-directory-exclusion-list))
+         (all-files
+          (if include-all
+              (mapcan
+               (lambda (dir) (project--files-in-directory dir vc-dirs-ignores))
+               dirs)
+            (project-files project dirs)))
+         ;; (file (funcall project-read-file-name-function
+         ;;                "Find file" all-files nil 'file-name-history
+         ;;                suggested-filename))
+         )
+    (helm :sources (helm-build-sync-source "helm-project-find-file"
+                     :candidates all-files
+                     :action  helm-find-files-actions))))
 
 (use-package diff-hl
   :demand t)
