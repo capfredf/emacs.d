@@ -191,7 +191,21 @@
   :bind
   ("C-x s" . project-find-regexp)
   (:map project-prefix-map
-        ("f" . helm-project-find-file-dwim)))
+        ("f" . helm-project-find-file-dwim)
+        ("p" . helm-project-switch-project)))
+
+(defun helm-project-switch-project ()
+  (interactive)
+  (helm :sources (helm-build-sync-source "Helm-project-switch-project"
+                   :candidates (mapcar 'car project--list) ;; the list is in the form of (("project-name") ...)
+                   :action
+                   '(("find files" . (lambda (dir)
+                                       (let ((default-dir dir)
+                                             (project-current-inhibit-prompt t))
+                                         (helm-project-find-file-dwim))))
+                     ("magit" . (lambda (dir)
+                                  (magit-status dir)))))))
+
 
 (defun helm-project-find-file-dwim (&optional include-all)
   "Find file at point based on context"
