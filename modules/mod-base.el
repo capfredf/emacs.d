@@ -200,7 +200,7 @@
                    :candidates (mapcar 'car project--list) ;; the list is in the form of (("project-name") ...)
                    :action
                    '(("find files" . (lambda (dir)
-                                       (let ((default-dir dir)
+                                       (let ((default-directory dir)
                                              (project-current-inhibit-prompt t))
                                          (helm-project-find-file-dwim))))
                      ("magit" . (lambda (dir)

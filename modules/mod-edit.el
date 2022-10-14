@@ -196,6 +196,8 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
 
+(add-hook 'prog-mode-hook (lambda () (hl-line-mode 1)))
+
 (defun with-face (str &rest face-plist)
   (propertize str 'face face-plist))
 
@@ -254,8 +256,8 @@ point reaches the beginning or end of the buffer, stop there."
 
 (defun create-new-notes ()
   (interactive)
-  (let* ((title (read-string "Title:"))
-         (name (string-replace " " "-" title))
+  (let* ((title (read-string "Title: "))
+         (name (downcase (string-replace " " "-" title)))
          (dir default-directory ))
     (find-file (file-name-concat dir (concat name ".org")))
     (insert (concat "#+title: " title))))
