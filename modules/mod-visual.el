@@ -56,7 +56,7 @@
   (setq solarized-height-plus-4 1.0))
 
 
-(global-hl-line-mode t)
+;; (global-hl-line-mode nil)
 
 ;; double tap in the minibuffer move point to the beginning of the minibuffer
 ;; enable when #29 is closed
