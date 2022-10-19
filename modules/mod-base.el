@@ -197,7 +197,7 @@
 (defun helm-project-switch-project ()
   (interactive)
   (helm :sources (helm-build-sync-source "Helm-project-switch-project"
-                   :candidates (mapcar 'car project--list) ;; the list is in the form of (("project-name") ...)
+                   :candidates (project-known-project-roots) ;; the list is in the form of (("project-name") ...)
                    :action
                    '(("find files" . (lambda (dir)
                                        (let ((default-directory dir)
