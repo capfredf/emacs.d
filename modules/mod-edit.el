@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 (put 'upcase-region 'disabled nil)
 
 (delete-selection-mode 1)
@@ -162,8 +163,39 @@
               (reusable-frames . visible)
               (window-height   . 0.33)))
 
+(defvar vterm-sys-frame nil)
+(require 'cl-lib)
+(defun vterm-sys ()
+  (interactive)
+  ;; (select-frame-set-input-focus vterm-sys-frame)
+  (setq vterm-sys-frame (make-frame-command))
+  (select-frame vterm-sys-frame)
+  (vterm-dwim "~" t)
+  (toggle-frame-maximized))
+
+(defun vterm-dwim (&optional dir reuse?)
+  (interactive)
+  ;; if dir is not set, we check if we are under a project
+  (cl-multiple-value-bind (dir^ buff-base)
+      (cond
+       (dir (cl-values (if (and (stringp dir) (file-directory-p dir))
+                           dir
+                         "~")
+                       "vterm"))
+       ((project-current)
+        (let* ((prj-name (project-root (project-current t)))
+               (base-name (format "vterm %s" prj-name)))
+          (cl-values prj-name base-name)))
+       (t (cl-values default-directory "vterm") ))
+
+    (let ((default-directory dir^))
+      (if (and reuse? (buffer-live-p (get-buffer buff-base)))
+          (switch-to-buffer buff-base)
+        (vterm buff-base)))))
+
+
 (global-set-key (kbd "C-M-]") 'jump-to-file-and-line)
-(global-set-key (kbd "<f4>") 'projectile-run-vterm)
+(global-set-key (kbd "<f4>") 'vterm-dwim)
 
 (defun insert-current-time ()
   (interactive)
@@ -470,8 +502,12 @@ point reaches the beginning or end of the buffer, stop there."
     (let ((quail-current-package (assoc "racket-unicode"
                                         quail-package-alist)))
       (quail-define-rules ((append . t))
-                          ("lte" ["≤"])
-                          ("dt" ["·"]))))
+                          ("lte " ["≤"])
+                          ("gte " ["≥"])
+                          ("bot " ["⊥"])
+                          ("top " ["⊤"])
+                          ("eqv " ["≡"])
+                          ("dt " ["·"]))))
   (put 'required/typed 'racket-indent-function 1))
 
 (use-package typescript-mode
