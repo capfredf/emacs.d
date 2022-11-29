@@ -168,10 +168,8 @@
 (defun vterm-sys ()
   (interactive)
   ;; (select-frame-set-input-focus vterm-sys-frame)
-  (setq vterm-sys-frame (make-frame-command))
-  (select-frame vterm-sys-frame)
-  (vterm-dwim "~" t)
-  (toggle-frame-maximized))
+  (tab-bar-select-tab-by-name "sys")
+  (vterm-dwim "~" t))
 
 (defun vterm-dwim (&optional dir reuse?)
   (interactive)

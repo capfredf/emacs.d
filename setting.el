@@ -61,6 +61,7 @@
  '(safe-local-variable-values '((TeX-engine . xelatex) (olivetti-body-width . 150)))
  '(shift-select-mode nil)
  '(tab-bar-mode t)
+ '(temporary-file-directory "~/tmp/")
  '(vterm-shell "fish")
  '(warning-suppress-types '((comp)))
  '(windmove-default-keybindings nil)
