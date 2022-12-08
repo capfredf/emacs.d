@@ -201,7 +201,9 @@
                    :action
                    '(("find files" . (lambda (dir)
                                        (let ((default-directory dir)
-                                             (project-current-inhibit-prompt t))
+                                             ;; FIXME: use (project-current-inhibit-prompt t) for 28 and below
+                                             ;; (project-current-directory-override "t")
+                                             )
                                          (helm-project-find-file-dwim))))
                      ("magit" . (lambda (dir)
                                   (magit-status dir)))))))

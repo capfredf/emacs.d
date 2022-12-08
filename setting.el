@@ -26,6 +26,7 @@
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
  '(frame-background-mode nil)
  '(grep-highlight-matches 'always)
+ '(helm-split-window-inside-p t)
  '(help-at-pt-display-when-idle 'never nil (help-at-pt))
  '(highlight-parentheses-colors '("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900"))
  '(ispell-program-name "aspell")
