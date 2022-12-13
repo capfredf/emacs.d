@@ -14,6 +14,10 @@
 
 (setq package-enable-at-startup nil)
 (add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
+;; it looks the path to the two libraries below have to be added separately in
+;; order to make epkg and/or borg work properly
+(add-to-list 'load-path (expand-file-name "lib/compat" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "lib/llama" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 (require 'borg)
 (borg-initialize)
