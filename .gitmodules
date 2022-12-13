@@ -47,6 +47,15 @@
 [submodule "highlight-parentheses"]
 	path = lib/highlight-parentheses
 	url = git@github.com:emacsmirror/highlight-parentheses.git
+[submodule "ht"]
+	path = lib/ht
+	url = https://github.com/Wilfred/ht.el
+[submodule "lib/compat"]
+	path = lib/compat
+	url = https://git.sr.ht/~pkal/compat
+[submodule "lib/llama"]
+	path = lib/llama
+	url = https://git.sr.ht/~tarsius/llama
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
@@ -62,6 +71,9 @@
 [submodule "org-bullets"]
 	path = lib/org-bullets
 	url = git@github.com:integral-dw/org-bullets.git
+[submodule "org-super-agenda"]
+	path = lib/org-super-agenda
+	url = https://github.com/alphapapa/org-super-agenda
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
@@ -89,6 +101,9 @@
 [submodule "transient"]
 	path = lib/transient
 	url = git@github.com:magit/transient.git
+[submodule "ts"]
+	path = lib/ts
+	url = https://github.com/alphapapa/ts.el
 [submodule "typescript-mode"]
 	path = lib/typescript-mode
 	url = git@github.com:emacs-typescript/typescript.el.git

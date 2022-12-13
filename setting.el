@@ -36,7 +36,7 @@
  '(olivetti-body-width 120)
  '(org-agenda-custom-commands nil)
  '(org-agenda-dim-blocked-tasks 'invisible)
- '(org-agenda-files '("/home/capfredf/newbrain/"))
+ '(org-agenda-files '("~/code/test.org"))
  '(org-capture-templates nil)
  '(org-catch-invisible-edits 'smart)
  '(org-enforce-todo-dependencies t)
