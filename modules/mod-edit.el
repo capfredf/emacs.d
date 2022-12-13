@@ -383,11 +383,12 @@ point reaches the beginning or end of the buffer, stop there."
                       (org-super-agenda-groups
                        '((:log t)                       ; Automatically named "Log"
                          (:name "Today"
-                                :scheduled today)))))
-          (todo "NEXT" ((org-super-agenda-groups
-                       '((:log t)                       ; Automatically named "Log"
-                          (:name "Important"
-                                 :priority "A")))))))))
+                          :scheduled today)))))
+          (todo "NEXT" ((org-agenda-overriding-header "Available")
+                        (org-super-agenda-groups
+                         '((:log t)                       ; Automatically named "Log"
+                           (:name "Important"
+                            :priority "A")))))))))
 
 ;; (use-package org-journal
 ;;   :ensure t
