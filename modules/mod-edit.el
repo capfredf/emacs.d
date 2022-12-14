@@ -377,6 +377,7 @@ point reaches the beginning or end of the buffer, stop there."
 (use-package org-bullets :after org)
 
 
+(org-super-agenda-mode t)
 (setq org-agenda-custom-commands
       '(("z" "Daily Agenda View"
          ((agenda "" ((org-agenda-span 'day)
@@ -385,9 +386,11 @@ point reaches the beginning or end of the buffer, stop there."
                          (:name "Today"
                                 :scheduled today)))))
           (todo "NEXT" ((org-agenda-overriding-header "Available")
+                        (org-agenda-todo-ignore-scheduled t)
                         (org-super-agenda-groups
                          '((:log t)                       ; Automatically named "Log"
                            (:name "Important"
+                                  ;; :not (:scheduled today)
                                   :priority "A")))))))))
 
 ;; (use-package org-journal
