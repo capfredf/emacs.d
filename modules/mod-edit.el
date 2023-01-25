@@ -106,6 +106,20 @@
   (unbind-key "C-M-n" paredit-mode-map)
   (unbind-key "C-M-p" paredit-mode-map)
   (unbind-key "M-s" paredit-mode-map)
+
+  (defun swap-parens-brackets ()
+    (interactive)
+    (cond
+     ((eq ?\[ (char-after))
+      (paredit-open-parenthesis))
+     ((eq ?\( (char-after))
+      (paredit-open-bracket))
+     (t (error "swap-parens-brackets: not an open bracket or parent")))
+    (paredit-forward-slurp-sexp)
+    (forward-char)
+    (paredit-splice-sexp-killing-backward)
+    (forward-char -1))
+
   :bind (:map paredit-mode-map
          ("C-M-l" . paredit-forward)
          ("C-M-h" . paredit-backward)
@@ -301,13 +315,9 @@ point reaches the beginning or end of the buffer, stop there."
                              (setq fill-column 100)))
   :custom
   (org-latex-create-formula-image-program 'dvisvgm)
-  ;; (org-hide-emphasis-markers nil)
   (org-fontify-done-headline t)
   (org-src-fontify-natively t)
   (org-image-actual-width 500)
-  (org-refile-targets '((nil :maxlevel . 3)
-                        (org-agenda-files :maxlevel . 3)))
-  (org-refile-use-outline-path 'file) ;; use file path as refile targets
   (org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
   (org-export-with-toc nil)
   :custom-face
@@ -463,7 +473,8 @@ point reaches the beginning or end of the buffer, stop there."
 
 (defun insert-today (arg)
   (interactive "P")
-  (insert (format-time-string "%b %d, %Y")))
+  (insert (format-time-string "%a, %D")))
+
 ;; (use-package agda2-mode
 ;;   :mode "\\.agda"
 ;;   :load-path "/usr/local/share/emacs/site-lisp/agda"

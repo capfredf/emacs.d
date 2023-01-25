@@ -35,6 +35,9 @@
 [submodule "expand-region"]
 	path = lib/expand-region
 	url = git@github.com:magnars/expand-region.el.git
+[submodule "f"]
+	path = lib/f
+	url = https://github.com/rejeep/f.el
 [submodule "git-modes"]
 	path = lib/git-modes
 	url = git@github.com:magit/git-modes.git
@@ -44,6 +47,9 @@
 [submodule "helm"]
 	path = lib/helm
 	url = git@github.com:emacs-helm/helm.git
+[submodule "helm-org-rifle"]
+	path = lib/helm-org-rifle
+	url = https://github.com/alphapapa/org-rifle
 [submodule "highlight-parentheses"]
 	path = lib/highlight-parentheses
 	url = git@github.com:emacsmirror/highlight-parentheses.git

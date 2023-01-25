@@ -12,6 +12,10 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(require 'treesit)
+(setq treesit-extra-load-path
+      '("/home/capfredf/code/tree-sitter-module/dist"))
+
 (use-package vterm)
 
 (defun splash-head ()
@@ -339,4 +343,5 @@ the same name or for the same purpose "
                     concat (format "%s: %s + %s = %s\n" type used free total))))
 
 
+(require 'helm-org-rifle)
 (provide 'mod-base)

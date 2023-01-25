@@ -37,20 +37,25 @@
  '(org-agenda-custom-commands nil)
  '(org-agenda-dim-blocked-tasks 'invisible)
  '(org-agenda-files '("~/my-brain/snd-brain.org"))
- '(org-capture-templates nil)
+ '(org-capture-templates
+   '(("T" "Today's tasks" entry
+      (file+headline "~/my-brain/snd-brain.org" "Today")
+      "")))
  '(org-catch-invisible-edits 'smart)
  '(org-enforce-todo-dependencies t)
+ '(org-fold-catch-invisible-edits 'smart)
  '(org-fontify-todo-headline nil)
  '(org-format-latex-options
    '(:foreground default :background default :scale 0.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
+ '(org-goto-interface 'outline-path-completion)
  '(org-hide-emphasis-markers nil)
  '(org-id-link-to-org-use-id t)
  '(org-log-into-drawer t)
  '(org-loop-over-headlines-in-active-region t)
  '(org-modules
-   '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail org-tempo ol-w3m))
- '(org-preview-latex-default-process 'dvisvgm nil nil "Customized with use-package org")
+   '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-id ol-info ol-irc ol-mhe ol-rmail org-tempo ol-w3m))
+ '(org-refile-targets '((nil :maxlevel . 10) (org-agenda-files :maxlevel . 3)) nil nil "Customized with use-package org")
  '(org-roam-directory "~/brain/")
  '(org-roam-graph-viewer "~/bin/firefox")
  '(org-startup-folded nil)
