@@ -37,6 +37,7 @@
  '(org-agenda-custom-commands nil)
  '(org-agenda-dim-blocked-tasks 'invisible)
  '(org-agenda-files '("~/my-brain/snd-brain.org"))
+ '(org-babel-load-languages '((emacs-lisp . t)))
  '(org-capture-templates
    '(("T" "Today's tasks" entry
       (file+headline "~/my-brain/snd-brain.org" "Today")
