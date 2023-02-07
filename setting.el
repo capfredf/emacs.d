@@ -104,5 +104,6 @@
  '(org-meta-line ((t (:inherit font-lock-comment-face :slant normal))))
  '(org-tag ((t (:foreground "light gray" :weight bold))))
  '(region ((((class color) (min-colors 89)) (:extend t :foreground "#fdf6e3" :background "#586e75"))))
+ '(tab-bar-tab ((t (:background "#fdf6e3" :foreground "#586e75" :underline (:color foreground-color :style line :position t)))))
  '(tooltip ((t nil)))
  '(variable-pitch ((t (:family "Source Han Sans" :height 160 :weight normal)))))
