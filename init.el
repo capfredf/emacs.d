@@ -21,12 +21,13 @@
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 (require 'borg)
 (borg-initialize)
+(setq package-enable-at-startup nil)
 
 (with-eval-after-load 'magit
-		      (magit-add-section-hook 'magit-status-sections-hook
-					                  'magit-insert-modules
-					                  'magit-insert-stashes
-					                  'append))
+  (magit-add-section-hook 'magit-status-sections-hook
+					      'magit-insert-modules
+					      'magit-insert-stashes
+					      'append))
 
 
 (eval-and-compile
