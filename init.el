@@ -12,16 +12,15 @@
 ;; (add-hook 'racket-mode-hook      #'racket-unicode-input-method-enable)
 ;; (require 'racket-mode)
 
-(setq package-enable-at-startup nil)
 (add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 ;; it looks the path to the two libraries below have to be added separately in
 ;; order to make epkg and/or borg work properly
-(add-to-list 'load-path (expand-file-name "lib/compat" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "lib/llama" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
+;;(add-to-list 'load-path (expand-file-name "lib/compat" user-emacs-directory))
+;; (add-to-list 'load-path (expand-file-name "lib/llama" user-emacs-directory))
 (require 'borg)
 (borg-initialize)
-(setq package-enable-at-startup nil)
+
 
 (with-eval-after-load 'magit
   (magit-add-section-hook 'magit-status-sections-hook
@@ -33,6 +32,7 @@
 (eval-and-compile
  (require 'use-package))
 (require 'bind-key)
+
 
 (require 'mod-base)
 (require 'mod-visual)

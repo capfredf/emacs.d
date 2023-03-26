@@ -528,6 +528,9 @@ point reaches the beginning or end of the buffer, stop there."
     (let ((quail-current-package (assoc "racket-unicode"
                                         quail-package-alist)))
       (quail-define-rules ((append . t))
+                          ("TT " ["𝕋𝕋"])
+                          ("FF " ["𝔽𝔽"])
+                          ("ll " ["≪"])
                           ("lte " ["≤"])
                           ("gte " ["≥"])
                           ("bot " ["⊥"])
