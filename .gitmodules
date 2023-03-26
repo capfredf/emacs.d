@@ -56,10 +56,10 @@
 [submodule "ht"]
 	path = lib/ht
 	url = https://github.com/Wilfred/ht.el
-[submodule "lib/compat"]
+[submodule "compat"]
 	path = lib/compat
 	url = https://git.sr.ht/~pkal/compat
-[submodule "lib/llama"]
+[submodule "llama"]
 	path = lib/llama
 	url = https://git.sr.ht/~tarsius/llama
 [submodule "magit"]
