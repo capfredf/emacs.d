@@ -12,8 +12,8 @@
   :defer t)
 
 
-(use-package scribble
-  :mode "\\.scribl")
+;; (use-package scribble
+;;   :mode "\\.scribl")
 
 (use-package ag
   :defer t
@@ -467,9 +467,7 @@ point reaches the beginning or end of the buffer, stop there."
 ;;;;;;;;; coding
 ;;;;;;;;;;;;;;;
 
-(setq-default c-basic-offset 4
-	          tab-width 4
-	          indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 (defun insert-today (arg)
   (interactive "P")
@@ -517,6 +515,7 @@ point reaches the beginning or end of the buffer, stop there."
   :init
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
+  (add-to-list 'auto-mode-alist '("\\.scrbl$" . racket-mode))
   :config
   (setq racket-program (executable-find "racket"))
   (put 'Π 'racket-indent-function 1)
@@ -605,4 +604,6 @@ point reaches the beginning or end of the buffer, stop there."
 ;;   (org-ref-pdf-directory "~/captainwiki/bibliography/bibtex-pdfs/"))
 
 
+(use-package ob-racket
+  :after org)
 (provide 'mod-edit)
