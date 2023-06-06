@@ -21,6 +21,17 @@
   (autoload 'wgrep-ag-setup "wgrep-ag")
   (add-hook 'ag-mode-hook 'wgrep-ag-setup))
 
+
+;; (defconst my-cc-style
+;;   '(c-offsets-alist . ((innamespace . 0))))
+
+;; (c-add-style "my-cc-mode" my-cc-style t)
+
+(defun my-c++-mode-hook ()
+  (c-set-offset 'innamespace 0))
+
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+
 (use-package multiple-cursors
   :defer t
   ;; :config
