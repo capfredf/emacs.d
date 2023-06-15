@@ -32,6 +32,13 @@
 
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
+(setq cc-search-directories
+      '("." "../../../lib/*"
+        "../../include/clang/*"))
+
+(global-set-key (kbd "s-f") 'ff-find-other-file)
+(repeat-mode t)
+
 (use-package multiple-cursors
   :defer t
   ;; :config
