@@ -34,10 +34,26 @@
 
 (setq cc-search-directories
       '("." "../../../lib/*"
-        "../../include/clang/*"))
+        "../../include/clang/*"
+        "../../include/llvm/*"))
+
+(customize-set-variable 'org-agenda-files
+                        (directory-files-recursively "~/my-brain/" "main\\.org$"))
+
+(use-package flymake
+  :bind (:map flymake-mode-map
+							("M-n" . 'flymake-goto-next-error)
+							("M-p" . 'flymake-goto-prev-error)))
+
+(defun refile-targets ()
+  (interactive)
+  (message "hello")
+  (list
+   (expand-file-name "/home/capfredf/my-brain/Research/Occurrence Typing X SimpleSub/Occurrence Typing X SimpleSub.org")))
 
 (global-set-key (kbd "s-f") 'ff-find-other-file)
 (repeat-mode t)
+(add-hook 'c++-mode-hook 'eglot-ensure)
 
 (use-package multiple-cursors
   :defer t

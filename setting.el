@@ -118,7 +118,8 @@
  '(olivetti-body-width 120)
  '(org-agenda-custom-commands nil)
  '(org-agenda-dim-blocked-tasks 'invisible)
- '(org-agenda-files '("~/my-brain/snd-brain.org"))
+ '(org-agenda-files
+   '("~/my-brain/clang-repl/main.org" "~/my-brain/snd-brain.org"))
  '(org-babel-load-languages '((emacs-lisp . t)))
  '(org-capture-templates
    '(("T" "Today's tasks" entry
@@ -138,7 +139,11 @@
  '(org-loop-over-headlines-in-active-region t)
  '(org-modules
    '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-id ol-info ol-irc ol-mhe ol-rmail org-tempo ol-w3m))
- '(org-refile-targets '((nil :maxlevel . 10) (org-agenda-files :maxlevel . 3)) nil nil "Customized with use-package org")
+ '(org-refile-targets
+   '((nil :maxlevel . 10)
+     (org-agenda-files :maxlevel . 3)
+     ("/home/capfredf/my-brain/Research/Occurrence Typing X SimpleSub/Occurrence Typing X SimpleSub.org" :maxlevel . 3)))
+ '(org-refile-use-outline-path 'title)
  '(org-roam-directory "~/brain/")
  '(org-roam-graph-viewer "~/bin/firefox")
  '(org-startup-folded nil)
@@ -161,7 +166,8 @@
  '(vterm-shell "fish")
  '(warning-suppress-types '((comp)))
  '(windmove-default-keybindings nil)
- '(window-divider-mode nil))
+ '(window-divider-mode nil)
+ '(xref-search-program 'ripgrep))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
