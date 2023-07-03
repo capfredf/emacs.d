@@ -262,6 +262,10 @@ directories listed in `vc-directory-exclusion-list'."
 
 ;; (define-key icomplete-minibuffer-map (kbd "<s-tab>") 'icomplete-force-complete)
 
+(use-package yasnippet
+   :hook ((prog-mode text-mode) . yas-minor-mode)
+   :config (yas-reload-all))
+
 (winner-mode t)
 (global-set-key (kbd "C-S-o") 'other-window)
 (global-set-key (kbd "C-S-h") 'windmove-left)
