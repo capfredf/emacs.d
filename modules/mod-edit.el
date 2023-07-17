@@ -55,6 +55,14 @@
 (repeat-mode t)
 (add-hook 'c++-mode-hook 'eglot-ensure)
 
+(defun compile-dwim ()
+  (interactive)
+  (if (file-exists-p (concat default-directory "Makefile"))
+      (call-interactively 'compile)
+    (call-interactively 'project-compile)))
+
+(global-set-key (kbd "C-c c") 'compile-dwim)
+
 (use-package multiple-cursors
   :defer t
   ;; :config

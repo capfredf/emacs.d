@@ -321,8 +321,11 @@ directories listed in `vc-directory-exclusion-list'."
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 
-(defvar tab-cfg '(("Dev" . "~/code/racket-extra-pkgs/typed-racket")
-                  ("Thoughts" . "~/brain")))
+(defvar tab-cfg '(("Emacs" . "~/.emacs.d/init.el")
+                  ("Mime" . "~/code/mime/mlsub")
+                  ("TR" . "~/code/rkt-extra-packages/typed-racket")
+                  ("Clang" . "~/code/llvm-project")
+                  ("Brain" . "~/my-brain/main.org")))
 
 (defun recreate-main-workspace ()
   "Recreate all my main tabs in a current frame.
@@ -332,8 +335,9 @@ the same name or for the same purpose "
   (interactive)
   (dolist (c tab-cfg)
     (tab-rename (car c))
-    (dired (expand-file-name (cdr c)))
+    (find-file (expand-file-name (cdr c)))
     (tab-new)))
+
 
 (defun ap/garbage-collect ()
   "Run `garbage-collect' and print stats about memory usage."
