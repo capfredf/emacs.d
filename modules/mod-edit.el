@@ -17,10 +17,6 @@
         "../../include/clang/*"
         "../../include/llvm/*"))
 
-(customize-set-variable 'org-agenda-files
-                        (directory-files-recursively "~/my-brain/" "main\\.org$"))
-
-
 (defun refile-targets ()
   (interactive)
   (message "hello")
@@ -28,7 +24,7 @@
    (expand-file-name "/home/capfredf/my-brain/Research/Occurrence Typing X SimpleSub/Occurrence Typing X SimpleSub.org")))
 
 (global-set-key (kbd "s-f") 'ff-find-other-file)
-(repeat-mode t)
+
 (add-hook 'c++-mode-hook 'eglot-ensure)
 
 (defun compile-dwim ()

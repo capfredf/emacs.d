@@ -122,7 +122,6 @@
  '(menu-bar-mode nil)
  '(olivetti-body-width 120)
  '(org-agenda-dim-blocked-tasks 'invisible)
- '(org-agenda-files '("/home/capfredf/my-brain/clang-repl/main.org"))
  '(org-babel-load-languages '((emacs-lisp . t)))
  '(org-capture-templates
    '(("T" "Today's tasks" entry
@@ -160,6 +159,7 @@
  '(package-selected-packages
    '(olivetti org-superstar org-nsuperstar ws-butler org-super-agenda paredit ob-racket racket-mode racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init auctex ag ace-window))
  '(reftex-plug-into-AUCTeX t)
+ '(repeat-mode t)
  '(safe-local-variable-values
    '((eval racket-unicode-input-method-enable)
      (TeX-engine . xelatex)

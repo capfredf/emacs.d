@@ -280,17 +280,18 @@
   (org-image-actual-width 500)
   (org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
   (org-export-with-toc nil)
+  (org-agenda-files (directory-files-recursively "~/my-brain/" "main\\.org$"))
   (org-agenda-custom-commands
    '(("z" "Daily Agenda View"
       ((agenda "" ((org-agenda-span 'day)
                    (org-super-agenda-groups
-                    '((:log t)                       ; Automatically named "Log"
+                    '((:log t)          ; Automatically named "Log"
                       (:name "Today"
                              :scheduled today)))))
        (todo "NEXT" ((org-agenda-overriding-header "Available")
                      (org-agenda-todo-ignore-scheduled t)
                      (org-super-agenda-groups
-                      '((:log t)                       ; Automatically named "Log"
+                      '((:log t)        ; Automatically named "Log"
                         (:name "Important"
                                ;; :not (:scheduled today)
                                :priority "A")))))))))
