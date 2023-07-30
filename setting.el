@@ -106,6 +106,8 @@
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(delete-selection-mode t)
  '(desktop-auto-save-timeout 0)
+ '(desktop-restore-eager 10)
+ '(desktop-save-mode t)
  '(dired-hide-details-hide-information-lines t)
  '(fill-column 80)
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)

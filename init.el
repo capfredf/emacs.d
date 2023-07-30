@@ -59,9 +59,6 @@
 (setq treesit-extra-load-path
       '("/home/capfredf/code/tree-sitter-module/dist"))
 
-(setq desktop-restore-eager 10)
-;; disable destop-save-mode if something visual goes wrong, because it tends to save *everything*
-(desktop-save-mode t)
 
 (use-package use-package-ensure-system-package)
 (use-package dired
