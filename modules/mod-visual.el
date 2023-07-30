@@ -24,36 +24,7 @@
 ;;   :config
 ;;   (switch-theme 'sanityinc-tomorrow-eighties))
 
-(use-package solarized-theme
-  :config
-  (switch-theme 'solarized-light)
-  ;; make the fringe stand out from the background
-  (setq solarized-distinct-fringe-background t)
 
-  ;; Don't change the font for some headings and titles
-  (setq solarized-use-variable-pitch nil)
-
-  ;; make the modeline high contrast
-  (setq solarized-high-contrast-mode-line t)
-
-  ;; Use less bolding
-  (setq solarized-use-less-bold t)
-
-  ;; Use more italics
-  (setq solarized-use-more-italic t)
-
-  ;; Use less colors for indicators such as git:gutter, flycheck and similar
-  (setq solarized-emphasize-indicators nil)
-
-  ;; Don't change size of org-mode headlines (but keep other size-changes)
-  (setq solarized-scale-org-headlines nil)
-
-  ;; Avoid all font-size changes
-  (setq solarized-height-minus-1 1.0)
-  (setq solarized-height-plus-1 1.0)
-  (setq solarized-height-plus-2 1.0)
-  (setq solarized-height-plus-3 1.0)
-  (setq solarized-height-plus-4 1.0))
 
 
 ;; (global-hl-line-mode nil)
@@ -68,11 +39,7 @@
 ;;   (moody-replace-vc-mode))
 
 
-(setq-default fill-column 80)
-(tool-bar-mode -1)
-(add-to-list 'default-frame-alist
-             '(vertical-scroll-bars . nil))
-(setq-default cursor-type 'bar)
+(add-to-list 'default-frame-alist '(vertical-scroll-bars . nil))
 
 
 (defun change-font-size (n)
@@ -95,10 +62,6 @@
                                    " - "(getenv "USER") "@" (getenv "HOSTNAME")))
 
 
-(use-package highlight-parentheses
-  :init
-  (add-hook 'racket-mode-hook (lambda () (highlight-parentheses-mode t)))
-  (add-hook 'emacs-lisp-mode-hook (lambda () (highlight-parentheses-mode t))))
 
 ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
 ;;   (set-fontset-font (frame-parameter nil 'font)
@@ -142,10 +105,6 @@
   (interactive)
   (set-transient-map text-scaling-map t))
 
-(require 'which-key)
-(add-to-list 'which-key-show-transient-maps text-scaling-map)
-
-(global-set-key (kbd "<f3>") 'scale-text)
 
 (provide 'mod-visual)
 ;; mod-visual.el ends here

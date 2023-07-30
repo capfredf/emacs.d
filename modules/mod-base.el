@@ -1,22 +1,5 @@
 ;; to ensure system-wise dependencies of executable programs
-;; (use-package use-package-ensure-system-package)
 
-(setq custom-file (concat user-emacs-directory "setting.el"))
-(when (file-exists-p custom-file)
-  (load custom-file))
-
-(setq make-backup-files nil)
-(define-coding-system-alias 'UTF-8 'utf-8)
-(define-coding-system-alias 'utf8 'utf-8)
-(set-language-environment 'utf-8)
-
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-(require 'treesit)
-(setq treesit-extra-load-path
-      '("/home/capfredf/code/tree-sitter-module/dist"))
-
-(use-package vterm)
 
 (defun splash-head ()
   "Insert the head part of the splash screen into the current buffer."
@@ -59,32 +42,12 @@
 ;; (setq initial-buffer-choice 'welcome-buffer)
 ;; (setq initial-buffer-choice nil)
 
-(setq desktop-restore-eager 10)
-;; disable destop-save-mode if something visual goes wrong, because it tends to save *everything*
-(desktop-save-mode t)
 ;; (use-package benchmark-init
 ;;   :ensure t
 ;;   :config
 ;;   ;; To disable collection of benchmark data after init is done.
 ;;   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
-(use-package dired
-  :hook (dired-mode . dired-hide-details-mode))
-
-(use-package bind-key
-  :demand t)
-
-;; (use-package vertico
-;;   :init
-;;   (vertico-mode))
-(use-package helm
-  :bind
-  ("M-x" . helm-M-x)
-  ("C-x C-f" . helm-find-files)
-  ("C-x b" . helm-mini)
-  ("M-y" . helm-show-kill-ring)
-  :config
-  (helm-mode 1))
 
 
 (defun read-lines (filePath)
@@ -116,18 +79,10 @@
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-
-(use-package which-key
-  :config
-  (setq which-key-show-early-on-C-h t)
-  (setq which-key-idle-delay 10000)
-  (setq which-key-idle-secondary-delay 0.05)
-  (which-key-mode))
-
-(add-hook 'eshell-mode-hook
-  (lambda ()
-    (define-key eshell-mode-map (kbd "<tab>")
-      'completion-at-point)))
+;; (add-hook 'eshell-mode-hook
+;;   (lambda ()
+;;     (define-key eshell-mode-map (kbd "<tab>")
+;;       'completion-at-point)))
 
 ;; faster than the default "scp"
 (setq tramp-default-method "ssh")
@@ -191,12 +146,6 @@
 ;; 				  :test "raco make -v typed-racket-test/main.rkt && racket typed-racket-test/main.rkt --unit"
 ;; 				  :run "echo 'hell world'"))
 
-(use-package project
-  :bind
-  ("C-x s" . project-find-regexp)
-  (:map project-prefix-map
-        ("f" . helm-project-find-file-dwim)
-        ("p" . helm-project-switch-project)))
 
 (defun helm-project-switch-project ()
   (interactive)
@@ -252,19 +201,6 @@ directories listed in `vc-directory-exclusion-list'."
                      :candidates all-files
                      :action  helm-find-files-actions))))
 
-(use-package diff-hl
-  :demand t)
-
-(use-package magit
-  :after (diff-hl)
-  :bind (("C-x m" . magit-status))
-  :config (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
-
-;; (define-key icomplete-minibuffer-map (kbd "<s-tab>") 'icomplete-force-complete)
-
-(use-package yasnippet
-   :hook ((prog-mode text-mode) . yas-minor-mode)
-   :config (yas-reload-all))
 
 (winner-mode t)
 (global-set-key (kbd "C-S-o") 'other-window)
@@ -277,7 +213,6 @@ directories listed in `vc-directory-exclusion-list'."
 (global-set-key (kbd "C-S-,") 'windmove-swap-states-up)
 (global-set-key (kbd "C-S-.") 'windmove-swap-states-right)
 ;;(abbrev-mode t)
-(setq-default abbrev-mode t)
 
 
 ;; (defun clear-invisible-buffer ()
@@ -305,7 +240,7 @@ directories listed in `vc-directory-exclusion-list'."
 ;;                                      (clear-invisible-buffer)))
 
 
-(global-set-key (kbd "C-M-m t") tab-prefix-map)
+;; (global-set-key (kbd "C-M-m t") tab-prefix-map)
 
 (defun rename-current-file-and-buffer ()
   ;; from Batsov
@@ -351,5 +286,4 @@ the same name or for the same purpose "
                     concat (format "%s: %s + %s = %s\n" type used free total))))
 
 
-(require 'helm-org-rifle)
 (provide 'mod-base)

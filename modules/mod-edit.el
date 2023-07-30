@@ -1,26 +1,6 @@
 ;; -*- lexical-binding: t -*-
 (put 'upcase-region 'disabled nil)
 
-(delete-selection-mode 1)
-
-(use-package s)
-(use-package dash)
-(use-package wgrep
-  :after grep)
-
-(use-package wgrep-ag
-  :defer t)
-
-
-;; (use-package scribble
-;;   :mode "\\.scribl")
-
-(use-package ag
-  :defer t
-  :config
-  (autoload 'wgrep-ag-setup "wgrep-ag")
-  (add-hook 'ag-mode-hook 'wgrep-ag-setup))
-
 
 ;; (defconst my-cc-style
 ;;   '(c-offsets-alist . ((innamespace . 0))))
@@ -40,10 +20,6 @@
 (customize-set-variable 'org-agenda-files
                         (directory-files-recursively "~/my-brain/" "main\\.org$"))
 
-(use-package flymake
-  :bind (:map flymake-mode-map
-							("M-n" . 'flymake-goto-next-error)
-							("M-p" . 'flymake-goto-prev-error)))
 
 (defun refile-targets ()
   (interactive)
@@ -63,18 +39,6 @@
 
 (global-set-key (kbd "C-c c") 'compile-dwim)
 
-(use-package multiple-cursors
-  :defer t
-  ;; :config
-  ;; (define-key mc/keymap (kbd "C-'") 'mc-hide-unmatched-lines-mode)
-  :bind (("C-M-e" . mc/edit-lines)
-         ("C-." . mc/mark-next-like-this)
-         ("C-," . mc/mark-previous-like-this)
-         ("C->" . mc/skip-to-next-like-this)
-         ("C-<" . mc/skip-to-previous-like-this)))
-
-(use-package expand-region
-  :bind (("C-=" . er/expand-region)))
 
 (defun select-line ()
   (interactive)
@@ -127,57 +91,8 @@
 ;;   :bind
 ;;   (("C-s" . swiper-isearch)))
 
-(require 'ws-butler)
-(add-hook 'prog-mode-hook #'ws-butler-mode)
 
-(use-package paredit
-  :demand t
-  :init
-  (add-hook 'racket-mode-hook #'enable-paredit-mode)
-  (add-hook 'racket-repl-mode-hook #'enable-paredit-mode)
-  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
-  :config
-  (unbind-key "C-M-f" paredit-mode-map)
-  (unbind-key "C-M-s" paredit-mode-map)
-  (unbind-key "C-(" paredit-mode-map)
-  (unbind-key "C-)" paredit-mode-map)
-  (unbind-key "C-{" paredit-mode-map)
-  (unbind-key "C-}" paredit-mode-map)
-  (unbind-key "C-M-b" paredit-mode-map)
-  (unbind-key "C-M-d" paredit-mode-map)
-  (unbind-key "C-M-n" paredit-mode-map)
-  (unbind-key "C-M-p" paredit-mode-map)
-  (unbind-key "M-s" paredit-mode-map)
 
-  (defun swap-parens-brackets ()
-    (interactive)
-    (cond
-     ((eq ?\[ (char-after))
-      (paredit-open-parenthesis))
-     ((eq ?\( (char-after))
-      (paredit-open-bracket))
-     (t (error "swap-parens-brackets: not an open bracket or parent")))
-    (paredit-forward-slurp-sexp)
-    (forward-char)
-    (paredit-splice-sexp-killing-backward)
-    (forward-char -1))
-
-  :bind (:map paredit-mode-map
-         ("C-M-l" . paredit-forward)
-         ("C-M-h" . paredit-backward)
-         ("C-M-r" . paredit-raise-sexp)
-         ("C-M-s" . paredit-splice-sexp-killing-backward)
-         ("C-M-j" . paredit-backward-down)
-         ("C-M-S-j" . paredit-backward-up)
-         ("C-M-k" . paredit-forward-down)
-         ("C-M-S-k" . paredit-forward-up)
-         ("C-M-." . paredit-forward-slurp-sexp)
-         ("C-M->" . paredit-forward-barf-sexp)
-         ("C-M-," . paredit-backward-slurp-sexp)
-         ("C-M-<" . paredit-backward-barf-sexp)
-         ("C-M-S-s" . paredit-splice-sexp)
-         ("C-M-(" . paredit-wrap-round)
-         ("C-M-o" . paredit-close-round-and-newline)))
 
 ;; (use-package scribble
 ;;   :load-path "site-lisp/scribble-emacs")
@@ -249,7 +164,7 @@
 
 
 (global-set-key (kbd "C-M-]") 'jump-to-file-and-line)
-(global-set-key (kbd "<f4>") 'vterm-dwim)
+;; (global-set-key (kbd "<f4>") 'vterm-dwim)
 
 (defun insert-current-time ()
   (interactive)
@@ -337,9 +252,6 @@ point reaches the beginning or end of the buffer, stop there."
 ;;   :ensure t
 ;;   :hook (visual-line-mode . visual-fill-column-mode))
 
-(use-package olivetti
-  :hook (org-mode . olivetti-mode))
-
 (defun create-new-notes ()
   (interactive)
   (let* ((title (read-string "Title: "))
@@ -349,101 +261,8 @@ point reaches the beginning or end of the buffer, stop there."
     (insert (concat "#+title: " title))))
 
 
-(use-package org
-  :mode ("\\.org" . org-mode)
-  :init
-  (add-hook 'org-mode-hook (lambda ()
-                             ;; (org-bullets-mode 1)
-                             (setq fill-column 100)))
-  :custom
-  (org-latex-create-formula-image-program 'dvisvgm)
-  (org-fontify-done-headline t)
-  (org-src-fontify-natively t)
-  (org-image-actual-width 500)
-  (org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
-  (org-export-with-toc nil)
-  :custom-face
-  ;; (org-quote ((t (:height 2.0))))
-  (org-done ((t (:foreground "dim gray" :strike-through t))))
-  (org-block ((t (:inherit fixed-pitch))))
-  (org-headline-done ((t (:foreground "dim gray" :strike-through t))))
-  (org-document-title ((t (:height 1.5 :underline nil))))
-  :bind (("C-c a" . org-agenda)
-         ("<f9>" . org-capture)
-         ;;("C-c g" . counsel-org-goto-all)
-         :map org-mode-map
-         ("C-c l" . org-store-link)
-         ("C-c C-M-o" . org-mark-ring-goto)
-         ("s-n" . org-next-visible-heading)
-         ("s-p" . org-previous-visible-heading)
-         ("s-u" . outline-up-heading)
-         ("s-l" . org-forward-heading-same-level)
-         ("s-h" . org-backward-heading-same-level))
-  :config
-  (require 'ox-publish)
-  (setq org-latex-listings 'minted
-        org-latex-packages-alist '(("" "minted")
-                                   ("" "mathtools")
-                                   ("" "amssymb")
-                                   ("" "bbm"))
-        org-latex-pdf-process
-        '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-          "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-  (org-link-set-parameters "message" :follow (lambda (path)
-                                               (browse-url (concat "message://" path))))
-  (setq org-publish-project-alist
-        '(("syntax-transformers"
-           :base-directory "~/code/capfredf.github.io/org/"
-           ;; the publish result will follow the directory structure in the base directory
-           :publishing-directory "~/code/capfredf.github.io/"
-           :publishing-function org-html-publish-to-html
-           :headline-levels 4
-           :html-extension "html"
-           :body-only t
-           :recursive t
-           :with-author nil)
-          ("org"
-           :base-directory "~/brain/"
-           :publishing-directory "~/captainwiki"
-           :publishing-function org-html-publish-to-html
-           :exclude "talks"
-           :section-numbers nil
-           :recursive t
-           :with-toc nil
-           :html-preamble t
-           :html-preamble-format (("en"  "<div class='container'><nav role='navigation'><div class='logo'><a class='logo_link' href='/' title='Wiki'>Inside Yet Another Hello World</a></div></nav></div>"))
-           :html-postamble nil
-           :html-head "<link rel=\"stylesheet\" href=\"/static/css/style.css\" type=\"text/css\"/>"
-           :auto-sitemap t                ; Generate sitemap.org automagically...
-           :sitemap-filename "index.org"  ; ... call it sitemap.org (it's the default)...
-           :sitemap-title "Inside:"        ; ... with title 'Sitemap'.
-           :sitemap-sort-files anti-chronologically
-           :with-author nil)
-          ("static"
-           :base-directory "~/brain/static/"
-           :base-extension any
-           :recursive t
-           :publishing-directory "~/captainwiki/static"
-           :publishing-function org-publish-attachment))))
-
-(use-package org-bullets :after org)
 
 
-(org-super-agenda-mode t)
-(setq org-agenda-custom-commands
-      '(("z" "Daily Agenda View"
-         ((agenda "" ((org-agenda-span 'day)
-                      (org-super-agenda-groups
-                       '((:log t)                       ; Automatically named "Log"
-                         (:name "Today"
-                                :scheduled today)))))
-          (todo "NEXT" ((org-agenda-overriding-header "Available")
-                        (org-agenda-todo-ignore-scheduled t)
-                        (org-super-agenda-groups
-                         '((:log t)                       ; Automatically named "Log"
-                           (:name "Important"
-                                  ;; :not (:scheduled today)
-                                  :priority "A")))))))))
 
 ;; (use-package org-journal
 ;;   :ensure t
@@ -456,20 +275,6 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; Tex
 
-(use-package markdown-mode
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode)))
-
-(use-package auctex
-  :mode (("\\.tex" . TeX-latex-mode))
-  :config
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-  (setq TeX-save-query nil))
-
-(require 'reftex)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
 ;; (use-package deft
 ;;   :bind ("<f8>" . deft)
@@ -547,57 +352,8 @@ point reaches the beginning or end of the buffer, stop there."
                                "1"))
   (message "PLT_TR_CONTRACTS is now %s" (getenv "PLT_TR_CONTRACTS")))
 
-(use-package racket-unicode-input-method
-  :commands racket-unicode-input-method-enable)
 
-(use-package racket-mode
-  ;; :no-require t
-  :mode "\\.rkt"
-  ;; :load-path "/Users/capfredf/site-lisp/racket-mode"
-  :init
-  (add-hook 'racket-mode-hook      #'racket-xp-mode)
-  (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
-  (add-to-list 'auto-mode-alist '("\\.scrbl$" . racket-mode))
-  :config
-  (setq racket-program (executable-find "racket"))
-  (put 'Π 'racket-indent-function 1)
-  (put 'type-case 'racket-indent-function 2)
-  (racket-unicode-input-method-enable)
-  (with-temp-buffer
-    (racket-unicode-input-method-enable)
-    (set-input-method "racket-unicode")
-    (let ((quail-current-package (assoc "racket-unicode"
-                                        quail-package-alist)))
-      (quail-define-rules ((append . t))
-                          ("TT " ["𝕋𝕋"])
-                          ("FF " ["𝔽𝔽"])
-                          ("ll " ["≪"])
-                          ("lte " ["≤"])
-                          ("gte " ["≥"])
-                          ("bot " ["⊥"])
-                          ("top " ["⊤"])
-                          ("eqv " ["≡"])
-                          ("dt " ["·"])
-                          ("^c "  ["ᶜ"])
-                          ("^D "  ["ᴰ"])
-                          ("^d "  ["ᵈ"])
-                          ("^n "  ["ⁿ"])
-                          ("^f "  ["ᶠ"])
-                          ("^- "  ["⁻"])
-                          ("_p "  ["ₚ"])
-                          ("_v "  ["ᵥ"])
-                          ("_v "  ["ᵥ"])
-                          ("pm " ["±"])
-                          ("ring " ["⊚"])
-                          ("aster " ["⊛"])
-                          ("Vdash " ["⊩"])
-                          ("diamond " ["◊"])
-                          ("nexists " ["∄"]))))
-  (put 'required/typed 'racket-indent-function 1)
-  (put 'term-let 'racket-indent-function 1))
 
-(use-package typescript-mode
-  :mode "\\.ts")
 ;; (load "/Users/phay/.opam/system/share/emacs/site-lisp/tuareg-site-file")
 
 ;; (use-package rust-mode
@@ -646,6 +402,5 @@ point reaches the beginning or end of the buffer, stop there."
 ;;   (org-ref-pdf-directory "~/captainwiki/bibliography/bibtex-pdfs/"))
 
 
-(use-package ob-racket
-  :after org)
+
 (provide 'mod-edit)

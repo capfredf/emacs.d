@@ -101,10 +101,13 @@
      (tramp-connection-local-default-system-profile
       (path-separator . ":")
       (null-device . "/dev/null"))))
+ '(cursor-type 'bar)
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
+ '(delete-selection-mode t)
  '(desktop-auto-save-timeout 0)
  '(dired-hide-details-hide-information-lines t)
+ '(fill-column 80)
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
  '(frame-background-mode nil)
  '(grep-highlight-matches 'always)
@@ -116,10 +119,8 @@
  '(markdown-enable-math t)
  '(menu-bar-mode nil)
  '(olivetti-body-width 120)
- '(org-agenda-custom-commands nil)
  '(org-agenda-dim-blocked-tasks 'invisible)
- '(org-agenda-files
-   '("~/my-brain/clang-repl/main.org" "~/my-brain/snd-brain.org"))
+ '(org-agenda-files '("/home/capfredf/my-brain/clang-repl/main.org"))
  '(org-babel-load-languages '((emacs-lisp . t)))
  '(org-capture-templates
    '(("T" "Today's tasks" entry
@@ -155,7 +156,7 @@
    '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "CANCELLED(c)" "DONE(d)")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(paredit vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate olivetti python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-super-agenda org-roam org-journal org-bullets multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init auctex ag ace-window))
+   '(ws-butler org-super-agenda paredit ob-racket racket-mode racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate olivetti python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal org-bullets multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init auctex ag ace-window))
  '(reftex-plug-into-AUCTeX t)
  '(safe-local-variable-values
    '((eval racket-unicode-input-method-enable)
@@ -165,6 +166,7 @@
  '(tab-bar-mode t)
  '(tab-width 2)
  '(temporary-file-directory "~/tmp/")
+ '(tool-bar-mode nil)
  '(vterm-shell "fish")
  '(warning-suppress-types '((comp)))
  '(windmove-default-keybindings nil)
