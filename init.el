@@ -361,9 +361,9 @@
            :publishing-directory "~/captainwiki/static"
            :publishing-function org-publish-attachment))))
 
-(use-package org-bullets
+(use-package org-superstar
   :ensure t
-  :hook (org-mode . org-bullets-mode))
+  :hook (org-mode . org-superstar-mode))
 
 
 (use-package org-super-agenda
