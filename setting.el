@@ -22,85 +22,84 @@
  '(compilation-scroll-output 'first-error)
  '(completion-styles '(substring partial-completion))
  '(connection-local-criteria-alist
-   '(((:application tramp :protocol "flatpak")
-      tramp-container-connection-local-default-flatpak-profile)
-     ((:application tramp)
-      tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)))
+   '(((:application tramp :protocol "kubernetes")
+      tramp-kubernetes-connection-local-default-profile)
+     ((:application tramp :protocol "flatpak")
+      tramp-container-connection-local-default-flatpak-profile
+      tramp-flatpak-connection-local-default-profile)
+     ((:application tramp) tramp-connection-local-default-system-profile
+      tramp-connection-local-default-shell-profile)))
  '(connection-local-profile-alist
-   '((tramp-container-connection-local-default-flatpak-profile
-      (tramp-remote-path "/app/bin" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin"))
+   '((tramp-flatpak-connection-local-default-profile
+      (tramp-remote-path "/app/bin" tramp-default-remote-path "/bin" "/usr/bin"
+                         "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"
+                         "/local/bin" "/local/freeware/bin" "/local/gnu/bin"
+                         "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin"
+                         "/opt/bin" "/opt/sbin" "/opt/local/bin"))
+     (tramp-kubernetes-connection-local-default-profile
+      (tramp-config-check . tramp-kubernetes--current-context-data)
+      (tramp-extra-expand-args 97
+                               (tramp-kubernetes--container
+                                (car tramp-current-connection))
+                               104
+                               (tramp-kubernetes--pod
+                                (car tramp-current-connection))
+                               120
+                               (tramp-kubernetes--context-namespace
+                                (car tramp-current-connection))))
+     (tramp-container-connection-local-default-flatpak-profile
+      (tramp-remote-path "/app/bin" tramp-default-remote-path "/bin" "/usr/bin"
+                         "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"
+                         "/local/bin" "/local/freeware/bin" "/local/gnu/bin"
+                         "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin"
+                         "/opt/bin" "/opt/sbin" "/opt/local/bin"))
      (tramp-connection-local-darwin-ps-profile
-      (tramp-process-attributes-ps-args "-acxww" "-o" "pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "state=abcde" "-o" "ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
-      (tramp-process-attributes-ps-format
-       (pid . number)
-       (euid . number)
-       (user . string)
-       (egid . number)
-       (comm . 52)
-       (state . 5)
-       (ppid . number)
-       (pgrp . number)
-       (sess . number)
-       (ttname . string)
-       (tpgid . number)
-       (minflt . number)
-       (majflt . number)
-       (time . tramp-ps-time)
-       (pri . number)
-       (nice . number)
-       (vsize . number)
-       (rss . number)
-       (etime . tramp-ps-time)
-       (pcpu . number)
-       (pmem . number)
-       (args)))
+      (tramp-process-attributes-ps-args "-acxww" "-o"
+                                        "pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                        "-o" "state=abcde" "-o"
+                                        "ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
+      (tramp-process-attributes-ps-format (pid . number) (euid . number)
+                                          (user . string) (egid . number)
+                                          (comm . 52) (state . 5)
+                                          (ppid . number) (pgrp . number)
+                                          (sess . number) (ttname . string)
+                                          (tpgid . number) (minflt . number)
+                                          (majflt . number)
+                                          (time . tramp-ps-time) (pri . number)
+                                          (nice . number) (vsize . number)
+                                          (rss . number) (etime . tramp-ps-time)
+                                          (pcpu . number) (pmem . number) (args)))
      (tramp-connection-local-busybox-ps-profile
-      (tramp-process-attributes-ps-args "-o" "pid,user,group,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "stat=abcde" "-o" "ppid,pgid,tty,time,nice,etime,args")
-      (tramp-process-attributes-ps-format
-       (pid . number)
-       (user . string)
-       (group . string)
-       (comm . 52)
-       (state . 5)
-       (ppid . number)
-       (pgrp . number)
-       (ttname . string)
-       (time . tramp-ps-time)
-       (nice . number)
-       (etime . tramp-ps-time)
-       (args)))
+      (tramp-process-attributes-ps-args "-o"
+                                        "pid,user,group,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                        "-o" "stat=abcde" "-o"
+                                        "ppid,pgid,tty,time,nice,etime,args")
+      (tramp-process-attributes-ps-format (pid . number) (user . string)
+                                          (group . string) (comm . 52)
+                                          (state . 5) (ppid . number)
+                                          (pgrp . number) (ttname . string)
+                                          (time . tramp-ps-time) (nice . number)
+                                          (etime . tramp-ps-time) (args)))
      (tramp-connection-local-bsd-ps-profile
-      (tramp-process-attributes-ps-args "-acxww" "-o" "pid,euid,user,egid,egroup,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "state,ppid,pgid,sid,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etimes,pcpu,pmem,args")
-      (tramp-process-attributes-ps-format
-       (pid . number)
-       (euid . number)
-       (user . string)
-       (egid . number)
-       (group . string)
-       (comm . 52)
-       (state . string)
-       (ppid . number)
-       (pgrp . number)
-       (sess . number)
-       (ttname . string)
-       (tpgid . number)
-       (minflt . number)
-       (majflt . number)
-       (time . tramp-ps-time)
-       (pri . number)
-       (nice . number)
-       (vsize . number)
-       (rss . number)
-       (etime . number)
-       (pcpu . number)
-       (pmem . number)
-       (args)))
-     (tramp-connection-local-default-shell-profile
-      (shell-file-name . "/bin/sh")
-      (shell-command-switch . "-c"))
-     (tramp-connection-local-default-system-profile
-      (path-separator . ":")
-      (null-device . "/dev/null"))))
+      (tramp-process-attributes-ps-args "-acxww" "-o"
+                                        "pid,euid,user,egid,egroup,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                        "-o"
+                                        "state,ppid,pgid,sid,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etimes,pcpu,pmem,args")
+      (tramp-process-attributes-ps-format (pid . number) (euid . number)
+                                          (user . string) (egid . number)
+                                          (group . string) (comm . 52)
+                                          (state . string) (ppid . number)
+                                          (pgrp . number) (sess . number)
+                                          (ttname . string) (tpgid . number)
+                                          (minflt . number) (majflt . number)
+                                          (time . tramp-ps-time) (pri . number)
+                                          (nice . number) (vsize . number)
+                                          (rss . number) (etime . number)
+                                          (pcpu . number) (pmem . number) (args)))
+     (tramp-connection-local-default-shell-profile (shell-file-name . "/bin/sh")
+                                                   (shell-command-switch . "-c"))
+     (tramp-connection-local-default-system-profile (path-separator . ":")
+                                                    (null-device . "/dev/null"))))
  '(cursor-type 'bar)
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
@@ -124,15 +123,15 @@
  '(org-agenda-dim-blocked-tasks 'invisible)
  '(org-babel-load-languages '((emacs-lisp . t)))
  '(org-capture-templates
-   '(("T" "Today's tasks" entry
-      (file+headline "~/my-brain/snd-brain.org" "Today")
+   '(("T" "Today's tasks" entry (file+headline "~/my-brain/snd-brain.org" "Today")
       "")))
  '(org-catch-invisible-edits 'smart)
  '(org-enforce-todo-dependencies t)
  '(org-fold-catch-invisible-edits 'smart)
  '(org-fontify-todo-headline nil)
  '(org-format-latex-options
-   '(:foreground default :background default :scale 0.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
+   '(:foreground default :background default :scale 0.5 :html-foreground "Black"
+                 :html-background "Transparent" :html-scale 1.0 :matchers
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(org-goto-interface 'outline-path-completion)
  '(org-hide-emphasis-markers nil)
@@ -140,11 +139,12 @@
  '(org-log-into-drawer t)
  '(org-loop-over-headlines-in-active-region t)
  '(org-modules
-   '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-id ol-info ol-irc ol-mhe ol-rmail org-tempo ol-w3m))
+   '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-id ol-info ol-irc
+             ol-mhe ol-rmail org-tempo ol-w3m))
  '(org-refile-targets
-   '((nil :maxlevel . 10)
-     (org-agenda-files :maxlevel . 3)
-     ("/home/capfredf/my-brain/Research/Occurrence Typing X SimpleSub/Occurrence Typing X SimpleSub.org" :maxlevel . 3)))
+   '((nil :maxlevel . 10) (org-agenda-files :maxlevel . 3)
+     ("/home/capfredf/my-brain/Research/Occurrence Typing X SimpleSub/Occurrence Typing X SimpleSub.org"
+      :maxlevel . 3)))
  '(org-refile-use-outline-path 'title)
  '(org-roam-directory "~/brain/")
  '(org-roam-graph-viewer "~/bin/firefox")
@@ -157,12 +157,21 @@
    '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "CANCELLED(c)" "DONE(d)")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(olivetti org-superstar org-nsuperstar ws-butler org-super-agenda paredit ob-racket racket-mode racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package typescript-mode solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal multiple-cursors moody markdown-mode magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init auctex ag ace-window))
+   '(markdown-mode typescript-mode auctex racket-mode olivetti org-superstar
+                   org-nsuperstar ws-butler org-super-agenda paredit ob-racket
+                   racket-unicode-input-method vertico olc wgrep-ag diredfl
+                   exec-path-from-shell yaml-mode perspective centaur-tabs
+                   rotate python-mode yasnippet which-key wgrep
+                   visual-fill-column use-package-ensure-system-package
+                   solarized-theme rust-mode projectile popup pdf-tools parsebib
+                   ox-reveal org-roam org-journal multiple-cursors moody magit
+                   key-chord iy-go-to-char hydra htmlize highlight-parentheses
+                   haskell-mode goto-chg flycheck eyebrowse expand-region
+                   diff-hl deft biblio benchmark-init ag ace-window))
  '(reftex-plug-into-AUCTeX t)
  '(repeat-mode t)
  '(safe-local-variable-values
-   '((eval racket-unicode-input-method-enable)
-     (TeX-engine . xelatex)
+   '((eval racket-unicode-input-method-enable) (TeX-engine . xelatex)
      (olivetti-body-width . 150)))
  '(shift-select-mode nil)
  '(tab-bar-mode t)

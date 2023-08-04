@@ -41,9 +41,6 @@
 
 (put 'downcase-region 'disabled nil)
 
-(load-file (let ((coding-system-for-read 'utf-8))
-             (shell-command-to-string "agda-mode locate")))
-
 (setq custom-file (concat user-emacs-directory "setting.el"))
 (when (file-exists-p custom-file)
   (load custom-file))
@@ -396,7 +393,8 @@
   :ensure t
   ;; :no-require t
   :mode "\\.rkt"
-  ;; :load-path "/Users/capfredf/site-lisp/racket-mode"
+  :load-path "site-lisp/racket-mode"
+  :pin manual
   :init
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
@@ -442,6 +440,9 @@
 (use-package typescript-mode
   :ensure t
   :mode "\\.ts")
+
+(load-file (let ((coding-system-for-read 'utf-8))
+             (shell-command-to-string "agda-mode locate")))
 
 
 ;; (use-package ob-racket
