@@ -349,6 +349,11 @@ point reaches the beginning or end of the buffer, stop there."
   (message "PLT_TR_CONTRACTS is now %s" (getenv "PLT_TR_CONTRACTS")))
 
 
+(defun buffer-name-with-point-info ()
+  (interactive)
+  (let ((s (format "%s:%d" (buffer-name) (line-number-at-pos))))
+    (kill-new s)
+    (message "%s COPIED" s)))
 
 ;; (load "/Users/phay/.opam/system/share/emacs/site-lisp/tuareg-site-file")
 
