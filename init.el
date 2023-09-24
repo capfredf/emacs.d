@@ -1,6 +1,7 @@
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/")
+             t)
 ;; (add-to-list 'package-archives
 ;;              '("org" . "https://orgmode.org/elpa/"))
 ;; (add-to-list 'package-archives
@@ -8,7 +9,7 @@
 
 ;; (add-to-list 'package-archives
 ;;              '("gnu-devel" . "https://orgmode.org/elpa/"))
-;; (package-initialize)
+(package-initialize)
 ;; (add-hook 'racket-mode-hook      #'racket-unicode-input-method-enable)
 ;; (require 'racket-mode)
 
@@ -393,8 +394,7 @@
   :ensure t
   ;; :no-require t
   :mode "\\.rkt"
-  :load-path "site-lisp/racket-mode"
-  :pin manual
+  ;; :load-path "site-lisp/racket-mode"
   :init
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
