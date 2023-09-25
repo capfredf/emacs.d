@@ -157,49 +157,54 @@
                                              ;; FIXME: use (project-current-inhibit-prompt t) for 28 and below
                                              ;; (project-current-directory-override "t")
                                              )
-                                         (helm-project-find-file-dwim))))
+                                         (project-find-file))))
                      ("magit" . (lambda (dir)
                                   (magit-status dir)))))))
 
 
-(defun helm-project-find-file-dwim (&optional include-all)
-  "Find file at point based on context"
-  (interactive)
-  (let* ((pr (project-current t))
-         (root (project-root pr))
-         (dirs (list root)))
-    (my-project-find-file-in
-     (or (thing-at-point 'filename)
-         (and buffer-file-name (file-relative-name buffer-file-name root)))
-     dirs pr include-all)))
+;; (defun helm-project-find-file-dwim (&optional include-all)
+;;   "Find file at point based on context"
+;;   (interactive)
+;;   (let* ((pr (project-current t))
+;;          (root (project-root pr))
+;;          (dirs (list root)))
+;;     (my-project-find-file-in
+;;      (or (thing-at-point 'filename)
+;;          (and buffer-file-name (file-relative-name buffer-file-name root)))
+;;      dirs pr include-all)))
+
+;; (let ((default-directory "/home/capfredf/.emacs.d/"))
+;;   (file-relative-name "/home/capfredf/.emacs.d/modules/init.el"))
 
 ;; adapt project-find-file-in from project.el
-(defun my-project-find-file-in (suggested-filename dirs project &optional include-all)
-  "Complete a file name in DIRS in PROJECT and visit the result.
+;; (defun my-project-find-file-in (suggested-filename dirs project &optional include-all)
+;;   "Complete a file name in DIRS in PROJECT and visit the result.
 
-SUGGESTED-FILENAME is a relative file name, or part of it, which
-is used as part of \"future history\".
+;; SUGGESTED-FILENAME is a relative file name, or part of it, which
+;; is used as part of \"future history\".
 
-If INCLUDE-ALL is non-nil, or with prefix argument when called
-interactively, include all files from DIRS, except for VCS
-directories listed in `vc-directory-exclusion-list'."
-  (let* ((vc-dirs-ignores (mapcar
-                           (lambda (dir)
-                             (concat dir "/"))
-                           vc-directory-exclusion-list))
-         (all-files
-          (if include-all
-              (mapcan
-               (lambda (dir) (project--files-in-directory dir vc-dirs-ignores))
-               dirs)
-            (project-files project dirs)))
-         ;; (file (funcall project-read-file-name-function
-         ;;                "Find file" all-files nil 'file-name-history
-         ;;                suggested-filename))
-         )
-    (helm :sources (helm-build-sync-source "helm-project-find-file"
-                     :candidates all-files
-                     :action  helm-find-files-actions))))
+;; If INCLUDE-ALL is non-nil, or with prefix argument when called
+;; interactively, include all files from DIRS, except for VCS
+;; directories listed in `vc-directory-exclusion-list'."
+;;   (let* ((vc-dirs-ignores (mapcar
+;;                            (lambda (dir)
+;;                              (concat dir "/"))
+;;                            vc-directory-exclusion-list))
+;;          (default-directory (project-root project))
+;;          ;; (file (funcall project-read-file-name-function
+;;          ;;                "Find file" all-files nil 'file-name-history
+;;          ;;                suggested-filename))
+;;          ;; (helm-ff-default-directory (project-root project))
+;;          (all-files (if include-all
+;;                         (mapcan
+;;                          (lambda (dir)
+;;                            (project--files-in-directory dir vc-dirs-ignores))
+;;                          dirs)
+;;                       (project-files project dirs))))
+
+;;     (helm :sources (helm-build-sync-source "helm-project-find-file"
+;;                      :candidates all-files
+;;                      :action  helm-find-files-actions))))
 
 
 (winner-mode t)

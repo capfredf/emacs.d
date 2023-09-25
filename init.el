@@ -92,7 +92,7 @@
   :bind
   ("C-x s" . project-find-regexp)
   (:map project-prefix-map
-        ("f" . helm-project-find-file-dwim)
+        ("f" . project-find-file)
         ("p" . helm-project-switch-project)))
 
 (use-package diff-hl
