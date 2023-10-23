@@ -331,6 +331,13 @@ point reaches the beginning or end of the buffer, stop there."
   (interactive "P")
   (insert (format-time-string "%a, %D")))
 
+(defun new-note-entry (title)
+  (interactive "sGive me a title:")
+  (let* ((ctitle (s-replace " " "_" (downcase title)))
+         (fn (format "%s--%s.org" (format-time-string "%Y-%m-%dT%H:%M:%S.%3N") ctitle)))
+    (find-file fn)
+    (insert "#+title: " title)))
+
 ;; (use-package agda2-mode
 ;;   :mode "\\.agda"
 ;;   :load-path "/usr/local/share/emacs/site-lisp/agda"
