@@ -69,6 +69,21 @@
 (global-set-key (kbd "M-k") nil)
 (global-set-key (kbd "M-k k") 'kill-whole-line)
 
+(defun next-student ()
+  (interactive)
+  (buffer-name)
+  (let* ((dir (directory-file-name default-directory))
+         (parent-dir (concat default-directory ".."))
+         (rel-name (file-relative-name dir (directory-file-name parent-dir)))
+         (all-fns (directory-files parent-dir))
+         (idx (cl-position rel-name
+                           all-fns
+                           :test 'equal)))
+    (find-file (concat parent-dir "/" (nth (+ 1 idx) all-fns)))))
+
+(global-set-key (kbd "C-c C-S-n") 'next-student)
+
+
 ;; (use-package yasnippet
 ;;   :hook ((prog-mode . yas-minor-mode)
 ;;          (org-mode . yas-minor-mode)
