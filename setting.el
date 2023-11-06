@@ -172,7 +172,7 @@
    '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "CANCELLED(c)" "DONE(d)")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(fish-mode markdown-mode typescript-mode auctex racket-mode olivetti org-superstar org-nsuperstar ws-butler org-super-agenda paredit ob-racket racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal multiple-cursors moody magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init ag ace-window))
+   '(denote markdown-mode typescript-mode auctex racket-mode olivetti org-superstar org-nsuperstar ws-butler org-super-agenda paredit ob-racket racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal multiple-cursors moody magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init ag ace-window))
  '(reftex-plug-into-AUCTeX t)
  '(repeat-mode t)
  '(safe-local-variable-values
@@ -220,4 +220,4 @@
  '(region ((((class color) (min-colors 89)) (:extend t :foreground "#fdf6e3" :background "#586e75"))))
  '(tab-bar-tab ((t (:background "#fdf6e3" :foreground "#586e75" :underline (:color foreground-color :style line :position t)))))
  '(tooltip ((t nil)))
- '(variable-pitch ((t (:family "Source Han Sans" :height 160 :weight normal)))))
+ '(variable-pitch ((t (:weight normal :height 1.0 :family "Noto Sans SC")))))
