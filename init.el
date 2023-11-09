@@ -68,6 +68,8 @@
 
 (use-package helm
   :ensure t
+  :init
+  (setq helm--tramp-archive-maybe-loaded t) ;; dirty fix, because dbus-ping can't reach Avahi
   :bind
   ("M-x" . helm-M-x)
   ("C-x C-f" . helm-find-files)
@@ -75,6 +77,7 @@
   ("M-y" . helm-show-kill-ring)
   :config
   (helm-mode 1))
+
 
 (use-package which-key
   :ensure t
@@ -444,7 +447,7 @@
 (load-file (let ((coding-system-for-read 'utf-8))
              (shell-command-to-string "agda-mode locate")))
 
-
+(add-hook 'text-mode-hook 'variable-pitch-mode)
 ;; (use-package ob-racket
 ;;   :ensure t
 ;;   :vc (url . "")
