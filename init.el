@@ -92,16 +92,26 @@
 
 (defun helm-project-ag-find ()
   (interactive)
-  (require 'project)
-  (require 'helm)
+  ;; (require 'project)
+  ;; (require 'helm)
   (let* ((pr (project-current))
          (dir (project-root pr)))
     (helm-grep-ag (expand-file-name dir) nil)))
 
-(use-package project
-  :bind
-  ("C-x s" . helm-project-ag-find)
+(defun helm-rifle-project ()
+  (interactive)
+  ;; (require 'project)
+  ;; (require 'helm)
+  (let* ((pr (project-current))
+         (dir (project-root pr)))
+    (helm-org-rifle-directories (expand-file-name dir) t)))
 
+
+(use-package project
+  :after (helm helm-org-rifle)
+  :bind
+  ("C-c s p" . helm-project-ag-find)
+  ("C-c s r" . helm-rifle-project)
   (:map project-prefix-map
         ("f" . project-find-file)
         ("p" . helm-project-switch-project)))
