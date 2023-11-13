@@ -266,10 +266,14 @@ point reaches the beginning or end of the buffer, stop there."
 (defun create-new-notes ()
   (interactive)
   (let* ((title (read-string "Title: "))
+         (date (format-time-string "%Y-%m-%d"))
          (name (downcase (string-replace " " "-" title)))
-         (dir default-directory ))
-    (find-file (file-name-concat dir (concat name ".org")))
-    (insert (concat "#+title: " title))))
+         (dir default-directory))
+    (find-file (file-name-concat dir (concat date (concat "--" (concat name ".org")))))
+    (insert (concat "#+title: " title))
+    (newline)
+    (insert (concat "#+date: " date))
+    (newline)))
 
 
 
@@ -329,12 +333,12 @@ point reaches the beginning or end of the buffer, stop there."
 
 (defun insert-today (arg)
   (interactive "P")
-  (insert (format-time-string "%a, %D")))
+  (insert (format-time-string "%D")))
 
 (defun new-note-entry (title)
   (interactive "sGive me a title:")
   (let* ((ctitle (s-replace " " "_" (downcase title)))
-         (fn (format "%s--%s.org" (format-time-string "%Y-%m-%dT%H:%M:%S.%3N") ctitle)))
+         (fn (format "%s--%s.org" (format-time-string "%Y%m-%dT%H:%M:%S.%3N") ctitle)))
     (find-file fn)
     (insert "#+title: " title)))
 

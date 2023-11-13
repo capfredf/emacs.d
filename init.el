@@ -273,6 +273,7 @@
   :init
   (add-hook 'org-mode-hook (lambda ()
                              ;; (org-bullets-mode 1)
+                             (variable-pitch-mode 1)
                              (setq fill-column 100)))
   :custom
   (org-latex-create-formula-image-program 'dvisvgm)
@@ -440,14 +441,19 @@
   (put 'required/typed 'racket-indent-function 1)
   (put 'term-let 'racket-indent-function 1))
 
-(use-package typescript-mode
-  :ensure t
-  :mode "\\.ts")
+;; (use-package typescript-mode
+;;   :ensure t
+;;   :mode "\\.ts")
+
+(use-package eshell
+  :requires eat
+  :hook ((eshell-load-hook . eat-shell-mode)
+         (eshell-load-hook . eat-eshell-visual-command-mode)))
 
 (load-file (let ((coding-system-for-read 'utf-8))
              (shell-command-to-string "agda-mode locate")))
 
-(add-hook 'text-mode-hook 'variable-pitch-mode)
+
 ;; (use-package ob-racket
 ;;   :ensure t
 ;;   :vc (url . "")
