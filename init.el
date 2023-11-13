@@ -90,10 +90,18 @@
 
 (global-set-key (kbd "<f3>") 'scale-text)
 
+(defun helm-project-ag-find ()
+  (interactive)
+  (require 'project)
+  (require 'helm)
+  (let* ((pr (project-current))
+         (dir (project-root pr)))
+    (helm-grep-ag (expand-file-name dir) nil)))
 
 (use-package project
   :bind
-  ("C-x s" . project-find-regexp)
+  ("C-x s" . helm-project-ag-find)
+
   (:map project-prefix-map
         ("f" . project-find-file)
         ("p" . helm-project-switch-project)))
