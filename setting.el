@@ -128,6 +128,7 @@
  '(desktop-restore-eager 10)
  '(desktop-save-mode t)
  '(dired-hide-details-hide-information-lines t)
+ '(enable-recursive-minibuffers t)
  '(eshell-visual-commands
    '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "python3" "python" "racket"))
  '(fill-column 80)
