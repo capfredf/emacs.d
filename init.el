@@ -106,8 +106,18 @@
 ;;          (dir (project-root pr)))
 ;;     (helm-org-rifle-directories (expand-file-name dir) t)))
 
+(defun up-directory (arg)
+  "Move up a directory (delete backwards to /)."
+  (interactive "p")
+  (if (string-match-p "/." (minibuffer-contents))
+      (zap-up-to-char (- arg) ?/)
+    (delete-minibuffer-contents)))
+
+
 (use-package vertico
   :ensure t
+  :bind (:map vertico-map
+              ("C-l" . up-directory))
   :init
   (vertico-mode))
 
@@ -117,6 +127,7 @@
 
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
+  :ensure t
   :init
   ;; Configure a custom style dispatcher (see the Consult wiki)
   ;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
@@ -126,6 +137,7 @@
         completion-category-overrides '((file (styles partial-completion)))))
 
 (use-package consult
+  :ensure t
   :defer t)
 
 (use-package project
