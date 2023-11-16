@@ -66,17 +66,17 @@
   :ensure t
   :demand t)
 
-(use-package helm
-  :ensure t
-  :init
-  (setq helm--tramp-archive-maybe-loaded t) ;; dirty fix, because dbus-ping can't reach Avahi
-  :bind
-  ("M-x" . helm-M-x)
-  ("C-x C-f" . helm-find-files)
-  ("C-x b" . helm-mini)
-  ("M-y" . helm-show-kill-ring)
-  :config
-  (helm-mode 1))
+;; (use-package helm
+;;   :ensure t
+;;   :init
+;;   (setq helm--tramp-archive-maybe-loaded t) ;; dirty fix, because dbus-ping can't reach Avahi
+;;   :bind
+;;   ("M-x" . helm-M-x)
+;;   ("C-x C-f" . helm-find-files)
+;;   ("C-x b" . helm-mini)
+;;   ("M-y" . helm-show-kill-ring)
+;;   :config
+;;   (helm-mode 1))
 
 
 (use-package which-key
@@ -90,31 +90,53 @@
 
 (global-set-key (kbd "<f3>") 'scale-text)
 
-(defun helm-project-ag-find ()
-  (interactive)
-  ;; (require 'project)
-  ;; (require 'helm)
-  (let* ((pr (project-current))
-         (dir (project-root pr)))
-    (helm-grep-ag (expand-file-name dir) nil)))
+;; (defun helm-project-ag-find ()
+;;   (interactive)
+;;   ;; (require 'project)
+;;   ;; (require 'helm)
+;;   (let* ((pr (project-current))
+;;          (dir (project-root pr)))
+;;     (helm-grep-ag (expand-file-name dir) nil)))
 
-(defun helm-rifle-project ()
-  (interactive)
-  ;; (require 'project)
-  ;; (require 'helm)
-  (let* ((pr (project-current))
-         (dir (project-root pr)))
-    (helm-org-rifle-directories (expand-file-name dir) t)))
+;; (defun helm-rifle-project ()
+;;   (interactive)
+;;   ;; (require 'project)
+;;   ;; (require 'helm)
+;;   (let* ((pr (project-current))
+;;          (dir (project-root pr)))
+;;     (helm-org-rifle-directories (expand-file-name dir) t)))
 
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode))
+
+(use-package savehist
+  :init
+  (savehist-mode))
+
+;; Optionally use the `orderless' completion style.
+(use-package orderless
+  :init
+  ;; Configure a custom style dispatcher (see the Consult wiki)
+  ;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
+  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
+
+(use-package consult
+  :defer t)
 
 (use-package project
-  :after (helm helm-org-rifle)
+  ;; :after (helm helm-org-rifle)
   :bind
-  ("C-c s p" . helm-project-ag-find)
-  ("C-c s r" . helm-rifle-project)
+  ;; ("C-c s p" . helm-project-ag-find)
+  ;; ("C-c s r" . helm-rifle-project)
   (:map project-prefix-map
         ("f" . project-find-file)
-        ("p" . helm-project-switch-project)))
+        ("g" . consult-ripgrep)
+        ))
 
 (use-package diff-hl
   :ensure t
@@ -231,6 +253,42 @@
   :ensure t
   :hook (prog-mode . ws-butler-mode))
 
+(use-package marginalia
+  :ensure t
+  :config
+  (marginalia-mode))
+
+(use-package embark
+  :ensure t
+
+  :bind
+  (("C-." . embark-act)         ;; pick some comfortable binding
+   ("C-;" . embark-dwim)        ;; good alternative: M-.
+   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+
+  :init
+
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  ;; Show the Embark target at point via Eldoc.  You may adjust the Eldoc
+  ;; strategy, if you want to see the documentation from multiple providers.
+  (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+  ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+
+  :config
+
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+;; Consult users will also want the embark-consult package.
+(use-package embark-consult
+  :ensure t ; only need to install it, embark loads it after consult if found
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package paredit
   :ensure t
