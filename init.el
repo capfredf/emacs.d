@@ -110,7 +110,11 @@
   "Move up a directory (delete backwards to /)."
   (interactive "p")
   (if (string-match-p "/." (minibuffer-contents))
-      (zap-up-to-char (- arg) ?/)
+      (save-excursion
+        (let ((end (point)))
+          (goto-char (1- end))
+          (when (search-backward "/" (minibuffer-prompt-end) t)
+            (delete-region (1+ (point)) end))))
     (delete-minibuffer-contents)))
 
 
