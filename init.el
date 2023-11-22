@@ -168,9 +168,10 @@
 (use-package consult
   :ensure t
   :bind
-  (:map org-mode-map
-        ("C-c C-l" . create-link))
-  (("C-x b" . consult-buffer)))
+  (("C-x b" . consult-buffer)
+   ("M-y" . consult-yank-pop)
+   (:map org-mode-map
+         ("C-c C-l" . create-link))))
 
 (use-package project
   ;; :after (helm helm-org-rifle)
