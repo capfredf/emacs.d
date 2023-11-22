@@ -117,6 +117,31 @@
             (delete-region (1+ (point)) end))))
     (delete-minibuffer-contents)))
 
+(defun consult-brain--files ()
+  (interactive "p")
+  (directory-files-recursively "~/my-brain/" "\.org$"))
+
+(defvar consult-brain--sources
+  `(:name "This Brain directory/project"
+          :narrow ?.
+          :category buffer
+          :face consult-file
+          :history file-name-history
+          :items ,#'consult-brain--files)
+  "Current project directory for `consult-brain--pick'.")
+
+
+
+
+
+(defun create-link ()
+  (interactive)
+  (let ((picked (car (consult--multi (list consult-brain--sources) ;; must be a list
+                                     :prompt "All Brain Files:"
+                                     :sort nil)))
+        (desc (read-string "Description: ")))
+    (insert (format "[[file:%s][%s]]" picked desc))))
+
 
 (use-package vertico
   :ensure t
@@ -141,7 +166,11 @@
   (completion-styles '(orderless)))
 
 (use-package consult
-  :ensure t)
+  :ensure t
+  :bind
+  (:map org-mode-map
+        ("C-c C-l" . create-link))
+  (("C-x b" . consult-buffer)))
 
 (use-package project
   ;; :after (helm helm-org-rifle)
@@ -269,10 +298,14 @@
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                  nil
                  (window-parameters (mode-line-format . none)))))
+(defun link()
+  (completing-read))
 
-;; (use-package denote
-;;   :commands (denote)
-;;   :ensure t)
+(use-package denote
+  :commands (denote)
+  :custom
+  (denote-directory "~/my-brain")
+  :ensure t)
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
