@@ -132,17 +132,16 @@
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
   :ensure t
-  :init
   ;; Configure a custom style dispatcher (see the Consult wiki)
   ;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
   ;;       orderless-component-separator #'orderless-escapable-split-on-space)
-  (setq completion-styles '(substring orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion)))))
+  :custom
+  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-category-defaults nil)
+  (completion-styles '(orderless)))
 
 (use-package consult
-  :ensure t
-  :defer t)
+  :ensure t)
 
 (use-package project
   ;; :after (helm helm-org-rifle)
@@ -179,34 +178,7 @@
 (use-package solarized-theme
   :ensure t
   :config
-  (switch-theme 'solarized-light)
-  ;; make the fringe stand out from the background
-  (setq solarized-distinct-fringe-background t)
-
-  ;; Don't change the font for some headings and titles
-  (setq solarized-use-variable-pitch nil)
-
-  ;; make the modeline high contrast
-  (setq solarized-high-contrast-mode-line t)
-
-  ;; Use less bolding
-  (setq solarized-use-less-bold t)
-
-  ;; Use more italics
-  (setq solarized-use-more-italic t)
-
-  ;; Use less colors for indicators such as git:gutter, flycheck and similar
-  (setq solarized-emphasize-indicators nil)
-
-  ;; Don't change size of org-mode headlines (but keep other size-changes)
-  (setq solarized-scale-org-headlines nil)
-
-  ;; Avoid all font-size changes
-  (setq solarized-height-minus-1 1.0)
-  (setq solarized-height-plus-1 1.0)
-  (setq solarized-height-plus-2 1.0)
-  (setq solarized-height-plus-3 1.0)
-  (setq solarized-height-plus-4 1.0))
+  (switch-theme 'solarized-light))
 
 
 (use-package highlight-parentheses
@@ -236,7 +208,6 @@
 
 (use-package ag
   :ensure t
-  :defer t
   :config
   (autoload 'wgrep-ag-setup "wgrep-ag")
   (add-hook 'ag-mode-hook 'wgrep-ag-setup))
@@ -251,7 +222,6 @@
 
 (use-package multiple-cursors
   :ensure t
-  :defer t
   ;; :config
   ;; (define-key mc/keymap (kbd "C-'") 'mc-hide-unmatched-lines-mode)
   :bind (("C-M-e" . mc/edit-lines)
@@ -464,7 +434,6 @@
 
 (use-package org-super-agenda
   :ensure t
-  :defer t
   :hook ((org-agenda-mode . org-super-agenda-mode)))
 
 

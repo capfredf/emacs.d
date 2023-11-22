@@ -47,7 +47,7 @@
    'user
    `(default ((t ( :family "Sarasa Fixed SC" :slant normal :weight normal :height ,n :width normal))))))
 
-(change-font-size 120)
+;; (change-font-size 120)
 
 
 
