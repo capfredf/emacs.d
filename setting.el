@@ -20,7 +20,6 @@
  '(column-number-mode t)
  '(comint-scroll-show-maximum-output nil)
  '(compilation-scroll-output 'first-error)
- '(completion-styles '(substring partial-completion))
  '(connection-local-criteria-alist
    '(((:application eshell)
       eshell-connection-default-profile)
