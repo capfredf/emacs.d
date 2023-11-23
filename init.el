@@ -299,14 +299,12 @@
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                  nil
                  (window-parameters (mode-line-format . none)))))
-(defun link()
-  (completing-read))
 
-(use-package denote
-  :commands (denote)
-  :custom
-  (denote-directory "~/my-brain")
-  :ensure t)
+;; (use-package denote
+;;   :commands (denote)
+;;   :custom
+;;   (denote-directory "~/my-brain")
+;;   :ensure t)
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
