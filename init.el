@@ -366,6 +366,18 @@
   :hook (org-mode . olivetti-mode))
 
 
+
+(use-package org-ql
+  :ensure t)
+
+(let ((org-agenda-span 'day)
+      (org-super-agenda-groups
+       '(;; (:log t)          ; Automatically named "Log"
+         (:name "Actionable" :todo "NEXT")
+         (:name "Available"
+                :todo "TODO"))))
+  (org-agenda-list))
+
 (use-package org
   :mode ("\\.org" . org-mode)
   :init
@@ -380,21 +392,8 @@
   (org-image-actual-width 500)
   (org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
   (org-export-with-toc nil)
-  (org-agenda-files (directory-files-recursively "~/my-brain/" "main\\.org$"))
-  (org-agenda-custom-commands
-   '(("z" "Daily Agenda View"
-      ((agenda "" ((org-agenda-span 'day)
-                   (org-super-agenda-groups
-                    '((:log t)          ; Automatically named "Log"
-                      (:name "Today"
-                             :scheduled today)))))
-       (todo "NEXT" ((org-agenda-overriding-header "Available")
-                     (org-agenda-todo-ignore-scheduled t)
-                     (org-super-agenda-groups
-                      '((:log t)        ; Automatically named "Log"
-                        (:name "Important"
-                               ;; :not (:scheduled today)
-                               :priority "A")))))))))
+  (org-agenda-files (list "~/my-brain/main.org"))
+
   :custom-face
   ;; (org-quote ((t (:height 2.0))))
   (org-done ((t (:foreground "dim gray" :strike-through t))))
@@ -414,6 +413,18 @@
          ("s-h" . org-backward-heading-same-level))
   :config
   (require 'ox-publish)
+  (setopt org-agenda-custom-commands
+          '(("z" "Daily Agenda View"
+             ((agenda "" ((org-agenda-overriding-header "Actionable")
+                          (org-agenda-span 'day)
+                          (org-agenda-skip-function
+                           '(org-agenda-skip-subtree-if
+                             'todo '("TODO")))
+                          (org-super-agenda-groups
+                           '((:log t)   ; Automatically named "Log"
+                             (:name "Laser Focus"
+                                    :scheduled today)
+                             ))))))))
   (setq org-latex-listings 'minted
         org-latex-packages-alist '(("" "minted")
                                    ("" "mathtools")
@@ -447,9 +458,9 @@
            :html-preamble-format (("en"  "<div class='container'><nav role='navigation'><div class='logo'><a class='logo_link' href='/' title='Wiki'>Inside Yet Another Hello World</a></div></nav></div>"))
            :html-postamble nil
            :html-head "<link rel=\"stylesheet\" href=\"/static/css/style.css\" type=\"text/css\"/>"
-           :auto-sitemap t                ; Generate sitemap.org automagically...
-           :sitemap-filename "index.org"  ; ... call it sitemap.org (it's the default)...
-           :sitemap-title "Inside:"        ; ... with title 'Sitemap'.
+           :auto-sitemap t               ; Generate sitemap.org automagically...
+           :sitemap-filename "index.org" ; ... call it sitemap.org (it's the default)...
+           :sitemap-title "Inside:"      ; ... with title 'Sitemap'.
            :sitemap-sort-files anti-chronologically
            :with-author nil)
           ("static"
@@ -541,6 +552,9 @@
 ;; (use-package typescript-mode
 ;;   :ensure t
 ;;   :mode "\\.ts")
+
+(use-package eat
+  :ensure t)
 
 (use-package eshell
   :requires eat

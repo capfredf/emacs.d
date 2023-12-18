@@ -1,4 +1,9 @@
 ;;-*-coding: utf-8;-*-
+(define-abbrev-table 'agda2-mode-abbrev-table
+  '(
+    ("interp" "⟦ ⟧" nil :count 3)
+   ))
+
 (define-abbrev-table 'global-abbrev-table
   '(
     ("bblk" "█" nil :count 1)
