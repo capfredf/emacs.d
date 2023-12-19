@@ -415,16 +415,16 @@
   (require 'ox-publish)
   (setopt org-agenda-custom-commands
           '(("z" "Daily Agenda View"
-             ((agenda "" ((org-agenda-overriding-header "Actionable")
+             ((agenda "" ((org-agenda-overriding-header "Scheduled")
                           (org-agenda-span 'day)
                           (org-agenda-skip-function
                            '(org-agenda-skip-subtree-if
-                             'todo '("TODO")))
+                             'todo '("NEXT")))
                           (org-super-agenda-groups
                            '((:log t)   ; Automatically named "Log"
-                             (:name "Laser Focus"
-                                    :scheduled today)
-                             ))))))))
+                             (:name ""
+                                    :todo "TODO")))))
+              (todo "NEXT" ((org-agenda-overriding-header "Laser Focus")))))))
   (setq org-latex-listings 'minted
         org-latex-packages-alist '(("" "minted")
                                    ("" "mathtools")
