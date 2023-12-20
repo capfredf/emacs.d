@@ -369,14 +369,6 @@
 (use-package org-ql
   :ensure t)
 
-(let ((org-agenda-span 'day)
-      (org-super-agenda-groups
-       '(;; (:log t)          ; Automatically named "Log"
-         (:name "Actionable" :todo "NEXT")
-         (:name "Available"
-                :todo "TODO"))))
-  (org-agenda-list))
-
 (use-package org
   :mode ("\\.org" . org-mode)
   :init
@@ -414,16 +406,17 @@
   (require 'ox-publish)
   (setopt org-agenda-custom-commands
           '(("z" "Daily Agenda View"
-             ((agenda "" ((org-agenda-overriding-header "Scheduled")
+             ((agenda "" ((org-agenda-overriding-header "Today")
                           (org-agenda-span 'day)
-                          (org-agenda-skip-function
-                           '(org-agenda-skip-subtree-if
-                             'todo '("NEXT")))
+                          ;; (org-agenda-skip-function
+                          ;;  '(org-agenda-skip-subtree-if
+                          ;;    'todo '("NEXT")))
                           (org-super-agenda-groups
                            '((:log t)   ; Automatically named "Log"
-                             (:name ""
-                                    :todo "TODO")))))
-              (todo "NEXT" ((org-agenda-overriding-header "Laser Focus")))))))
+                             (:name "" :todo "NEXT")))))
+              ;; (todo "NEXT" ((org-agenda-overriding-header "Laser Focus")
+              ;;               '(org-agenda-skip-entry-if 'scheduled)))
+              ))))
   (setq org-latex-listings 'minted
         org-latex-packages-alist '(("" "minted")
                                    ("" "mathtools")
