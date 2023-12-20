@@ -186,7 +186,7 @@
      (project-find-dir "Find directory" nil)
      (project-vc-dir "VC-Dir" nil)
      (project-eshell "Eshell" nil)
-     (magit-project-status "Magit" nil)))
+     (magit-project-status "Magit" 109)))
  '(reftex-plug-into-AUCTeX t)
  '(repeat-mode t)
  '(safe-local-variable-values
