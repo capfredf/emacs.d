@@ -57,7 +57,6 @@
 (setq treesit-extra-load-path
       '("/home/capfredf/code/tree-sitter-module/dist"))
 
-
 (use-package use-package-ensure-system-package)
 (use-package dired
   :hook (dired-mode . dired-hide-details-mode))

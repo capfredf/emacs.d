@@ -56,19 +56,19 @@
     (insert-file-contents filePath)
     (split-string (buffer-string) "\n" t)))
 
-(setq old-paths
-      (split-string (getenv "PATH") ":"))
+;; (setq old-paths
+;;       (split-string (getenv "PATH") ":"))
 
 
-(setq exec-path
-      (append
-       (mapcar (lambda (x)
-		         (expand-file-name x))
-		       (read-lines "~/dotconf/extra/path"))
-       old-paths))
+;; (setq exec-path
+;;       (append
+;;        (mapcar (lambda (x)
+;; 		         (expand-file-name x))
+;; 		       (read-lines "~/dotconf/extra/path"))
+;;        old-paths))
 
 
-(setenv "PATH" (mapconcat 'identity exec-path ":"))
+;; (setenv "PATH" (mapconcat 'identity exec-path ":"))
 
 (setq ring-bell-function 'ignore)
 (setq mac-command-modifier 'meta)
@@ -102,7 +102,7 @@
 (defun mean (lst)
   (/ (apply '+ lst) (length lst)))
 
-(unless (server-running-p) (server-start))
+;; (unless (server-running-p) (server-start))
 
 ;; I don't know the reason that I added the code below
 ;; (add-hook 'server-swtich-hook

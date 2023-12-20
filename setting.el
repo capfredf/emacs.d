@@ -129,7 +129,7 @@
  '(dired-hide-details-hide-information-lines t)
  '(enable-recursive-minibuffers t)
  '(eshell-visual-commands
-   '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "python3" "python" "racket"))
+   '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "python3" "python" "racket" "git"))
  '(fill-column 80)
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
  '(frame-background-mode nil)
