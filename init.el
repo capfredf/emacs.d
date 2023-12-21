@@ -408,15 +408,19 @@
           '(("z" "Daily Agenda View"
              ((agenda "" ((org-agenda-overriding-header "Today")
                           (org-agenda-span 'day)
-                          ;; (org-agenda-skip-function
-                          ;;  '(org-agenda-skip-subtree-if
-                          ;;    'todo '("NEXT")))
+                          (org-agenda-skip-function
+                           '(org-agenda-skip-subtree-if
+                             'todo '("DONE")))
                           (org-super-agenda-groups
                            '((:log t)   ; Automatically named "Log"
-                             (:name "" :todo "NEXT")))))
-              ;; (todo "NEXT" ((org-agenda-overriding-header "Laser Focus")
-              ;;               '(org-agenda-skip-entry-if 'scheduled)))
-              ))))
+                             (:name "Laser Focus" :todo "NEXT")
+                             (:name "Scheduled For Today" :todo "TODAY")))))
+              (todo "NEXT" ((org-agenda-overriding-header "")
+                            (org-agenda-skip-function
+                             '(org-agenda-skip-entry-if 'scheduled))
+                            (org-super-agenda-groups
+                             '((:log t)   ; Automatically named "Log"
+                               (:name "Important" :todo "NEXT")))))))))
   (setq org-latex-listings 'minted
         org-latex-packages-alist '(("" "minted")
                                    ("" "mathtools")
