@@ -299,11 +299,11 @@
                  nil
                  (window-parameters (mode-line-format . none)))))
 
-;; (use-package denote
-;;   :commands (denote)
-;;   :custom
-;;   (denote-directory "~/my-brain")
-;;   :ensure t)
+(use-package denote
+  :commands (denote)
+  :custom
+  (denote-directory "~/my-brain")
+  :ensure t)
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
