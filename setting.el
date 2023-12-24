@@ -221,7 +221,7 @@
  '(org-done ((t (:foreground "dim gray" :strike-through t))))
  '(org-headline-done ((t (:foreground "dim gray" :strike-through t))))
  '(org-headline-todo ((t (:foreground "Red4"))))
- '(org-level-1 ((t (:inherit default :extend nil :foreground "#657b83" :weight bold :height 1.4))))
+ '(org-level-1 ((t (:inherit variable-pitch :foreground "#657b83" :height 1.0))))
  '(org-level-2 ((t (:inherit org-level-1 :extend nil :foreground "#657b83" :height 0.95))))
  '(org-level-3 ((t (:inherit org-level-2 :extend nil :foreground "#657b83" :height 0.95))))
  '(org-level-4 ((t (:inherit org-level-3 :extend nil :foreground "#657b83" :height 1.0))))
