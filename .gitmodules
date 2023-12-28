@@ -1,0 +1,3 @@
+[submodule "beancount-mode"]
+	path = beancount-mode
+	url = git@github.com:beancount/beancount-mode.git
