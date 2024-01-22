@@ -60,6 +60,7 @@
 ;;       (split-string (getenv "PATH") ":"))
 
 
+;; (push  "/usr/local/texlive/2023/bin/x86_64-linux" exec-path)
 ;; (setq exec-path
 ;;       (append
 ;;        (mapcar (lambda (x)
@@ -67,7 +68,8 @@
 ;; 		       (read-lines "~/dotconf/extra/path"))
 ;;        old-paths))
 
-
+(push "/usr/local/texlive/2023/bin/x86_64-linux" exec-path)
+(setenv "PATH" (concat "/usr/local/texlive/2023/bin/x86_64-linux:" (getenv "PATH")))
 ;; (setenv "PATH" (mapconcat 'identity exec-path ":"))
 
 (setq ring-bell-function 'ignore)

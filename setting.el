@@ -129,7 +129,7 @@
  '(dired-hide-details-hide-information-lines t)
  '(enable-recursive-minibuffers t)
  '(eshell-visual-commands
-   '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "python3" "python" "racket" "git"))
+   '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "racket"))
  '(fill-column 80)
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
  '(frame-background-mode nil)
@@ -179,7 +179,7 @@
    '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "CANCELLED(c)" "DONE(d)")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(org-ql embark-consult marginalia consult embark orderless eat helm-core wfnames helm helm-org-rifle denote markdown-mode typescript-mode auctex racket-mode olivetti org-superstar org-nsuperstar ws-butler org-super-agenda paredit ob-racket racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal multiple-cursors moody magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init ag ace-window))
+   '(lua-mode org-ql embark-consult marginalia consult embark orderless eat helm-core wfnames helm helm-org-rifle denote markdown-mode typescript-mode auctex racket-mode olivetti org-superstar org-nsuperstar ws-butler org-super-agenda paredit ob-racket racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal multiple-cursors moody magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init ag ace-window))
  '(project-switch-commands
    '((project-find-file "Find file" nil)
      (project-find-regexp "Find regexp" nil)
