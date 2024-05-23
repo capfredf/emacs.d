@@ -514,7 +514,7 @@
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
   (add-to-list 'auto-mode-alist '("\\.scrbl$" . racket-mode))
   :config
-  (setq racket-program (executable-find "racket"))
+  ;; (setq racket-program (executable-find "racket"))
   (put 'Π 'racket-indent-function 1)
   (put 'type-case 'racket-indent-function 2)
   (put 'new-slide-module 'racket-indent-function 1)

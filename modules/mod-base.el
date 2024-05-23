@@ -69,7 +69,8 @@
 ;;        old-paths))
 
 (push "/usr/local/texlive/2023/bin/x86_64-linux" exec-path)
-(setenv "PATH" (concat "/usr/local/texlive/2023/bin/x86_64-linux:" (getenv "PATH")))
+(push "~/.racket/bin" exec-path)
+;; (setenv "PATH" (concat "$HOME/.racket/bin:" (concat "/usr/local/texlive/2023/bin/x86_64-linux:" (getenv "PATH"))))
 ;; (setenv "PATH" (mapconcat 'identity exec-path ":"))
 
 (setq ring-bell-function 'ignore)

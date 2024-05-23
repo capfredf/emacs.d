@@ -3,13 +3,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(TeX-auto-save t)
+ '(TeX-auto-save t t)
  '(TeX-command-extra-options "-shell-escape")
  '(TeX-electric-escape nil)
  '(TeX-electric-math '("$" . "$"))
  '(TeX-engine 'luatex)
  '(TeX-master nil)
- '(TeX-parse-self t)
+ '(TeX-parse-self t t)
  '(TeX-source-correlate-mode t)
  '(ag-highlight-search t)
  '(ansi-color-faces-vector
@@ -192,7 +192,8 @@
  '(reftex-plug-into-AUCTeX t)
  '(repeat-mode t)
  '(safe-local-variable-values
-   '((eval racket-unicode-input-method-enable)
+   '((TeX-master . t)
+     (eval racket-unicode-input-method-enable)
      (TeX-engine . xelatex)
      (olivetti-body-width . 150)))
  '(shift-select-mode nil)
