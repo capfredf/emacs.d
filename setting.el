@@ -17,6 +17,7 @@
  '(beacon-color "#f2777a")
  '(browse-url-browser-function 'browse-url-default-browser)
  '(c-basic-offset 2)
+ '(calendar-week-start-day 1)
  '(column-number-mode t)
  '(comint-scroll-show-maximum-output nil)
  '(compilation-scroll-output 'first-error)
@@ -146,6 +147,7 @@
  '(menu-bar-mode nil)
  '(olivetti-body-width 120)
  '(org-agenda-dim-blocked-tasks 'invisible)
+ '(org-agenda-files '("~/new-brain/journals") nil nil "Customized with use-package org")
  '(org-babel-load-languages '((emacs-lisp . t)))
  '(org-capture-templates
    '(("T" "Today's tasks" entry
@@ -161,6 +163,10 @@
  '(org-goto-interface 'outline-path-completion)
  '(org-hide-emphasis-markers nil)
  '(org-id-link-to-org-use-id t)
+ '(org-journal-carryover-items "")
+ '(org-journal-dir "~/new-brain/journals")
+ '(org-journal-file-format "%Y-W%V-%m%d.org")
+ '(org-journal-file-type 'weekly)
  '(org-log-into-drawer t)
  '(org-loop-over-headlines-in-active-region t)
  '(org-modules
@@ -175,10 +181,11 @@
  '(org-startup-folded nil)
  '(org-tags-column 0)
  '(org-todo-keyword-faces
-   '(("WIP" . "(:foreground \"orange\" :weight bold :underline t)")
-     ("TODO" :foreground "gray" :weight bold :underline t)))
+   '(("DOING" . "(:foreground \"orange\" :weight bold :underline t)")
+     ("TODO" :foreground "dark green" :weight bold :underline t)
+     ("CANCELLED" . "gray")))
  '(org-todo-keywords
-   '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "CANCELLED(c)" "DONE(d)")))
+   '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "|" "CANCELLED(c)" "DONE(d)")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
    '(clojure-mode elixir-mode fish-mode lua-mode org-ql embark-consult marginalia consult embark orderless eat helm-core wfnames helm helm-org-rifle denote markdown-mode typescript-mode auctex racket-mode olivetti org-superstar org-nsuperstar ws-butler org-super-agenda paredit ob-racket racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal multiple-cursors moody magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init ag ace-window))

@@ -299,11 +299,11 @@
                  nil
                  (window-parameters (mode-line-format . none)))))
 
-(use-package denote
-  :commands (denote)
-  :custom
-  (denote-directory "~/my-brain")
-  :ensure t)
+;; (use-package denote
+;;   :commands (denote)
+;;   :custom
+;;   (denote-directory "~/my-brain")
+;;   :ensure t)
 
 (use-package beancount-mode
   :load-path "beancount-mode/"
@@ -387,7 +387,6 @@
   (org-image-actual-width 500)
   (org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
   (org-export-with-toc nil)
-  (org-agenda-files (list "~/my-brain/main.org"))
 
   :custom-face
   ;; (org-quote ((t (:height 2.0))))
@@ -564,9 +563,24 @@
   :hook ((eshell-load-hook . eat-shell-mode)
          (eshell-load-hook . eat-eshell-visual-command-mode)))
 
-(load-file (let ((coding-system-for-read 'utf-8))
-             (shell-command-to-string "agda-mode locate")))
+(defconst org-journal-entry-template-name "daily-journal-template.org")
+(defun new-entry-template ()
+  (org-insert-heading-respect-content)
+  (kill-whole-line)
+  (insert-file-contents (expand-file-name org-journal-entry-template-name org-journal-dir)))
 
+(use-package org-journal
+  :config
+  (unbind-key "C-c C-s" org-journal-mode-map)
+  :hook ((org-journal-after-header-create . new-entry-template))
+  :bind (:map org-journal-mode-map
+              ("C-c C-s" . org-schedule)))
+
+(use-package agda2-mode
+  :mode "\\.agda\\'"
+  :load-path (lambda () (let ((coding-system-for-read 'utf-8))
+                          (file-name-directory (shell-command-to-string "agda-mode locate"))))
+  :hook ((agda-mode . electric-pair-local-mode)))
 
 ;; (use-package ob-racket
 ;;   :ensure t
