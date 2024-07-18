@@ -46,7 +46,8 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
-(set-fontset-font "fontset-default" 'symbol "Noto Color Symbols 2" nil 'append)
+;; (set-fontset-font "fontset-default" 'symbol "Noto Color Symbols 2" nil 'append)
+;; (set-fontset-font "fontset-default" 'symbol "Noto Color Symbols 2")
 (setq make-backup-files nil)
 (define-coding-system-alias 'UTF-8 'utf-8)
 (define-coding-system-alias 'utf8 'utf-8)
@@ -581,7 +582,7 @@
   :mode "\\.agda\\'"
   :load-path (lambda () (let ((coding-system-for-read 'utf-8))
                           (file-name-directory (shell-command-to-string "agda-mode locate"))))
-  :hook ((agda-mode . electric-pair-local-mode)))
+  :hook ((agda2-mode . electric-pair-local-mode)))
 
 ;; (use-package ob-racket
 ;;   :ensure t
