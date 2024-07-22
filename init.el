@@ -60,6 +60,48 @@
       '("/home/capfredf/code/tree-sitter-module/dist"))
 
 (use-package use-package-ensure-system-package)
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(pgtk))
+  :config
+  (exec-path-from-shell-initialize))
+
+(use-package tabspaces
+  :ensure t
+  ;; use this next line only if you also use straight, otherwise ignore it.
+  :hook (after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup.
+  :commands (tabspaces-switch-or-create-workspace
+             tabspaces-open-or-create-project-and-workspace)
+  :custom
+  (tabspaces-use-filtered-buffers-as-default t)
+  (tabspaces-default-tab "Default")
+  (tabspaces-remove-to-default t)
+  (tabspaces-include-buffers '("*scratch*"))
+  (tabspaces-initialize-project-with-todo t)
+  (tabspaces-todo-file-name "project-todo.org")
+  ;; sessions
+  (tabspaces-session t)
+  (tabspaces-session-auto-restore t))
+
+(with-eval-after-load 'consult
+  ;; hide full buffer list (still available with "b" prefix)
+  (consult-customize consult--source-buffer :hidden t :default nil)
+  ;; set consult-workspace buffer list
+  (defvar consult--source-workspace
+    (list :name     "Workspace Buffers"
+          :narrow   ?w
+          :history  'buffer-name-history
+          :category 'buffer
+          :state    #'consult--buffer-state
+          :default  t
+          :items    (lambda () (consult--buffer-query
+                                :predicate #'tabspaces--local-buffer-p
+                                :sort 'visibility
+                                :as #'buffer-name)))
+
+    "Set workspace buffer list for consult-buffer.")
+  (add-to-list 'consult-buffer-sources 'consult--source-workspace))
+
 (use-package dired
   :hook (dired-mode . dired-hide-details-mode))
 
@@ -380,7 +422,7 @@
   :init
   (add-hook 'org-mode-hook (lambda ()
                              ;; (org-bullets-mode 1)
-                             (variable-pitch-mode 1)
+                             ;; (variable-pitch-mode 1)
                              (setq fill-column 100)))
   :custom
   (org-latex-create-formula-image-program 'dvisvgm)
@@ -401,6 +443,7 @@
          ;;("C-c g" . counsel-org-goto-all)
          :map org-mode-map
          ("C-c l" . org-store-link)
+         ("C-c C-j" . my/new-day)
          ("C-c C-M-o" . org-mark-ring-goto)
          ("s-n" . org-next-visible-heading)
          ("s-p" . org-previous-visible-heading)
@@ -503,6 +546,19 @@
   (lambda () (interactive)
      (insert (buffer-name (window-buffer (minibuffer-selected-window))))))
 
+(defun my/new-day ()
+  (interactive)
+  (let ((headline "Timeline")
+        (file (expand-file-name "dashboard.org" "~/new-brain")))
+    (save-excursion
+      (find-file file)
+      (goto-char (org-find-exact-headline-in-buffer "Today"))
+      (org-edit-headline (format-time-string "%m/%d/%Y" (time-subtract (current-time) (days-to-time 1))))
+      (let* ((pos (org-find-exact-headline-in-buffer headline)))
+        (org-refile nil nil (list headline file nil pos)))
+      (org-insert-heading)
+      (insert "Today"))))
+
 ;; (use-package racket-unicode-input-method
 ;;   :commands racket-unicode-input-method-enable)
 (use-package racket-mode
@@ -571,12 +627,12 @@
   (kill-whole-line)
   (insert-file-contents (expand-file-name org-journal-entry-template-name org-journal-dir)))
 
-(use-package org-journal
-  :config
-  (unbind-key "C-c C-s" org-journal-mode-map)
-  :hook ((org-journal-after-header-create . new-entry-template))
-  :bind (:map org-journal-mode-map
-              ("C-c C-s" . org-schedule)))
+;; (use-package org-journal
+;;   :config
+;;   (unbind-key "C-c C-s" org-journal-mode-map)
+;;   :hook ((org-journal-after-header-create . new-entry-template))
+;;   :bind (:map org-journal-mode-map
+;;               ("C-c C-s" . org-schedule)))
 
 (use-package agda2-mode
   :mode "\\.agda\\'"

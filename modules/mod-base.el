@@ -68,9 +68,9 @@
 ;; 		       (read-lines "~/dotconf/extra/path"))
 ;;        old-paths))
 
-(push "/usr/local/texlive/2023/bin/x86_64-linux" exec-path)
-(push "/home/capfredf/.racket/bin" exec-path)
-(push "/home/capfredf/.cabal/bin" exec-path)
+;; (push "/usr/local/texlive/2023/bin/x86_64-linux" exec-path)
+;; (push "/home/capfredf/.racket/bin" exec-path)
+;; (push "/home/capfredf/.cabal/bin" exec-path)
 ;; (setenv "PATH" (concat "/home/capfredf/.racket/bin:/home/capfredf/.cabal/bin:/usr/local/texlive/2023/bin/x86_64-linux:" (getenv "PATH")))
 ;; (setenv "PATH" (mapconcat 'identity exec-path ":"))
 

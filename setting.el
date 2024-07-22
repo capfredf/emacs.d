@@ -131,6 +131,7 @@
  '(enable-recursive-minibuffers t)
  '(eshell-visual-commands
    '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "racket"))
+ '(exec-path-from-shell-shell-name "/usr/bin/fish")
  '(fill-column 80)
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
  '(frame-background-mode nil)
@@ -190,7 +191,7 @@
    '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "|" "CANCELLED(c)" "DONE(d)")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(clojure-mode elixir-mode fish-mode lua-mode org-ql embark-consult marginalia consult embark orderless eat helm-core wfnames helm helm-org-rifle denote markdown-mode typescript-mode auctex racket-mode olivetti org-superstar org-nsuperstar ws-butler org-super-agenda paredit ob-racket racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal multiple-cursors moody magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init ag ace-window))
+   '(tabspaces clojure-mode elixir-mode fish-mode lua-mode org-ql embark-consult marginalia consult embark orderless eat helm-core wfnames helm helm-org-rifle denote markdown-mode typescript-mode auctex racket-mode olivetti org-superstar org-nsuperstar ws-butler org-super-agenda paredit ob-racket racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal multiple-cursors moody magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init ag ace-window))
  '(project-switch-commands
    '((project-find-file "Find file" nil)
      (project-find-regexp "Find regexp" nil)
@@ -221,7 +222,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 120 :width normal :foundry "ADBO" :family "Iosevka"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 120 :width normal :foundry "UKWN" :family "Sarasa Mono SC"))))
  '(fixed-pitch ((t (:family "Iosevka" :slant normal :weight normal :height 1.0 :width normal))))
  '(font-lock-variable-name-face ((t nil)))
  '(helm-ff-file-extension ((t (:extend t :foreground "dark red"))))
