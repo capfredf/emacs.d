@@ -451,10 +451,17 @@
          ("s-l" . org-forward-heading-same-level)
          ("s-h" . org-backward-heading-same-level))
   :config
+  ;; (defface org-inline-tags-face
+  ;;   '((t (:foreground "orange" :weight bold)))
+  ;;   "Face for custom inline tags in plain list items.")
+
+  ;; (font-lock-add-keywords 'org-mode
+  ;;                         '(("#\\(\\w+\\(-\\w+\\)*\\)" 0 'org-inline-tags-face prepend)))
   (require 'ox-publish)
   (setopt org-agenda-custom-commands
           '(("z" "Daily Agenda View"
-             ((agenda "" ((org-agenda-overriding-header "Today")
+             (
+              (agenda "" ((org-agenda-overriding-header "Today")
                           (org-agenda-span 'day)
                           (org-agenda-skip-function
                            '(org-agenda-skip-subtree-if
@@ -463,7 +470,7 @@
                            '((:log t)   ; Automatically named "Log"
                              (:name "Laser Focus" :todo "NEXT")
                              (:name "Scheduled For Today" :todo "TODAY")))))
-              (todo "NEXT" ((org-agenda-overriding-header "")
+              (todo "TODO" ((org-agenda-overriding-header "")
                             (org-agenda-skip-function
                              '(org-agenda-skip-entry-if 'scheduled))
                             (org-super-agenda-groups

@@ -128,6 +128,7 @@
  '(desktop-restore-eager 10)
  '(desktop-save-mode t)
  '(dired-hide-details-hide-information-lines t)
+ '(electric-pair-pairs '((34 . 34) (8216 . 8217) (8220 . 8221) (10181 . 10182)))
  '(enable-recursive-minibuffers t)
  '(eshell-visual-commands
    '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "racket"))
