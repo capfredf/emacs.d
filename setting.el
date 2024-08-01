@@ -156,6 +156,7 @@
       (file+headline "~/my-brain/snd-brain.org" "Today")
       "")))
  '(org-catch-invisible-edits 'smart)
+ '(org-ctags-open-link-functions nil t)
  '(org-enforce-todo-dependencies t)
  '(org-fold-catch-invisible-edits 'smart)
  '(org-fontify-todo-headline nil)
@@ -170,6 +171,7 @@
  '(org-journal-dir "~/new-brain/journals")
  '(org-journal-file-format "%Y-W%V-%m%d.org")
  '(org-journal-file-type 'weekly)
+ '(org-link-use-indirect-buffer-for-internals t)
  '(org-log-into-drawer t)
  '(org-loop-over-headlines-in-active-region t)
  '(org-modules

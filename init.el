@@ -465,6 +465,7 @@
 
   ;; (font-lock-add-keywords 'org-mode
   ;;                         '(("#\\(\\w+\\(-\\w+\\)*\\)" 0 'org-inline-tags-face prepend)))
+  (setq org-ctags-open-link-functions nil) ;; disable the ctags to correctly open internal links
   (require 'ox-publish)
   (setopt org-agenda-custom-commands
           '(("z" "Daily Agenda View"
