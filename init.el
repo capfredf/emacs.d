@@ -415,7 +415,15 @@
 
 
 (use-package org-ql
-  :ensure t)
+  :ensure t
+  :config
+  (defun my/show-scheduled ()
+    (interactive)
+    (org-ql-search (org-agenda-files) '(or (and (scheduled :to today) (todo))
+                                           (and (planning) (todo)))))
+
+  :bind
+  (("C-c q" . my/show-scheduled)))
 
 (use-package org
   :mode ("\\.org" . org-mode)
@@ -474,7 +482,7 @@
                             (org-agenda-skip-function
                              '(org-agenda-skip-entry-if 'scheduled))
                             (org-super-agenda-groups
-                             '((:log t)   ; Automatically named "Log"
+                             '((:log t) ; Automatically named "Log"
                                (:name "Important" :todo "NEXT")))))))))
   (setq org-latex-listings 'minted
         org-latex-packages-alist '(("" "minted")
