@@ -420,7 +420,15 @@
   (defun my/show-scheduled ()
     (interactive)
     (org-ql-search (org-agenda-files) '(or (and (scheduled :to today) (todo))
-                                           (and (planning) (todo)))))
+                                           (and (planning) (todo))
+                                           (ts-active :on today)
+                                           (todo "DOING"))
+      :sort '(todo date)
+      :title "Today's View"
+      :super-groups '((:name "In-Progress" :todo "DOING" )
+                      (:name "Fitness" :and (:scheduled today :category "workout"))
+                      (:name "Available" :and (:scheduled today :not (:category "workout")))
+                      (:name "Future" :scheduled future))))
 
   :bind
   (("C-c q" . my/show-scheduled)))
