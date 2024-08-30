@@ -1,6 +1,8 @@
 ;;-*-coding: utf-8;-*-
 (define-abbrev-table 'agda2-mode-abbrev-table
   '(
+    ("in1" "inj₁" nil :count 3)
+    ("in2" "inj₂" nil :count 2)
     ("interp" "⟦ ⟧" nil :count 3)
    ))
 

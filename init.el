@@ -414,6 +414,7 @@
 
 
 
+;; (org-ql-search (org-agenda-files) '(and (todo "TODO") (not (scheduled :to today))))
 (use-package org-ql
   :ensure t
   :config
@@ -426,8 +427,11 @@
       :sort '(todo date)
       :title "Today's View"
       :super-groups '((:name "In-Progress" :todo "DOING" )
+                      (:name "Waiting" :and (:scheduled today :todo "WAITING"))
                       (:name "Fitness" :and (:scheduled today :category "workout"))
-                      (:name "Available" :and (:scheduled today :not (:category "workout") :todo "TODO"))
+                      (:name "Daily" :and (:scheduled today :category "daily"))
+                      (:name "Scheduled" :and (:scheduled today :not (:and (:category "daily" :category "workout"))
+                                                          :todo "TODO"))
                       (:name "Future" :scheduled future))))
 
   :bind
@@ -475,24 +479,21 @@
   ;;                         '(("#\\(\\w+\\(-\\w+\\)*\\)" 0 'org-inline-tags-face prepend)))
   (setq org-ctags-open-link-functions nil) ;; disable the ctags to correctly open internal links
   (require 'ox-publish)
-  (setopt org-agenda-custom-commands
-          '(("z" "Daily Agenda View"
-             (
-              (agenda "" ((org-agenda-overriding-header "Today")
-                          (org-agenda-span 'day)
-                          (org-agenda-skip-function
-                           '(org-agenda-skip-subtree-if
-                             'todo '("DONE")))
-                          (org-super-agenda-groups
-                           '((:log t)   ; Automatically named "Log"
-                             (:name "Laser Focus" :todo "NEXT")
-                             (:name "Scheduled For Today" :todo "TODAY")))))
-              (todo "TODO" ((org-agenda-overriding-header "")
-                            (org-agenda-skip-function
-                             '(org-agenda-skip-entry-if 'scheduled))
-                            (org-super-agenda-groups
-                             '((:log t) ; Automatically named "Log"
-                               (:name "Important" :todo "NEXT")))))))))
+  ;; (setopt org-agenda-custom-commands
+  ;;         '(("z" "Daily Agenda View"
+  ;;            ((org-ql-block '(or (and (scheduled :to today) (todo "TODO" "WAITING"))
+  ;;                                (and (planning) (todo "TODO" "WAITING"))
+  ;;                                (and (ts-active :on today) (todo "TODO" "WAITING"))
+  ;;                                (todo "DOING"))
+  ;;                           ((org-super-agenda-groups '((:name "In-Progress" :todo "DOING" )
+  ;;                                                       (:name "Waiting" :and (:scheduled today :todo "WAITING"))
+  ;;                                                       (:name "Fitness" :and (:scheduled today :category "workout"))
+  ;;                                                       (:name "Daily" :and (:scheduled today :category "daily"))
+  ;;                                                       (:name "Available" :and (:scheduled today :not (:and (:category "daily" :category "workout"))
+  ;;                                                                                           :todo "TODO"))
+  ;;                                                       (:name "Future" :scheduled future)))))
+
+  ;;             (agenda)))))
   (setq org-latex-listings 'minted
         org-latex-packages-alist '(("" "minted")
                                    ("" "mathtools")
@@ -536,11 +537,11 @@
            :base-extension any
            :recursive t
            :publishing-directory "~/captainwiki/static"
-           :publishing-function org-publish-attachment))))
+           :publishing-function org-publish-attachment)))
 
-(use-package org-superstar
-  :ensure t
-  :hook (org-mode . org-superstar-mode))
+  (use-package org-superstar
+    :ensure t
+    :hook (org-mode . org-superstar-mode)))
 
 
 (use-package org-super-agenda
@@ -573,7 +574,8 @@
 (defun my/new-day ()
   (interactive)
   (let ((headline "Timeline")
-        (file (expand-file-name "dashboard.org" "~/new-brain")))
+        (file (expand-file-name "dashboard.org" "~/new-brain"))
+        (template (expand-file-name "daily_template.org" "~/new-brain")))
     (save-excursion
       (find-file file)
       (goto-char (org-find-exact-headline-in-buffer "Today"))
@@ -581,7 +583,12 @@
       (let* ((pos (org-find-exact-headline-in-buffer headline)))
         (org-refile nil nil (list headline file nil pos)))
       (org-insert-heading)
-      (insert "Today"))))
+      (insert "Today")
+      (newline)
+      (insert-file-contents template)
+      (org-schedule 0 (format-time-string "%Y-%m-%d"))
+      (org-next-visible-heading 1)
+      (org-schedule 0 (format-time-string "%Y-%m-%d")))))
 
 ;; (use-package racket-unicode-input-method
 ;;   :commands racket-unicode-input-method-enable)
@@ -664,6 +671,9 @@
                           (file-name-directory (shell-command-to-string "agda-mode locate"))))
   :hook ((agda2-mode . electric-pair-local-mode)))
 
+(use-package haskell-mode
+  :mode "\\.hs"
+  :hook ((haskell-mode . interactive-haskell-mode)))
 ;; (use-package ob-racket
 ;;   :ensure t
 ;;   :vc (url . "")
