@@ -421,7 +421,7 @@
   (defun my/show-scheduled ()
     (interactive)
     (org-ql-search (org-agenda-files) '(or (and (scheduled :to today) (todo "TODO" "WAITING"))
-                                           (and (planning) (todo "TODO" "WAITING"))
+                                           ;; (and (planning) (todo "TODO" "WAITING"))
                                            (and (ts-active :on today) (todo "TODO" "WAITING"))
                                            (todo "DOING"))
       :sort '(todo date)
@@ -673,7 +673,8 @@
 
 (use-package haskell-mode
   :mode "\\.hs"
-  :hook ((haskell-mode . interactive-haskell-mode)))
+  :hook ((haskell-mode . interactive-haskell-mode)
+         (haskell-mode . electric-pair-local-mode)))
 ;; (use-package ob-racket
 ;;   :ensure t
 ;;   :vc (url . "")

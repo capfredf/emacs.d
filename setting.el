@@ -131,7 +131,7 @@
  '(electric-pair-pairs '((34 . 34) (8216 . 8217) (8220 . 8221) (10181 . 10182)))
  '(enable-recursive-minibuffers t)
  '(eshell-visual-commands
-   '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "racket"))
+   '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "racket" "ghci"))
  '(exec-path-from-shell-shell-name "/usr/bin/fish")
  '(fill-column 80)
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
@@ -156,7 +156,7 @@
       (file+headline "~/my-brain/snd-brain.org" "Today")
       "")))
  '(org-catch-invisible-edits 'smart)
- '(org-ctags-open-link-functions nil)
+ '(org-ctags-open-link-functions nil t)
  '(org-enforce-todo-dependencies t)
  '(org-fold-catch-invisible-edits 'smart)
  '(org-fontify-todo-headline nil)
@@ -193,9 +193,6 @@
         (scheduled :to today)
         (todo "TODO" "WAITING"))
        (and
-        (planning)
-        (todo "TODO" "WAITING"))
-       (and
         (ts-active :on today)
         (todo "TODO" "WAITING"))
        (todo "DOING"))
@@ -209,7 +206,7 @@
               (:scheduled today :category "workout"))
        (:name "Daily" :and
               (:scheduled today :category "daily"))
-       (:name "Available" :and
+       (:name "Scheduled" :and
               (:scheduled today :not
                           (:and
                            (:category "daily" :category "workout"))
