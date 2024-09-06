@@ -126,12 +126,12 @@
  '(delete-selection-mode t)
  '(desktop-auto-save-timeout 0)
  '(desktop-restore-eager 10)
- '(desktop-save-mode t)
+ '(desktop-save-mode nil)
  '(dired-hide-details-hide-information-lines t)
  '(electric-pair-pairs '((34 . 34) (8216 . 8217) (8220 . 8221) (10181 . 10182)))
  '(enable-recursive-minibuffers t)
  '(eshell-visual-commands
-   '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "racket" "ghci"))
+   '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "racket" "cabal repl" "ghci"))
  '(exec-path-from-shell-shell-name "/usr/bin/fish")
  '(fill-column 80)
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
@@ -141,6 +141,7 @@
  '(helm-split-window-inside-p t)
  '(help-at-pt-display-when-idle 'never nil (help-at-pt))
  '(highlight-parentheses-colors '("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900"))
+ '(inhibit-startup-screen t)
  '(ispell-program-name "hunspell")
  '(js-indent-level 2)
  '(lua-indent-level 2)
@@ -307,7 +308,7 @@
    '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "|" "CANCELLED(c)" "DONE(d)")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(tabspaces clojure-mode elixir-mode fish-mode lua-mode org-ql embark-consult marginalia consult embark orderless eat helm-core wfnames helm helm-org-rifle denote markdown-mode typescript-mode auctex racket-mode olivetti org-superstar org-nsuperstar ws-butler org-super-agenda paredit ob-racket racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal multiple-cursors moody magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init ag ace-window))
+   '(activities tabspaces clojure-mode elixir-mode fish-mode lua-mode org-ql embark-consult marginalia consult embark orderless eat helm-core wfnames helm helm-org-rifle markdown-mode typescript-mode auctex racket-mode olivetti org-superstar org-nsuperstar ws-butler org-super-agenda paredit ob-racket racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal multiple-cursors moody magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init ag ace-window))
  '(project-switch-commands
    '((project-find-file "Find file" nil)
      (project-find-regexp "Find regexp" nil)
