@@ -72,38 +72,38 @@
 ;; (defadvice text-scale-increase (around all-buffers (arg) activate)
 ;;   ad-do-it)
 
-(defun text-scale-increase-for-all ()
-  "Increase font size for all buffers."
-  (interactive)
-  (dolist (buffer (buffer-list))
-    (with-current-buffer buffer
-      (text-scale-increase 1))))
+;; (defun text-scale-increase-for-all ()
+;;   "Increase font size for all buffers."
+;;   (interactive)
+;;   (dolist (buffer (buffer-list))
+;;     (with-current-buffer buffer
+;;       (text-scale-increase 1))))
 
-(defun text-scale-decrease-for-all ()
-  "Decrease font size for all buffers."
-  (interactive)
-  (dolist (buffer (buffer-list))
-    (with-current-buffer buffer
-      (text-scale-decrease 1))))
+;; (defun text-scale-decrease-for-all ()
+;;   "Decrease font size for all buffers."
+;;   (interactive)
+;;   (dolist (buffer (buffer-list))
+;;     (with-current-buffer buffer
+;;       (text-scale-decrease 1))))
 
-(defun text-scale-reset-for-all ()
-  "Reset to the default font size for all buffers."
-  (interactive)
-  (dolist (buffer (buffer-list))
-    (with-current-buffer buffer
-      (text-scale-adjust 0))))
+;; (defun text-scale-reset-for-all ()
+;;   "Reset to the default font size for all buffers."
+;;   (interactive)
+;;   (dolist (buffer (buffer-list))
+;;     (with-current-buffer buffer
+;;       (text-scale-adjust 0))))
 
-(defvar text-scaling-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "i") 'text-scale-increase-for-all)
-    (define-key map (kbd "r") 'text-scale-reset-for-all)
-    (define-key map (kbd "o") 'text-scale-decrease-for-all)
-    map))
+;; (defvar text-scaling-map
+;;   (let ((map (make-sparse-keymap)))
+;;     (define-key map (kbd "i") 'text-scale-increase-for-all)
+;;     (define-key map (kbd "r") 'text-scale-reset-for-all)
+;;     (define-key map (kbd "o") 'text-scale-decrease-for-all)
+;;     map))
 
-(defun scale-text ()
-  "Start the text scaling mode."
-  (interactive)
-  (set-transient-map text-scaling-map t))
+;; (defun scale-text ()
+;;   "Start the text scaling mode."
+;;   (interactive)
+;;   (set-transient-map text-scaling-map t))
 
 
 (provide 'mod-visual)

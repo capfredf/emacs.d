@@ -131,7 +131,8 @@
 ;;   (setq which-key-idle-secondary-delay 0.05)
 ;;   (which-key-mode))
 
-(global-set-key (kbd "<f3>") 'scale-text)
+;; invoke M-x global-scale-text directly
+;; (global-set-key (kbd "<f3>") 'scale-text)
 
 ;; (defun helm-project-ag-find ()
 ;;   (interactive)
