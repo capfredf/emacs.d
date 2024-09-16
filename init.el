@@ -785,6 +785,7 @@
 (use-package meow
   :config
   (meow-setup)
+  (setopt meow-keypad-leader-dispatch ctl-x-map)
   (meow-global-mode t))
 ;; (use-package ob-racket
 ;;   :ensure t
