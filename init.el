@@ -695,7 +695,6 @@
    ("C-x C-a g" . activities-revert)
    ("C-x C-a l" . activities-list)))
 
-
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-overwrite-define-key
@@ -785,7 +784,8 @@
 (use-package meow
   :config
   (meow-setup)
-  (setopt meow-keypad-leader-dispatch ctl-x-map)
+  ;; (setopt meow-keypad-leader-dispatch ctl-x-map)
+  (setopt meow-keypad-leader-dispatch "C-x")
   (meow-global-mode t))
 ;; (use-package ob-racket
 ;;   :ensure t
