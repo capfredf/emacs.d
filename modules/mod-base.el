@@ -81,7 +81,7 @@
 
 ;; (global-set-key (kbd "C-x b") 'counsel-switch-buffer)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-x b") 'ibuffer)
 
 ;; (add-hook 'eshell-mode-hook
 ;;   (lambda ()

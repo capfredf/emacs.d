@@ -157,6 +157,7 @@
      (112 . paragraph)
      (108 . line)
      (98 . buffer)))
+ '(meow-keypad-leader-dispatch nil)
  '(olivetti-body-width 120)
  '(org-agenda-dim-blocked-tasks 'invisible)
  '(org-agenda-files '("~/new-brain/dashboard.org"))

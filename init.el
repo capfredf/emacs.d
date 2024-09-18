@@ -212,7 +212,7 @@
 (use-package consult
   :ensure t
   :bind
-  (("C-x b" . consult-buffer)
+  (("C-x C-b" . consult-buffer)
    ("M-y" . consult-yank-pop)
    (:map org-mode-map
          ("C-c C-l" . create-link))))
@@ -740,8 +740,7 @@
    '("b" . meow-back-word)
    '("B" . meow-back-symbol)
    '("c" . meow-change)
-   '("d" . meow-delete)
-   '("D" . meow-backward-delete)
+   '("d" . meow-kill)
    '("e" . meow-next-word)
    '("E" . meow-next-symbol)
    '("f" . meow-find)
@@ -759,33 +758,34 @@
    '("L" . meow-right-expand)
    '("m" . meow-join)
    '("n" . meow-search)
-   '("$" . meow-block)
-   '("#" . meow-to-block)
    '("p" . meow-yank)
    '("q" . meow-quit)
    '("Q" . meow-goto-line)
    '("r" . meow-replace)
    '("R" . meow-swap-grab)
-   '("s" . meow-kill)
+   '("x" . meow-delete)
+   '("X" . meow-backward-delete)
    '("t" . meow-till)
    '("u" . meow-undo)
    '("U" . meow-undo-in-selection)
    '("v" . meow-visit)
    '("w" . meow-mark-word)
    '("W" . meow-mark-symbol)
-   '("x" . meow-line)
+   '("V" . meow-line)
    '("X" . meow-goto-line)
    '("y" . meow-save)
    '("Y" . meow-sync-grab)
    '("z" . meow-pop-selection)
    '("'" . repeat)
+   '("$" . meow-block)
+   '("#" . meow-to-block)
    '("<escape>" . ignore)))
 
 (use-package meow
   :config
   (meow-setup)
   ;; (setopt meow-keypad-leader-dispatch ctl-x-map)
-  (setopt meow-keypad-leader-dispatch "C-x")
+  ;; (setopt meow-keypad-leader-dispatch "C-x")
   (meow-global-mode t))
 ;; (use-package ob-racket
 ;;   :ensure t
