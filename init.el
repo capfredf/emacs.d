@@ -700,6 +700,9 @@
    ("C-x C-a g" . activities-revert)
    ("C-x C-a l" . activities-list)))
 
+(defun me/ignore-vanilla-keybindings ()
+  (interactive)
+  (message "Follow the meow way"))
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-overwrite-define-key
@@ -724,6 +727,10 @@
    '("/" . meow-keypad-describe-key)
    '("?" . meow-cheatsheet))
   (meow-normal-define-key
+   '("C-x C-f" . me/ignore-vanilla-keybindings)
+   '("C-x C-b" . me/ignore-vanilla-keybindings)
+   '("C-x b" . me/ignore-vanilla-keybindings)
+   '("M-x" . me/ignore-vanilla-keybindings)
    '("0" . meow-expand-0)
    '("9" . meow-expand-9)
    '("8" . meow-expand-8)
