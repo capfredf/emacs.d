@@ -74,7 +74,7 @@
 ;; (setenv "PATH" (concat "/home/capfredf/.racket/bin:/home/capfredf/.cabal/bin:/usr/local/texlive/2023/bin/x86_64-linux:" (getenv "PATH")))
 ;; (setenv "PATH" (mapconcat 'identity exec-path ":"))
 
-(setq ring-bell-function 'ignore)
+;; (setq ring-bell-function 'ignore)
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 (define-key global-map [?\s-m] nil)

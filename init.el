@@ -670,7 +670,12 @@
   :mode "\\.agda\\'"
   :load-path (lambda () (let ((coding-system-for-read 'utf-8))
                           (file-name-directory (shell-command-to-string "agda-mode locate"))))
-  :hook ((agda2-mode . electric-pair-local-mode)))
+  :hook ((agda2-mode . electric-pair-local-mode))
+  :config
+  (unbind-key "C-c C-SPC" agda2-goal-map)
+  (unbind-key "C-c C-SPC" agda2-mode-map)
+  (bind-key "C-c C-v" 'agda2-give agda2-mode-map))
+
 
 (use-package haskell-mode
   :mode "\\.hs"
