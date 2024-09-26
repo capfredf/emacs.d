@@ -419,6 +419,8 @@
 (use-package org-ql
   :ensure t
   :config
+  ;; I don't need to bury the buffer. I want to exit the view
+  (bind-key "q" 'org-agenda-exit org-ql-view-map)
   (defun my/show-scheduled ()
     (interactive)
     (org-ql-search (org-agenda-files) '(or (and (scheduled :to today) (todo "TODO" "WAITING"))
@@ -436,7 +438,23 @@
                       (:name "Future" :scheduled future))))
 
   :bind
-  (("C-c q" . my/show-scheduled)))
+  (("C-c q" . my/show-scheduled)
+   ;; can't use the method below, because the variable is not in scope when org-ql is loaded
+   ;; :map org-ql-view-map
+   ;; ("q" . kill-buffer)
+   ))
+
+(use-package org-agenda
+  :defer t
+  ;; :config
+  ;; (bind-key "j" 'org-agenda-next-line org-agenda-mode-map)
+  :bind
+  (:map org-agenda-mode-map
+        ;; ("q" . org-agenda-Quit)
+        ;; ("x" . org-agenda-quit)
+        ("n" . org-agenda-goto-date)
+        ("j" . org-agenda-next-line)
+        ("k" . org-agenda-previous-line)))
 
 (use-package org
   :mode ("\\.org" . org-mode)
