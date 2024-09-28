@@ -672,6 +672,16 @@
   :config
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
 
+(use-package corfu
+  :ensure t
+  ;; :custom
+  ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
+  :bind
+  ;; Configure SPC for separator insertion
+  (:map corfu-map ("SPC" . corfu-insert-separator))
+  :init
+  (global-corfu-mode))
+
 (defconst org-journal-entry-template-name "daily-journal-template.org")
 (defun new-entry-template ()
   (org-insert-heading-respect-content)
