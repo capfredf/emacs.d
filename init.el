@@ -663,13 +663,14 @@
 ;;   :ensure t
 ;;   :mode "\\.ts")
 
-(use-package eat
-  :ensure t)
+;; (use-package eat
+;;   :ensure t)
 
-(use-package eshell
-  :requires eat
-  :hook ((eshell-load . eat-shell-mode)
-         (eshell-load . eat-eshell-visual-command-mode)))
+(use-package eat
+  :ensure t
+  :after eshell
+  :config
+  (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
 
 (defconst org-journal-entry-template-name "daily-journal-template.org")
 (defun new-entry-template ()
