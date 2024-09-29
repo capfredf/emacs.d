@@ -19,14 +19,14 @@
         ;; Insert the image with a help-echo and a link.
         (make-button (prog1 (point) (insert-image img)) (point)
                      'face 'default
-                     'help-echo "mouse-2, RET: Browse https://www.yahw.io"
+                     'help-echo "mouse-2, RET: Browse https://www..io"
                      'action (lambda (_button) (browse-url "https://www.yahw.io"))
                      'follow-link t)
         (insert "\n\n")))))
 
 (defun welcome-buffer ()
   (interactive)
-  (let (($buf (get-buffer-create "*Aye, aye, Captain*")))
+  (let (($buf (get-buffer-create "*Some Quotes*")))
     (with-current-buffer $buf
       (erase-buffer)
       (funcall initial-major-mode)
@@ -38,8 +38,8 @@
       (set-buffer-modified-p nil))
     (switch-to-buffer $buf)))
 
-;; (setq initial-major-mode (quote fundamental-mode))
-;; (setq initial-buffer-choice 'welcome-buffer)
+(setq initial-major-mode (quote fundamental-mode))
+(setq initial-buffer-choice 'welcome-buffer)
 ;; (setq initial-buffer-choice nil)
 
 ;; (use-package benchmark-init
@@ -119,7 +119,8 @@
 ;; (add-hook 'server-done-hook (lambda () (delete-frame)))
 
 (global-unset-key (kbd "M-z")) ;; unbind (suspend-frame) to C-z
-(global-unset-key (kbd "C-x z")) ;; unbind repeat to C-x
+(global-unset-key (kbd "C-x z")) ;; unbind repeat to C-x switch the two
+
 (global-set-key (kbd "M-z") 'repeat)
 ;; (icomplete-mode +1)
 ;; (icomplete-vertical-mode +1)
@@ -151,19 +152,19 @@
 ;; 				  :run "echo 'hell world'"))
 
 
-(defun helm-project-switch-project ()
-  (interactive)
-  (helm :sources (helm-build-sync-source "Helm-project-switch-project"
-                   :candidates (project-known-project-roots) ;; the list is in the form of (("project-name") ...)
-                   :action
-                   '(("find files" . (lambda (dir)
-                                       (let ((default-directory dir)
-                                             ;; FIXME: use (project-current-inhibit-prompt t) for 28 and below
-                                             ;; (project-current-directory-override "t")
-                                             )
-                                         (project-find-file))))
-                     ("magit" . (lambda (dir)
-                                  (magit-status dir)))))))
+;; (defun helm-project-switch-project ()
+;;   (interactive)
+;;   (helm :sources (helm-build-sync-source "Helm-project-switch-project"
+;;                    :candidates (project-known-project-roots) ;; the list is in the form of (("project-name") ...)
+;;                    :action
+;;                    '(("find files" . (lambda (dir)
+;;                                        (let ((default-directory dir)
+;;                                              ;; FIXME: use (project-current-inhibit-prompt t) for 28 and below
+;;                                              ;; (project-current-directory-override "t")
+;;                                              )
+;;                                          (project-find-file))))
+;;                      ("magit" . (lambda (dir)
+;;                                   (magit-status dir)))))))
 
 
 ;; (defun helm-project-find-file-dwim (&optional include-all)
@@ -265,22 +266,22 @@
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 
-(defvar tab-cfg '(("Emacs" . "~/.emacs.d/init.el")
-                  ("Mime" . "~/code/mime/mlsub")
-                  ("TR" . "~/code/rkt-extra-packages/typed-racket")
-                  ("Clang" . "~/code/llvm-project")
-                  ("Brain" . "~/my-brain/main.org")))
+;; (defvar tab-cfg '(("Emacs" . "~/.emacs.d/init.el")
+;;                   ("Mime" . "~/code/mime/mlsub")
+;;                   ("TR" . "~/code/rkt-extra-packages/typed-racket")
+;;                   ("Clang" . "~/code/llvm-project")
+;;                   ("Brain" . "~/my-brain/main.org")))
 
-(defun recreate-main-workspace ()
-  "Recreate all my main tabs in a current frame.
+;; (defun recreate-main-workspace ()
+;;   "Recreate all my main tabs in a current frame.
 
-This function doesn't check if there are pre-existing tabs with
-the same name or for the same purpose "
-  (interactive)
-  (dolist (c tab-cfg)
-    (tab-rename (car c))
-    (find-file (expand-file-name (cdr c)))
-    (tab-new)))
+;; This function doesn't check if there are pre-existing tabs with
+;; the same name or for the same purpose "
+;;   (interactive)
+;;   (dolist (c tab-cfg)
+;;     (tab-rename (car c))
+;;     (find-file (expand-file-name (cdr c)))
+;;     (tab-new)))
 
 
 (defun ap/garbage-collect ()

@@ -2,25 +2,8 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/")
              t)
-;; (add-to-list 'package-archives
-;;              '("org" . "https://orgmode.org/elpa/"))
-;; (add-to-list 'package-archives
-;;              '("devel" . "https://elpa.gnu.org/devel/"))
-
-;; (add-to-list 'package-archives
-;;              '("gnu-devel" . "https://orgmode.org/elpa/"))
 (package-initialize)
-;; (add-hook 'racket-mode-hook      #'racket-unicode-input-method-enable)
-;; (require 'racket-mode)
-
-;; (add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
-;; it looks the path to the two libraries below have to be added separately in
-;; order to make epkg and/or borg work properly
-;;(add-to-list 'load-path (expand-file-name "lib/compat" user-emacs-directory))
-;; (add-to-list 'load-path (expand-file-name "lib/llama" user-emacs-directory))
-;; (require 'borg)
-;; (borg-initialize)
 
 
 (with-eval-after-load 'magit
@@ -66,42 +49,6 @@
   :config
   (exec-path-from-shell-initialize))
 
-;; (use-package tabspaces
-;;   :ensure t
-;;   ;; use this next line only if you also use straight, otherwise ignore it.
-;;   :hook (after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup.
-;;   :commands (tabspaces-switch-or-create-workspace
-;;              tabspaces-open-or-create-project-and-workspace)
-;;   :custom
-;;   (tabspaces-use-filtered-buffers-as-default t)
-;;   (tabspaces-default-tab "Default")
-;;   (tabspaces-remove-to-default t)
-;;   (tabspaces-include-buffers '("*scratch*"))
-;;   (tabspaces-initialize-project-with-todo t)
-;;   (tabspaces-todo-file-name "project-todo.org")
-;;   ;; sessions
-;;   (tabspaces-session t)
-;;   (tabspaces-session-auto-restore t))
-
-;; (with-eval-after-load 'consult
-;;   ;; hide full buffer list (still available with "b" prefix)
-;;   (consult-customize consult--source-buffer :hidden t :default nil)
-;;   ;; set consult-workspace buffer list
-;;   (defvar consult--source-workspace
-;;     (list :name     "Workspace Buffers"
-;;           :narrow   ?w
-;;           :history  'buffer-name-history
-;;           :category 'buffer
-;;           :state    #'consult--buffer-state
-;;           :default  t
-;;           :items    (lambda () (consult--buffer-query
-;;                                 :predicate #'tabspaces--local-buffer-p
-;;                                 :sort 'visibility
-;;                                 :as #'buffer-name)))
-
-;;     "Set workspace buffer list for consult-buffer.")
-;;   (add-to-list 'consult-buffer-sources 'consult--source-workspace))
-
 (use-package dired
   :hook (dired-mode . dired-hide-details-mode))
 
@@ -109,57 +56,7 @@
   :ensure t
   :demand t)
 
-;; (use-package helm
-;;   :ensure t
-;;   :init
-;;   (setq helm--tramp-archive-maybe-loaded t) ;; dirty fix, because dbus-ping can't reach Avahi
-;;   :bind
-;;   ("M-x" . helm-M-x)
-;;   ("C-x C-f" . helm-find-files)
-;;   ("C-x b" . helm-mini)
-;;   ("M-y" . helm-show-kill-ring)
-;;   :config
-;;   (helm-mode 1))
 
-
-;; (use-package which-key
-;;   :ensure t
-;;   :config
-;;   (add-to-list 'which-key-show-transient-maps text-scaling-map)
-;;   (setq which-key-show-early-on-C-h t)
-;;   (setq which-key-idle-delay 10000)
-;;   (setq which-key-idle-secondary-delay 0.05)
-;;   (which-key-mode))
-
-;; invoke M-x global-scale-text directly
-;; (global-set-key (kbd "<f3>") 'scale-text)
-
-;; (defun helm-project-ag-find ()
-;;   (interactive)
-;;   ;; (require 'project)
-;;   ;; (require 'helm)
-;;   (let* ((pr (project-current))
-;;          (dir (project-root pr)))
-;;     (helm-grep-ag (expand-file-name dir) nil)))
-
-;; (defun helm-rifle-project ()
-;;   (interactive)
-;;   ;; (require 'project)
-;;   ;; (require 'helm)
-;;   (let* ((pr (project-current))
-;;          (dir (project-root pr)))
-;;     (helm-org-rifle-directories (expand-file-name dir) t)))
-
-(defun up-directory (arg)
-  "Move up a directory (delete backwards to /)."
-  (interactive "p")
-  (if (string-match-p "/." (minibuffer-contents))
-      (save-excursion
-        (let ((end (point)))
-          (goto-char (1- end))
-          (when (search-backward "/" (minibuffer-prompt-end) t)
-            (delete-region (1+ (point)) end))))
-    (delete-minibuffer-contents)))
 
 (defun consult-brain--files ()
   (interactive "p")
@@ -174,10 +71,6 @@
           :items ,#'consult-brain--files)
   "Current project directory for `consult-brain--pick'.")
 
-
-
-
-
 (defun create-link ()
   (interactive)
   (let ((picked (car (consult--multi (list consult-brain--sources) ;; must be a list
@@ -187,12 +80,23 @@
     (insert (format "[[file:%s][%s]]" picked desc))))
 
 
+
 (use-package vertico
   :ensure t
-  :bind (:map vertico-map
-              ("C-l" . up-directory))
   :init
-  (vertico-mode))
+  (defun up-directory (arg)
+    "Move up a directory (delete backwards to /)."
+    (interactive "p")
+    (if (string-match-p "/." (minibuffer-contents))
+        (save-excursion
+          (let ((end (point)))
+            (goto-char (1- end))
+            (when (search-backward "/" (minibuffer-prompt-end) t)
+              (delete-region (1+ (point)) end))))
+      (delete-minibuffer-contents)))
+  (vertico-mode)
+  :bind (:map vertico-map
+              ("C-l" . up-directory)))
 
 (use-package savehist
   :init
@@ -218,10 +122,7 @@
          ("C-c C-l" . create-link))))
 
 (use-package project
-  ;; :after (helm helm-org-rifle)
   :bind
-  ;; ("C-c s p" . helm-project-ag-find)
-  ;; ("C-c s r" . helm-rifle-project)
   (:map project-prefix-map
         ("f" . project-find-file)
         ("g" . consult-ripgrep)
@@ -294,15 +195,15 @@
 							("M-p" . 'flymake-goto-prev-error)))
 
 
-(use-package multiple-cursors
-  :ensure t
-  ;; :config
-  ;; (define-key mc/keymap (kbd "C-'") 'mc-hide-unmatched-lines-mode)
-  :bind (("C-M-e" . mc/edit-lines)
-         ("C-." . mc/mark-next-like-this)
-         ("C-," . mc/mark-previous-like-this)
-         ("C->" . mc/skip-to-next-like-this)
-         ("C-<" . mc/skip-to-previous-like-this)))
+;; (use-package multiple-cursors
+;;   :ensure t
+;;   ;; :config
+;;   ;; (define-key mc/keymap (kbd "C-'") 'mc-hide-unmatched-lines-mode)
+;;   :bind (("C-M-e" . mc/edit-lines)
+;;          ("C-." . mc/mark-next-like-this)
+;;          ("C-," . mc/mark-previous-like-this)
+;;          ("C->" . mc/skip-to-next-like-this)
+;;          ("C-<" . mc/skip-to-previous-like-this)))
 
 (use-package expand-region
   :ensure t
@@ -333,7 +234,7 @@
 
   ;; Show the Embark target at point via Eldoc.  You may adjust the Eldoc
   ;; strategy, if you want to see the documentation from multiple providers.
-  (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+  (add-hook 'eldoc-documentation-fucntions #'embark-eldoc-first-target)
   ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
 
   :config
@@ -444,6 +345,9 @@
    ;; ("q" . kill-buffer)
    ))
 
+(toggle-frame-maximized)
+;; (fullscreen)
+
 (use-package org-agenda
   :defer t
   ;; :config
@@ -477,7 +381,8 @@
   (org-block ((t (:inherit fixed-pitch))))
   (org-headline-done ((t (:foreground "dim gray" :strike-through t))))
   (org-document-title ((t (:height 1.5 :underline nil))))
-  :bind (("C-c a" . org-agenda)
+  :bind (
+         ;;("C-c a" . org-agenda)
          ("<f9>" . org-capture)
          ;;("C-c g" . counsel-org-goto-all)
          :map org-mode-map
@@ -625,37 +530,6 @@
   (put 'Π 'racket-indent-function 1)
   (put 'type-case 'racket-indent-function 2)
   (put 'new-slide-module 'racket-indent-function 1)
-  ;; (racket-unicode-input-method-enable)
-  ;; (with-temp-buffer
-  ;;   (racket-unicode-input-method-enable)
-  ;;   (set-input-method "racket-unicode")
-  ;;   (let ((quail-current-package (assoc "racket-unicode"
-  ;;                                       quail-package-alist)))
-  ;;     (quail-define-rules ((append . t))
-  ;;                         ("TT " ["𝕋𝕋"])
-  ;;                         ("FF " ["𝔽𝔽"])
-  ;;                         ("ll " ["≪"])
-  ;;                         ("lte " ["≤"])
-  ;;                         ("gte " ["≥"])
-  ;;                         ("bot " ["⊥"])
-  ;;                         ("top " ["⊤"])
-  ;;                         ("eqv " ["≡"])
-  ;;                         ("dt " ["·"])
-  ;;                         ("^c "  ["ᶜ"])
-  ;;                         ("^D "  ["ᴰ"])
-  ;;                         ("^d "  ["ᵈ"])
-  ;;                         ("^n "  ["ⁿ"])
-  ;;                         ("^f "  ["ᶠ"])
-  ;;                         ("^- "  ["⁻"])
-  ;;                         ("_p "  ["ₚ"])
-  ;;                         ("_v "  ["ᵥ"])
-  ;;                         ("_v "  ["ᵥ"])
-  ;;                         ("pm " ["±"])
-  ;;                         ("ring " ["⊚"])
-  ;;                         ("aster " ["⊛"])
-  ;;                         ("Vdash " ["⊩"])
-  ;;                         ("diamond " ["◊"])
-  ;;                         ("nexists " ["∄"]))))
   (put 'required/typed 'racket-indent-function 1)
   (put 'term-let 'racket-indent-function 1))
 
@@ -732,6 +606,7 @@
 (defun me/ignore-vanilla-keybindings ()
   (interactive)
   (message "Follow the meow way"))
+
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-overwrite-define-key
@@ -823,6 +698,16 @@
    '("<escape>" . ignore)))
 
 (use-package meow
+  :init
+  ;; following keys because using Meow, C-x C-k requires fewer key strokes, which
+  ;; is important for a regular comamnd like kill-buff
+  (global-set-key (kbd "C-x C-k") 'kill-buffer)
+  (global-set-key (kbd "C-x k") #'kmacro-keymap)
+  ;; C-x C-p oringally is bound to mark-page. The command becomes moot in presence of Meow
+  ;; we need to unbind the key first, as the global keymap take the most precedence.
+  (global-unset-key (kbd "C-x C-p"))
+  (define-key ctl-x-map "C-p" project-prefix-map)
+
   :config
   (meow-setup)
   ;; (setopt meow-keypad-leader-dispatch ctl-x-map)
