@@ -38,6 +38,14 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(setq-default abbrev-mode t)
+(autoload 'ibuffer "ibuffer" "List buffers." t)
+(global-set-key (kbd "C-x b") 'ibuffer)
+(toggle-frame-maximized)
+(global-unset-key (kbd "M-z")) ;; unbind (suspend-frame) to C-z
+(global-unset-key (kbd "C-x z")) ;; unbind repeat to C-x switch the two
+(global-set-key (kbd "M-z") 'repeat)
+
 (require 'treesit)
 (setq treesit-extra-load-path
       '("/home/capfredf/code/tree-sitter-module/dist"))
@@ -145,10 +153,8 @@
   :hook ((prog-mode text-mode) . yas-minor-mode)
   :config (yas-reload-all))
 
-(setq-default abbrev-mode t)
-
-(use-package helm-org-rifle
-  :ensure t)
+;; (use-package helm-org-rifle
+;;   :ensure t)
 
 (use-package solarized-theme
   :ensure t
@@ -162,12 +168,12 @@
   (add-hook 'racket-mode-hook (lambda () (highlight-parentheses-mode t)))
   (add-hook 'emacs-lisp-mode-hook (lambda () (highlight-parentheses-mode t))))
 
-
-
 (use-package s
   :ensure t)
+
 (use-package dash
   :ensure t)
+
 (use-package wgrep
   :ensure t
   :after grep)
@@ -270,6 +276,10 @@
   :config
   (unbind-key "C-M-f" paredit-mode-map)
   (unbind-key "C-M-s" paredit-mode-map)
+  (unbind-key "C-<left>" paredit-mode-map)
+  (unbind-key "C-<right>" paredit-mode-map)
+  (unbind-key "C-<up>" paredit-mode-map)
+  (unbind-key "C-<down>" paredit-mode-map)
   (unbind-key "C-(" paredit-mode-map)
   (unbind-key "C-)" paredit-mode-map)
   (unbind-key "C-{" paredit-mode-map)
@@ -345,7 +355,6 @@
    ;; ("q" . kill-buffer)
    ))
 
-(toggle-frame-maximized)
 ;; (fullscreen)
 
 (use-package org-agenda
@@ -538,7 +547,17 @@
 ;;   :mode "\\.ts")
 
 ;; (use-package eat
-;;   :ensure t)
+;;   :ensure
+;;   t)
+;; (require 'subr-x)
+(use-package winner
+  :config
+  (winner-mode t))
+
+(use-package windmove
+  :config
+  (windmove-mode t)
+  (windmove-swap-states-default-keybindings '(shift control)))
 
 (use-package eat
   :ensure t
@@ -579,7 +598,6 @@
   (unbind-key "C-c C-SPC" agda2-mode-map)
   (bind-key "C-c C-v" 'agda2-give agda2-mode-map))
 
-
 (use-package haskell-mode
   :mode "\\.hs"
   :hook ((haskell-mode . interactive-haskell-mode)
@@ -603,105 +621,109 @@
    ("C-x C-a g" . activities-revert)
    ("C-x C-a l" . activities-list)))
 
-(defun me/ignore-vanilla-keybindings ()
-  (interactive)
-  (message "Follow the meow way"))
-
-(defun meow-setup ()
-  (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
-  (meow-motion-overwrite-define-key
-   '("j" . meow-next)
-   '("k" . meow-prev)
-   '("<escape>" . ignore))
-  (meow-leader-define-key
-   ;; SPC j/k will run the original command in MOTION state.
-   '("j" . "H-j")
-   '("k" . "H-k")
-   ;; Use SPC (0-9) for digit arguments.
-   '("1" . meow-digit-argument)
-   '("2" . meow-digit-argument)
-   '("3" . meow-digit-argument)
-   '("4" . meow-digit-argument)
-   '("5" . meow-digit-argument)
-   '("6" . meow-digit-argument)
-   '("7" . meow-digit-argument)
-   '("8" . meow-digit-argument)
-   '("9" . meow-digit-argument)
-   '("0" . meow-digit-argument)
-   '("/" . meow-keypad-describe-key)
-   '("?" . meow-cheatsheet))
-  (meow-normal-define-key
-   '("C-x C-f" . me/ignore-vanilla-keybindings)
-   '("C-x C-b" . me/ignore-vanilla-keybindings)
-   '("C-x b" . me/ignore-vanilla-keybindings)
-   '("M-x" . me/ignore-vanilla-keybindings)
-   '("0" . meow-expand-0)
-   '("9" . meow-expand-9)
-   '("8" . meow-expand-8)
-   '("7" . meow-expand-7)
-   '("6" . meow-expand-6)
-   '("5" . meow-expand-5)
-   '("4" . meow-expand-4)
-   '("3" . meow-expand-3)
-   '("2" . meow-expand-2)
-   '("1" . meow-expand-1)
-   '("-" . negative-argument)
-   '(";" . meow-reverse)
-   '("," . meow-inner-of-thing)
-   '("." . meow-bounds-of-thing)
-   '("[" . meow-beginning-of-thing)
-   '("]" . meow-end-of-thing)
-   '("a" . meow-append)
-   '("o" . meow-open-below)
-   '("b" . meow-back-word)
-   '("B" . meow-back-symbol)
-   '("c" . meow-change)
-   '("d" . meow-kill)
-   '("e" . meow-next-word)
-   '("E" . meow-next-symbol)
-   '("f" . meow-find)
-   '("g" . meow-cancel-selection)
-   '("G" . meow-grab)
-   '("h" . meow-left)
-   '("H" . meow-left-expand)
-   '("i" . meow-insert)
-   '("O" . meow-open-above)
-   '("j" . meow-next)
-   '("J" . meow-next-expand)
-   '("k" . meow-prev)
-   '("K" . meow-prev-expand)
-   '("l" . meow-right)
-   '("L" . meow-right-expand)
-   '("m" . meow-join)
-   '("n" . meow-search)
-   '("p" . meow-yank)
-   '("q" . meow-quit)
-   '("Q" . meow-goto-line)
-   '("r" . meow-replace)
-   '("R" . meow-swap-grab)
-   '("x" . meow-delete)
-   '("X" . meow-backward-delete)
-   '("t" . meow-till)
-   '("u" . meow-undo)
-   '("U" . meow-undo-in-selection)
-   '("v" . meow-visit)
-   '("w" . meow-mark-word)
-   '("W" . meow-mark-symbol)
-   '("V" . meow-line)
-   '("X" . meow-goto-line)
-   '("y" . meow-save)
-   '("Y" . meow-sync-grab)
-   '("z" . meow-pop-selection)
-   '("'" . repeat)
-   '("$" . meow-block)
-   '("#" . meow-to-block)
-   '("<escape>" . ignore)))
-
 (use-package meow
   :init
-  ;; following keys because using Meow, C-x C-k requires fewer key strokes, which
+  (defun meow-setup ()
+    (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+    (meow-motion-overwrite-define-key
+     '("j" . meow-next)
+     '("k" . meow-prev)
+     '("<escape>" . ignore))
+    (meow-leader-define-key
+     ;; SPC j/k will run the original command in MOTION state.
+     '("j" . "H-j")
+     '("k" . "H-k")
+     ;; Use SPC (0-9) for digit arguments.
+     '("1" . meow-digit-argument)
+     '("2" . meow-digit-argument)
+     '("3" . meow-digit-argument)
+     '("4" . meow-digit-argument)
+     '("5" . meow-digit-argument)
+     '("6" . meow-digit-argument)
+     '("7" . meow-digit-argument)
+     '("8" . meow-digit-argument)
+     '("9" . meow-digit-argument)
+     '("0" . meow-digit-argument)
+     '("/" . meow-keypad-describe-key)
+     '("?" . meow-cheatsheet))
+    (meow-normal-define-key
+     '("C-x C-f" . me/ignore-vanilla-keybindings)
+     '("C-x C-b" . me/ignore-vanilla-keybindings)
+     '("C-x b" . me/ignore-vanilla-keybindings)
+     '("M-x" . me/ignore-vanilla-keybindings)
+     '("0" . meow-expand-0)
+     '("9" . meow-expand-9)
+     '("8" . meow-expand-8)
+     '("7" . meow-expand-7)
+     '("6" . meow-expand-6)
+     '("5" . meow-expand-5)
+     '("4" . meow-expand-4)
+     '("3" . meow-expand-3)
+     '("2" . meow-expand-2)
+     '("1" . meow-expand-1)
+     '("-" . negative-argument)
+     '(";" . meow-reverse)
+     '("," . meow-inner-of-thing)
+     '("." . meow-bounds-of-thing)
+     '("[" . meow-beginning-of-thing)
+     '("]" . meow-end-of-thing)
+     '("a" . meow-append)
+     '("o" . meow-open-below)
+     '("b" . meow-back-word)
+     '("B" . meow-back-symbol)
+     '("c" . meow-change)
+     '("d" . meow-kill)
+     '("e" . meow-next-word)
+     '("E" . meow-next-symbol)
+     '("f" . meow-find)
+     '("g" . meow-cancel-selection)
+     '("G" . meow-grab)
+     '("h" . meow-left)
+     '("H" . meow-left-expand)
+     '("i" . meow-insert)
+     '("O" . meow-open-above)
+     '("j" . meow-next)
+     '("J" . meow-next-expand)
+     '("k" . meow-prev)
+     '("K" . meow-prev-expand)
+     '("l" . meow-right)
+     '("L" . meow-right-expand)
+     '("m" . meow-join)
+     '("n" . meow-search)
+     '("p" . meow-yank)
+     '("q" . meow-quit)
+     '("Q" . meow-goto-line)
+     '("r" . meow-replace)
+     '("R" . meow-swap-grab)
+     '("x" . meow-delete)
+     '("X" . meow-backward-delete)
+     '("t" . meow-till)
+     '("u" . meow-undo)
+     '("U" . meow-undo-in-selection)
+     '("v" . meow-visit)
+     '("w" . meow-mark-word)
+     '("W" . meow-mark-symbol)
+     '("V" . meow-line)
+     '("X" . meow-goto-line)
+     '("y" . meow-save)
+     '("Y" . meow-sync-grab)
+     '("z" . meow-pop-selection)
+     '("'" . repeat)
+     '("$" . meow-block)
+     '("#" . meow-to-block)
+     '("<escape>" . ignore)))
+
+  (defun me/ignore-vanilla-keybindings ()
+    (interactive)
+    (message "Follow the meow way"))
+
+  (defun my/kill-buffer ()
+    (interactive)
+    (kill-buffer (buffer-name)))
+  ;; following keys because using Meow, C-x C-<key> requires fewer key strokes, which
   ;; is important for a regular comamnd like kill-buff
-  (global-set-key (kbd "C-x C-k") 'kill-buffer)
+  (global-set-key (kbd "C-x C-k") 'my/kill-buffer)
+  (global-set-key (kbd "C-x C-o") 'other-window)
   (global-set-key (kbd "C-x k") #'kmacro-keymap)
   ;; C-x C-p oringally is bound to mark-page. The command becomes moot in presence of Meow
   ;; we need to unbind the key first, as the global keymap take the most precedence.
