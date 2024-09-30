@@ -331,7 +331,9 @@
   :ensure t
   :config
   ;; I don't need to bury the buffer. I want to exit the view
+  (require 'org-ql-view)
   (bind-key "q" 'org-agenda-exit org-ql-view-map)
+  :init
   (defun my/show-scheduled ()
     (interactive)
     (org-ql-search (org-agenda-files) '(or (and (scheduled :to today) (todo "TODO" "WAITING"))

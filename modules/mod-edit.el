@@ -208,7 +208,7 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
 
-(add-hook 'prog-mode-hook (lambda () (hl-line-mode 1)))
+;; (add-hook 'prog-mode-hook (lambda () (hl-line-mode 1)))
 
 (defun with-face (str &rest face-plist)
   (propertize str 'face face-plist))
