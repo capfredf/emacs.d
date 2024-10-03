@@ -125,9 +125,7 @@
   :ensure t
   :bind
   (("C-x C-b" . consult-buffer)
-   ("M-y" . consult-yank-pop)
-   (:map org-mode-map
-         ("C-c C-l" . create-link))))
+   ("M-y" . consult-yank-pop)))
 
 (use-package project
   :bind
