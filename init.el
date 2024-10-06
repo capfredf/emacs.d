@@ -621,8 +621,29 @@
    ("C-x C-a g" . activities-revert)
    ("C-x C-a l" . activities-list)))
 
+(defvar open-closing-pairs
+  '((?\[ . ?\])
+    (?\{ . ?\})
+    (?\( . ?\))
+    (?\" . ?\")
+    (?\' . ?\')))
+
 (use-package meow
   :init
+  (defun surround-delimiters (delimiter)
+    (interactive "cdelimiter: ")
+    (setq the-other-delimiter (alist-get delimiter open-closing-pairs))
+    (cond
+     ((not the-other-delimiter)  (message "%c is not electric pairs" delimiter))
+     (t
+      (meow-grab)
+      (meow-append)
+      (insert delimiter)
+      (insert the-other-delimiter)
+      (ignore)
+      (backward-char)
+      (meow-swap-grab))))
+
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
     (meow-motion-overwrite-define-key
@@ -724,6 +745,7 @@
   ;; is important for a regular comamnd like kill-buff
   (global-set-key (kbd "C-x C-k") 'my/kill-buffer)
   (global-set-key (kbd "C-x C-o") 'other-window)
+  (global-set-key (kbd "C-c C-p") 'surround-delimiters)
   (global-set-key (kbd "C-x k") #'kmacro-keymap)
   ;; C-x C-p oringally is bound to mark-page. The command becomes moot in presence of Meow
   ;; we need to unbind the key first, as the global keymap take the most precedence.
