@@ -301,22 +301,51 @@
     (paredit-splice-sexp-killing-backward)
     (forward-char -1))
 
-  :bind (:map paredit-mode-map
-         ("C-M-l" . paredit-forward)
-         ("C-M-h" . paredit-backward)
-         ("C-M-r" . paredit-raise-sexp)
-         ("C-M-s" . paredit-splice-sexp-killing-backward)
-         ("C-M-j" . paredit-backward-down)
-         ("C-M-S-j" . paredit-backward-up)
-         ("C-M-k" . paredit-forward-down)
-         ("C-M-S-k" . paredit-forward-up)
-         ("C-M-." . paredit-forward-slurp-sexp)
-         ("C-M->" . paredit-forward-barf-sexp)
-         ("C-M-," . paredit-backward-slurp-sexp)
-         ("C-M-<" . paredit-backward-barf-sexp)
-         ("C-M-S-s" . paredit-splice-sexp)
-         ("C-M-(" . paredit-wrap-round)
-         ("C-M-o" . paredit-close-round-and-newline)))
+  (defun meow-paredit-setup ()
+    (setq meow-paren-keymap (make-keymap))
+    (meow-define-state paren "paredit mode" :lighter " [P]"
+                       :keymap meow-paren-keymap)
+    (setq meow-cursor-type-paren 'hollow)
+    (meow-define-keys
+      'paren
+      '("<escape>" . meow-normal-mode)
+      '("l" . paredit-forward)
+      '("h" . paredit-backward)
+      '("r" . paredit-raise-sexp)
+      '("s" . paredit-splice-sexp-killing-backward)
+      '("j" . paredit-backward-down)
+      '("J" . paredit-backward-up)
+      '("k" . paredit-forward-down)
+      '("K" . paredit-forward-up)
+      '("." . paredit-forward-slurp-sexp)
+      '(">" . paredit-forward-barf-sexp)
+      '("," . paredit-backward-slurp-sexp)
+      '("<" . paredit-backward-barf-sexp)
+      '("S" . paredit-splice-sexp)
+      '("(" . paredit-wrap-round)
+      '("o" . paredit-close-round-and-newline)
+      ;; '("l" . sp-forward-sexp)
+      ;; '("h" . sp-backward-sexp)
+      ;; '("j" . sp-down-sexp)
+      ;; '("k" . sp-up-sexp)
+      ;; '("w s" . sp-wrap-square)
+      ;; '("w r" . sp-wrap-round)
+      ;; '("w c" . sp-wrap-curly)
+      ;; '("W" . sp-unwrap-sexp)
+      ;; '("n" . sp-forward-slurp-sexp)
+      ;; '("b" . sp-forward-barf-sexp)
+      ;; '("v" . sp-backward-barf-sexp)
+      ;; '("c" . sp-backward-slurp-sexp)
+      ;; '("s" . sp-splice-sexp-killing-forward)
+      ;; '("S" . sp-splice-sexp-killing-backward)
+      ;; '("e" . sp-end-of-sexp)
+      ;; '("a" . sp-beginning-of-sexp)
+      ;; '("t" . sp-transpose-hybrid-sexp)
+      '("u" . meow-undo))
+    (meow-normal-define-key
+     '("<f6>" . meow-paren-mode)))
+  (meow-paredit-setup))
+
 
 (use-package olivetti
   :ensure t
@@ -565,6 +594,12 @@
   :config
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
 
+;; (with-eval-after-load "esh-opt"
+;;   (autoload 'epe-theme-lambda "eshell-prompt-extras")
+;;   (setq eshell-highlight-prompt nil
+;;         eshell-prompt-function 'epe-theme-lambda))
+
+
 (use-package corfu
   :ensure t
   ;; :custom
@@ -644,8 +679,11 @@
       (backward-char)
       (meow-swap-grab))))
 
+
+
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+    ;; (meow-paredit-setup ())
     (meow-motion-overwrite-define-key
      '("j" . meow-next)
      '("k" . meow-prev)
@@ -753,6 +791,11 @@
   (define-key ctl-x-map "C-p" project-prefix-map)
 
   :config
+  ;; (defun me/meow-setup-indicator ()
+  ;;   (unless (cl-find '(:eval (meow-indicator)) mode-line-format :test 'equal)
+  ;;     (setq-default mode-line-format (append '((:eval (propertize (meow-indicator) 'face '(:background "yellow")))) mode-line-format))))
+  (meow-indicator)
+  (meow-setup-indicator)
   (meow-setup)
   ;; (setopt meow-keypad-leader-dispatch ctl-x-map)
   ;; (setopt meow-keypad-leader-dispatch "C-x")
@@ -760,4 +803,8 @@
 ;; (use-package ob-racket
 ;;   :ensure t
 ;;   :vc (url . "")
-;;   :after org)
+;;   :after org)j
+;; (propertize (propertize "foo" 'face 'italic
+;;                         'mouse-face 'bold-italic)
+;;             'face 'italic
+;;             'mouse-face 'bold-italic)
