@@ -301,13 +301,24 @@
     (paredit-splice-sexp-killing-backward)
     (forward-char -1))
 
+  (defface meow-paren-indicator
+  '((((class color) (background dark))
+     ())
+    (((class color) (background light))
+     ()))
+  "Normal state indicator."
+  :group 'meow)
+
+  (push '(paren . meow-paren-indicator) meow-indicator-face-alist)
+
   (defun meow-paredit-setup ()
     (setq meow-paren-keymap (make-keymap))
     (meow-define-state paren "paredit mode" :lighter " [P]"
+                       ;; :face '(:background "#cea2fd")
                        :keymap meow-paren-keymap)
     (setq meow-cursor-type-paren 'hollow)
     (meow-define-keys
-      'paren
+        'paren
       '("<escape>" . meow-normal-mode)
       '("l" . paredit-forward)
       '("h" . paredit-backward)

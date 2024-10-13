@@ -362,6 +362,7 @@
  '(match ((t (:background "orange" :foreground "#586e75" :weight bold))))
  '(meow-insert-indicator ((t (:background "#6cb221" :foreground "white smoke" :weight bold))))
  '(meow-normal-indicator ((t (:background "deep sky blue" :foreground "white smoke" :weight bold))))
+ '(meow-paren-indicator ((t (:background "dark goldenrod" :foreground "white smoke" :weight bold))))
  '(mode-line ((t (:background "#eee8d5" :foreground "#657b83" :box nil :overline "#cccec4" :underline (:color "#cccec4" :style line :position t)))))
  '(org-block ((t (:inherit fixed-pitch))) t)
  '(org-code ((t (:inherit fixed-pitch :foreground "#93a1a1"))))
