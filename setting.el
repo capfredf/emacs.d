@@ -166,8 +166,8 @@
  '(org-agenda-files '("~/new-brain/dashboard.org"))
  '(org-babel-load-languages '((emacs-lisp . t)))
  '(org-capture-templates
-   '(("T" "Today's tasks" entry
-      (file+headline "~/my-brain/snd-brain.org" "Today")
+   '(("T" "Fleeting notes or task" entry
+      (file+headline "~/new-brain/dashboard.org" "Today")
       "")))
  '(org-catch-invisible-edits 'smart)
  '(org-ctags-open-link-functions nil t)
@@ -190,6 +190,7 @@
  '(org-loop-over-headlines-in-active-region t)
  '(org-modules
    '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-id ol-info ol-irc ol-mhe ol-rmail org-tempo ol-w3m))
+ '(org-preview-latex-default-process 'dvisvgm nil nil "Customized with use-package org")
  '(org-ql-views
    '(("Tasks that needs to processed" :buffers-files
       ("/home/capfredf/new-brain/dashboard.org")
@@ -364,12 +365,12 @@
  '(meow-normal-indicator ((t (:background "deep sky blue" :foreground "white smoke" :weight bold))))
  '(meow-paren-indicator ((t (:background "dark goldenrod" :foreground "white smoke" :weight bold))))
  '(mode-line ((t (:background "#eee8d5" :foreground "#657b83" :box nil :overline "#cccec4" :underline (:color "#cccec4" :style line :position t)))))
- '(org-block ((t (:inherit fixed-pitch))) t)
+ '(org-block ((t (:inherit fixed-pitch))))
  '(org-code ((t (:inherit fixed-pitch :foreground "#93a1a1"))))
- '(org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))) t)
- '(org-done ((t (:foreground "dim gray" :strike-through t))) t)
+ '(org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))))
+ '(org-done ((t (:foreground "dim gray" :strike-through t))))
  '(org-drawer ((t (:foreground "#2aa198" :height 0.8))))
- '(org-headline-done ((t (:foreground "dim gray" :strike-through t))) t)
+ '(org-headline-done ((t (:foreground "dim gray" :strike-through t))))
  '(org-headline-todo ((t (:foreground "Red4"))))
  '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
  '(org-level-1 ((t (:inherit nil :extend nil :foreground "#657b83" :height 1.3))))
