@@ -1,0 +1,2 @@
+(defalias 'transpose
+   (kmacro "g e l h l t SPC G l w r u h w R"))
