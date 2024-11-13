@@ -63,32 +63,60 @@
   :ensure t
   :demand t)
 
+(defun my/insert-key (key)
+  (call-interactively (key-binding key)))
 
-(defvar open-closing-pairs
-  '((?\[ . ?\])
-    (?\{ . ?\})
-    (?\( . ?\))
-    (?\" . ?\")
-    (?\' . ?\')))
-
+;; (self-insert-command )
 (use-package meow
   :init
   (defun surround-delimiters (delimiter)
-    (interactive "cdelimiter: ")
-    (setq the-other-delimiter (alist-get delimiter open-closing-pairs))
-    (cond
-     ((not the-other-delimiter)  (message "%c is not electric pairs" delimiter))
-     (t
-      (meow-grab)
-      (meow-append)
-      (insert delimiter)
-      (insert the-other-delimiter)
-      (ignore)
-      (backward-char)
-      (meow-swap-grab))))
+    (interactive "sdelimiter: ")
+    (my/insert-key delimiter))
 
 
-
+  (defun meow-paredit-setup ()
+    ;; (setq meow-paren-keymap (make-keymap))
+    ;; (meow-define-state paren "paredit mode" :lighter " [P]"
+    ;;                    ;; :face '(:background "#cea2fd")
+    ;;                    :keymap meow-paren-keymap)
+    ;; (setq meow-cursor-type-paren 'hollow)
+    (meow-normal-define-key
+     ;; 'paren
+     '("s l" . paredit-forward)
+     '("s h" . paredit-backward)
+     '("s r" . paredit-raise-sexp)
+     '("s s" . paredit-splice-sexp-killing-backward)
+     '("s j" . paredit-backward-down)
+     '("s J" . paredit-backward-up)
+     '("s k" . paredit-forward-down)
+     '("s K" . paredit-forward-up)
+     '("s ." . paredit-forward-slurp-sexp)
+     '("s >" . paredit-forward-barf-sexp)
+     '("s ," . paredit-backward-slurp-sexp)
+     '("s <" . paredit-backward-barf-sexp)
+     '("s S" . paredit-splice-sexp)
+     '("s (" . paredit-wrap-round)
+     '("s o" . paredit-close-round-and-newline)
+     ;; '("l" . sp-forward-sexp)
+     ;; '("h" . sp-backward-sexp)
+     ;; '("j" . sp-down-sexp)
+     ;; '("k" . sp-up-sexp)
+     ;; '("w s" . sp-wrap-square)
+     ;; '("w r" . sp-wrap-round)
+     ;; '("w c" . sp-wrap-curly)
+     ;; '("W" . sp-unwrap-sexp)
+     ;; '("n" . sp-forward-slurp-sexp)
+     ;; '("b" . sp-forward-barf-sexp)
+     ;; '("v" . sp-backward-barf-sexp)
+     ;; '("c" . sp-backward-slurp-sexp)
+     ;; '("s" . sp-splice-sexp-killing-forward)
+     ;; '("S" . sp-splice-sexp-killing-backward)
+     ;; '("e" . sp-end-of-sexp)
+     ;; '("a" . sp-beginning-of-sexp)
+     ;; '("t" . sp-transpose-hybrid-sexp)
+     ;; '("u" . meow-undo)
+     ))
+  (add-hook 'paredit-mode-hook #'meow-paredit-setup)
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
     ;; (meow-paredit-setup ())
@@ -412,7 +440,7 @@
   :ensure t
   :init
   (add-hook 'racket-mode-hook 'enable-paredit-mode)
-  (add-hook 'racket-repl-mode-hook 'enable-paredit-mode)
+  ;; (add-hook 'racket-repl-mode-hook 'enable-paredit-mode)
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
   :config
   (unbind-key "C-M-f" paredit-mode-map)
@@ -453,51 +481,7 @@
   ;; :group 'meow)
 
   ;; (push '(paren . meow-paren-indicator) meow-indicator-face-alist)
-
-  (defun meow-paredit-setup ()
-    ;; (setq meow-paren-keymap (make-keymap))
-    ;; (meow-define-state paren "paredit mode" :lighter " [P]"
-    ;;                    ;; :face '(:background "#cea2fd")
-    ;;                    :keymap meow-paren-keymap)
-    ;; (setq meow-cursor-type-paren 'hollow)
-    (meow-normal-define-key
-        ;; 'paren
-      '("s l" . paredit-forward)
-      '("s h" . paredit-backward)
-      '("s r" . paredit-raise-sexp)
-      '("s s" . paredit-splice-sexp-killing-backward)
-      '("s j" . paredit-backward-down)
-      '("s J" . paredit-backward-up)
-      '("s k" . paredit-forward-down)
-      '("s K" . paredit-forward-up)
-      '("s ." . paredit-forward-slurp-sexp)
-      '("s >" . paredit-forward-barf-sexp)
-      '("s ," . paredit-backward-slurp-sexp)
-      '("s <" . paredit-backward-barf-sexp)
-      '("s S" . paredit-splice-sexp)
-      '("s (" . paredit-wrap-round)
-      '("s o" . paredit-close-round-and-newline)
-      ;; '("l" . sp-forward-sexp)
-      ;; '("h" . sp-backward-sexp)
-      ;; '("j" . sp-down-sexp)
-      ;; '("k" . sp-up-sexp)
-      ;; '("w s" . sp-wrap-square)
-      ;; '("w r" . sp-wrap-round)
-      ;; '("w c" . sp-wrap-curly)
-      ;; '("W" . sp-unwrap-sexp)
-      ;; '("n" . sp-forward-slurp-sexp)
-      ;; '("b" . sp-forward-barf-sexp)
-      ;; '("v" . sp-backward-barf-sexp)
-      ;; '("c" . sp-backward-slurp-sexp)
-      ;; '("s" . sp-splice-sexp-killing-forward)
-      ;; '("S" . sp-splice-sexp-killing-backward)
-      ;; '("e" . sp-end-of-sexp)
-      ;; '("a" . sp-beginning-of-sexp)
-      ;; '("t" . sp-transpose-hybrid-sexp)
-      ;; '("u" . meow-undo)
-      )
-    )
-  (meow-paredit-setup))
+)
 
 
 (use-package olivetti

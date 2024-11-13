@@ -131,7 +131,7 @@
  '(electric-pair-pairs '((34 . 34) (8216 . 8217) (8220 . 8221) (10181 . 10182)))
  '(enable-recursive-minibuffers t)
  '(eshell-visual-commands
-   '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "racket" "cabal repl" "ghci"))
+   '("vi" "vim" "screen" "tmux" "top" "htop" "less" "more" "lynx" "links" "ncftp" "mutt" "pine" "tin" "trn" "elm" "cabal repl" "ghci"))
  '(exec-path-from-shell-shell-name "/usr/bin/fish")
  '(fill-column 80)
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
