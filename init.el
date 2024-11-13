@@ -501,8 +501,8 @@
   (defun my/show-scheduled ()
     (interactive)
     (org-ql-search (org-agenda-files) '(or (and (scheduled :to today) (todo "TODO" "WAITING"))
-                                           ;; (and (planning) (todo "TODO" "WAITING"))
-                                           (and (ts-active :on today) (todo "TODO" "WAITING"))
+                                           (and (deadline) (todo "TODO" "WAITING"))
+                                           ;; (and (ts-active :on today) (todo "TODO" "WAITING"))
                                            (todo "DOING"))
       :sort '(todo date)
       :title "Today's View"
@@ -512,7 +512,7 @@
                       (:name "Daily" :and (:scheduled today :category "daily"))
                       (:name "Scheduled" :and (:scheduled today :not (:and (:category "daily" :category "workout"))
                                                           :todo "TODO"))
-                      (:name "Future" :scheduled future))))
+                      (:name "Deadlined" :deadline future))))
 
   :bind
   (("C-c q" . my/show-scheduled)
