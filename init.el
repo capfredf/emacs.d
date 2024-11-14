@@ -63,16 +63,29 @@
   :ensure t
   :demand t)
 
-(defun my/insert-key (key)
-  (call-interactively (key-binding key)))
+(defvar open-closing-pairs
+  '((?\[ . ?\])
+    (?\{ . ?\})
+    (?\( . ?\))
+    (?\" . ?\")
+    (?\' . ?\')))
 
 ;; (self-insert-command )
 (use-package meow
   :init
   (defun surround-delimiters (delimiter)
-    (interactive "sdelimiter: ")
-    (my/insert-key delimiter))
-
+    (interactive "cdelimiter: ")
+    (setq the-other-delimiter (alist-get delimiter open-closing-pairs))
+    (cond
+     ((not the-other-delimiter)  (message "%c is not electric pairs" delimiter))
+     (t
+      (meow-grab)
+      (meow-append)
+      (insert delimiter)
+      (insert the-other-delimiter)
+      (ignore)
+      (backward-char)
+      (meow-swap-grab))))
 
   (defun meow-paredit-setup ()
     ;; (setq meow-paren-keymap (make-keymap))
