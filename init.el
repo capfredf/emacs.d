@@ -510,6 +510,12 @@
   ;; I don't need to bury the buffer. I want to exit the view
   (require 'org-ql-view)
   (bind-key "q" 'org-agenda-exit org-ql-view-map)
+  ;; there are no bindings in org-ql-view-map for those keys, we need to unbind
+  ;; those keys from its parent keymap
+  (unbind-key "h" org-agenda-mode-map)
+  (unbind-key "H" org-agenda-mode-map)
+  (unbind-key "l" org-agenda-mode-map)
+  (unbind-key "L" org-agenda-mode-map)
   :init
   (defun my/show-scheduled ()
     (interactive)
