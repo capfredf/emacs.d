@@ -556,7 +556,7 @@
 
 (use-package org
   :mode ("\\.org" . org-mode)
-  :init
+  :init 
   (add-hook 'org-mode-hook (lambda ()
                              ;; (org-bullets-mode 1)
                              ;; (variable-pitch-mode 1)
