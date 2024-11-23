@@ -34,6 +34,7 @@
 (define-coding-system-alias 'UTF-8 'utf-8)
 (define-coding-system-alias 'utf8 'utf-8)
 (set-language-environment 'utf-8)
+(setopt use-package-always-ensure t)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
