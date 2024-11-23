@@ -192,7 +192,6 @@
  '(org-loop-over-headlines-in-active-region t)
  '(org-modules
    '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-id ol-info ol-irc ol-mhe ol-rmail org-tempo ol-w3m))
- '(org-preview-latex-default-process 'dvisvgm nil nil "Customized with use-package org")
  '(org-ql-views
    '(("Tasks that needs to processed" :buffers-files
       ("/home/capfredf/new-brain/dashboard.org")
@@ -324,7 +323,7 @@
    '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "|" "CANCELLED(c)" "DONE(d)")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(eshell-prompt-extras corfu meow activities clojure-mode elixir-mode fish-mode lua-mode org-ql embark-consult marginalia consult embark orderless eat helm-core wfnames helm helm-org-rifle markdown-mode typescript-mode auctex racket-mode olivetti org-superstar org-nsuperstar ws-butler org-super-agenda paredit ob-racket racket-unicode-input-method vertico olc wgrep-ag diredfl exec-path-from-shell yaml-mode perspective centaur-tabs rotate python-mode yasnippet which-key wgrep visual-fill-column use-package-ensure-system-package solarized-theme rust-mode projectile popup pdf-tools parsebib ox-reveal org-roam org-journal multiple-cursors moody magit key-chord iy-go-to-char hydra htmlize highlight-parentheses haskell-mode goto-chg flycheck eyebrowse expand-region diff-hl deft biblio benchmark-init ag ace-window))
+   '(activities org-super-agenda org-ql ag auctex corfu diff-hl eat embark-consult exec-path-from-shell expand-region highlight-parentheses magit marginalia markdown-mode meow olivetti orderless org-superstar paredit racket-mode solarized-theme ts vertico wgrep-ag ws-butler yasnippet))
  '(project-switch-commands
    '((project-find-file "Find file" nil)
      (project-find-regexp "Find regexp" nil)

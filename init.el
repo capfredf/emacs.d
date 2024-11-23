@@ -72,6 +72,7 @@
 
 ;; (self-insert-command )
 (use-package meow
+  :ensure t
   :init
   (defun surround-delimiters (delimiter)
     (interactive "cdelimiter: ")
@@ -760,10 +761,8 @@
   :ensure t
   ;; :custom
   ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
-  :bind
-  ;; Configure SPC for separator insertion
-  (:map corfu-map ("SPC" . corfu-insert-separator))
-  :init
+  :bind (:map corfu-map ("SPC" . corfu-insert-separator)) ;; Configure SPC for separator insertion
+  :config
   (global-corfu-mode))
 
 (defconst org-journal-entry-template-name "daily-journal-template.org")
@@ -795,6 +794,7 @@
          (haskell-mode . electric-pair-local-mode)))
 
 (use-package activities
+  :ensure t
   :init
   (activities-mode)
   (activities-tabs-mode)
