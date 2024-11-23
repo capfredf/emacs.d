@@ -51,7 +51,6 @@
 
 (use-package use-package-ensure-system-package)
 (use-package exec-path-from-shell
-  :ensure t
   :if (memq window-system '(pgtk))
   :config
   (exec-path-from-shell-initialize))
@@ -60,7 +59,6 @@
   :hook (dired-mode . dired-hide-details-mode))
 
 (use-package bind-key
-  :ensure t
   :demand t)
 
 (defvar open-closing-pairs
@@ -72,7 +70,6 @@
 
 ;; (self-insert-command )
 (use-package meow
-  :ensure t
   :init
   (defun surround-delimiters (delimiter)
     (interactive "cdelimiter: ")
@@ -275,7 +272,6 @@
 
 
 (use-package vertico
-  :ensure t
   :init
   (defun up-directory (arg)
     "Move up a directory (delete backwards to /)."
@@ -297,7 +293,6 @@
 
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
-  :ensure t
   ;; Configure a custom style dispatcher (see the Consult wiki)
   ;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
   ;;       orderless-component-separator #'orderless-escapable-split-on-space)
@@ -307,7 +302,6 @@
   (completion-styles '(orderless)))
 
 (use-package consult
-  :ensure t
   :bind
   (("C-x C-b" . consult-buffer)
    ("M-y" . consult-yank-pop)))
@@ -320,11 +314,9 @@
         ))
 
 (use-package diff-hl
-  :ensure t
   :demand t)
 
 (use-package magit
-  :ensure t
   :after (diff-hl)
   :bind (("C-x m" . magit-status))
   :config (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
@@ -332,7 +324,6 @@
 ;; (define-key icomplete-minibuffer-map (kbd "<s-tab>") 'icomplete-force-complete)
 
 (use-package yasnippet
-  :ensure t
   :hook ((prog-mode text-mode) . yas-minor-mode)
   :config (yas-reload-all))
 
@@ -340,29 +331,23 @@
 ;;   :ensure t)
 
 (use-package solarized-theme
-  :ensure t
   :config
   (switch-theme 'solarized-light))
 
 
 (use-package highlight-parentheses
-  :ensure t
   :init
   (add-hook 'racket-mode-hook (lambda () (highlight-parentheses-mode t)))
   (add-hook 'emacs-lisp-mode-hook (lambda () (highlight-parentheses-mode t))))
 
-(use-package s
-  :ensure t)
+(use-package s)
 
-(use-package dash
-  :ensure t)
+(use-package dash)
 
 (use-package wgrep
-  :ensure t
   :after grep)
 
 (use-package wgrep-ag
-  :ensure t
   :defer t)
 
 
@@ -371,14 +356,12 @@
 ;;   :mode "\\.scribl")
 
 (use-package ag
-  :ensure t
   :config
   (autoload 'wgrep-ag-setup "wgrep-ag")
   (add-hook 'ag-mode-hook 'wgrep-ag-setup))
 
 
 (use-package flymake
-  :ensure t
   :bind (:map flymake-mode-map
 							("M-n" . 'flymake-goto-next-error)
 							("M-p" . 'flymake-goto-prev-error)))
@@ -394,23 +377,19 @@
 ;;          ("C->" . mc/skip-to-next-like-this)
 ;;          ("C-<" . mc/skip-to-previous-like-this)))
 
-(use-package expand-region
-  :ensure t
-  :bind (("C-=" . er/expand-region)))
+;; (use-package expand-region
+;;   :ensure t
+;;   :bind (("C-=" . er/expand-region)))
 
 
 (use-package ws-butler
-  :ensure t
   :hook (prog-mode . ws-butler-mode))
 
 (use-package marginalia
-  :ensure t
   :config
   (marginalia-mode))
 
 (use-package embark
-  :ensure t
-
   :bind
   (("C-;" . embark-act)         ;; pick some comfortable binding
    ("C-:" . embark-dwim)        ;; good alternative: M-.
@@ -446,12 +425,10 @@
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
-  :ensure t    ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package paredit
-  :ensure t
   :init
   (add-hook 'racket-mode-hook 'enable-paredit-mode)
   ;; (add-hook 'racket-repl-mode-hook 'enable-paredit-mode)
@@ -499,14 +476,12 @@
 
 
 (use-package olivetti
-  :ensure t
   :hook (org-mode . olivetti-mode))
 
 
 
 ;; (org-ql-search (org-agenda-files) '(and (todo "TODO") (not (scheduled :to today))))
 (use-package org-ql
-  :ensure t
   :config
   ;; I don't need to bury the buffer. I want to exit the view
   (require 'org-ql-view)
@@ -659,24 +634,20 @@
            :publishing-function org-publish-attachment)))
 
   (use-package org-superstar
-    :ensure t
     :hook (org-mode . org-superstar-mode)))
 
 
 (use-package org-super-agenda
-  :ensure t
   :hook ((org-agenda-mode . org-super-agenda-mode)))
 
 
 
 (use-package markdown-mode
-  :ensure t
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)))
 
 (use-package auctex
-  :ensure t
   :mode (("\\.tex" . TeX-latex-mode))
   :config
   (require 'reftex)
@@ -712,7 +683,6 @@
 ;; (use-package racket-unicode-input-method
 ;;   :commands racket-unicode-input-method-enable)
 (use-package racket-mode
-  :ensure t
   ;; :no-require t
   :mode "\\.rkt"
   ;; :load-path "site-lisp/racket-mode"
@@ -746,7 +716,6 @@
   (windmove-swap-states-default-keybindings '(shift control)))
 
 (use-package eat
-  :ensure t
   :after eshell
   :config
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
@@ -758,7 +727,6 @@
 
 
 (use-package corfu
-  :ensure t
   ;; :custom
   ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
   :bind (:map corfu-map ("SPC" . corfu-insert-separator)) ;; Configure SPC for separator insertion
@@ -794,7 +762,6 @@
          (haskell-mode . electric-pair-local-mode)))
 
 (use-package activities
-  :ensure t
   :init
   (activities-mode)
   (activities-tabs-mode)
