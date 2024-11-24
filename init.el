@@ -34,7 +34,7 @@
 (define-coding-system-alias 'UTF-8 'utf-8)
 (define-coding-system-alias 'utf8 'utf-8)
 (set-language-environment 'utf-8)
-(setopt use-package-always-ensure t)
+;; (setopt use-package-always-ensure t)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -50,8 +50,10 @@
 (setq treesit-extra-load-path
       '("/home/capfredf/code/tree-sitter-module/dist"))
 
-(use-package use-package-ensure-system-package)
+;; (use-package use-package-ensure-system-package
+;;   :ensure t)
 (use-package exec-path-from-shell
+  :ensure t
   :if (memq window-system '(pgtk))
   :config
   (exec-path-from-shell-initialize))
@@ -60,6 +62,7 @@
   :hook (dired-mode . dired-hide-details-mode))
 
 (use-package bind-key
+  :ensure t
   :demand t)
 
 (defvar open-closing-pairs
@@ -71,6 +74,7 @@
 
 ;; (self-insert-command )
 (use-package meow
+  :ensure t
   :init
   (defun surround-delimiters (delimiter)
     (interactive "cdelimiter: ")
@@ -273,6 +277,7 @@
 
 
 (use-package vertico
+  :ensure t
   :init
   (defun up-directory (arg)
     "Move up a directory (delete backwards to /)."
@@ -289,11 +294,13 @@
               ("C-l" . up-directory)))
 
 (use-package savehist
+  :ensure t
   :init
   (savehist-mode))
 
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
+  :ensure t
   ;; Configure a custom style dispatcher (see the Consult wiki)
   ;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
   ;;       orderless-component-separator #'orderless-escapable-split-on-space)
@@ -303,11 +310,13 @@
   (completion-styles '(orderless)))
 
 (use-package consult
+  :ensure t
   :bind
   (("C-x C-b" . consult-buffer)
    ("M-y" . consult-yank-pop)))
 
 (use-package project
+  :ensure t
   :bind
   (:map project-prefix-map
         ("f" . project-find-file)
@@ -315,9 +324,11 @@
         ))
 
 (use-package diff-hl
+  :ensure t
   :demand t)
 
 (use-package magit
+  :ensure t
   :after (diff-hl)
   :bind (("C-x m" . magit-status))
   :config (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
@@ -325,72 +336,67 @@
 ;; (define-key icomplete-minibuffer-map (kbd "<s-tab>") 'icomplete-force-complete)
 
 (use-package yasnippet
+  :ensure t
   :hook ((prog-mode text-mode) . yas-minor-mode)
   :config (yas-reload-all))
 
-;; (use-package helm-org-rifle
-;;   :ensure t)
 
 (use-package solarized-theme
+  :ensure t
   :config
   (switch-theme 'solarized-light))
 
 
 (use-package highlight-parentheses
+  :ensure t
   :init
   (add-hook 'racket-mode-hook (lambda () (highlight-parentheses-mode t)))
   (add-hook 'emacs-lisp-mode-hook (lambda () (highlight-parentheses-mode t))))
 
-(use-package s)
+(use-package s
+  :ensure t)
 
-(use-package dash)
+(use-package dash
+  :ensure t)
 
 (use-package wgrep
+  :ensure t
   :after grep)
 
 (use-package wgrep-ag
+  :ensure t
   :defer t)
 
 
 ;; (use-package scribble
+:ensure t
 ;;   :ensure t
 ;;   :mode "\\.scribl")
 
 (use-package ag
+  :ensure t
   :config
   (autoload 'wgrep-ag-setup "wgrep-ag")
   (add-hook 'ag-mode-hook 'wgrep-ag-setup))
 
 
 (use-package flymake
+  :ensure t
   :bind (:map flymake-mode-map
 							("M-n" . 'flymake-goto-next-error)
 							("M-p" . 'flymake-goto-prev-error)))
 
-
-;; (use-package multiple-cursors
-;;   :ensure t
-;;   ;; :config
-;;   ;; (define-key mc/keymap (kbd "C-'") 'mc-hide-unmatched-lines-mode)
-;;   :bind (("C-M-e" . mc/edit-lines)
-;;          ("C-." . mc/mark-next-like-this)
-;;          ("C-," . mc/mark-previous-like-this)
-;;          ("C->" . mc/skip-to-next-like-this)
-;;          ("C-<" . mc/skip-to-previous-like-this)))
-
-;; (use-package expand-region
-;;   :ensure t
-;;   :bind (("C-=" . er/expand-region)))
-
-
 (use-package ws-butler
+  :ensure t
   :hook (prog-mode . ws-butler-mode))
 
 (use-package marginalia
+  :ensure t
   :config
   (marginalia-mode))
 
 (use-package embark
+  :ensure t
   :bind
   (("C-;" . embark-act)         ;; pick some comfortable binding
    ("C-:" . embark-dwim)        ;; good alternative: M-.
@@ -414,11 +420,6 @@
                  nil
                  (window-parameters (mode-line-format . none)))))
 
-;; (use-package denote
-;;   :commands (denote)
-;;   :custom
-;;   (denote-directory "~/my-brain")
-;;   :ensure t)
 
 (use-package beancount-mode
   :load-path "beancount-mode/"
@@ -426,10 +427,12 @@
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
+  :ensure t
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package paredit
+  :ensure t
   :init
   (add-hook 'racket-mode-hook 'enable-paredit-mode)
   ;; (add-hook 'racket-repl-mode-hook 'enable-paredit-mode)
@@ -477,12 +480,14 @@
 
 
 (use-package olivetti
+  :ensure t
   :hook (org-mode . olivetti-mode))
 
 
 
 ;; (org-ql-search (org-agenda-files) '(and (todo "TODO") (not (scheduled :to today))))
 (use-package org-ql
+  :ensure t
   :config
   ;; I don't need to bury the buffer. I want to exit the view
   (require 'org-ql-view)
@@ -532,6 +537,7 @@
         ("k" . org-agenda-previous-line)))
 
 (use-package org
+  :ensure t
   :mode ("\\.org" . org-mode)
   :init 
   (add-hook 'org-mode-hook (lambda ()
@@ -635,20 +641,24 @@
            :publishing-function org-publish-attachment)))
 
   (use-package org-superstar
+    :ensure t
     :hook (org-mode . org-superstar-mode)))
 
 
 (use-package org-super-agenda
+  :ensure t
   :hook ((org-agenda-mode . org-super-agenda-mode)))
 
 
 
 (use-package markdown-mode
+  :ensure t
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)))
 
 (use-package auctex
+  :ensure t
   :mode (("\\.tex" . TeX-latex-mode))
   :config
   (require 'reftex)
@@ -681,9 +691,8 @@
       (org-next-visible-heading 1)
       (org-schedule 0 (format-time-string "%Y-%m-%d")))))
 
-;; (use-package racket-unicode-input-method
-;;   :commands racket-unicode-input-method-enable)
 (use-package racket-mode
+  :ensure t
   ;; :no-require t
   :mode "\\.rkt"
   ;; :load-path "site-lisp/racket-mode"
@@ -699,24 +708,24 @@
   (put 'required/typed 'racket-indent-function 1)
   (put 'term-let 'racket-indent-function 1))
 
-;; (use-package typescript-mode
+; (use-package typescript-mode
+;; :ensure t
 ;;   :ensure t
 ;;   :mode "\\.ts")
 
-;; (use-package eat
-;;   :ensure
-;;   t)
-;; (require 'subr-x)
 (use-package winner
+  :ensure t
   :config
   (winner-mode t))
 
 (use-package windmove
+  :ensure t
   :config
   (windmove-mode t)
   (windmove-swap-states-default-keybindings '(shift control)))
 
 (use-package eat
+  :ensure t
   :after eshell
   :config
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
@@ -728,6 +737,7 @@
 
 
 (use-package corfu
+  :ensure t
   ;; :custom
   ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
   :bind (:map corfu-map ("SPC" . corfu-insert-separator)) ;; Configure SPC for separator insertion
@@ -740,13 +750,6 @@
   (kill-whole-line)
   (insert-file-contents (expand-file-name org-journal-entry-template-name org-journal-dir)))
 
-;; (use-package org-journal
-;;   :config
-;;   (unbind-key "C-c C-s" org-journal-mode-map)
-;;   :hook ((org-journal-after-header-create . new-entry-template))
-;;   :bind (:map org-journal-mode-map
-;;               ("C-c C-s" . org-schedule)))
-
 (use-package agda2-mode
   :mode "\\.agda\\'"
   :load-path (lambda () (let ((coding-system-for-read 'utf-8))
@@ -758,11 +761,13 @@
   (bind-key "C-c C-v" 'agda2-give agda2-mode-map))
 
 (use-package haskell-mode
+  :ensure t
   :mode "\\.hs"
   :hook ((haskell-mode . interactive-haskell-mode)
          (haskell-mode . electric-pair-local-mode)))
 
 (use-package activities
+  :ensure t
   :init
   (activities-mode)
   (activities-tabs-mode)
@@ -780,11 +785,3 @@
    ("C-x C-a g" . activities-revert)
    ("C-x C-a l" . activities-list)))
 
-;; (use-package ob-racket
-;;   :ensure t
-;;   :vc (url . "")
-;;   :after org)j
-;; (propertize (propertize "foo" 'face 'italic
-;;                         'mouse-face 'bold-italic)
-;;             'face 'italic
-;;             'mouse-face 'bold-italic)
