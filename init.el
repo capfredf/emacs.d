@@ -659,7 +659,7 @@
 
 (use-package auctex
   :ensure t
-  :mode (("\\.tex" . TeX-latex-mode))
+  :mode (("\\.tex" . LaTeX-mode))
   :config
   (require 'reftex)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
