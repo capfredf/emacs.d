@@ -174,6 +174,7 @@
  '(org-catch-invisible-edits 'smart)
  '(org-ctags-open-link-functions nil t)
  '(org-enforce-todo-dependencies t)
+ '(org-export-initial-scope 'subtree)
  '(org-fold-catch-invisible-edits 'smart)
  '(org-fontify-todo-headline nil)
  '(org-format-latex-options
@@ -187,11 +188,13 @@
  '(org-journal-dir "~/new-brain/journals")
  '(org-journal-file-format "%Y-W%V-%m%d.org")
  '(org-journal-file-type 'weekly)
+ '(org-latex-compiler "lualatex")
  '(org-link-use-indirect-buffer-for-internals t)
  '(org-log-into-drawer t)
  '(org-loop-over-headlines-in-active-region t)
  '(org-modules
    '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-id ol-info ol-irc ol-mhe ol-rmail org-tempo ol-w3m))
+ '(org-preview-latex-default-process 'dvisvgm nil nil "Customized with use-package org")
  '(org-ql-views
    '(("Tasks that needs to processed" :buffers-files
       ("/home/capfredf/new-brain/dashboard.org")
@@ -323,7 +326,7 @@
    '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "|" "CANCELLED(c)" "DONE(d)")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(haskell-mode activities org-super-agenda org-ql ag auctex corfu diff-hl eat embark embark-consult exec-path-from-shell expand-region highlight-parentheses magit marginalia markdown-mode meow olivetti orderless org-superstar paredit racket-mode solarized-theme ts vertico wgrep-ag ws-butler yasnippet))
+   '(fish-mode haskell-mode activities org-super-agenda org-ql ag auctex corfu diff-hl eat embark embark-consult exec-path-from-shell expand-region highlight-parentheses magit marginalia markdown-mode meow olivetti orderless org-superstar paredit racket-mode solarized-theme ts vertico wgrep-ag ws-butler yasnippet))
  '(project-switch-commands
    '((project-find-file "Find file" nil)
      (project-find-regexp "Find regexp" nil)
@@ -368,12 +371,12 @@
  '(meow-normal-indicator ((t (:background "deep sky blue" :foreground "white smoke" :weight bold))))
  '(meow-paren-indicator ((t (:background "dark goldenrod" :foreground "white smoke" :weight bold))))
  '(mode-line ((t (:background "#eee8d5" :foreground "#657b83" :box nil :overline "#cccec4" :underline (:color "#cccec4" :style line :position t)))))
- '(org-block ((t (:inherit fixed-pitch))) t)
+ '(org-block ((t (:inherit fixed-pitch))))
  '(org-code ((t (:inherit fixed-pitch :foreground "#93a1a1"))))
- '(org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))) t)
- '(org-done ((t (:foreground "dim gray" :strike-through t))) t)
+ '(org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))))
+ '(org-done ((t (:foreground "dim gray" :strike-through t))))
  '(org-drawer ((t (:foreground "#2aa198" :height 0.8))))
- '(org-headline-done ((t (:foreground "dim gray" :strike-through t))) t)
+ '(org-headline-done ((t (:foreground "dim gray" :strike-through t))))
  '(org-headline-todo ((t (:foreground "Red4"))))
  '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
  '(org-level-1 ((t (:inherit nil :extend nil :foreground "#657b83" :height 1.3))))
