@@ -679,17 +679,20 @@
         (template (expand-file-name "daily_template.org" "~/new-brain")))
     (save-excursion
       (find-file file)
-      (goto-char (org-find-exact-headline-in-buffer "Today"))
-      (org-edit-headline (format-time-string "%m/%d/%Y" (time-subtract (current-time) (days-to-time 1))))
+      ;; go the the first heading
+      (goto-char (point-min))
+      (unless (org-at-heading-p)
+        (org-next-visible-heading 1)
+      (org-edit-headline (substring (nth 4 (org-heading-components)) date-pos))
       (let* ((pos (org-find-exact-headline-in-buffer headline)))
         (org-refile nil nil (list headline file nil pos)))
       (org-insert-heading)
-      (insert "Today")
+      (insert (format "Today -- %s" (format-time-string "%m/%d/%Y" (current-time))))
       (newline)
       (insert-file-contents template)
       (org-schedule 0 (format-time-string "%Y-%m-%d"))
       (org-next-visible-heading 1)
-      (org-schedule 0 (format-time-string "%Y-%m-%d")))))
+      (org-schedule 0 (format-time-string "%Y-%m-%d"))))))
 
 (use-package racket-mode
   :ensure t
