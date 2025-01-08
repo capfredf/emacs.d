@@ -789,3 +789,6 @@
    ("C-x C-a g" . activities-revert)
    ("C-x C-a l" . activities-list)))
 
+(use-package proof-general
+  :ensure t
+  )
