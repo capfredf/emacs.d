@@ -712,7 +712,7 @@
   :init
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
   (add-hook 'racket-hash-lang-mode-hook #'racket-xp-mode)
-  (add-hook 'racket-hash-lang-module-language-hook (lambda (_)
+  (add-hook 'racket-hash-lang-module-language-hook (lambda (arg)
                                                      (setq-local racket-xp-add-binding-faces t)))
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
   (add-to-list 'auto-mode-alist '("\\.rhm$" . racket-hash-lang-mode))
