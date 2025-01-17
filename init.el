@@ -711,6 +711,9 @@
   ;; :load-path "site-lisp/racket-mode"
   :init
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
+  (add-hook 'racket-hash-lang-mode-hook #'racket-xp-mode)
+  (add-hook 'racket-hash-lang-module-language-hook (lambda (_)
+                                                     (setq-local racket-xp-add-binding-faces t)))
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
   (add-to-list 'auto-mode-alist '("\\.rhm$" . racket-hash-lang-mode))
   (add-to-list 'auto-mode-alist '("\\.scrbl$" . racket-mode))
