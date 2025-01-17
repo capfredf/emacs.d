@@ -168,10 +168,6 @@
  '(org-agenda-files '("~/new-brain/dashboard.org"))
  '(org-agenda-tags-column -20)
  '(org-babel-load-languages '((emacs-lisp . t)))
- '(org-capture-templates
-   '(("T" "Fleeting notes or task" entry
-      (file+headline "~/new-brain/dashboard.org" "Today")
-      "")))
  '(org-catch-invisible-edits 'smart)
  '(org-ctags-open-link-functions nil t)
  '(org-enforce-todo-dependencies t)

@@ -551,7 +551,11 @@
   (org-image-actual-width 500)
   (org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
   (org-export-with-toc nil)
-
+  (org-capture-templates
+   `(("T" "Fleeting notes or task" entry
+      (file+function "~/new-brain/dashboard.org" ,(lambda ()
+                                                    (org-goto)))
+      "")))
   :custom-face
   ;; (org-quote ((t (:height 2.0))))
   (org-done ((t (:foreground "dim gray" :strike-through t))))
@@ -572,6 +576,11 @@
          ("s-l" . org-forward-heading-same-level)
          ("s-h" . org-backward-heading-same-level))
   :config
+  ;; (defun my/org-count-subtree-words ()
+  ;;     (interactive)
+  ;;     (save-excursion
+  ;;       (org-back-to-heading t)
+  ;;       (org)))
   ;; (defface org-inline-tags-face
   ;;   '((t (:foreground "orange" :weight bold)))
   ;;   "Face for custom inline tags in plain list items.")
@@ -703,6 +712,7 @@
   :init
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
   (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
+  (add-to-list 'auto-mode-alist '("\\.rhm$" . racket-hash-lang-mode))
   (add-to-list 'auto-mode-alist '("\\.scrbl$" . racket-mode))
   :config
   ;; (setq racket-program (executable-find "racket"))
