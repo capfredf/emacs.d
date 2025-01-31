@@ -38,7 +38,7 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(setq-default abbrev-mode t)
+;; (setq-default abbrev-mode t)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (global-set-key (kbd "C-x b") 'ibuffer)
 (toggle-frame-maximized)
@@ -136,14 +136,14 @@
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
     ;; (meow-paredit-setup ())
-    (meow-motion-overwrite-define-key
+    (meow-motion-define-key
      '("j" . meow-next)
      '("k" . meow-prev)
      '("<escape>" . ignore))
     (meow-leader-define-key
      ;; SPC j/k will run the original command in MOTION state.
-     '("j" . "H-j")
-     '("k" . "H-k")
+     ;; '("j" . "H-j")
+     ;; '("k" . "H-k")
      ;; Use SPC (0-9) for digit arguments.
      '("1" . meow-digit-argument)
      '("2" . meow-digit-argument)
@@ -803,5 +803,4 @@
    ("C-x C-a l" . activities-list)))
 
 (use-package proof-general
-  :ensure t
-  )
+  :ensure t)
