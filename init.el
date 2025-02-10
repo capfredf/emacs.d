@@ -162,6 +162,7 @@
      '("C-x C-b" . me/ignore-vanilla-keybindings)
      '("C-x b" . me/ignore-vanilla-keybindings)
      '("M-x" . me/ignore-vanilla-keybindings)
+     '("RET" . meow-next)
      '("0" . meow-expand-0)
      '("9" . meow-expand-9)
      '("8" . meow-expand-8)
