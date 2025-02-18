@@ -180,6 +180,7 @@
      '("[" . meow-beginning-of-thing)
      '("]" . meow-end-of-thing)
      '("a" . meow-append)
+     '("!" . meow-universal-argument)
      '("o" . meow-open-below)
      '("b" . meow-back-word)
      '("B" . meow-back-symbol)
