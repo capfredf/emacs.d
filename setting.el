@@ -319,8 +319,6 @@
    '(("DOING" . "(:foreground \"orange\" :weight bold :underline t)")
      ("TODO" :foreground "dark green" :weight bold :underline t)
      ("CANCELLED" . "gray")))
- '(org-todo-keywords
-   '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "|" "CANCELLED(c)" "DONE(d)")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
    '(proof-general fish-mode haskell-mode activities org-super-agenda org-ql ag auctex corfu diff-hl eat embark embark-consult exec-path-from-shell expand-region highlight-parentheses magit marginalia markdown-mode meow olivetti orderless org-superstar paredit racket-mode solarized-theme ts vertico wgrep-ag ws-butler yasnippet))

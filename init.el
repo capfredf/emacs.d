@@ -486,7 +486,6 @@
   :hook (org-mode . olivetti-mode))
 
 
-
 ;; (org-ql-search (org-agenda-files) '(and (todo "TODO") (not (scheduled :to today))))
 (use-package org-ql
   :ensure t
@@ -494,6 +493,7 @@
   ;; I don't need to bury the buffer. I want to exit the view
   (require 'org-ql-view)
   (bind-key "q" 'org-agenda-exit org-ql-view-map)
+  (bind-key "G" 'org-ql-view-refresh org-ql-view-map)
   ;; there are no bindings in org-ql-view-map for those keys, we need to unbind
   ;; those keys from its parent keymap
   (unbind-key "h" org-agenda-mode-map)
@@ -501,6 +501,18 @@
   (unbind-key "l" org-agenda-mode-map)
   (unbind-key "L" org-agenda-mode-map)
   :init
+  (defun my/all-available-tasks ()
+    (interactive)
+    (org-ql-search (org-agenda-files) '(and (todo) (not (todo "DOING")) (not (scheduled :to today)) (not (blocked)))
+      :sort '(todo date)
+      :title "Today's View"
+      :super-groups '((:name "Upcoming" :and (:scheduled future :todo "TODO"))
+                      (:name "Hiatus" :and (:todo "TODO" :tag "hiatus"))
+                      (:name "Waiting" :and (:todo "WAITING"))
+                      (:name "Papers" :and (:todo "TODO" :tag "paper"))
+                      (:name "Someday" :todo "Someday" )
+                      (:name "Deadlined" :deadline future))))
+  
   (defun my/show-scheduled ()
     (interactive)
     (org-ql-search (org-agenda-files) '(or (and (scheduled :to today) (todo "TODO" "WAITING"))
@@ -513,12 +525,13 @@
                       (:name "Waiting" :and (:scheduled today :todo "WAITING"))
                       (:name "Fitness" :and (:scheduled today :category "workout"))
                       (:name "Daily" :and (:scheduled today :category "daily"))
-                      (:name "Scheduled" :and (:scheduled today :not (:and (:category "daily" :category "workout"))
-                                                          :todo "TODO"))
+                      (:name "Avaiable" :and (:scheduled t :not (:and (:category "daily" :category "workout"))
+                                                         :todo "TODO"))
                       (:name "Deadlined" :deadline future))))
 
   :bind
   (("C-c q" . my/show-scheduled)
+   ("C-c a" . my/all-available-tasks)
    ;; can't use the method below, because the variable is not in scope when org-ql is loaded
    ;; :map org-ql-view-map
    ;; ("q" . kill-buffer)
@@ -546,7 +559,10 @@
                              ;; (org-bullets-mode 1)
                              ;; (variable-pitch-mode 1)
                              (setq fill-column 100)))
+  (setopt org-agenda-dim-blocked-tasks t)
   :custom
+  (org-todo-keywords
+    '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "Someday(s)" "|" "CANCELLED(c)" "DONE(d)")))
   (org-latex-create-formula-image-program 'dvisvgm)
   (org-fontify-done-headline t)
   (org-src-fontify-natively t)
