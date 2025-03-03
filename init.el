@@ -501,6 +501,7 @@
   (unbind-key "l" org-agenda-mode-map)
   (unbind-key "L" org-agenda-mode-map)
   :init
+  (add-hook 'org-agenda-finalize-hook 'meow-motion-mode)
   (defun my/all-available-tasks ()
     (interactive)
     (org-ql-search (org-agenda-files) '(and (todo) (not (todo "DOING")) (not (scheduled :to today)) (not (blocked)))
@@ -515,7 +516,7 @@
   
   (defun my/show-scheduled ()
     (interactive)
-    (org-ql-search (org-agenda-files) '(or (and (scheduled :to today) (todo "TODO" "WAITING"))
+    (org-ql-search (org-agenda-files) '(or (and (not (blocked)) (scheduled :to today) (todo "TODO" "WAITING"))
                                            (and (deadline) (todo "TODO" "WAITING"))
                                            ;; (and (ts-active :on today) (todo "TODO" "WAITING"))
                                            (todo "DOING"))
