@@ -572,8 +572,8 @@
   (org-export-with-toc nil)
   (org-capture-templates
    `(("T" "Fleeting notes or task" entry
-      (file+function "~/new-brain/dashboard.org" ,(lambda ()
-                                                    (org-goto)))
+      (file+function "~/sync/new-brain/dashboard.org" ,(lambda ()
+                                                         (org-goto)))
       "")))
   :custom-face
   ;; (org-quote ((t (:height 2.0))))
@@ -704,8 +704,8 @@
 (defun my/new-day ()
   (interactive)
   (let ((headline "Timeline")
-        (file (expand-file-name "dashboard.org" "~/new-brain"))
-        (template (expand-file-name "daily_template.org" "~/new-brain")))
+        (file (expand-file-name "dashboard.org" "~/sync/new-brain"))
+        (template (expand-file-name "daily_template.org" "~/sync/new-brain")))
     (save-excursion
       (find-file file)
       ;; go the the first heading
