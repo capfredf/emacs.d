@@ -551,7 +551,6 @@
         ("n" . org-agenda-goto-date)
         ("j" . org-agenda-next-line)
         ("k" . org-agenda-previous-line)))
-
 (use-package org
   :ensure t
   :mode ("\\.org" . org-mode)
@@ -561,6 +560,13 @@
                              ;; (variable-pitch-mode 1)
                              (setq fill-column 100)))
   (setopt org-agenda-dim-blocked-tasks t)
+  (setopt org-capture-templates
+          `(("T" "Fleeting notes or task" entry
+             (file+function "~/sync/new-brain/dashboard.org" ,(lambda ()
+                                                                (beginning-of-buffer)
+                                                                (org-next-visible-heading)
+                                                                (point-marker)))
+             "")))
   :custom
   (org-todo-keywords
     '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "Someday(s)" "|" "CANCELLED(c)" "DONE(d)")))
@@ -570,11 +576,6 @@
   (org-image-actual-width 500)
   (org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
   (org-export-with-toc nil)
-  (org-capture-templates
-   `(("T" "Fleeting notes or task" entry
-      (file+function "~/sync/new-brain/dashboard.org" ,(lambda ()
-                                                         (org-goto)))
-      "")))
   :custom-face
   ;; (org-quote ((t (:height 2.0))))
   (org-done ((t (:foreground "dim gray" :strike-through t))))
