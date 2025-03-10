@@ -394,7 +394,7 @@
 
 (use-package marginalia
   :ensure t
-  :config
+  :init
   (marginalia-mode))
 
 (use-package embark
@@ -564,18 +564,15 @@
           `(("T" "Fleeting notes or task" entry
              (file+function "~/sync/new-brain/dashboard.org" ,(lambda ()
                                                                 (beginning-of-buffer)
-                                                                (org-next-visible-heading)
-                                                                (point-marker)))
+                                                                (org-next-visible-heading 1)))
              "")))
-  :custom
-  (org-todo-keywords
-    '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "Someday(s)" "|" "CANCELLED(c)" "DONE(d)")))
-  (org-latex-create-formula-image-program 'dvisvgm)
-  (org-fontify-done-headline t)
-  (org-src-fontify-natively t)
-  (org-image-actual-width 500)
-  (org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
-  (org-export-with-toc nil)
+  (setopt org-todo-keywords '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "Someday(s)" "|" "CANCELLED(c)" "DONE(d)")))
+  (setopt org-latex-create-formula-image-program 'dvisvgm)
+  (setopt org-fontify-done-headline t)
+  (setopt org-src-fontify-natively t)
+  (setopt org-image-actual-width 500)
+  (setopt org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
+  (setopt org-export-with-toc nil)
   :custom-face
   ;; (org-quote ((t (:height 2.0))))
   (org-done ((t (:foreground "dim gray" :strike-through t))))
