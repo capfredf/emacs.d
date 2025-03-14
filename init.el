@@ -235,7 +235,7 @@
     (kill-buffer (buffer-name)))
   ;; following keys because using Meow, C-x C-<key> requires fewer key strokes, which
   ;; is important for a regular comamnd like kill-buff
-  (global-set-key (kbd "C-x C-k") 'my/kill-buffer)
+  (global-set-key (kbd "C-x C-k") 'my/activities-tabs--kill-buffer)
   (global-set-key (kbd "C-x C-o") 'other-window)
   (global-set-key (kbd "C-c C-p") 'surround-delimiters)
   (global-set-key (kbd "C-x k") #'kmacro-keymap)
@@ -830,3 +830,36 @@
   (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
 
 (global-set-key (kbd "C-c +") #'my/increment-number-at-point)
+(defun my/get-all-tab-buffers (exception)
+  (let* ((all-tabs (funcall tab-bar-tabs-function))
+         (tab-buffers
+          (cl-reduce 
+           (lambda (acc tab)
+             (if (eq tab exception)
+                 acc
+               (seq-difference acc (activities-tabs--tab-parameter 'activities-buffer-list tab))))
+           all-tabs)))
+    tab-buffers))
+(defun my/activities-tabs--kill-buffer ()
+  "Kill buffers that are only in the current tab's buffer list.
+Only does so when `activities-kill-buffers' is non-nil."
+  (interactive)
+  (let* ((current-tab (tab-bar--current-tab-find))
+         (current-tab-bufs (activities-tabs--tab-parameter 'activities-buffer-list current-tab)))
+    (cond
+     ((null current-tab-bufs) (message "You can't kill the only buffer"))
+     (t
+      (let* ((current-tab-bufs (remove (current-buffer) current-tab-bufs)))
+        (setf (alist-get 'activities-buffer-list current-tab) current-tab-bufs)
+        ;; (message (apply #'concat (mapcar #'buffer-name (alist-get 'activities-buffer-list current-tab))))
+        ;; (message (member (current-buffer) (my/get-all-tab-buffers)))
+        ;; (message "hello")
+        (if (member (current-buffer) (my/get-all-tab-buffers current-tab))
+            (kill-buffer (current-buffer))
+          ;; (message (buffer-name (car current-tab-bufs)))
+          (switch-to-buffer (car current-tab-bufs))))))))
+
+
+;; (mapcar #'length (mapcar (lambda (tab)
+;;                            (activities-tabs--tab-parameter 'activities-buffer-list tab))
+;;                          (funcall tab-bar-tabs-function)))
