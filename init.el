@@ -858,10 +858,10 @@ Only does so when `activities-kill-buffers' is non-nil."
         (if (member (current-buffer) (my/get-all-tab-buffers current-tab))
             (kill-buffer (current-buffer))
           ;; (message (buffer-name (car current-tab-bufs)))
-          (switch-to-buffer (car (cl-remove-if #'buffer-live-p
-                                               current-tab-bufs)))))))))
+          (switch-to-buffer (car (cl-remove-if-not #'buffer-live-p
+                                                   current-tab-bufs)))))))))
+  ;; (mapcar #'buffer-live-p current-tab-bufs))
 
-
-;; (mapcar #'length (mapcar (lambda (tab)
-;;                            (activities-tabs--tab-parameter 'activities-buffer-list tab))
-;;                          (funcall tab-bar-tabs-function)))
+  ;; (mapcar #'length (mapcar (lambda (tab)
+  ;;                            (activities-tabs--tab-parameter 'activities-buffer-list tab))
+  ;;                          (funcall tab-bar-tabs-function)))
