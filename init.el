@@ -664,11 +664,12 @@
            :base-extension any
            :recursive t
            :publishing-directory "~/captainwiki/static"
-           :publishing-function org-publish-attachment)))
+           :publishing-function org-publish-attachment))))
 
-  (use-package org-superstar
-    :ensure t
-    :hook (org-mode . org-superstar-mode)))
+(use-package org-superstar
+  :ensure t
+  :after org
+  :hook (org-mode . org-superstar-mode))
 
 
 (use-package org-super-agenda
@@ -857,7 +858,8 @@ Only does so when `activities-kill-buffers' is non-nil."
         (if (member (current-buffer) (my/get-all-tab-buffers current-tab))
             (kill-buffer (current-buffer))
           ;; (message (buffer-name (car current-tab-bufs)))
-          (switch-to-buffer (car current-tab-bufs))))))))
+          (switch-to-buffer (car (cl-remove-if #'buffer-live-p
+                                               current-tab-bufs)))))))))
 
 
 ;; (mapcar #'length (mapcar (lambda (tab)
