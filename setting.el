@@ -168,8 +168,8 @@
  '(org-log-into-drawer t)
  '(org-loop-over-headlines-in-active-region t)
  '(org-modules
-   '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-id ol-info ol-irc
-             ol-mhe ol-rmail org-tempo ol-w3m))
+   '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-habit org-id ol-info
+             ol-irc ol-mhe ol-rmail org-tempo ol-w3m))
  '(org-preview-latex-default-process 'dvisvgm nil nil "Customized with use-package org")
  '(org-ql-views
    '(("Tasks that needs to processed" :buffers-files

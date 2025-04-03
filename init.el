@@ -518,11 +518,13 @@
     (interactive)
     (org-ql-search (org-agenda-files) '(or (and (not (blocked)) (scheduled :to today) (todo "TODO" "WAITING"))
                                            (and (deadline) (todo "TODO" "WAITING"))
+                                           (habit)
                                            ;; (and (ts-active :on today) (todo "TODO" "WAITING"))
                                            (todo "DOING"))
       :sort '(todo date)
       :title "Today's View"
       :super-groups '((:name "In-Progress" :todo "DOING" )
+                      (:name "Habit" :habit t)
                       (:name "Waiting" :and (:scheduled today :todo "WAITING"))
                       (:name "Fitness" :and (:scheduled today :category "workout"))
                       (:name "Daily" :and (:scheduled today :category "daily"))
@@ -703,8 +705,7 @@
 (defun my/new-day ()
   (interactive)
   (let ((headline "Timeline")
-        (file (expand-file-name "dashboard.org" "~/sync/new-brain"))
-        (template (expand-file-name "daily_template.org" "~/sync/new-brain")))
+        (file (expand-file-name "dashboard.org" "~/sync/new-brain")))
     (save-excursion
       (find-file file)
       ;; go the the first heading
@@ -716,11 +717,7 @@
           (org-refile nil nil (list headline file nil pos)))
         (org-insert-heading)
         (insert (format "Today -- %s" (format-time-string "%m/%d/%Y" (current-time))))
-        (newline)
-        (insert-file-contents template)
-        (org-schedule 0 (format-time-string "%Y-%m-%d"))
-        (org-next-visible-heading 1)
-        (org-schedule 0 (format-time-string "%Y-%m-%d"))))))
+        (newline)))))
 
 (use-package racket-mode
   :ensure t
