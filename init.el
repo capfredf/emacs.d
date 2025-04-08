@@ -862,3 +862,19 @@ Only does so when `activities-kill-buffers' is non-nil."
   ;; (mapcar #'length (mapcar (lambda (tab)
   ;;                            (activities-tabs--tab-parameter 'activities-buffer-list tab))
   ;;                          (funcall tab-bar-tabs-function)))
+
+;; (defun my/parse-headline (x)
+;;   (plist-get (cadr x) :raw-value))
+
+;; (defun my/get-headlines ()
+;;   (org-element-map (org-element-parse-buffer) 'headline #'my/parse-headline))
+
+
+;; (my/get-headlines)
+;; (defun my/link-to-headline ()
+;;   "Insert an internal link to a headline."
+;;   (interactive)
+;;   (let* ((headlines (my/get-headlines))
+;; 	       (choice (completing-read "Headings: " headlines nil t))
+;; 	       (desc (read-string "Description: " choice)))
+;;     (org-insert-link buffer-file-name (concat "*" choice) desc)))

@@ -264,12 +264,11 @@
      ("CANCELLED" . "gray")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(activities ag auctex compat corfu diff-hl eat embark embark-consult
-                exec-path-from-shell expand-region fish-mode haskell-mode
-                highlight-parentheses magit marginalia markdown-mode meow
-                olivetti orderless org-ql org-super-agenda org-superstar paredit
-                proof-general racket-mode solarized-theme ts vertico wgrep-ag
-                ws-butler yasnippet))
+   '(activities ag auctex corfu diff-hl eat embark-consult exec-path-from-shell
+                fish-mode haskell-mode highlight-parentheses magit marginalia
+                markdown-mode meow olivetti orderless org-ql org-superstar
+                paredit proof-general racket-mode solarized-theme vertico
+                wgrep-ag ws-butler yasnippet))
  '(project-switch-commands
    '((project-find-file "Find file" nil) (project-find-regexp "Find regexp" nil)
      (project-find-dir "Find directory" nil) (project-vc-dir "VC-Dir" nil)
@@ -298,7 +297,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :extend nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 120 :width normal :foundry "UKWN" :family "Sarasa Mono SC"))))
- '(fixed-pitch ((t (:family "Iosevka" :slant normal :weight normal :height 1.0 :width normal))))
+ '(fixed-pitch ((t (:slant normal :weight normal :height 1.0 :width normal :family "Sarasa Mono SC"))))
  '(font-lock-variable-name-face ((t nil)))
  '(helm-ff-file-extension ((t (:extend t :foreground "dark red"))))
  '(highlight ((t nil)))
