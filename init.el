@@ -823,6 +823,12 @@
 (use-package proof-general
   :ensure t)
 
+(use-package jinx
+  :ensure t
+  :hook (emacs-startup . global-jinx-mode)
+  :bind (("M-$" . jinx-correct)
+         ("C-M-$" . jinx-languages)))
+
 (defun my/increment-number-at-point ()
   (interactive)
   (skip-chars-backward "0-9")
