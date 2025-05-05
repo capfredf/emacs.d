@@ -22,6 +22,7 @@
 (require 'mod-visual)
 (require 'mod-edit)
 ;;
+(defconst new-brain-dir (expand-file-name "~/sync/new-brain"))
 
 (put 'downcase-region 'disabled nil)
 
@@ -709,7 +710,7 @@
 (defun my/new-day ()
   (interactive)
   (let ((headline "Timeline")
-        (file (expand-file-name "dashboard.org" "~/sync/new-brain")))
+        (file (expand-file-name "dashboard.org" new-brain-dir)))
     (save-excursion
       (find-file file)
       ;; go the the first heading
@@ -784,6 +785,23 @@
   (global-corfu-mode))
 
 (defconst org-journal-entry-template-name "daily-journal-template.org")
+;; (define-key calendar-mode-map (kbd "j d") 'org-journal-display-entry)
+;; (accessible-keymaps calendar-mode-map)
+;; (with-output-to-temp-buffer "*Keymap Bindings*"
+;;   (map-keymap
+;;    (lambda (key binding)
+;;      (princ (format "%s => %s\n" (key-description (vector key)) binding)))
+;;    calendar-mode-map))
+(use-package org-journal
+  :ensure t
+  :init
+  (setopt org-journal-file-type 'daily
+          org-journal-file-header "#+title: %m/%d/%Y, No Title\n#+created: %Y-%m-%d\n"
+          org-journal-date-prefix ""
+          org-journal-date-format " "
+          org-journal-time-format ""
+          org-journal-dir (expand-file-name "journals" new-brain-dir)))
+
 (defun new-entry-template ()
   (org-insert-heading-respect-content)
   (kill-whole-line)
