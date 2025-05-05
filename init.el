@@ -792,6 +792,7 @@
 ;;    (lambda (key binding)
 ;;      (princ (format "%s => %s\n" (key-description (vector key)) binding)))
 ;;    calendar-mode-map))
+;; the keybindings prefixed with j do not work with meow, and I don't understand why.
 (use-package org-journal
   :ensure t
   :init
