@@ -141,7 +141,7 @@
  '(meow-keypad-leader-dispatch nil)
  '(meow-use-clipboard t)
  '(olivetti-body-width 120)
- '(org-agenda-dim-blocked-tasks 'invisible t)
+ '(org-agenda-dim-blocked-tasks 'invisible)
  '(org-agenda-files '("~/sync/new-brain/dashboard.org"))
  '(org-agenda-tags-column -20)
  '(org-babel-load-languages '((emacs-lisp . t)))
@@ -264,11 +264,12 @@
      ("CANCELLED" . "gray")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(activities ag auctex corfu diff-hl eat embark-consult exec-path-from-shell
-                fish-mode haskell-mode highlight-parentheses jinx magit
-                marginalia markdown-mode meow olivetti orderless org-journal
-                org-modern org-ql org-superstar paredit proof-general
-                racket-mode solarized-theme vertico wgrep-ag ws-butler yasnippet))
+   '(activities ag auctex cape corfu diff-hl eat embark-consult
+                exec-path-from-shell fish-mode haskell-mode
+                highlight-parentheses jinx magit marginalia markdown-mode meow
+                olivetti orderless org-journal org-modern org-ql org-superstar
+                paredit proof-general racket-mode solarized-theme vertico
+                wgrep-ag ws-butler yasnippet))
  '(project-switch-commands
    '((project-find-file "Find file" nil) (project-find-regexp "Find regexp" nil)
      (project-find-dir "Find directory" nil) (project-vc-dir "VC-Dir" nil)
@@ -308,12 +309,12 @@
  '(meow-normal-indicator ((t (:background "deep sky blue" :foreground "white smoke" :weight bold))))
  '(meow-paren-indicator ((t (:background "dark goldenrod" :foreground "white smoke" :weight bold))))
  '(mode-line ((t (:background "#eee8d5" :foreground "#657b83" :box nil :overline "#cccec4" :underline (:color "#cccec4" :style line :position t)))))
- '(org-block ((t (:inherit fixed-pitch))) t)
+ '(org-block ((t (:inherit fixed-pitch))))
  '(org-code ((t (:inherit fixed-pitch :foreground "#93a1a1"))))
- '(org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))) t)
- '(org-done ((t (:foreground "dim gray" :strike-through t))) t)
+ '(org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))))
+ '(org-done ((t (:foreground "dim gray" :strike-through t))))
  '(org-drawer ((t (:foreground "#2aa198" :height 0.8))))
- '(org-headline-done ((t (:foreground "dim gray" :strike-through t))) t)
+ '(org-headline-done ((t (:foreground "dim gray" :strike-through t))))
  '(org-headline-todo ((t (:foreground "Red4"))))
  '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
  '(org-level-1 ((t (:inherit nil :extend nil :foreground "#657b83" :height 1.3))))
