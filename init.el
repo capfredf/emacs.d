@@ -668,11 +668,15 @@
            :publishing-directory "~/captainwiki/static"
            :publishing-function org-publish-attachment))))
 
-(use-package org-superstar
-  :ensure t
-  :after org
-  :hook (org-mode . org-superstar-mode))
+;; (use-package org-superstar
+;;   :ensure t
+;;   :after org
+;;   :hook (org-mode . org-superstar-mode))
 
+
+(use-package org-modern
+  :ensure t
+  :hook ((org-mode . org-modern-mode)))
 
 (use-package org-super-agenda
   :ensure t
