@@ -760,7 +760,7 @@
   :ensure t
   :config
   (windmove-mode t)
-  (windmove-wsap-states-default-keybindings '(shift control)))
+  (windmove-swap-states-default-keybindings '(shift control)))
 
 (use-package eat
   :ensure t
@@ -772,8 +772,8 @@
 ;;   (autoload 'epe-theme-lambda "eshell-prompt-extras")
 ;;   (setq eshell-highlight-prompt nil
 ;;         eshell-prompt-function 'epe-theme-lambda))
-
-()
+;; (hello world ice-cream)
+;; ()
 (use-package corfu
   :ensure t
   ;; :custom
