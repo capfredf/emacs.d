@@ -488,72 +488,73 @@
 
 
 ;; (org-ql-search (org-agenda-files) '(and (todo "TODO") (not (scheduled :to today))))
-(use-package org-ql
-  :ensure t
-  :config
-  ;; I don't need to bury the buffer. I want to exit the view
-  (require 'org-ql-view)
-  (bind-key "q" 'org-agenda-exit org-ql-view-map)
-  (bind-key "G" 'org-ql-view-refresh org-ql-view-map)
-  ;; there are no bindings in org-ql-view-map for those keys, we need to unbind
-  ;; those keys from its parent keymap
-  (unbind-key "h" org-agenda-mode-map)
-  (unbind-key "H" org-agenda-mode-map)
-  (unbind-key "l" org-agenda-mode-map)
-  (unbind-key "L" org-agenda-mode-map)
-  :init
-  (add-hook 'org-agenda-finalize-hook 'meow-motion-mode)
-  (defun my/all-available-tasks ()
-    (interactive)
-    (org-ql-search (org-agenda-files) '(and (todo) (not (todo "DOING")) (not (scheduled :to today)) (not (blocked)))
-      :sort '(todo date)
-      :title "Today's View"
-      :super-groups '((:name "Upcoming" :and (:scheduled future :todo "TODO"))
-                      (:name "Hiatus" :and (:todo "TODO" :tag "hiatus"))
-                      (:name "Waiting" :and (:todo "WAITING"))
-                      (:name "Papers" :and (:todo "TODO" :tag "paper"))
-                      (:name "Someday" :todo "Someday" )
-                      (:name "Deadlined" :deadline future))))
-  
-  (defun my/show-scheduled ()
-    (interactive)
-    (org-ql-search (org-agenda-files) '(or (and (not (blocked)) (scheduled :to today) (todo "TODO" "WAITING"))
-                                           (and (deadline) (todo "TODO" "WAITING"))
-                                           (habit)
-                                           ;; (and (ts-active :on today) (todo "TODO" "WAITING"))
-                                           (todo "DOING"))
-      :sort '(todo date)
-      :title "Today's View"
-      :super-groups '((:name "In-Progress" :todo "DOING" )
-                      (:name "Habit" :habit t)
-                      (:name "Waiting" :and (:scheduled today :todo "WAITING"))
-                      (:name "Fitness" :and (:scheduled today :category "workout"))
-                      (:name "Daily" :and (:scheduled today :category "daily"))
-                      (:name "Avaiable" :and (:scheduled t :not (:and (:category "daily" :category "workout"))
-                                                         :todo "TODO"))
-                      (:name "Deadlined" :deadline future))))
+;; (use-package org-ql
+;;   :ensure t
+;;   :config
+;;   ;; I don't need to bury the buffer. I want to exit the view
+;;   ;; (require 'org-ql-view)
+;;   ;; (bind-key "q" 'org-agenda-exit org-ql-view-map)
+;;   ;; (bind-key "G" 'org-ql-view-refresh org-ql-view-map)
+;;   ;; there are no bindings in org-ql-view-map for those keys, we need to unbind
+;;   ;; those keys from its parent keymap
+;;   ;; (unbind-key "h" org-agenda-mode-map)
+;;   ;; (unbind-key "H" org-agenda-mode-map)
+;;   ;; (unbind-key "l" org-agenda-mode-map)
+;;   ;; (unbind-key "L" org-agenda-mode-map)
+;;   :init
+;;   (add-hook 'org-agenda-finalize-hook 'meow-motion-mode)
+;;   (defun my/all-available-tasks ()
+;;     (interactive)
+;;     (org-ql-search (org-agenda-files) '(and (todo) (not (todo "DOING")) (not (scheduled :to today)) (not (blocked)))
+;;       :sort '(todo date)
+;;       :title "Today's View"
+;;       :super-groups '((:name "Upcoming" :and (:scheduled future :todo "TODO"))
+;;                       (:name "Hiatus" :and (:todo "TODO" :tag "hiatus"))
+;;                       (:name "Waiting" :and (:todo "WAITING"))
+;;                       (:name "Papers" :and (:todo "TODO" :tag "paper"))
+;;                       (:name "Someday" :todo "Someday" )
+;;                       (:name "Deadlined" :deadline future))))
 
-  :bind
-  (("C-c q" . my/show-scheduled)
-   ("C-c a" . my/all-available-tasks)
-   ;; can't use the method below, because the variable is not in scope when org-ql is loaded
-   ;; :map org-ql-view-map
-   ;; ("q" . kill-buffer)
-   ))
+;;   (defun my/show-scheduled ()
+;;     (interactive)
+;;     (org-ql-search (org-agenda-files) '(or (and (not (blocked)) (scheduled :to today) (todo "TODO" "WAITING"))
+;;                                            (and (deadline) (todo "TODO" "WAITING"))
+;;                                            (habit)
+;;                                            ;; (and (ts-active :on today) (todo "TODO" "WAITING"))
+;;                                            (todo "DOING"))
+;;       :sort '(todo date)
+;;       :title "Today's View"
+;;       :super-groups '((:name "In-Progress" :todo "DOING" )
+;;                       (:name "Habit" :habit t)
+;;                       (:name "Waiting" :and (:scheduled today :todo "WAITING"))
+;;                       (:name "Fitness" :and (:scheduled today :category "workout"))
+;;                       (:name "Daily" :and (:scheduled today :category "daily"))
+;;                       (:name "Avaiable" :and (:scheduled t :not (:and (:category "daily" :category "workout"))
+;;                                                          :todo "TODO"))
+;;                       (:name "Deadlined" :deadline future))))
 
-;; (fullscreen)
+;;   :bind
+;;   (("C-c q" . my/show-scheduled)
+;;    ("C-c a" . my/all-available-tasks)
+;;    ;; can't use the method below, because the variable is not in scope when org-ql is loaded
+;;    ;; :map org-ql-view-map
+;;    ;; ("q" . kill-buffer)
+;;    ))
 
-(use-package org-agenda
-  :defer t
-  ;; :config
-  ;; (bind-key "j" 'org-agenda-next-line org-agenda-mode-map)
-  :bind
-  (:map org-agenda-mode-map
-        ;; ("q" . org-agenda-Quit)
-        ;; ("x" . org-agenda-quit)
-        ("n" . org-agenda-goto-date)
-        ("j" . org-agenda-next-line)
-        ("k" . org-agenda-previous-line)))
+;; ;; (fullscreen)
+
+;; (use-package org-agenda
+;;   :defer t
+;;   ;; :config
+;;   ;; (bind-key "j" 'org-agenda-next-line org-agenda-mode-map)
+;;   :bind
+;;   (:map org-agenda-mode-map
+;;         ;; ("q" . org-agenda-Quit)
+;;         ;; ("x" . org-agenda-quit)
+;;         ("n" . org-agenda-goto-date)
+;;         ("j" . org-agenda-next-line)
+;;         ("k" . org-agenda-previous-line)))
+
 (use-package org
   :ensure t
   :mode ("\\.org" . org-mode)
@@ -624,14 +625,24 @@
   ;;                                                       (:name "Future" :scheduled future)))))
 
   ;;             (agenda)))))
-  (setq org-latex-listings 'minted
-        org-latex-packages-alist '(("" "minted")
-                                   ("" "mathtools")
-                                   ("" "amssymb")
-                                   ("" "bbm"))
-        org-latex-pdf-process
-        '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-          "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+  (setf (alist-get 'xdvsvgm org-preview-latex-process-alist)
+        '(:programs ("xelatex" "dvisvgm") :description "xdv > svg" :message
+                    "you need to install the programs: latex and dvisvgm."
+                    :image-input-type "xdv" :image-output-type "svg" :image-size-adjust
+                    (1.7 . 1.5) :latex-compiler
+                    ("xelatex -no-pdf -interaction nonstopmode -output-directory %o %f")
+                    :image-converter
+                    ("dvisvgm %f --no-fonts --exact-bbox --scale=%S --output=%O")))
+  ;; (add-to-list 'org-preview-latex-process-alist 'dvisvgm)
+  (setopt org-latex-listings 'minted
+          org-latex-packages-alist '(("" "minted")
+                                     ("" "mathtools")
+                                     ("" "amssymb")
+                                     ("" "bbm"))
+          org-latex-create-formula-image-program 'xdvsvgm
+          org-latex-pdf-process
+          '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+            "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
   (org-link-set-parameters "message" :follow (lambda (path)
                                                (browse-url (concat "message://" path))))
   (setq org-publish-project-alist
