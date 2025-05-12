@@ -291,9 +291,9 @@
    '(activities ag auctex cape corfu diff-hl eat embark-consult
                 exec-path-from-shell fish-mode haskell-mode
                 highlight-parentheses jinx magit marginalia markdown-mode meow
-                olivetti orderless org-journal org-modern org-ql org-superstar
-                paredit proof-general racket-mode solarized-theme vertico
-                wgrep-ag ws-butler yasnippet))
+                mistty olivetti orderless org-journal org-modern org-ql
+                org-superstar paredit proof-general racket-mode solarized-theme
+                tabspaces vertico wgrep-ag ws-butler yasnippet))
  '(project-switch-commands
    '((project-find-file "Find file" nil) (project-find-regexp "Find regexp" nil)
      (project-find-dir "Find directory" nil) (project-vc-dir "VC-Dir" nil)

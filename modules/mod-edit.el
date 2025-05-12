@@ -364,7 +364,7 @@ point reaches the beginning or end of the buffer, stop there."
 
 
 
-(setq shell-file-name "bash")
+;; (setq shell-file-name "bash")
 
 (setq comint-prompt-read-only t)
 

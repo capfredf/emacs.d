@@ -608,7 +608,6 @@
 
   ;; (font-lock-add-keywords 'org-mode
   ;;                         '(("#\\(\\w+\\(-\\w+\\)*\\)" 0 'org-inline-tags-face prepend)))
-  (setq org-ctags-open-link-functions nil) ;; disable the ctags to correctly open internal links
   (require 'ox-publish)
   ;; (setopt org-agenda-custom-commands
   ;;         '(("z" "Daily Agenda View"
@@ -638,8 +637,11 @@
           org-latex-packages-alist '(("" "minted")
                                      ("" "mathtools")
                                      ("" "amssymb")
-                                     ("" "bbm"))
+                                     ("" "bbm")
+                                     ("" "mathpartir"))
+          org-hide-emphasis-markers t
           org-latex-create-formula-image-program 'xdvsvgm
+          org-ctags-open-link-functions nil ;; disable the ctags to correctly open internal links
           org-latex-pdf-process
           '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
             "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
@@ -855,24 +857,24 @@
   :hook ((haskell-mode . interactive-haskell-mode)
          (haskell-mode . electric-pair-local-mode)))
 
-(use-package activities
-  :ensure t
-  :init
-  (activities-mode)
-  (activities-tabs-mode)
-  ;; Prevent `edebug' default bindings from interfering.
-  (setq edebug-inhibit-emacs-lisp-mode-bindings t)
+;; (use-package activities
+;;   :ensure t
+;;   :init
+;;   (activities-mode)
+;;   (activities-tabs-mode)
+;;   ;; Prevent `edebug' default bindings from interfering.
+;;   (setq edebug-inhibit-emacs-lisp-mode-bindings t)
 
-  :bind
-  (("C-x C-a C-n" . activities-new)
-   ("C-x C-a C-d" . activities-define)
-   ("C-x C-a C-a" . activities-resume)
-   ("C-x C-a C-s" . activities-suspend)
-   ("C-x C-a C-k" . activities-kill)
-   ("C-x C-a RET" . activities-switch)
-   ("C-x C-b" . activities-switch-buffer)
-   ("C-x C-a g" . activities-revert)
-   ("C-x C-a l" . activities-list)))
+;;   :bind
+;;   (("C-x C-a C-n" . activities-new)
+;;    ("C-x C-a C-d" . activities-define)
+;;    ("C-x C-a C-a" . activities-resume)
+;;    ("C-x C-a C-s" . activities-suspend)
+;;    ("C-x C-a C-k" . activities-kill)
+;;    ("C-x C-a RET" . activities-switch)
+;;    ("C-x C-b" . activities-switch-buffer)
+;;    ("C-x C-a g" . activities-revert)
+;;    ("C-x C-a l" . activities-list)))
 
 (use-package proof-general
   :ensure t)
@@ -883,6 +885,44 @@
   :bind (("M-$" . jinx-correct)
          ("C-M-$" . jinx-languages)))
 
+(use-package tabspaces
+  ;; use this next line only if you also use straight, otherwise ignore it.
+  :ensure t
+  :hook (after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup.
+  :config
+  (with-eval-after-load 'consult
+    ;; hide full buffer list (still available with "b" prefix)
+    (consult-customize consult--source-buffer :hidden t :default nil)
+    ;; set consult-workspace buffer list
+    (defvar consult--source-workspace
+      (list :name     "Workspace Buffers"
+            :narrow   ?w
+            :history  'buffer-name-history
+            :category 'buffer
+            :state    #'consult--buffer-state
+            :default  t
+            :items    (lambda () (consult--buffer-query
+                                  :predicate #'tabspaces--local-buffer-p
+                                  :sort 'visibility
+                                  :as #'buffer-name)))
+
+      "Set workspace buffer list for consult-buffer.")
+    (add-to-list 'consult-buffer-sources 'consult--source-workspace))
+
+  :commands (tabspaces-switch-or-create-workspace
+             tabspaces-open-or-create-project-and-workspace)
+  :custom
+  (tabspaces-use-filtered-buffers-as-default t)
+  (tabspaces-default-tab "Default")
+  (tabspaces-remove-to-default t)
+  (tabspaces-include-buffers '("*scratch*" ))
+  ;; (tabspaces-initialize-project-with-todo t)
+  ;; (tabspaces-todo-file-name "project-todo.org")
+  ;; sessions
+  (tabspaces-session t)
+  (tabspaces-session-auto-restore t)
+  (tab-bar-new-tab-choice "*scratch*"))
+
 (defun my/increment-number-at-point ()
   (interactive)
   (skip-chars-backward "0-9")
@@ -890,36 +930,36 @@
       (error "No number at point"))
   (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
 
-(global-set-key (kbd "C-c +") #'my/increment-number-at-point)
-(defun my/get-all-tab-buffers (exception)
-  (let* ((all-tabs (funcall tab-bar-tabs-function))
-         (tab-buffers
-          (cl-reduce 
-           (lambda (acc tab)
-             (if (eq tab exception)
-                 acc
-               (seq-difference acc (activities-tabs--tab-parameter 'activities-buffer-list tab))))
-           all-tabs)))
-    tab-buffers))
-(defun my/activities-tabs--kill-buffer ()
-  "Kill buffers that are only in the current tab's buffer list.
-Only does so when `activities-kill-buffers' is non-nil."
-  (interactive)
-  (let* ((current-tab (tab-bar--current-tab-find))
-         (current-tab-bufs (activities-tabs--tab-parameter 'activities-buffer-list current-tab)))
-    (cond
-     ((null current-tab-bufs) (message "You can't kill the only buffer"))
-     (t
-      (let* ((current-tab-bufs (remove (current-buffer) current-tab-bufs)))
-        (setf (alist-get 'activities-buffer-list current-tab) current-tab-bufs)
-        ;; (message (apply #'concat (mapcar #'buffer-name (alist-get 'activities-buffer-list current-tab))))
-        ;; (message (member (current-buffer) (my/get-all-tab-buffers)))
-        ;; (message "hello")
-        (if (member (current-buffer) (my/get-all-tab-buffers current-tab))
-            (kill-buffer (current-buffer))
-          ;; (message (buffer-name (car current-tab-bufs)))
-          (switch-to-buffer (car (cl-remove-if-not #'buffer-live-p
-                                                   current-tab-bufs)))))))))
+;; (global-set-key (kbd "C-c +") #'my/increment-number-at-point)
+;; (defun my/get-all-tab-buffers (exception)
+;;   (let* ((all-tabs (funcall tab-bar-tabs-function))
+;;          (tab-buffers
+;;           (cl-reduce
+;;            (lambda (acc tab)
+;;              (if (eq tab exception)
+;;                  acc
+;;                (seq-difference acc (activities-tabs--tab-parameter 'activities-buffer-list tab))))
+;;            all-tabs)))
+;;     tab-buffers))
+;; (defun my/activities-tabs--kill-buffer ()
+;;   "Kill buffers that are only in the current tab's buffer list.
+;; Only does so when `activities-kill-buffers' is non-nil."
+;;   (interactive)
+;;   (let* ((current-tab (tab-bar--current-tab-find))
+;;          (current-tab-bufs (activities-tabs--tab-parameter 'activities-buffer-list current-tab)))
+;;     (cond
+;;      ((null current-tab-bufs) (message "You can't kill the only buffer"))
+;;      (t
+;;       (let* ((current-tab-bufs (remove (current-buffer) current-tab-bufs)))
+;;         (setf (alist-get 'activities-buffer-list current-tab) current-tab-bufs)
+;;         ;; (message (apply #'concat (mapcar #'buffer-name (alist-get 'activities-buffer-list current-tab))))
+;;         ;; (message (member (current-buffer) (my/get-all-tab-buffers)))
+;;         ;; (message "hello")
+;;         (if (member (current-buffer) (my/get-all-tab-buffers current-tab))
+;;             (kill-buffer (current-buffer))
+;;           ;; (message (buffer-name (car current-tab-bufs)))
+;;           (switch-to-buffer (car (cl-remove-if-not #'buffer-live-p
+;;                                                    current-tab-bufs)))))))))
   ;; (mapcar #'buffer-live-p current-tab-bufs))
 
   ;; (mapcar #'length (mapcar (lambda (tab)
@@ -941,3 +981,19 @@ Only does so when `activities-kill-buffers' is non-nil."
 ;; 	       (choice (completing-read "Headings: " headlines nil t))
 ;; 	       (desc (read-string "Description: " choice)))
 ;;     (org-insert-link buffer-file-name (concat "*" choice) desc)))
+
+(use-package mistty
+  :ensure t
+  :bind (("C-c s" . mistty)
+
+         ;; bind here the shortcuts you'd like the
+         ;; shell to handle instead of Emacs.
+         :map project-prefix-map
+         ("m" . mistty-in-project)
+         :map mistty-prompt-map
+
+         ;; fish: directory history
+         ("M-<up>" . mistty-send-key)
+         ("M-<down>" . mistty-send-key)
+         ("M-<left>" . mistty-send-key)
+         ("M-<right>" . mistty-send-key)))
