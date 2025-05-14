@@ -293,7 +293,7 @@
                 highlight-parentheses jinx magit marginalia markdown-mode meow
                 mistty olivetti orderless org-journal org-modern org-ql
                 org-superstar paredit proof-general racket-mode solarized-theme
-                tabspaces vertico wgrep-ag ws-butler yasnippet))
+                tabspaces vertico wgrep-ag ws-butler yaml-mode yasnippet))
  '(project-switch-commands
    '((project-find-file "Find file" nil) (project-find-regexp "Find regexp" nil)
      (project-find-dir "Find directory" nil) (project-vc-dir "VC-Dir" nil)
