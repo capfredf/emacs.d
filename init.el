@@ -236,7 +236,7 @@
     (kill-buffer (buffer-name)))
   ;; following keys because using Meow, C-x C-<key> requires fewer key strokes, which
   ;; is important for a regular comamnd like kill-buff
-  (global-set-key (kbd "C-x C-k") 'my/activities-tabs--kill-buffer)
+  (global-set-key (kbd "C-x C-k") 'my/kill-buffer)
   (global-set-key (kbd "C-x C-o") 'other-window)
   (global-set-key (kbd "C-c C-p") 'surround-delimiters)
   (global-set-key (kbd "C-x k") #'kmacro-keymap)
