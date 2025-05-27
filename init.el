@@ -775,11 +775,44 @@
   (windmove-mode t)
   (windmove-swap-states-default-keybindings '(shift control)))
 
+(add-hook 'eshell-mode-hook (lambda () (setenv "TERM" "xterm-256color")))
 (use-package eat
   :ensure t
   :after eshell
   :config
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
+
+(defun with-face (str &rest face-plist)
+  (propertize str
+              ;; 'read-only t
+              'face face-plist))
+
+(defun my/system-name ()
+  (interactive)
+  (if (getenv "CONTAINER_ID")
+      (concat "⚙️ " (getenv "CONTAINER_ID"))
+    (system-name)))
+
+(defun my/eshell-prompt ()
+  (concat
+   ;; (with-face ""  :foreground "#2aa198")
+   (with-face (user-login-name)  :foreground "#dc143c")
+   (with-face "@"  :foreground "#2aa198")
+   (with-face (my/system-name)  :foreground "#268bd2")
+   (with-face "──["  :foreground "#2aa198")
+   (with-face (format-time-string "%H:%M" (current-time))  :foreground "#b58900")
+   (with-face "]──["  :foreground "#2aa198")
+   (with-face (concat (eshell/pwd))  :foreground "#93a1a1")
+   (with-face "]\n"  :foreground "#2aa198")
+   (with-face "└─>"  :foreground "#2aa198")
+   ;; (with-face (if venv-current-name (concat " (" venv-current-name ")")  "")  :foreground "#00dc00")
+   (with-face (if (= (user-uid) 0) " # " " $ ")  :foreground "#2aa198")
+   ))
+;; (setq eshell-prompt-function 'shk-eshell-prompt)
+(setopt eshell-highlight-prompt t)
+
+(setopt eshell-prompt-function
+        #'my/eshell-prompt)
 
 ;; (with-eval-after-load "esh-opt"
 ;;   (autoload 'epe-theme-lambda "eshell-prompt-extras")

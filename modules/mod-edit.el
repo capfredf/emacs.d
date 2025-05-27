@@ -210,27 +210,6 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; (add-hook 'prog-mode-hook (lambda () (hl-line-mode 1)))
 
-(defun with-face (str &rest face-plist)
-  (propertize str 'face face-plist))
-
-(defun shk-eshell-prompt ()
-  (let ((header-bg "#fafafa"))
-    (concat
-     (with-face "\n" :background header-bg)
-     (with-face (concat (eshell/pwd) " ") :background header-bg)
-     (with-face
-      (or (ignore-errors (format "(%s)" (vc-responsible-backend default-directory))) "")
-      :background header-bg)
-     (with-face "\n" :background header-bg)
-     (with-face user-login-name :foreground "#64a6ae")
-     "@"
-     (with-face (system-name) :foreground "#889a2e")
-     (if (= (user-uid) 0)
-         (with-face " #" :foreground "red")
-       " $")
-     " ")))
-(setq eshell-prompt-function 'shk-eshell-prompt)
-(setq eshell-highlight-prompt nil)
 
 
 (defun insert-file-name-into-minibuffer (full-path)
