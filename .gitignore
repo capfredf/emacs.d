@@ -5,7 +5,7 @@ elpa/
 recentf
 tramp
 projects
-eshell/
+eshell/history
 projectile-bookmarks.eld
 projectile.cache
 snippets/
