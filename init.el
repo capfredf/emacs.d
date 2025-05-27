@@ -806,9 +806,10 @@
    (with-face "]\n"  :foreground "#2aa198")
    (with-face "└─>"  :foreground "#2aa198")
    ;; (with-face (if venv-current-name (concat " (" venv-current-name ")")  "")  :foreground "#00dc00")
-   (with-face (if (= (user-uid) 0) " # " " $ ")  :foreground "#2aa198")
-   ))
+   (with-face (if (= (user-uid) 0) " #" " $")  :foreground "#2aa198")
+   (with-face " ")))
 ;; (setq eshell-prompt-function 'shk-eshell-prompt)
+;; enabling this variable gives us read-only prompts
 (setopt eshell-highlight-prompt t)
 
 (setopt eshell-prompt-function
