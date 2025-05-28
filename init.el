@@ -741,7 +741,7 @@
   :ensure t
   ;; :no-require t
   :mode "\\.rkt"
-  ;; :load-path "site-lisp/racket-mode"
+  :load-path "site-lisp/racket-mode"
   :init
   (defun my/racket-hash-lang-module-lang-hook (arg)
     (setq-local racket-xp-add-binding-faces t))
@@ -752,6 +752,7 @@
   (add-to-list 'auto-mode-alist '("\\.rhm$" . racket-hash-lang-mode))
   (add-to-list 'auto-mode-alist '("\\.scrbl$" . racket-mode))
   :config
+  (setopt racket-repl-buffer-name-function #'racket-repl-buffer-name-project)
   ;; (setq racket-program (executable-find "racket"))
   (put 'Π 'racket-indent-function 1)
   (put 'type-case 'racket-indent-function 2)
@@ -759,7 +760,7 @@
   (put 'required/typed 'racket-indent-function 1)
   (put 'term-let 'racket-indent-function 1))
 
-; (use-package typescript-mode
+                                        ; (use-package typescript-mode
 ;; :ensure t
 ;;   :ensure t
 ;;   :mode "\\.ts")
@@ -919,10 +920,19 @@
   :bind (("M-$" . jinx-correct)
          ("C-M-$" . jinx-languages)))
 
+(defun start-tabspaces-mode ()
+  (interactive)
+  (tabspaces-mode)
+  ;; I don't know where to put this:
+  (let ((maybe-idx (tab-bar--tab-index-by-name "*tabspaces--placeholder*")))
+    (message "maybe-idx = %s" maybe-idx)
+    (when maybe-idx
+      (tab-bar-close-tab (1+ maybe-idx)))))
+
 (use-package tabspaces
   ;; use this next line only if you also use straight, otherwise ignore it.
   :ensure t
-  :hook (after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup.
+  :hook (after-init . start-tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup.
   :config
   (with-eval-after-load 'consult
     ;; hide full buffer list (still available with "b" prefix)
@@ -956,6 +966,7 @@
   (tabspaces-session t)
   (tabspaces-session-auto-restore t)
   (tab-bar-new-tab-choice "*scratch*"))
+
 
 (defun my/increment-number-at-point ()
   (interactive)
