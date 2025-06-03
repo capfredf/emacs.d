@@ -38,7 +38,6 @@
 ;; (setopt use-package-always-ensure t)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
-
 ;; (setq-default abbrev-mode t)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (global-set-key (kbd "C-x b") 'ibuffer)
@@ -46,6 +45,7 @@
 (global-unset-key (kbd "M-z")) ;; unbind (suspend-frame) to C-z
 (global-unset-key (kbd "C-x z")) ;; unbind repeat to C-x switch the two
 (global-set-key (kbd "M-z") 'repeat)
+(setopt tab-always-indent 'complete)
 
 (require 'treesit)
 (setq treesit-extra-load-path
@@ -738,11 +738,18 @@
         (newline)))))
 
 (use-package racket-mode
-  :ensure t
-  ;; :no-require t
+  ;; pick the :ensure or :load-path X :vc t
+  ;; as ensure always ensures the package to be downloaded from elpa or melpa
+  ;; :ensure t
+  ;; :vc t ;; this rids me of manually load the autoloads file
+  ;; :load-path "site-lisp/racket-mode"
   :mode "\\.rkt"
-  :load-path "site-lisp/racket-mode"
+  ;; not very useful for developing or fix packages
+  ;; :vc (:url "git@github.com:capfredf/racket-mode.git"
+  ;;      :branch "fix")
   :init
+
+  ;; (load-library "racket-mode-autoloads")
   (defun my/racket-hash-lang-module-lang-hook (arg)
     (setq-local racket-xp-add-binding-faces t))
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
@@ -827,7 +834,7 @@
   ;; :custom
   ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
   :bind (:map corfu-map ("SPC" . corfu-insert-separator)) ;; Configure SPC for separator insertion
-  :config
+  :init
   (global-corfu-mode))
 
 (use-package cape
