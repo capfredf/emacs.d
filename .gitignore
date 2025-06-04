@@ -6,6 +6,7 @@ recentf
 tramp
 projects
 eshell/history
+eshell/lastdir
 projectile-bookmarks.eld
 projectile.cache
 snippets/

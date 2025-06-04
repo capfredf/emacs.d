@@ -932,7 +932,6 @@
   (tabspaces-mode)
   ;; I don't know where to put this:
   (let ((maybe-idx (tab-bar--tab-index-by-name "*tabspaces--placeholder*")))
-    (message "maybe-idx = %s" maybe-idx)
     (when maybe-idx
       (tab-bar-close-tab (1+ maybe-idx)))))
 
