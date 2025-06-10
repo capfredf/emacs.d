@@ -41,10 +41,10 @@
 ;; (setq-default abbrev-mode t)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (global-set-key (kbd "C-x b") 'ibuffer)
+(global-set-key (kbd "<f5>") #'compile)
 (toggle-frame-maximized)
 (global-unset-key (kbd "M-z")) ;; unbind (suspend-frame) to C-z
 (global-unset-key (kbd "C-x z")) ;; unbind repeat to C-x switch the two
-(global-set-key (kbd "M-z") 'repeat)
 (setopt tab-always-indent 'complete)
 
 (require 'treesit)
