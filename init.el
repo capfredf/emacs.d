@@ -223,6 +223,7 @@
      '("Y" . meow-sync-grab)
      '("z" . meow-pop-selection)
      '("'" . repeat)
+     ;; '("$" . meow-block)
      '("$" . meow-block)
      '("#" . meow-to-block)
      '("<escape>" . ignore)))
@@ -918,6 +919,25 @@
 ;;    ("C-x C-a g" . activities-revert)
 ;;    ("C-x C-a l" . activities-list)))
 
+(defun my/insert-debug-indent (start end)
+  "Insert 'start_debug {}:' before region with matching indentation, then indent region right."
+  (interactive "r")
+  (save-excursion
+    ;; Move to start and get current indentation
+    (goto-char start)
+    (beginning-of-line)
+    (let* ((indent (buffer-substring (line-beginning-position)
+                                     (progn (back-to-indentation) (point))))
+           (debug-line (concat indent "start_debug {}:\n")))
+      (goto-char start)
+      (beginning-of-line)
+      (insert debug-line)
+      (let ((new-start (line-beginning-position))
+            (new-end (+ end (length debug-line))))
+        (indent-rigidly new-start new-end tab-width))))
+  (search-backward "start_debug {")
+  (forward-char (length "start_debug {")))
+
 (use-package proof-general
   :ensure t)
 
@@ -969,8 +989,8 @@
   ;; (tabspaces-initialize-project-with-todo t)
   ;; (tabspaces-todo-file-name "project-todo.org")
   ;; sessions
-  (tabspaces-session t)
-  (tabspaces-session-auto-restore t)
+  ;; (tabspaces-session t)
+  ;; (tabspaces-session-auto-restore t)
   (tab-bar-new-tab-choice "*scratch*"))
 
 
