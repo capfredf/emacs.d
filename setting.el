@@ -288,14 +288,16 @@
      ("CANCELLED" . "gray")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(activities ag auctex cape corfu diff-hl dockerfile-mode eat embark-consult
-                exec-path-from-shell fish-mode haskell-mode
+   '(activities ag auctex beancount-mode cape corfu diff-hl dockerfile-mode eat
+                embark-consult exec-path-from-shell fish-mode haskell-mode
                 highlight-parentheses jinx magit marginalia markdown-mode meow
                 mistty olivetti orderless org-journal org-modern org-ql
                 org-superstar paredit proof-general racket-mode solarized-theme
                 tabspaces vertico wgrep-ag ws-butler yaml-mode yasnippet))
  '(package-vc-selected-packages
-   '((racket-mode :url "git@github.com:greghendershott/racket-mode.git" :branch
+   '((beancount-mode :url "git@github.com:beancount/beancount-mode.git" :branch
+                     "main")
+     (racket-mode :url "git@github.com:greghendershott/racket-mode.git" :branch
                   "issue-759")))
  '(project-switch-commands
    '((project-find-file "Find file" nil) (project-find-regexp "Find regexp" nil)

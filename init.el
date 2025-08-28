@@ -426,7 +426,9 @@
 
 
 (use-package beancount-mode
-  :load-path "beancount-mode/"
+  :ensure t
+  :vc (:url "git@github.com:beancount/beancount-mode.git"
+            :branch "main")
   :mode "\\.beancount")
 
 ;; Consult users will also want the embark-consult package.
