@@ -714,9 +714,9 @@
   (require 'reftex)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-  (setq TeX-save-query nil))
+  (setopt TeX-auto-save t)
+  (setopt TeX-parse-self t)
+  (setopt TeX-save-query nil))
 
 (define-key minibuffer-local-map [f3]
   (lambda () (interactive)
