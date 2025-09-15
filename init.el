@@ -73,7 +73,9 @@
     (?\" . ?\")
     (?\' . ?\')))
 
-;; (self-insert-command )
+(global-set-key (kbd "M-[") #'insert-pair)
+(global-set-key (kbd "M-{") #'insert-pair)
+(global-set-key (kbd "M-<backspace>") #'delete-pair)
 (use-package meow
   :ensure t
   :init
@@ -239,7 +241,7 @@
   ;; is important for a regular comamnd like kill-buff
   (global-set-key (kbd "C-x C-k") 'my/kill-buffer)
   (global-set-key (kbd "C-x C-o") 'other-window)
-  (global-set-key (kbd "C-c C-p") 'surround-delimiters)
+  ;; (global-set-key (kbd "C-c C-p") 'surround-delimiters)
   (global-set-key (kbd "C-x k") #'kmacro-keymap)
   ;; C-x C-p oringally is bound to mark-page. The command becomes moot in presence of Meow
   ;; we need to unbind the key first, as the global keymap take the most precedence.
@@ -982,18 +984,19 @@
 
   :commands (tabspaces-switch-or-create-workspace
              tabspaces-open-or-create-project-and-workspace)
-  :custom
-  (tabspaces-session-project-session-store 'project)
-  (tabspaces-use-filtered-buffers-as-default t)
-  (tabspaces-default-tab "Default")
-  (tabspaces-remove-to-default t)
-  (tabspaces-include-buffers '("*scratch*" ))
-  ;; (tabspaces-initialize-project-with-todo t)
-  ;; (tabspaces-todo-file-name "project-todo.org")
-  ;; sessions
-  (tabspaces-session t)
-  ;; (tabspaces-session-auto-restore t)
-  (tab-bar-new-tab-choice "*scratch*"))
+  :init
+  (setopt
+   tabspaces-session-project-session-store 'project
+   tabspaces-use-filtered-buffers-as-default t
+   tabspaces-default-tab "Default"
+   tabspaces-remove-to-default t
+   tabspaces-include-buffers '("*scratch*" )
+   ;; (tabspaces-initialize-project-with-todo t)
+   ;; (tabspaces-todo-file-name "project-todo.org")
+   ;; sessions
+   tabspaces-session t
+   ;; (tabspaces-session-auto-restore t)
+   tab-bar-new-tab-choice "*scratch*"))
 
 
 (defun my/increment-number-at-point ()
@@ -1055,18 +1058,18 @@
 ;; 	       (desc (read-string "Description: " choice)))
 ;;     (org-insert-link buffer-file-name (concat "*" choice) desc)))
 
-(use-package mistty
-  :ensure t
-  :bind (("C-c s" . mistty)
+;; (use-package mistty
+;;   :ensure t
+;;   :bind (("C-c s" . mistty)
 
-         ;; bind here the shortcuts you'd like the
-         ;; shell to handle instead of Emacs.
-         :map project-prefix-map
-         ("m" . mistty-in-project)
-         :map mistty-prompt-map
+;;          ;; bind here the shortcuts you'd like the
+;;          ;; shell to handle instead of Emacs.
+;;          :map project-prefix-map
+;;          ("m" . mistty-in-project)
+;;          :map mistty-prompt-map
 
-         ;; fish: directory history
-         ("M-<up>" . mistty-send-key)
-         ("M-<down>" . mistty-send-key)
-         ("M-<left>" . mistty-send-key)
-         ("M-<right>" . mistty-send-key)))
+;;          ;; fish: directory history
+;;          ("M-<up>" . mistty-send-key)
+;;          ("M-<down>" . mistty-send-key)
+;;          ("M-<left>" . mistty-send-key)
+;;          ("M-<right>" . mistty-send-key)))
