@@ -750,8 +750,8 @@
   ;; :load-path "site-lisp/racket-mode"
   :mode "\\.rkt"
   ;; not very useful for developing or fix packages
-  :vc (:url "git@github.com:greghendershott/racket-mode.git"
-       :branch "issue-759")
+  ;; :vc (:url "git@github.com:greghendershott/racket-mode.git"
+  ;;      :branch "issue-759")
   :init
   ;; (load-library "racket-mode-autoloads")
   (defun my/racket-hash-lang-module-lang-hook (arg)
