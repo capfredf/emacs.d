@@ -959,9 +959,8 @@
       (tab-bar-close-tab (1+ maybe-idx)))))
 
 (use-package tabspaces
-  ;; use this next line only if you also use straight, otherwise ignore it.
   :ensure t
-  :hook (after-init . start-tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup.
+  :hook (after-init . start-tabspaces-mode)
   :config
   (with-eval-after-load 'consult
     ;; hide full buffer list (still available with "b" prefix)
