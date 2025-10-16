@@ -45,7 +45,7 @@
 (toggle-frame-maximized)
 (global-unset-key (kbd "M-z")) ;; unbind (suspend-frame) to C-z
 (global-unset-key (kbd "C-x z")) ;; unbind repeat to C-x switch the two
-(setopt tab-always-indent 'complete)
+(setopt tab-always-indent t)
 
 (require 'treesit)
 (setq treesit-extra-load-path
