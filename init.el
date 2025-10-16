@@ -687,6 +687,30 @@
            :publishing-directory "~/captainwiki/static"
            :publishing-function org-publish-attachment))))
 
+;; (defun my/org-entry-range ()
+;;    (let ((elt (org-element-at-point)))
+;;        (cons (org-element-property :begin elt)
+;;               (org-element-property :end elt))))
+
+;; (defun my/make-invisible (range)
+;;    (let ((ov (make-overlay (car range) (cdr range))))
+;;       (overlay-put ov 'invisible t)
+;;       (overlay-put ov 'org-hide-done t)
+;;       (overlay-put ov 'evaporate t)))
+
+;; (defun my/org-hide-done-tasks ()
+;;    (mapc #'my/make-invisible (org-map-entries #'my/org-entry-range "TODO=\"DONE\"" 'file)))
+
+;; (defun my/org-toggle-done-tasks-visibility ()
+;;   "Toggle visibility of DONE tasks in the current buffer."
+;;   (interactive)
+;;   (if (seq-find (lambda (ov) (overlay-get ov 'org-hide-done))
+;;                 (overlays-in (point-min) (point-max)))
+;;       ;; If DONE entries are hidden, show them
+;;       (remove-overlays (point-min) (point-max) 'org-hide-done t)
+;;     ;; Otherwise, hide DONE entries
+;;     (my/org-hide-done-tasks)))
+
 ;; (use-package org-superstar
 ;;   :ensure t
 ;;   :after org
