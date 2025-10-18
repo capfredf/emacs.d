@@ -569,12 +569,6 @@
                              ;; (variable-pitch-mode 1)
                              (setq fill-column 100)))
   (setopt org-agenda-dim-blocked-tasks t)
-  (setopt org-capture-templates
-          `(("T" "Fleeting notes or task" entry
-             (file+function "~/sync/new-brain/dashboard.org" ,(lambda ()
-                                                                (beginning-of-buffer)
-                                                                (org-next-visible-heading 1)))
-             "")))
   (setopt org-todo-keywords '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "Someday(s)" "|" "CANCELLED(c)" "DONE(d)")))
   (setopt org-latex-create-formula-image-program 'dvisvgm)
   (setopt org-fontify-done-headline t)
@@ -613,6 +607,16 @@
 
   ;; (font-lock-add-keywords 'org-mode
   ;;                         '(("#\\(\\w+\\(-\\w+\\)*\\)" 0 'org-inline-tags-face prepend)))
+  (setq org-capture-templates
+           '(("t" "Task" entry (file+headline "~/sync/new-brain/dashboard.org" "Task Queue")
+              "* TODO %?\n  %i\n  %a")
+             ;; ("j" "Journal" entry (file+datetree "~/org/journal.org")
+             ;;  "* %?\nEntered on %U\n  %i\n  %a")
+             )
+           ;; '(("t" "task" entry
+           ;;    (file+heading "~/sync/new-brain/dashboard.org" "Task Queue")
+           ;;    "* TODO %?\n %i\n %a"))
+           )
   (require 'ox-publish)
   ;; (setopt org-agenda-custom-commands
   ;;         '(("z" "Daily Agenda View"
