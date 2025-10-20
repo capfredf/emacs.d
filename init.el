@@ -609,7 +609,7 @@
   ;;                         '(("#\\(\\w+\\(-\\w+\\)*\\)" 0 'org-inline-tags-face prepend)))
   (setq org-capture-templates
            '(("t" "Task" entry (file+headline "~/sync/new-brain/dashboard.org" "Task Queue")
-              "* TODO %?\n  %i\n  %a")
+              "* TODO %?\n %a")
              ;; ("j" "Journal" entry (file+datetree "~/org/journal.org")
              ;;  "* %?\nEntered on %U\n  %i\n  %a")
              )
