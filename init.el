@@ -560,6 +560,29 @@
 ;;         ("j" . org-agenda-next-line)
 ;;         ("k" . org-agenda-previous-line)))
 
+
+(defun ff/goto-today ()
+  "Find the last Org heading and create a sibling heading below it.
+If TITLE is non-nil (or given interactively), insert it as the new heading's title.
+If the buffer has no headings, insert a top-level heading at end."
+  (interactive)
+  ;; (unless (derived-mode-p 'org-mode)
+  ;;   (user-error "This command works in org-mode buffers"))
+
+  (goto-char (point-max))
+  (if (re-search-backward org-heading-regexp nil t)
+      (progn
+        ;; On the last heading; create a sibling after its subtree
+        (goto-char (match-beginning 0))
+        (org-insert-heading-respect-content)
+        (org-insert-time-stamp (current-time)))
+    ;; No headings: create a top-level heading at end
+    (goto-char (point-max))
+    (unless (bolp) (insert "\n"))
+    (insert "* ")
+    (org-insert-time-stamp (current-time))))
+
+
 (use-package org
   :ensure t
   :mode ("\\.org" . org-mode)
@@ -608,15 +631,15 @@
   ;; (font-lock-add-keywords 'org-mode
   ;;                         '(("#\\(\\w+\\(-\\w+\\)*\\)" 0 'org-inline-tags-face prepend)))
   (setq org-capture-templates
-           '(("t" "Task" entry (file+headline "~/sync/new-brain/dashboard.org" "Task Queue")
-              "* TODO %?\n %a")
-             ;; ("j" "Journal" entry (file+datetree "~/org/journal.org")
-             ;;  "* %?\nEntered on %U\n  %i\n  %a")
-             )
-           ;; '(("t" "task" entry
-           ;;    (file+heading "~/sync/new-brain/dashboard.org" "Task Queue")
-           ;;    "* TODO %?\n %i\n %a"))
-           )
+        '(("t" "Task" entry (file+headline "~/sync/new-brain/dashboard.org" "Task Queue")
+           "* TODO %?\n %a")
+          ;; ("j" "Journal" entry (file+datetree "~/org/journal.org")
+          ;;  "* %?\nEntered on %U\n  %i\n  %a")
+          )
+        ;; '(("t" "task" entry
+        ;;    (file+heading "~/sync/new-brain/dashboard.org" "Task Queue")
+        ;;    "* TODO %?\n %i\n %a"))
+        )
   (require 'ox-publish)
   ;; (setopt org-agenda-custom-commands
   ;;         '(("z" "Daily Agenda View"
@@ -988,7 +1011,8 @@
 
 (use-package tabspaces
   :ensure t
-  :hook (after-init . start-tabspaces-mode)
+  :hook ((after-init . start-tabspaces-mode)
+         (kill-emacs . tabspaces-save-current-project-session))
   :config
   (with-eval-after-load 'consult
     ;; hide full buffer list (still available with "b" prefix)
