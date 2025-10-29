@@ -575,12 +575,12 @@ If the buffer has no headings, insert a top-level heading at end."
         ;; On the last heading; create a sibling after its subtree
         (goto-char (match-beginning 0))
         (org-insert-heading-respect-content)
-        (org-insert-time-stamp (current-time)))
+        (org-insert-time-stamp (current-time) nil t))
     ;; No headings: create a top-level heading at end
     (goto-char (point-max))
     (unless (bolp) (insert "\n"))
     (insert "* ")
-    (org-insert-time-stamp (current-time))))
+    (org-insert-time-stamp (current-time) nil t)))
 
 
 (use-package org
