@@ -583,6 +583,19 @@ If the buffer has no headings, insert a top-level heading at end."
     (org-insert-time-stamp (current-time) nil t)))
 
 
+(defun ff/org-insert-link-to-heading ()
+  "Use `org-goto` to select a heading and insert a link to it at point."
+  (interactive)
+  (require 'org)
+  (let* ((ret (save-excursion
+               (org-goto)
+               (cons (org-id-get-create) (point))))    ; position of selected heading
+         (id (car ret))
+         (pos (cdr ret))
+         (title (org-with-point-at pos (org-get-heading t t t t))) ; get clean title
+         (link (format "[[id:%s][%s]]" id title)))
+    (insert link)))
+
 (use-package org
   :ensure t
   :mode ("\\.org" . org-mode)
