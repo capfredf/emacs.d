@@ -1050,6 +1050,7 @@ If the buffer has no headings, insert a top-level heading at end."
              tabspaces-open-or-create-project-and-workspace)
   :init
   (setopt
+   tabspaces-keymap-prefix "<f7>"
    tabspaces-session-project-session-store 'project
    tabspaces-use-filtered-buffers-as-default t
    tabspaces-default-tab "Default"
