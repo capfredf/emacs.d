@@ -375,7 +375,7 @@
 
 
 ;; (use-package scribble
-:ensure t
+;; ensure t
 ;;   :ensure t
 ;;   :mode "\\.scribl")
 
