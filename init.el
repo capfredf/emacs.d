@@ -612,6 +612,7 @@ If the buffer has no headings, insert a top-level heading at end."
   (setopt org-image-actual-width 500)
   (setopt org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
   (setopt org-export-with-toc nil)
+  (setopt org-archive-default-command #'org-archive-to-archive-sibling)
   :custom-face
   ;; (org-quote ((t (:height 2.0))))
   (org-done ((t (:foreground "dim gray" :strike-through t))))
