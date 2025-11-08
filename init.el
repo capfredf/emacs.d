@@ -1023,10 +1023,20 @@ If the buffer has no headings, insert a top-level heading at end."
     (when maybe-idx
       (tab-bar-close-tab (1+ maybe-idx)))))
 
+(defun ff/save-all-tabspace-sessions ()
+  (interactive)
+  (cl-loop for tab in (tabspaces--list-tabspaces)
+           when (not (string= tab "*Some Quotes*"))
+           do (progn
+                (save-excursion
+                  (tab-bar-select-tab-by-name tab)
+                  (tabspaces-save-current-project-session)))))
+
 (use-package tabspaces
   :ensure t
   :hook ((after-init . start-tabspaces-mode)
-         (kill-emacs . tabspaces-save-current-project-session))
+         (kill-emacs . ff/save-all-tabspace-sessions)
+         )
   :config
   (with-eval-after-load 'consult
     ;; hide full buffer list (still available with "b" prefix)
