@@ -1035,7 +1035,7 @@ If the buffer has no headings, insert a top-level heading at end."
 (use-package tabspaces
   :ensure t
   :hook ((after-init . start-tabspaces-mode)
-         (kill-emacs . ff/save-all-tabspace-sessions)
+         ;; (kill-emacs . ff/save-all-tabspace-sessions)
          )
   :config
   (with-eval-after-load 'consult
@@ -1071,7 +1071,7 @@ If the buffer has no headings, insert a top-level heading at end."
    ;; (tabspaces-todo-file-name "project-todo.org")
    ;; sessions
    tabspaces-session t
-   ;; (tabspaces-session-auto-restore t)
+   tabspaces-session-auto-restore t
    tab-bar-new-tab-choice "*scratch*"))
 
 
