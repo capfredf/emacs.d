@@ -561,7 +561,17 @@
 ;;         ("k" . org-agenda-previous-line)))
 
 
-(defun ff/goto-today ()
+(defun ff/go-or-create (heading)
+  (let ((pos (org-find-exact-headline-in-buffer heading)))
+    (if pos
+        (progn
+          (goto-char pos)
+          pos)
+      (progn
+        (org-insert-heading-respect-content)
+        (org-demote-subtree)
+        (insert heading)))))
+(defun ff/create-today-entry ()
   "Find the last Org heading and create a sibling heading below it.
 If TITLE is non-nil (or given interactively), insert it as the new heading's title.
 If the buffer has no headings, insert a top-level heading at end."
@@ -569,18 +579,26 @@ If the buffer has no headings, insert a top-level heading at end."
   ;; (unless (derived-mode-p 'org-mode)
   ;;   (user-error "This command works in org-mode buffers"))
 
-  (goto-char (point-max))
-  (if (re-search-backward org-heading-regexp nil t)
-      (progn
-        ;; On the last heading; create a sibling after its subtree
-        (goto-char (match-beginning 0))
-        (org-insert-heading-respect-content)
-        (org-insert-time-stamp (current-time) nil t))
-    ;; No headings: create a top-level heading at end
-    (goto-char (point-max))
-    (unless (bolp) (insert "\n"))
-    (insert "* ")
-    (org-insert-time-stamp (current-time) nil t)))
+  (goto-char (point-min))
+  (current-time)
+  (let ((year (format-time-string "%Y"))
+        (month (format-time-string "%m"))
+        (today (format-time-string "%Y-%m-%d %a")))
+    (ff/go-or-create "Calendar")
+    (ff/go-or-create year)
+    (ff/go-or-create month)
+    (ff/go-or-create (format "[%s] [/]" today))))
+  ;; (if (re-search-backward org-heading-regexp nil t)
+  ;;     (progn
+  ;;       ;; On the last heading; create a sibling after its subtree
+  ;;       (goto-char (match-beginning 0))
+  ;;       (org-insert-heading-respect-content)
+  ;;       (org-insert-time-stamp (current-time) nil t))
+  ;;   ;; No headings: create a top-level heading at end
+  ;;   (goto-char (point-max))
+  ;;   (unless (bolp) (insert "\n"))
+  ;;   (insert "* ")
+  ;;   (org-insert-time-stamp (current-time) nil t)))
 
 
 (defun ff/org-insert-link-to-heading ()
@@ -588,13 +606,20 @@ If the buffer has no headings, insert a top-level heading at end."
   (interactive)
   (require 'org)
   (let* ((ret (save-excursion
-               (org-goto)
-               (cons (org-id-get-create) (point))))    ; position of selected heading
+                (org-goto)
+                (cons (org-id-get-create) (point)))) ; position of selected heading
          (id (car ret))
          (pos (cdr ret))
          (title (org-with-point-at pos (org-get-heading t t t t))) ; get clean title
          (link (format "[[id:%s][%s]]" id title)))
     (insert link)))
+
+
+(defun ff/insert-new-entry ()
+  (interactive)
+  (org-insert-heading-respect-content)
+  (message "hello")
+  (insert (format-time-string "[%H:%M]")))
 
 (use-package org
   :ensure t
@@ -625,7 +650,7 @@ If the buffer has no headings, insert a top-level heading at end."
          ;;("C-c g" . counsel-org-goto-all)
          :map org-mode-map
          ("C-c l" . org-store-link)
-         ("C-c C-j" . my/new-day)
+         ("C-c j" . ff/insert-new-entry)
          ("C-c C-M-o" . org-mark-ring-goto)
          ("s-n" . org-next-visible-heading)
          ("s-p" . org-previous-visible-heading)
@@ -790,22 +815,22 @@ If the buffer has no headings, insert a top-level heading at end."
      (insert (buffer-name (window-buffer (minibuffer-selected-window))))))
 
 (defconst date-pos (length "Today -- "))
-(defun my/new-day ()
-  (interactive)
-  (let ((headline "Timeline")
-        (file (expand-file-name "dashboard.org" new-brain-dir)))
-    (save-excursion
-      (find-file file)
-      ;; go the the first heading
-      (goto-char (point-min))
-      (unless (org-at-heading-p)
-        (org-next-visible-heading 1)
-        (org-edit-headline (substring (nth 4 (org-heading-components)) date-pos))
-        (let* ((pos (org-find-exact-headline-in-buffer headline)))
-          (org-refile nil nil (list headline file nil pos)))
-        (org-insert-heading)
-        (insert (format "Today -- %s" (format-time-string "%m/%d/%Y" (current-time))))
-        (newline)))))
+;; (defun my/new-day ()
+;;   (interactive)
+;;   (let ((headline "Timeline")
+;;         (file (expand-file-name "dashboard.org" new-brain-dir)))
+;;     (save-excursion
+;;       (find-file file)
+;;       ;; go the the first heading
+;;       (goto-char (point-min))
+;;       (unless (org-at-heading-p)
+;;         (org-next-visible-heading 1)
+;;         (org-edit-headline (substring (nth 4 (org-heading-components)) date-pos))
+;;         (let* ((pos (org-find-exact-headline-in-buffer headline)))
+;;           (org-refile nil nil (list headline file nil pos)))
+;;         (org-insert-heading)
+;;         (insert (format "Today -- %s" (format-time-string "%m/%d/%Y" (current-time))))
+;;         (newline)))))
 
 (use-package racket-mode
   ;; pick the :ensure or :load-path X :vc t
