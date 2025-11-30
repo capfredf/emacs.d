@@ -669,6 +669,26 @@ If the buffer has no headings, insert a top-level heading at end."
 
   ;; (font-lock-add-keywords 'org-mode
   ;;                         '(("#\\(\\w+\\(-\\w+\\)*\\)" 0 'org-inline-tags-face prepend)))
+  (defface org-time-only
+    '((t :inherit org-modern-date-inactive :weight semi-bold))
+    "Face for time-only pseudo-timestamps.")
+
+  (font-lock-add-keywords
+   'org-mode
+   '(("\\[[0-2]?[0-9]:[0-5][0-9]\\]"
+      . 'org-time-only)))
+
+  (defun my-org-add-time-only-font-lock ()
+    (add-to-list
+     'org-font-lock-extra-keywords
+     '("\\(\\[[0-2]?[0-9]:[0-5][0-9]\\]\\)"
+       ;; subexp 1 → our face; OVERRIDE=t so it wins over headline face
+       (1 'org-time-only t))))
+
+
+  (with-eval-after-load 'org
+    (add-hook 'org-font-lock-set-keywords-hook #'my-org-add-time-only-font-lock))
+
   (setq org-capture-templates
         '(("t" "Task" entry (file+headline "~/sync/new-brain/dashboard.org" "Task Queue")
            "* TODO %?\n %a")
@@ -1037,6 +1057,9 @@ If the buffer has no headings, insert a top-level heading at end."
 (use-package jinx
   :ensure t
   :hook (emacs-startup . global-jinx-mode)
+  :config
+
+  (add-to-list 'jinx-exclude-regexps '(t "\\cc"))
   :bind (("M-$" . jinx-correct)
          ("C-M-$" . jinx-languages)))
 
