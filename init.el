@@ -319,6 +319,7 @@
   :ensure t
   :bind
   (("C-x C-b" . consult-buffer)
+   ("C-x C-l" . consult-line)
    ("M-y" . consult-yank-pop)))
 
 (use-package project
