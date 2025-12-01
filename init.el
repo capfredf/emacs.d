@@ -572,6 +572,7 @@
         (org-insert-heading-respect-content)
         (org-demote-subtree)
         (insert heading)))))
+
 (defun ff/create-today-entry ()
   "Find the last Org heading and create a sibling heading below it.
 If TITLE is non-nil (or given interactively), insert it as the new heading's title.
@@ -588,7 +589,7 @@ If the buffer has no headings, insert a top-level heading at end."
     (ff/go-or-create "Calendar")
     (ff/go-or-create year)
     (ff/go-or-create month)
-    (ff/go-or-create (format "[%s] [/]" today))))
+    (ff/go-or-create (format "[%s] [/] " today))))
   ;; (if (re-search-backward org-heading-regexp nil t)
   ;;     (progn
   ;;       ;; On the last heading; create a sibling after its subtree
@@ -619,7 +620,6 @@ If the buffer has no headings, insert a top-level heading at end."
 (defun ff/insert-new-entry ()
   (interactive)
   (org-insert-heading-respect-content)
-  (message "hello")
   (insert (format-time-string "[%H:%M]")))
 
 (use-package org
@@ -835,7 +835,7 @@ If the buffer has no headings, insert a top-level heading at end."
   (lambda () (interactive)
      (insert (buffer-name (window-buffer (minibuffer-selected-window))))))
 
-(defconst date-pos (length "Today -- "))
+;; (defconst date-pos (length "Today -- "))
 ;; (defun my/new-day ()
 ;;   (interactive)
 ;;   (let ((headline "Timeline")
