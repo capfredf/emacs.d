@@ -622,6 +622,16 @@ If the buffer has no headings, insert a top-level heading at end."
   (org-insert-heading-respect-content)
   (insert (format-time-string "[%H:%M]")))
 
+(require 'transient)
+(transient-define-prefix ff/org-cmds ()
+  "org commands"
+  [("g" "org-goto"
+    org-goto)
+   ("t" "create an entry for today"
+    ff/create-today-entry)
+   ("n" "create a new interstitial entry"
+    ff/insert-new-entry)])
+
 (use-package org
   :ensure t
   :mode ("\\.org" . org-mode)
@@ -651,7 +661,9 @@ If the buffer has no headings, insert a top-level heading at end."
          ;;("C-c g" . counsel-org-goto-all)
          :map org-mode-map
          ("C-c l" . org-store-link)
-         ("C-c j" . ff/insert-new-entry)
+         ("C-c C-j" . ff/org-cmds)
+         ;; ("C-c C-j t" . ff/create-today-entry)
+         ;; ("C-c C-j n" . ff/create-new-entry)
          ("C-c C-M-o" . org-mark-ring-goto)
          ("s-n" . org-next-visible-heading)
          ("s-p" . org-previous-visible-heading)
@@ -974,7 +986,7 @@ If the buffer has no headings, insert a top-level heading at end."
   ;; ...
 )
 
-(defconst org-journal-entry-template-name "daily-journal-template.org")
+;; (defconst org-journal-entry-template-name "daily-journal-template.org")
 ;; (define-key calendar-mode-map (kbd "j d") 'org-journal-display-entry)
 ;; (accessible-keymaps calendar-mode-map)
 ;; (with-output-to-temp-buffer "*Keymap Bindings*"
@@ -983,20 +995,20 @@ If the buffer has no headings, insert a top-level heading at end."
 ;;      (princ (format "%s => %s\n" (key-description (vector key)) binding)))
 ;;    calendar-mode-map))
 ;; the keybindings prefixed with j do not work with meow, and I don't understand why.
-(use-package org-journal
-  :ensure t
-  :init
-  (setopt org-journal-file-type 'daily
-          org-journal-file-header "#+title: %m/%d/%Y, No Title\n#+created: %Y-%m-%d\n"
-          org-journal-date-prefix ""
-          org-journal-date-format " "
-          org-journal-time-format ""
-          org-journal-dir (expand-file-name "journals" new-brain-dir)))
+;; (use-package org-journal
+;;   :ensure t
+;;   :init
+;;   (setopt org-journal-file-type 'daily
+;;           org-journal-file-header "#+title: %m/%d/%Y, No Title\n#+created: %Y-%m-%d\n"
+;;           org-journal-date-prefix ""
+;;           org-journal-date-format " "
+;;           org-journal-time-format ""
+;;           org-journal-dir (expand-file-name "journals" new-brain-dir)))
 
-(defun new-entry-template ()
-  (org-insert-heading-respect-content)
-  (kill-whole-line)
-  (insert-file-contents (expand-file-name org-journal-entry-template-name org-journal-dir)))
+;; (defun new-entry-template ()
+;;   (org-insert-heading-respect-content)
+;;   (kill-whole-line)
+;;   (insert-file-contents (expand-file-name org-journal-entry-template-name org-journal-dir)))
 
 (use-package agda2-mode
   :mode "\\.agda\\'"
@@ -1232,3 +1244,11 @@ If the buffer has no headings, insert a top-level heading at end."
   ;; (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
   ;; (global-tempel-abbrev-mode)
 )
+
+
+
+
+;; First, use M-x org-babel-execute-src-blk to cause `tsc-hello' to be
+;; defined
+;; Second, M-x `eval-last-sexp' with your point at the end of the line below
+;; (tsc-hello)
