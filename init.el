@@ -585,10 +585,11 @@ If the buffer has no headings, insert a top-level heading at end."
   ;;   (user-error "This command works in org-mode buffers"))
   (goto-char (point-min))
   (let ((year (format-time-string "%Y"))
-        (month (format-time-string "%m"))
+        (month (format-time-string "%Y/%m"))
         (today (format-time-string "%Y-%m-%d %a")))
     (ff/go-or-create "Calendar")
     (ff/go-or-create year)
+    ;; this needs to be unique. Just a month name will cause duplication that is not worth fixing
     (ff/go-or-create month)
     (ff/go-or-create (format "[%s] [/] " today))))
   ;; (if (re-search-backward org-heading-regexp nil t)
@@ -1255,6 +1256,22 @@ If the buffer has no headings, insert a top-level heading at end."
 )
 
 
+(defun org-dblock-write:reflections-count (params)
+  "Dynamic block writer. Counts headings in current file matching :tag."
+  (let* ((tag (or (plist-get params :tag) "reflection"))
+         (count (save-excursion
+                  (org-up-element)
+                  (org-up-element)
+                  (org-up-element)
+                  (length
+                   (org-map-entries
+                    (lambda ()
+                      (prin1 (org-heading-components))
+                      t)
+                    ;; nil
+                    (format "+%s" tag)
+                    'tree)))))
+    (insert (format "Total %s: %d" tag count))))
 
 
 ;; First, use M-x org-babel-execute-src-blk to cause `tsc-hello' to be
