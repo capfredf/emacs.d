@@ -1260,9 +1260,13 @@ If the buffer has no headings, insert a top-level heading at end."
   "Dynamic block writer. Counts headings in current file matching :tag."
   (let* ((tag (or (plist-get params :tag) "reflection"))
          (count (save-excursion
+                  ;; we are at the content of the dblock
                   (org-up-element)
+                  ;; we are at the heading of the dblock
                   (org-up-element)
+                  ;; we are at the goals
                   (org-up-element)
+                  ;; we are at the heading for the current month
                   (length
                    (org-map-entries
                     (lambda ()
