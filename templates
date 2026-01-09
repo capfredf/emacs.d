@@ -1,5 +1,10 @@
 latex-mode
 
+(tbf "\\textbf{"p"}")
+(ttt "\\texttt{"p"}")
+(tit "\\textit{"p"}")
+(sec "\\section{"p"}")
+(secn "\\section*{"p"}")
 (abstract "\\begin{abstract}\n" r> n> "\\end{abstract}")
 (align "\\begin{align}\n" r> n> "\\end{align}")
 (alignn "\\begin{align*}\n" r> n> "\\end{align*}")
