@@ -656,6 +656,7 @@ If the buffer has no headings, insert a top-level heading at end."
   (setopt org-fontify-done-headline t)
   (setopt org-src-fontify-natively t)
   (setopt org-image-actual-width 500)
+  (setopt org-M-RET-may-split-line nil)
   (setopt org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
   (setopt org-export-with-toc nil)
   (setopt org-archive-default-command #'org-archive-to-archive-sibling)
