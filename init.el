@@ -921,7 +921,7 @@ If the buffer has no headings, insert a top-level heading at end."
   (windmove-mode t)
   (windmove-swap-states-default-keybindings '(shift control)))
 
-(add-hook 'eshell-mode-hook (lambda () (setenv "TERM" "xterm-256color")))
+(add-hook 'eshell-mode-hook (lambda () (setenv "TERM" "dumb")))
 (use-package eat
   :ensure t
   :after eshell
