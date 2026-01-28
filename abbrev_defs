@@ -1,4 +1,9 @@
 ;;-*-coding: utf-8;-*-
+(define-abbrev-table 'LaTeX-mode-abbrev-table
+  '(
+    ("vsp" "\\vspace{1\\baselineskip}" nil :count 6)
+   ))
+
 (define-abbrev-table 'agda2-mode-abbrev-table
   '(
     ("in1" "inj₁" nil :count 3)
