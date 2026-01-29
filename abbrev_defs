@@ -1,7 +1,8 @@
 ;;-*-coding: utf-8;-*-
 (define-abbrev-table 'LaTeX-mode-abbrev-table
   '(
-    ("vsp" "\\vspace{1\\baselineskip}" nil :count 6)
+    ("ndc" "NewDocumentCommand" nil :count 0)
+    ("vsp" "\\vspace{1\\baselineskip}" nil :count 12)
    ))
 
 (define-abbrev-table 'agda2-mode-abbrev-table
