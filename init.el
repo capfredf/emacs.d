@@ -66,6 +66,8 @@
   :ensure t
   :demand t)
 
+(add-to-list 'insert-pair-alist '(?\$ ?\$))
+
 (defvar open-closing-pairs
   '((?\[ . ?\])
     (?\{ . ?\})
@@ -73,9 +75,26 @@
     (?\" . ?\")
     (?\' . ?\')))
 
-(global-set-key (kbd "M-[") #'insert-pair)
-(global-set-key (kbd "M-{") #'insert-pair)
-(global-set-key (kbd "M-<backspace>") #'delete-pair)
+(require 'transient)
+
+;; (global-set-key (kbd "M-[") #'insert-pair)
+;; (global-set-key (kbd "M-{") #'insert-pair)
+;; (global-set-key (kbd "M-$") #'insert-pair)
+;; (global-set-key (kbd "M-<backspace>") #'delete-pair)
+
+
+
+(defmacro def-ff/pairs (keybinding &rest keys)
+  `(progn (transient-define-prefix ff/pairs ()
+            "pair operations"
+            [,@(mapcar (lambda (key) (list (format "%c" key)
+                                           (format "insert a pair of %c and %c" key (car (alist-get key insert-pair-alist)))
+                                           'insert-pair))
+                       keys)])
+          (global-set-key ,keybinding #'ff/pairs)))
+
+(def-ff/pairs (kbd "C-c p") ?\( ?\{ ?\$ ?\" ?\')
+
 (use-package meow
   :ensure t
   :init
@@ -632,7 +651,6 @@ If the buffer has no headings, insert a top-level heading at end."
     (org-demote-subtree)
     (insert (format-time-string "[%H:%M]"))))
 
-(require 'transient)
 (transient-define-prefix ff/org-cmds ()
   "org commands"
   [("g" "org-goto"
@@ -888,7 +906,10 @@ If the buffer has no headings, insert a top-level heading at end."
   ;;      :branch "issue-759")
   :init
   ;; (load-library "racket-mode-autoloads")
-  (defun my/racket-hash-lang-module-lang-hook (arg)
+  (defun my/racket-hash-lang-module-lang-hook (lang)
+    (when (string-prefix-p "(lib rhombus" lang)
+      (setq-local electric-pair-pairs
+                  (cons '(?' . ?') electric-pair-pairs)))
     (setq-local racket-xp-add-binding-faces t))
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
   (add-hook 'racket-hash-lang-mode-hook #'racket-xp-mode)
