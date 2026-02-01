@@ -1253,6 +1253,13 @@ If the buffer has no headings, insert a top-level heading at end."
          ("M-*" . tempel-insert))
 
   :init
+  (setopt tempel-path (list (expand-file-name "templates" user-emacs-directory)))
+  (defun tempel-reload ()
+    (interactive)
+    (setq tempel--path-templates nil))
+
+  (defun add-to-tempel-path (path)
+    (setopt tempel-path (cons path tempel-path)))
 
   ;; Setup completion at point
   (defun tempel-setup-capf ()
@@ -1275,7 +1282,7 @@ If the buffer has no headings, insert a top-level heading at end."
   ;; either locally or globally. `expand-abbrev' is bound to C-x '.
   ;; (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
   ;; (global-tempel-abbrev-mode)
-)
+  )
 
 
 (defun org-dblock-write:reflections-count (params)

@@ -1,4 +1,4 @@
-latex-mode
+LaTeX-mode
 
 (tbf "\\textbf{"p"}")
 (ttt "\\texttt{"p"}")
