@@ -235,7 +235,7 @@
      '("t" . meow-till)
      '("u" . meow-undo)
      '("U" . meow-undo-in-selection)
-     '("v" . meow-visit)
+     '("v" . consult-line)
      '("w" . meow-mark-word)
      '("W" . meow-mark-symbol)
      '("V" . meow-line)
@@ -864,10 +864,37 @@ If the buffer has no headings, insert a top-level heading at end."
 (use-package auctex
   :ensure t
   :mode (("\\.tex" . LaTeX-mode))
+  :init
+  (defun ff/add-meow-things ()
+    (interactive)
+    (meow-thing-register 'dollar
+                         '(regexp "\\$" "\\$")
+		                     '(regexp "\\$" "\\$"))
+
+    (setq-local meow-char-thing-table
+                (cons '(?$ . dollar)
+                      meow-char-thing-table)))
   :config
   (require 'reftex)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-
+  (add-hook 'LaTeX-mode-hook 'ff/add-meow-things)
+  (defun ff/latex-inline-math-to-align ()
+    "Convert $...$ at point into \\begin{align*} ... \\end{align*}."
+    (interactive)
+    (save-excursion
+      (let ((beg (region-beginning))
+            (end (region-end)))
+        (goto-char end)
+        (delete-char -1)
+        (setq end (- (point) 1))
+        (goto-char beg)
+        (delete-char 1)
+        (setq beg (point))
+        (set-mark end)
+        (let ((mark-active t)
+              (transient-mark-mode t))
+          ;; Wrap with align*
+          (call-interactively #'LaTeX-environment)))))
   (setopt TeX-auto-save t)
   (setopt TeX-parse-self t)
   (setopt TeX-save-query nil))
