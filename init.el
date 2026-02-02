@@ -247,6 +247,7 @@
      ;; '("$" . meow-block)
      '("$" . meow-block)
      '("#" . meow-to-block)
+     '("<backspace>" . meow-left)
      '("<escape>" . ignore)))
 
   (defun me/ignore-vanilla-keybindings ()
