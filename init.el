@@ -936,7 +936,7 @@ If the buffer has no headings, insert a top-level heading at end."
   (defun my/racket-hash-lang-module-lang-hook (lang)
     (when (string-prefix-p "(lib rhombus" lang)
       (setq-local electric-pair-pairs
-                  (cons '(?' . ?') electric-pair-pairs)))
+                  (append (list '(?' . ?')) electric-pair-pairs)))
     (setq-local racket-xp-add-binding-faces t))
   (add-hook 'racket-mode-hook      #'racket-xp-mode)
   (add-hook 'racket-hash-lang-mode-hook #'racket-xp-mode)
