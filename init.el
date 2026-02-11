@@ -668,6 +668,7 @@ If the buffer has no headings, insert a top-level heading at end."
   (add-hook 'org-mode-hook (lambda ()
                              ;; (org-bullets-mode 1)
                              ;; (variable-pitch-mode 1)
+                             (setq-local line-spacing 0.15)
                              (setq fill-column 100)))
   (setopt org-agenda-dim-blocked-tasks t)
   (setopt org-todo-keywords '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "Someday(s)" "|" "CANCELLED(c)" "DONE(d)")))
@@ -848,7 +849,9 @@ If the buffer has no headings, insert a top-level heading at end."
 
 (use-package org-modern
   :ensure t
-  :hook ((org-mode . org-modern-mode)))
+  :hook ((org-mode . org-modern-mode))
+  :config
+  (setopt org-modern-todo-faces '(("DOING" :inverse-video t :weight semibold :foreground "dodger blue"))))
 
 (use-package org-super-agenda
   :ensure t
