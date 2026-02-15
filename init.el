@@ -1318,8 +1318,24 @@ If the buffer has no headings, insert a top-level heading at end."
                     'tree)))))
     (insert (format "Total %s: %d" tag count))))
 
+(require 'auth-source)
 
-;; First, use M-x org-babel-execute-src-blk to cause `tsc-hello' to be
-;; defined
-;; Second, M-x `eval-last-sexp' with your point at the end of the line below
-;; (tsc-hello)
+(defun ff/auth-get-secret (host &optional user)
+  "Return secret for HOST from auth-source."
+  (let* ((match (car (auth-source-search
+                      :host host
+                      :user (or user "apikey")
+                      :require '(:secret)
+                      :max 1)))
+         (secret (plist-get match :secret)))
+    (when secret
+      (if (functionp secret) (funcall secret) secret))))
+
+(use-package gptel
+  :defer t
+  :ensure t
+  :config
+  (setopt
+   gptel-default-mode 'org-mode
+   gptel-model 'gemini-3-flash-preview
+   gptel-backend (gptel-make-gemini "Gemini" :key (ff/auth-get-secret "api.generativelanguage.googleapis.com" "apikey") :stream t)))
