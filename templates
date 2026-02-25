@@ -5,6 +5,7 @@ LaTeX-mode
 (tit "\\textit{"p"}")
 (sec "\\section{"p"}")
 (secn "\\section*{"p"}")
+(lb "\\label{" p "}")
 (abstract "\\begin{abstract}\n" r> n> "\\end{abstract}")
 (align "\\begin{align}\n" r> n> "\\end{align}")
 (alignn "\\begin{align*}\n" r> n> "\\end{align*}")
