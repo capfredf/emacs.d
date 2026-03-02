@@ -6,6 +6,8 @@ LaTeX-mode
 (sec "\\section{"p"}")
 (secn "\\section*{"p"}")
 (lb "\\label{" p "}")
+(Crf "\\Cref{" p "}")
+(crf "\\cref{" p "}")
 (abstract "\\begin{abstract}\n" r> n> "\\end{abstract}")
 (align "\\begin{align}\n" r> n> "\\end{align}")
 (alignn "\\begin{align*}\n" r> n> "\\end{align*}")
