@@ -502,48 +502,50 @@
 (use-package org-ql
   :after org
   :ensure t
-  ;; :config
+  :init
+  (add-hook 'org-agenda-finalize-hook 'meow-motion-mode)
   ;; I don't need to bury the buffer. I want to exit the view
-  ;; (require 'org-ql-view)
-  ;; (bind-key "q" 'org-agenda-exit org-ql-view-map)
-  ;; (bind-key "G" 'org-ql-view-refresh org-ql-view-map)
+  (require 'org-ql-view)
+  :config
+  (bind-key "q" 'org-agenda-exit org-ql-view-map)
+  (bind-key "G" 'org-ql-view-refresh org-ql-view-map)
   ;; there are no bindings in org-ql-view-map for those keys, we need to unbind
   ;; those keys from its parent keymap
-  ;; (unbind-key "h" org-agenda-mode-map)
-  ;; (unbind-key "H" org-agenda-mode-map)
-  ;; (unbind-key "l" org-agenda-mode-map)
-  ;; (unbind-key "L" org-agenda-mode-map)
-  ;; :init
-  ;; (add-hook 'org-agenda-finalize-hook 'meow-motion-mode)
-  ;; (defun my/all-available-tasks ()
-  ;;   (interactive)
-  ;;   (org-ql-search (org-agenda-files) '(and (todo) (not (todo "DOING")) (not (scheduled :to today)) (not (blocked)))
-  ;;     :sort '(todo date)
-  ;;     :title "Today's View"
-  ;;     :super-groups '((:name "Upcoming" :and (:scheduled future :todo "TODO"))
-  ;;                     (:name "Hiatus" :and (:todo "TODO" :tag "hiatus"))
-  ;;                     (:name "Waiting" :and (:todo "WAITING"))
-  ;;                     (:name "Papers" :and (:todo "TODO" :tag "paper"))
-  ;;                     (:name "Someday" :todo "Someday" )
-  ;;                     (:name "Deadlined" :deadline future))))
+  (unbind-key "h" org-agenda-mode-map)
+  (unbind-key "H" org-agenda-mode-map)
+  (unbind-key "l" org-agenda-mode-map)
+  (unbind-key "L" org-agenda-mode-map)
+  (defun ff/all-available-tasks ()
+    (interactive)
+    (org-ql-search (org-agenda-files) '(and (todo) (not (todo "DOING")) (not (scheduled :to today)) (not (blocked)))
+      :sort '(todo date)
+      :title "Available View"
+      ;; :super-groups '((:name "Upcoming" :and (:scheduled future :todo "TODO"))
+      ;;                 (:name "Hiatus" :and (:todo "TODO" :tag "hiatus"))
+      ;;                 (:name "Waiting" :and (:todo "WAITING"))
+      ;;                 (:name "Papers" :and (:todo "TODO" :tag "paper"))
+      ;;                 (:name "Someday" :todo "Someday" )
+      ;;                 (:name "Important" :and (:category "Rebuild TR Proof"))
+      ;;                 (:name "Deadlined" :deadline future))
+      :super-groups '((:name "everything" :auto-category t :todo "TODO"))))
 
-  ;; (defun my/show-scheduled ()
-  ;;   (interactive)
-  ;;   (org-ql-search (org-agenda-files) '(or (and (not (blocked)) (scheduled :to today) (todo "TODO" "WAITING"))
-  ;;                                          (and (deadline) (todo "TODO" "WAITING"))
-  ;;                                          (habit)
-  ;;                                          ;; (and (ts-active :on today) (todo "TODO" "WAITING"))
-  ;;                                          (todo "DOING"))
-  ;;     :sort '(todo date)
-  ;;     :title "Today's View"
-  ;;     :super-groups '((:name "In-Progress" :todo "DOING" )
-  ;;                     (:name "Habit" :habit t)
-  ;;                     (:name "Waiting" :and (:scheduled today :todo "WAITING"))
-  ;;                     (:name "Fitness" :and (:scheduled today :category "workout"))
-  ;;                     (:name "Daily" :and (:scheduled today :category "daily"))
-  ;;                     (:name "Avaiable" :and (:scheduled t :not (:and (:category "daily" :category "workout"))
-  ;;                                                        :todo "TODO"))
-  ;;                     (:name "Deadlined" :deadline future))))
+  (defun ff/show-scheduled ()
+    (interactive)
+    (org-ql-search (org-agenda-files) '(or (and (not (blocked)) (scheduled :to today) (todo "TODO" "WAITING"))
+                                           (and (deadline) (todo "TODO" "WAITING"))
+                                           (habit)
+                                           ;; (and (ts-active :on today) (todo "TODO" "WAITING"))
+                                           (todo "DOING"))
+      :sort '(todo date)
+      :title "Today's View"
+      :super-groups '((:name "In-Progress" :todo "DOING" )
+                      (:name "Habit" :habit t)
+                      (:name "Waiting" :and (:scheduled today :todo "WAITING"))
+                      (:name "Fitness" :and (:scheduled today :category "workout"))
+                      (:name "Daily" :and (:scheduled today :category "daily"))
+                      (:name "Avaiable" :and (:scheduled t :not (:and (:category "daily" :category "workout"))
+                                                         :todo "TODO"))
+                      (:name "Deadlined" :deadline future))))
 
   ;; :bind
   ;; (("C-c q" . my/show-scheduled)
@@ -554,6 +556,8 @@
    ;; )
 )
 
+;; (add-to-list 'display-buffer-alist
+;;              '(""))
 
 ;; ;; (fullscreen)
 
@@ -639,7 +643,11 @@ If the buffer has no headings, insert a top-level heading at end."
 
 (transient-define-prefix ff/org-cmds ()
   "org commands"
-  [("g" "org-goto"
+  [("s" "Today's Tasks"
+    ff/show-scheduled)
+   ("a" "Avaiable Tasks"
+    ff/all-available-tasks)
+   ("g" "org-goto"
     org-goto)
    ("t" "create an entry for today"
     ff/create-today-entry)
@@ -1337,11 +1345,12 @@ If the buffer has no headings, insert a top-level heading at end."
     (when secret
       (if (functionp secret) (funcall secret) secret))))
 
-(use-package gptel
-  :defer t
-  :ensure t
-  :config
-  (setopt
-   gptel-default-mode 'org-mode
-   gptel-model 'gemini-3-flash-preview
-   gptel-backend (gptel-make-gemini "Gemini" :key (ff/auth-get-secret "api.generativelanguage.googleapis.com" "apikey") :stream t)))
+
+;; (use-package gptel
+;;   :defer t
+;;   :ensure t
+;;   :config
+;;   (setopt
+;;    gptel-default-mode 'org-mode
+;;    gptel-model 'gemini-3-flash-preview
+;;    gptel-backend (gptel-make-gemini "Gemini" :key (ff/auth-get-secret "api.generativelanguage.googleapis.com" "apikey") :stream t)))

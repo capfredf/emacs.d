@@ -197,10 +197,10 @@
                   ("convert -density %D -trim -antialias %f -quality 100 %O"))))
  '(org-ql-views
    '(("Tasks that needs to processed" :buffers-files
-      ("/home/capfredf/new-brain/dashboard.org") :query
+      ("/home/capfredf/sync/new-brain/dashboard.org") :query
       (and (todo "TODO") (not (scheduled :to today))) :sort nil :narrow nil
       :super-groups nil :title "Tasks that needs to processed")
-     ("Today's View" :buffers-files ("/home/capfredf/new-brain/dashboard.org")
+     ("Today's View" :buffers-files ("/home/capfredf/sync/new-brain/dashboard.org")
       :query
       (or (and (scheduled :to today) (todo "TODO" "WAITING"))
           (and (ts-active :on today) (todo "TODO" "WAITING")) (todo "DOING"))
