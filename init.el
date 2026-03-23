@@ -875,6 +875,7 @@ If the buffer has no headings, insert a top-level heading at end."
                       meow-char-thing-table)))
   :config
   (require 'reftex)
+  (setopt reftex-plug-into-AUCTeX t)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   (add-hook 'LaTeX-mode-hook 'ff/add-meow-things)
   (defun ff/latex-inline-math-to-align ()
