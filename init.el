@@ -517,7 +517,7 @@
   (unbind-key "L" org-agenda-mode-map)
   (defun ff/all-available-tasks ()
     (interactive)
-    (org-ql-search (org-agenda-files) '(and (todo) (not (todo "DOING")) (not (scheduled :to today)) (not (blocked)))
+    (org-ql-search (org-agenda-files) '(and (todo) (not (todo "DOING")) (not (tags "ARCHIVE")) (not (scheduled :to today)) (not (blocked)))
       :sort '(todo date)
       :title "Available View"
       ;; :super-groups '((:name "Upcoming" :and (:scheduled future :todo "TODO"))

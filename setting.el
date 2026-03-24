@@ -200,8 +200,8 @@
       ("/home/capfredf/sync/new-brain/dashboard.org") :query
       (and (todo "TODO") (not (scheduled :to today))) :sort nil :narrow nil
       :super-groups nil :title "Tasks that needs to processed")
-     ("Today's View" :buffers-files ("/home/capfredf/sync/new-brain/dashboard.org")
-      :query
+     ("Today's View" :buffers-files
+      ("/home/capfredf/sync/new-brain/dashboard.org") :query
       (or (and (scheduled :to today) (todo "TODO" "WAITING"))
           (and (ts-active :on today) (todo "TODO" "WAITING")) (todo "DOING"))
       :sort (todo date) :narrow nil :super-groups
@@ -304,6 +304,7 @@
    '((project-find-file "Find file" nil) (project-find-regexp "Find regexp" nil)
      (project-find-dir "Find directory" nil) (project-vc-dir "VC-Dir" nil)
      (project-eshell "Eshell" nil) (magit-project-status "Magit" 109)))
+ '(reftex-insert-label-flags '("e" "eft"))
  '(reftex-plug-into-AUCTeX t)
  '(repeat-mode t)
  '(safe-local-variable-values
