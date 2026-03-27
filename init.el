@@ -574,17 +574,20 @@
 ;;         ("j" . org-agenda-next-line)
 ;;         ("k" . org-agenda-previous-line)))
 
-
+;; (goto-char (car (org-ql-select (org-agenda-files) '(heading "[2026-03-27 Fri")
+;;                   :action #'point)))
 (defun ff/go-or-create (heading)
-  (let ((pos (org-find-exact-headline-in-buffer heading)))
+  (let ((pos (org-ql-select (org-agenda-files) `(heading ,heading)
+               :action #'point)))
     (if pos
         (progn
-          (goto-char pos)
-          pos)
+          (goto-char (car pos))
+          'go)
       (progn
         (org-insert-heading-respect-content)
         (org-demote-subtree)
-        (insert heading)))))
+        (insert heading)
+        'create))))
 
 (defun ff/create-today-entry ()
   "Find the last Org heading and create a sibling heading below it.
@@ -601,7 +604,7 @@ If the buffer has no headings, insert a top-level heading at end."
     (ff/go-or-create year)
     ;; this needs to be unique. Just a month name will cause duplication that is not worth fixing
     (ff/go-or-create month)
-    (ff/go-or-create (format "[%s] [/] " today))))
+    (ff/go-or-create (format "[%s]" today))))
   ;; (if (re-search-backward org-heading-regexp nil t)
   ;;     (progn
   ;;       ;; On the last heading; create a sibling after its subtree
