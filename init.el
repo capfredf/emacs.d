@@ -531,11 +531,12 @@
 
   (defun ff/show-scheduled ()
     (interactive)
-    (org-ql-search (org-agenda-files) '(or (and (not (blocked)) (scheduled :to today) (todo "TODO" "WAITING"))
-                                           (and (deadline) (todo "TODO" "WAITING"))
-                                           (habit)
-                                           ;; (and (ts-active :on today) (todo "TODO" "WAITING"))
-                                           (todo "DOING"))
+    (org-ql-search (org-agenda-files) '(and (not (tags "ARCHIVE"))
+                                            (or (and (not (blocked)) (scheduled :to today) (todo "TODO" "WAITING"))
+                                                (and (deadline) (todo "TODO" "WAITING"))
+                                                (habit)
+                                                ;; (and (ts-active :on today) (todo "TODO" "WAITING"))
+                                                (todo "DOING")))
       :sort '(todo date)
       :title "Today's View"
       :super-groups '((:name "In-Progress" :todo "DOING" )
