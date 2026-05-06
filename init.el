@@ -93,7 +93,7 @@
                        keys)])
           (global-set-key ,keybinding #'ff/pairs)))
 
-(def-ff/pairs (kbd "C-c p") ?\( ?\{ ?\$ ?\" ?\')
+(def-ff/pairs (kbd "C-c p") ?\( ?\{ ?\$ ?\" ?\' ?\[)
 
 (use-package meow
   :ensure t
@@ -901,6 +901,7 @@ If the buffer has no headings, insert a top-level heading at end."
           (call-interactively #'LaTeX-environment)))))
   (setopt TeX-auto-save t)
   (setopt TeX-parse-self t)
+  (setopt bibtex-dialect 'biblatex)
   (setopt TeX-save-query nil))
 
 (define-key minibuffer-local-map [f3]
