@@ -1355,6 +1355,8 @@ If the buffer has no headings, insert a top-level heading at end."
 (defalias 'psub
    (kmacro ", { SPC p { h i p s u b <backspace> <backspace> <backspace> <backspace> \\ p s u b p r o p <escape>"))
 
+(setopt dired-dwim-target t)
+
 ;; (use-package gptel
 ;;   :defer t
 ;;   :ensure t
