@@ -308,7 +308,18 @@
  '(reftex-plug-into-AUCTeX t)
  '(repeat-mode t)
  '(safe-local-variable-values
-   '((eval add-to-tempel-path "templates")
+   '((eval let*
+           ((root (locate-dominating-file default-directory ".dir-locals.el"))
+            (ff-dir (expand-file-name "ff.sty/" root))
+            (ff-tree (concat ff-dir "//")) (texinputs (getenv "TEXINPUTS")))
+           (when (boundp 'TeX-macro-private)
+             (add-to-list 'TeX-macro-private ff-dir))
+           (unless
+               (member ff-tree (split-string (or texinputs "") path-separator t))
+             (setenv "TEXINPUTS"
+                     (concat ff-tree path-separator (or texinputs ""))))
+           (when (fboundp 'TeX-run-style-hooks) (TeX-run-style-hooks "ff")))
+     (eval add-to-tempel-path "templates")
      (lisp-indent-local-overrides (cond . 0) (interactive . 0)) (TeX-master . t)
      (eval racket-unicode-input-method-enable) (TeX-engine . xelatex)
      (olivetti-body-width . 150)))
