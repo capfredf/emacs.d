@@ -294,7 +294,7 @@
                 marginalia markdown-mode meow mistty olivetti orderless
                 org-journal org-modern org-ql org-superstar paredit
                 proof-general racket-mode solarized-theme tabspaces tempel
-                vertico wgrep-ag ws-butler yaml-mode yasnippet))
+                typst-ts-mode vertico wgrep-ag ws-butler yaml-mode yasnippet))
  '(package-vc-selected-packages
    '((beancount-mode :url "git@github.com:beancount/beancount-mode.git" :branch
                      "main")

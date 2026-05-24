@@ -511,6 +511,7 @@
   (bind-key "G" 'org-ql-view-refresh org-ql-view-map)
   ;; there are no bindings in org-ql-view-map for those keys, we need to unbind
   ;; those keys from its parent keymap
+  (bind-key "p" 'org-agenda-show-and-scroll-up org-agenda-mode-map)
   (unbind-key "h" org-agenda-mode-map)
   (unbind-key "H" org-agenda-mode-map)
   (unbind-key "l" org-agenda-mode-map)
@@ -1365,3 +1366,11 @@ If the buffer has no headings, insert a top-level heading at end."
 ;;    gptel-default-mode 'org-mode
 ;;    gptel-model 'gemini-3-flash-preview
 ;;    gptel-backend (gptel-make-gemini "Gemini" :key (ff/auth-get-secret "api.generativelanguage.googleapis.com" "apikey") :stream t)))
+
+(with-eval-after-load 'eglot
+  (with-eval-after-load 'typst-ts-mode
+    (add-to-list 'eglot-server-programs
+                 `((typst-ts-mode) .
+                   ,(eglot-alternatives `(,typst-ts-lsp-download-path
+                                          "tinymist"
+                                          "typst-lsp"))))))
