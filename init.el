@@ -677,7 +677,7 @@ If the buffer has no headings, insert a top-level heading at end."
   (setopt org-M-RET-may-split-line nil)
   (setopt org-outline-path-complete-in-steps nil) ;; show all headlines in a file when refiling a substree
   (setopt org-export-with-toc nil)
-  (setopt org-archive-default-command #'org-archive-to-archive-sibling)
+  (setopt org-archive-default-command #'org-archive-subtree)
   (setopt org-refile-targets
           '((nil :maxlevel . 10) (org-agenda-files :maxlevel . 3)))
   :custom-face
