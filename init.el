@@ -669,7 +669,7 @@ If the buffer has no headings, insert a top-level heading at end."
                              (setq-local line-spacing 0.15)
                              (setq-local fill-column 100)))
   (setopt org-agenda-dim-blocked-tasks t)
-  (setopt org-todo-keywords '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "Someday(s)" "|" "CANCELLED(c)" "DONE(d)")))
+  (setopt org-todo-keywords '((sequence "TODO(t)" "DOING(n)" "WAITING(w)" "Someday(s)" "CANCELLED(c)" "|" "DONE(d)")))
   (setopt org-latex-create-formula-image-program 'dvisvgm)
   (setopt org-fontify-done-headline t)
   (setopt org-src-fontify-natively t)
