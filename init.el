@@ -219,7 +219,7 @@
      '("t" . meow-till)
      '("u" . meow-undo)
      '("U" . meow-undo-in-selection)
-     '("v" . consult-line)
+     '("v" . meow-visit)
      '("w" . meow-mark-word)
      '("W" . meow-mark-symbol)
      '("V" . meow-line)
