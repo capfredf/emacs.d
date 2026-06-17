@@ -24,3 +24,4 @@ org-roam.db
 history
 tabsession.el
 persist/
+tree-sitter/
