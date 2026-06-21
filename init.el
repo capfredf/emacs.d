@@ -1374,3 +1374,11 @@ If the buffer has no headings, insert a top-level heading at end."
                    ,(eglot-alternatives `(,typst-ts-lsp-download-path
                                           "tinymist"
                                           "typst-lsp"))))))
+
+(use-package ghostel
+  :ensure t)
+(use-package denote
+  :ensure t)
+
+(use-package ghostel-compile
+  :hook (after-init . ghostel-compile-global-mode))

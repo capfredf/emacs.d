@@ -288,10 +288,10 @@
      ("CANCELLED" . "gray")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(activities ag auctex beancount beancount-mode cape consult corfu diff-hl
-                dockerfile-mode eat embark-consult exec-path-from-shell
-                fish-mode gptel haskell-mode highlight-parentheses jinx magit
-                marginalia markdown-mode meow mistty olivetti orderless
+   '(activities ag auctex beancount beancount-mode cape consult corfu denote
+                diff-hl dockerfile-mode eat embark-consult exec-path-from-shell
+                fish-mode ghostel gptel haskell-mode highlight-parentheses jinx
+                magit marginalia markdown-mode meow mistty olivetti orderless
                 org-journal org-modern org-ql org-superstar paredit
                 proof-general racket-mode solarized-theme tabspaces tempel
                 typst-ts-mode vertico wgrep-ag ws-butler yaml-mode yasnippet))
