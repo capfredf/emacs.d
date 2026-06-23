@@ -1376,7 +1376,10 @@ If the buffer has no headings, insert a top-level heading at end."
                                           "typst-lsp"))))))
 
 (use-package ghostel
-  :ensure t)
+  :ensure t
+  :bind (:map project-prefix-map
+              ("m" . ghostel-project)))
+
 (use-package denote
   :ensure t)
 
