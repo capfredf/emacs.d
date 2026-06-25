@@ -1381,7 +1381,9 @@ If the buffer has no headings, insert a top-level heading at end."
               ("m" . ghostel-project)))
 
 (use-package denote
-  :ensure t)
+  :ensure t
+  :init
+  (setopt denote-directory new-brain-dir))
 
 (use-package ghostel-compile
   :hook (after-init . ghostel-compile-global-mode))
