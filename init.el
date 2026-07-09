@@ -903,6 +903,7 @@ If the buffer has no headings, insert a top-level heading at end."
   (setopt TeX-auto-save t)
   (setopt TeX-parse-self t)
   (setopt bibtex-dialect 'biblatex)
+  (setopt reftex-cite-format 'natbib)
   (setopt TeX-save-query nil))
 
 (define-key minibuffer-local-map [f3]
