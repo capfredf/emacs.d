@@ -1388,3 +1388,8 @@ If the buffer has no headings, insert a top-level heading at end."
 
 (use-package ghostel-compile
   :hook (after-init . ghostel-compile-global-mode))
+
+
+(use-package codex-ide
+  :vc (:url "https://github.com/dgillis/emacs-codex-ide" :rev :newest)
+  :bind ("C-c C-;" . codex-ide-menu))

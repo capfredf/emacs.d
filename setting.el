@@ -141,7 +141,7 @@
  '(meow-keypad-leader-dispatch nil)
  '(meow-use-clipboard t)
  '(olivetti-body-width 120)
- '(org-agenda-dim-blocked-tasks 'invisible)
+ '(org-agenda-dim-blocked-tasks 'invisible t)
  '(org-agenda-files '("~/sync/new-brain/dashboard.org"))
  '(org-agenda-tags-column -20)
  '(org-babel-load-languages '((emacs-lisp . t)))
@@ -275,7 +275,7 @@
  '(org-refile-targets
    '((nil :maxlevel . 10) (org-agenda-files :maxlevel . 3)
      ("/home/capfredf/my-brain/Research/Occurrence Typing X SimpleSub/Occurrence Typing X SimpleSub.org"
-      :maxlevel . 3)))
+      :maxlevel . 3)) t)
  '(org-refile-use-outline-path 'title)
  '(org-roam-directory "~/brain/")
  '(org-roam-graph-viewer "~/bin/firefox")
@@ -288,15 +288,17 @@
      ("CANCELLED" . "gray")))
  '(org-use-fast-todo-selection 'expert)
  '(package-selected-packages
-   '(activities ag auctex beancount beancount-mode cape consult corfu denote
-                diff-hl dockerfile-mode eat embark-consult exec-path-from-shell
-                fish-mode ghostel gptel haskell-mode highlight-parentheses jinx
-                magit marginalia markdown-mode meow mistty olivetti orderless
-                org-journal org-modern org-ql org-superstar paredit
-                proof-general racket-mode solarized-theme tabspaces tempel
-                typst-ts-mode vertico wgrep-ag ws-butler yaml-mode yasnippet))
+   '(activities ag auctex beancount beancount-mode cape codex-ide consult corfu
+                denote diff-hl dockerfile-mode eat embark-consult
+                exec-path-from-shell fish-mode ghostel gptel haskell-mode
+                highlight-parentheses jinx magit marginalia markdown-mode meow
+                mistty olivetti orderless org-journal org-modern org-ql
+                org-superstar paredit proof-general racket-mode solarized-theme
+                tabspaces tempel typst-ts-mode vertico wgrep-ag ws-butler
+                yaml-mode yasnippet))
  '(package-vc-selected-packages
-   '((beancount-mode :url "git@github.com:beancount/beancount-mode.git" :branch
+   '((codex-ide :url "https://github.com/dgillis/emacs-codex-ide")
+     (beancount-mode :url "git@github.com:beancount/beancount-mode.git" :branch
                      "main")
      (racket-mode :url "git@github.com:greghendershott/racket-mode.git" :branch
                   "issue-759")))
@@ -353,12 +355,12 @@
  '(meow-normal-indicator ((t (:background "deep sky blue" :foreground "white smoke" :weight bold))))
  '(meow-paren-indicator ((t (:background "dark goldenrod" :foreground "white smoke" :weight bold))))
  '(mode-line ((t (:background "#eee8d5" :foreground "#657b83" :box nil :overline "#cccec4" :underline (:color "#cccec4" :style line :position t)))))
- '(org-block ((t (:inherit fixed-pitch))))
+ '(org-block ((t (:inherit fixed-pitch))) t)
  '(org-code ((t (:inherit fixed-pitch :foreground "#93a1a1"))))
- '(org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))))
- '(org-done ((t (:foreground "dim gray" :strike-through t))))
+ '(org-document-title ((t (:family "Source Han Sans SC" :height 1.5 :underline nil))) t)
+ '(org-done ((t (:foreground "dim gray" :strike-through t))) t)
  '(org-drawer ((t (:foreground "#2aa198" :height 0.8))))
- '(org-headline-done ((t (:foreground "dim gray" :strike-through t))))
+ '(org-headline-done ((t (:foreground "dim gray" :strike-through t))) t)
  '(org-headline-todo ((t (:foreground "Red4"))))
  '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
  '(org-level-1 ((t (:inherit nil :extend nil :foreground "#657b83" :height 1.3))))
