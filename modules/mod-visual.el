@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (defun switch-theme (theme)
   ;; This interactive call is taken from `load-theme'
   (interactive
