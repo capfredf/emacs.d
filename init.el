@@ -953,6 +953,10 @@ If the buffer has no headings, insert a top-level heading at end."
   (add-to-list 'auto-mode-alist '("\\.rhm$" . racket-hash-lang-mode))
   (add-to-list 'auto-mode-alist '("\\.scrbl$" . racket-mode))
   :config
+  (setopt racket-input-translations
+          (append racket-input-translations
+                  '(("gl" "«")
+                    ("gr" "»"))))
   (setopt racket-repl-buffer-name-function #'racket-repl-buffer-name-project)
   ;; (setq racket-program (executable-find "racket"))
   (put 'Π 'racket-indent-function 1)
