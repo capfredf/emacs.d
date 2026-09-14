@@ -60,6 +60,21 @@
   :config
   (exec-path-from-shell-initialize))
 
+;; PGTK can fail to claim the Wayland clipboard when Emacs is running in a
+;; container.  wl-copy talks to the same compositor socket and works across
+;; the container/host boundary (including Flatpak applications).
+(when (and (getenv "WAYLAND_DISPLAY")
+           (executable-find "wl-copy"))
+  (defun ff/wayland-copy (text)
+    "Make TEXT available on the Wayland clipboard using wl-copy."
+    (with-temp-buffer
+      (insert text)
+      (let ((coding-system-for-write 'utf-8-unix))
+        (call-process-region
+         (point-min) (point-max) "wl-copy" nil 0 nil
+         "--type" "text/plain;charset=utf-8"))))
+  (setq interprogram-cut-function #'ff/wayland-copy))
+
 (use-package dired
   :hook (dired-mode . dired-hide-details-mode))
 
