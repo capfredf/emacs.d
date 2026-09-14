@@ -950,23 +950,37 @@ If the buffer has no headings, insert a top-level heading at end."
   ;; :ensure t
   ;; :vc t ;; this rids me of manually load the autoloads file
   ;; :load-path "site-lisp/racket-mode"
-  :mode "\\.rkt"
+  :mode (("\\.rkt\\'" . racket-mode)
+         ("\\.pie\\'" . racket-mode)
+         ("\\.rhm\\'" . racket-hash-lang-mode)
+         ("\\.scrbl\\'" . racket-mode))
+  :hook ((racket-mode . racket-xp-mode)
+         (racket-hash-lang-mode . my/racket-hash-lang-mark-pending)
+         (racket-hash-lang-mode . racket-xp-mode)
+         (racket-hash-lang-module-language . my/racket-hash-lang-mark-ready)
+         (racket-hash-lang-module-language . my/racket-hash-lang-module-lang-hook))
   ;; not very useful for developing or fix packages
   ;; :vc (:url "git@github.com:greghendershott/racket-mode.git"
   ;;      :branch "issue-759")
-  :init
-  ;; (load-library "racket-mode-autoloads")
+  :preface
+  (defvar-local my/racket-hash-lang-ready nil)
+
+  (defun my/racket-hash-lang-mark-pending ()
+    (setq-local my/racket-hash-lang-ready nil)
+    (when (bound-and-true-p jinx-mode)
+      (jinx-mode -1)))
+
+  (defun my/racket-hash-lang-mark-ready (&rest _)
+    (setq-local my/racket-hash-lang-ready t)
+    (when (bound-and-true-p global-jinx-mode)
+      (jinx-mode 1))
+    (font-lock-flush))
+
   (defun my/racket-hash-lang-module-lang-hook (lang)
     (when (string-prefix-p "(lib rhombus" lang)
       (setq-local electric-pair-pairs
                   (append (list '(?' . ?')) electric-pair-pairs)))
     (setq-local racket-xp-add-binding-faces t))
-  (add-hook 'racket-mode-hook      #'racket-xp-mode)
-  (add-hook 'racket-hash-lang-mode-hook #'racket-xp-mode)
-  (add-hook 'racket-hash-lang-module-language-hook #'my/racket-hash-lang-module-lang-hook)
-  (add-to-list 'auto-mode-alist '("\\.pie$" . racket-mode))
-  (add-to-list 'auto-mode-alist '("\\.rhm$" . racket-hash-lang-mode))
-  (add-to-list 'auto-mode-alist '("\\.scrbl$" . racket-mode))
   :config
   (setopt racket-input-translations
           (append racket-input-translations
@@ -1181,10 +1195,30 @@ If the buffer has no headings, insert a top-level heading at end."
 
 (use-package tabspaces
   :ensure t
+  :preface
+  (defun my/tabspaces-wait-for-racket-hash-lang (buffer)
+    "Wait for a restored hash-lang BUFFER to receive its language notification."
+    (when (buffer-live-p buffer)
+      (with-current-buffer buffer
+        (when (eq major-mode 'racket-hash-lang-mode)
+          (let ((deadline (+ (float-time) 30)))
+            (while (and (not my/racket-hash-lang-ready)
+                        (< (float-time) deadline))
+              (accept-process-output nil 0.05))
+            (unless my/racket-hash-lang-ready
+              (message "Timed out initializing hash-lang for %s"
+                       (buffer-name)))))))
+    buffer)
   :hook ((after-init . start-tabspaces-mode)
          ;; (kill-emacs . ff/save-all-tabspace-sessions)
          )
   :config
+  (unless (advice-member-p #'my/tabspaces-wait-for-racket-hash-lang
+                           #'tabspaces--restore-buffer-record)
+    (advice-add 'tabspaces--restore-buffer-record
+                :filter-return
+                #'my/tabspaces-wait-for-racket-hash-lang))
+
   (with-eval-after-load 'consult
     ;; hide full buffer list (still available with "b" prefix)
     (plist-put consult-source-buffer :hidden t)
