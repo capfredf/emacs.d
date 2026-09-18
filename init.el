@@ -955,6 +955,7 @@ If the buffer has no headings, insert a top-level heading at end."
          ("\\.rhm\\'" . racket-hash-lang-mode)
          ("\\.scrbl\\'" . racket-mode))
   :hook ((racket-mode . racket-xp-mode)
+         (racket-hash-lang-mode . my/racket-hash-lang-fontify-directive)
          (racket-hash-lang-mode . my/racket-hash-lang-mark-pending)
          (racket-hash-lang-mode . racket-xp-mode)
          (racket-hash-lang-module-language . my/racket-hash-lang-mark-ready)
@@ -964,6 +965,12 @@ If the buffer has no headings, insert a top-level heading at end."
   ;;      :branch "issue-759")
   :preface
   (defvar-local my/racket-hash-lang-ready nil)
+
+  (defun my/racket-hash-lang-fontify-directive ()
+    "Fontify the #lang reader directive as a keyword."
+    (font-lock-add-keywords
+     nil
+     '(("^#lang\\_>" (0 'font-lock-keyword-face t)))))
 
   (defun my/racket-hash-lang-mark-pending ()
     (setq-local my/racket-hash-lang-ready nil)
@@ -1171,7 +1178,6 @@ If the buffer has no headings, insert a top-level heading at end."
   :ensure t
   :hook (emacs-startup . global-jinx-mode)
   :config
-
   (add-to-list 'jinx-exclude-regexps '(t "\\cc"))
   :bind (("M-$" . jinx-correct)
          ("C-M-$" . jinx-languages)))
