@@ -956,32 +956,28 @@ If the buffer has no headings, insert a top-level heading at end."
          ("\\.scrbl\\'" . racket-mode))
   :hook ((racket-mode . racket-xp-mode)
          (racket-hash-lang-mode . my/racket-hash-lang-fontify-directive)
-         (racket-hash-lang-mode . my/racket-hash-lang-mark-pending)
          (racket-hash-lang-mode . racket-xp-mode)
-         (racket-hash-lang-module-language . my/racket-hash-lang-mark-ready)
          (racket-hash-lang-module-language . my/racket-hash-lang-module-lang-hook))
   ;; not very useful for developing or fix packages
   ;; :vc (:url "git@github.com:greghendershott/racket-mode.git"
   ;;      :branch "issue-759")
   :preface
-  (defvar-local my/racket-hash-lang-ready nil)
-
   (defun my/racket-hash-lang-fontify-directive ()
     "Fontify the #lang reader directive as a keyword."
     (font-lock-add-keywords
      nil
      '(("^#lang\\_>" (0 'font-lock-keyword-face t)))))
 
-  (defun my/racket-hash-lang-mark-pending ()
-    (setq-local my/racket-hash-lang-ready nil)
-    (when (bound-and-true-p jinx-mode)
-      (jinx-mode -1)))
-
-  (defun my/racket-hash-lang-mark-ready (&rest _)
-    (setq-local my/racket-hash-lang-ready t)
+  (defun my/racket-hash-lang-after-fontify (beg end &rest _)
+    "Enable Jinx after hash-lang has installed token faces in BEG..END."
     (when (bound-and-true-p global-jinx-mode)
-      (jinx-mode 1))
-    (font-lock-flush))
+      (unless (bound-and-true-p jinx-mode)
+        (jinx-mode 1))
+      ;; Hash-lang fontification is asynchronous, so Jinx's jit-lock
+      ;; function may have run before the final token faces existed.
+      (when (fboundp 'jinx--mark-pending)
+        (with-silent-modifications
+          (jinx--mark-pending beg end)))))
 
   (defun my/racket-hash-lang-module-lang-hook (lang)
     (when (string-prefix-p "(lib rhombus" lang)
@@ -989,6 +985,12 @@ If the buffer has no headings, insert a top-level heading at end."
                   (append (list '(?' . ?')) electric-pair-pairs)))
     (setq-local racket-xp-add-binding-faces t))
   :config
+  (unless (advice-member-p #'my/racket-hash-lang-after-fontify
+                           #'racket--hash-lang-tokens+fontify)
+    (advice-add 'racket--hash-lang-tokens+fontify
+                :after
+                #'my/racket-hash-lang-after-fontify))
+
   (setopt racket-input-translations
           (append racket-input-translations
                   '(("gl" "«")
@@ -1202,28 +1204,27 @@ If the buffer has no headings, insert a top-level heading at end."
 (use-package tabspaces
   :ensure t
   :preface
-  (defun my/tabspaces-wait-for-racket-hash-lang (buffer)
-    "Wait for a restored hash-lang BUFFER to receive its language notification."
-    (when (buffer-live-p buffer)
-      (with-current-buffer buffer
-        (when (eq major-mode 'racket-hash-lang-mode)
-          (let ((deadline (+ (float-time) 30)))
-            (while (and (not my/racket-hash-lang-ready)
-                        (< (float-time) deadline))
-              (accept-process-output nil 0.05))
-            (unless my/racket-hash-lang-ready
-              (message "Timed out initializing hash-lang for %s"
-                       (buffer-name)))))))
-    buffer)
+  (defun my/tabspaces-restore-with-deferred-rhm-mode (restore &rest args)
+    "Call RESTORE without selecting `racket-hash-lang-mode' by filename.
+This leaves .rhm buffers in `fundamental-mode'; use `normal-mode' to
+activate their usual mode on demand."
+    (let ((auto-mode-alist
+           (cons '("\\.rhm\\'" . fundamental-mode) auto-mode-alist)))
+      (apply restore args)))
   :hook ((after-init . start-tabspaces-mode)
          ;; (kill-emacs . ff/save-all-tabspace-sessions)
          )
   :config
-  (unless (advice-member-p #'my/tabspaces-wait-for-racket-hash-lang
-                           #'tabspaces--restore-buffer-record)
-    (advice-add 'tabspaces--restore-buffer-record
-                :filter-return
-                #'my/tabspaces-wait-for-racket-hash-lang))
+  ;; Remove the previous blocking workaround when this form is reevaluated.
+  (when (advice-member-p #'my/tabspaces-wait-for-racket-hash-lang
+                         #'tabspaces--restore-buffer-record)
+    (advice-remove 'tabspaces--restore-buffer-record
+                   #'my/tabspaces-wait-for-racket-hash-lang))
+  (unless (advice-member-p #'my/tabspaces-restore-with-deferred-rhm-mode
+                           #'tabspaces-restore-session)
+    (advice-add 'tabspaces-restore-session
+                :around
+                #'my/tabspaces-restore-with-deferred-rhm-mode))
 
   (with-eval-after-load 'consult
     ;; hide full buffer list (still available with "b" prefix)
