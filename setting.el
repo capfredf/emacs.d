@@ -296,12 +296,13 @@
                 consult corfu denote diff-hl dockerfile-mode eat embark-consult
                 exec-path-from-shell fish-mode ghostel gptel haskell-mode
                 highlight-parentheses jinx magit marginalia markdown-mode meow
-                mistty olivetti orderless org-journal org-modern org-ql
-                org-superstar paredit proof-general racket-mode solarized-theme
-                tabspaces tempel typst-ts-mode vertico wgrep-ag ws-butler
-                yaml-mode yasnippet))
+                meow-ghostel mistty olivetti orderless org-journal org-modern
+                org-ql org-superstar paredit proof-general racket-mode
+                solarized-theme tabspaces tempel typst-ts-mode vertico wgrep-ag
+                ws-butler yaml-mode yasnippet))
  '(package-vc-selected-packages
-   '((claude-code-ide :url "https://github.com/manzaltu/claude-code-ide.el")
+   '((meow-ghostel :url "https://github.com/dakra/meow-ghostel")
+     (claude-code-ide :url "https://github.com/manzaltu/claude-code-ide.el")
      (codex-ide :url "https://github.com/dgillis/emacs-codex-ide")
      (beancount-mode :url "git@github.com:beancount/beancount-mode.git" :branch
                      "main")

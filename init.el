@@ -1461,3 +1461,8 @@ activate their usual mode on demand."
   :config
   (setopt claude-code-ide-terminal-backend 'ghostel)
   (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools
+
+(use-package meow-ghostel
+  :vc (:url "https://github.com/dakra/meow-ghostel" :rev :newest)
+  :after (ghostel meow)
+  :hook (ghostel-mode . meow-ghostel-mode))
