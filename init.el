@@ -1454,3 +1454,10 @@ activate their usual mode on demand."
 (use-package codex-ide
   :vc (:url "https://github.com/dgillis/emacs-codex-ide" :rev :newest)
   :bind ("C-c C-;" . codex-ide-menu))
+
+(use-package claude-code-ide
+  :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest)
+  :bind ("C-c C-'" . claude-code-ide-menu) ; Set your favorite keybinding
+  :config
+  (setopt claude-code-ide-terminal-backend 'ghostel)
+  (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools
