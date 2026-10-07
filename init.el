@@ -1203,28 +1203,28 @@ If the buffer has no headings, insert a top-level heading at end."
 
 (use-package tabspaces
   :ensure t
-  :preface
-  (defun my/tabspaces-restore-with-deferred-rhm-mode (restore &rest args)
-    "Call RESTORE without selecting `racket-hash-lang-mode' by filename.
-This leaves .rhm buffers in `fundamental-mode'; use `normal-mode' to
-activate their usual mode on demand."
-    (let ((auto-mode-alist
-           (cons '("\\.rhm\\'" . fundamental-mode) auto-mode-alist)))
-      (apply restore args)))
+;;   :preface
+;;   (defun my/tabspaces-restore-with-deferred-rhm-mode (restore &rest args)
+;;     "Call RESTORE without selecting `racket-hash-lang-mode' by filename.
+;; This leaves .rhm buffers in `fundamental-mode'; use `normal-mode' to
+;; activate their usual mode on demand."
+;;     (let ((auto-mode-alist
+;;            (cons '("\\.rhm\\'" . fundamental-mode) auto-mode-alist)))
+;;       (apply restore args)))
   :hook ((after-init . start-tabspaces-mode)
          ;; (kill-emacs . ff/save-all-tabspace-sessions)
          )
   :config
   ;; Remove the previous blocking workaround when this form is reevaluated.
-  (when (advice-member-p #'my/tabspaces-wait-for-racket-hash-lang
-                         #'tabspaces--restore-buffer-record)
-    (advice-remove 'tabspaces--restore-buffer-record
-                   #'my/tabspaces-wait-for-racket-hash-lang))
-  (unless (advice-member-p #'my/tabspaces-restore-with-deferred-rhm-mode
-                           #'tabspaces-restore-session)
-    (advice-add 'tabspaces-restore-session
-                :around
-                #'my/tabspaces-restore-with-deferred-rhm-mode))
+  ;; (when (advice-member-p #'my/tabspaces-wait-for-racket-hash-lang
+  ;;                        #'tabspaces--restore-buffer-record)
+  ;;   (advice-remove 'tabspaces--restore-buffer-record
+  ;;                  #'my/tabspaces-wait-for-racket-hash-lang))
+  ;; (unless (advice-member-p #'my/tabspaces-restore-with-deferred-rhm-mode
+  ;;                          #'tabspaces-restore-session)
+  ;;   (advice-add 'tabspaces-restore-session
+  ;;               :around
+  ;;               #'my/tabspaces-restore-with-deferred-rhm-mode))
 
   (with-eval-after-load 'consult
     ;; hide full buffer list (still available with "b" prefix)
