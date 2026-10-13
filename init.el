@@ -1465,4 +1465,6 @@ If the buffer has no headings, insert a top-level heading at end."
 (use-package meow-ghostel
   :vc (:url "https://github.com/dakra/meow-ghostel" :rev :newest)
   :after (ghostel meow)
-  :hook (ghostel-mode . meow-ghostel-mode))
+  :hook (ghostel-mode . meow-ghostel-mode)
+  :config
+  (setopt meow-ghostel-escape 'meow))
