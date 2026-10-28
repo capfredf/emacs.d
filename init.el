@@ -1468,3 +1468,6 @@ If the buffer has no headings, insert a top-level heading at end."
   :hook (ghostel-mode . meow-ghostel-mode)
   :config
   (setopt meow-ghostel-escape 'meow))
+
+(unless (server-running-p)
+  (server-start))
