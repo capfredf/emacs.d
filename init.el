@@ -1469,5 +1469,10 @@ If the buffer has no headings, insert a top-level heading at end."
   :config
   (setopt meow-ghostel-escape 'meow))
 
+(require 'server)
+(setenv "EDITOR" "ec")
 (unless (server-running-p)
   (server-start))
+
+(use-package scribble
+  :load-path "~/code/scribble-mode")
