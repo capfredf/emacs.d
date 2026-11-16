@@ -952,8 +952,7 @@ If the buffer has no headings, insert a top-level heading at end."
   ;; :load-path "site-lisp/racket-mode"
   :mode (("\\.rkt\\'" . racket-mode)
          ("\\.pie\\'" . racket-mode)
-         ("\\.rhm\\'" . racket-hash-lang-mode)
-         ("\\.scrbl\\'" . racket-mode))
+         ("\\.rhm\\'" . racket-hash-lang-mode))
   :hook ((racket-mode . racket-xp-mode)
          (racket-hash-lang-mode . my/racket-hash-lang-fontify-directive)
          (racket-hash-lang-mode . racket-xp-mode)
@@ -980,6 +979,8 @@ If the buffer has no headings, insert a top-level heading at end."
           (jinx--mark-pending beg end)))))
 
   (defun my/racket-hash-lang-module-lang-hook (lang)
+    ;; lang can be nil, e.g. a newly opened buffer/file. This is fine because
+    ;; string-prefix-p returns nil when the second argument is nil.
     (when (string-prefix-p "(lib rhombus" lang)
       (setq-local electric-pair-pairs
                   (append (list '(?' . ?')) electric-pair-pairs)))
@@ -1474,5 +1475,5 @@ If the buffer has no headings, insert a top-level heading at end."
 (unless (server-running-p)
   (server-start))
 
-(use-package scribble
-  :load-path "~/code/scribble-mode")
+(use-package scribble-minor
+  :load-path "~/code/scribble-minor-ode")
