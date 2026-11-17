@@ -1476,4 +1476,4 @@ If the buffer has no headings, insert a top-level heading at end."
   (server-start))
 
 (use-package scribble-minor
-  :load-path "~/code/scribble-minor-mode")
+  :load-path "~/code/scribble-mode")
